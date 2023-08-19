@@ -72,13 +72,17 @@ a:hover {
 .blocos{
     display:flex;
     justify-content:center;
+
 }
 .bloco_imagens{
-    padding:20px;
+    padding-top:20px;
+    width:30%;
+    padding-right:4%;
+    /* background-color:red; */
 }
 
 .imagem1{
-    width:56%;
+    width:100%;
 }
 .imagem1 img{
     width:100%;
@@ -86,8 +90,6 @@ a:hover {
 }
 .segunda_parte{
     display:flex;
-    width:56%;
-    padding:5px;
 }
 
 .segunda_parte img{
@@ -127,4 +129,34 @@ span{
 }
 #btn_join:hover{
     cursor:pointer;
+}
+.bloco_texto{
+    width:30%;
+}
+.numeros{
+    display:flex;
+    justify-content:space-evenly;
+    padding-top:3%;
+}
+.numeros span{
+    font-size:130%;
+}
+.negocios{
+    text-align:center;
+    padding-top:5%;
+}
+.missao_empresa{
+    justify-content:flex;
+    text-align:center;
+}
+.valores_um{
+    display:flex;
+    justify-content:space-evenly;
+}
+.valores_dois{
+    display:flex;
+    justify-content:space-evenly;
+}
+.missao_empresa span{
+    font-size:130%;
 }
