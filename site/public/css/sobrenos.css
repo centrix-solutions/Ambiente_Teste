@@ -3,8 +3,10 @@
 body {
     margin: auto;
     font-family: 'Mulish', sans-serif;
-    background-color: rgb(156, 106, 156);
-    color: white;
+    margin: 0;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%, #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%, rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%, rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
+    height: max-content;
+    color:white;
 }
 
 .navBar {
@@ -119,7 +121,7 @@ span{
 .texto p{
     border:none;
 }
-#btn_join{
+.btn_join{
     border:none;
     color:white;
     border-radius:50px;
@@ -127,7 +129,7 @@ span{
     padding:15px 30px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-#btn_join:hover{
+.btn_join:hover{
     cursor:pointer;
 }
 .bloco_texto{
@@ -143,7 +145,7 @@ span{
 }
 .negocios{
     text-align:center;
-    padding-top:5%;
+    padding:5%;
 }
 .valores_empresa{
     justify-content:flex;
@@ -163,7 +165,7 @@ span{
 .missao_frases{
     display:flex;
 }
-.missao_frases img{
+.ticks{
     height:2%;
     padding-top:4%;
     padding-right: 3%;
@@ -174,5 +176,65 @@ span{
 .missao{
     display:flex;
     justify-content:center;
+    padding:3%;
     /* width:30%; */
+}
+.img_missao{
+    width:15%;
+    height:10%;
+    border-radius:30px;
+    padding:10px;
+}
+.card{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    width:20%;
+    padding:3%;
+}
+.card img{
+    width:20%;
+    height:40%;
+}
+.card:hover{
+    background-color:#FFF;
+    border-radius:20px;
+    color:black;
+    width:25%;
+}
+.time_um{
+    display:flex;
+    justify-content:space-evenly;
+}
+.time_dois{
+    display:flex;
+    justify-content:space-evenly;
+}
+.membros{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.membros img{
+    width:50%;
+    height:70%;
+    padding:4%;
+    border-radius:20px;
+}
+.membros span{
+    font-size: 20px;
+}
+.time_empresa{
+background: url(../assets/imgs/fundo.png), lightgray 50% / cover no-repeat;
+background-blend-mode: soft-light;
+}
+.inicio{
+    display:flex;
+    justify-content:space-between;
+    padding:3%;
+}
+.team{
+    background-color:white;
+    color:black;
+    height:20%;
 }
