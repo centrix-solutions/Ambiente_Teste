@@ -170,21 +170,25 @@ span{
     padding-top:4%;
     padding-right: 3%;
 }
+
 .missao_empresa{
     width:30%;
 }
+
 .missao{
     display:flex;
     justify-content:center;
     padding:3%;
     /* width:30%; */
 }
+
 .img_missao{
     width:15%;
     height:10%;
     border-radius:30px;
     padding:10px;
 }
+
 .card{
     display:flex;
     flex-direction: column;
@@ -192,47 +196,57 @@ span{
     width:20%;
     padding:3%;
 }
+
 .card img{
     width:20%;
     height:40%;
 }
+
 .card:hover{
     background-color:#FFF;
     border-radius:20px;
     color:black;
     width:25%;
 }
+
 .time_um{
     display:flex;
     justify-content:space-evenly;
 }
+
 .time_dois{
     display:flex;
     justify-content:space-evenly;
 }
+
 .membros{
     display:flex;
     flex-direction: column;
     align-items:center;
 }
+
 .membros img{
     width:50%;
     height:70%;
     padding:4%;
     border-radius:20px;
 }
+
 .membros span{
     font-size: 20px;
 }
+
 .time_empresa{
 background: url(../assets/imgs/fundo.png), lightgray 50% / cover no-repeat;
 background-blend-mode: soft-light;
 }
+
 .inicio{
     display:flex;
     justify-content:space-between;
     padding:3%;
 }
+
 .team{
     background-color:white;
     color:black;
