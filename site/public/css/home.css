@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300&display=swap');
+
 body {
     margin: 0;
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%, #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%, rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%, rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
     height: max-content;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    
 }
 
 .header {
@@ -60,6 +65,11 @@ line-height: normal;
 text-decoration: none;
 }
 
+.links:hover{
+    border-bottom: 1px solid white;
+    transform: scale(1.09);
+}
+
 .header .navBar .btn_login{
     margin-left: 10%;
     display: flex;
@@ -78,8 +88,71 @@ text-decoration: none;
     background-color: #e0e0e000;
 }
 
-.banner{
+.btn_login:hover{
+    background-color: white !important;
+    cursor: pointer !important;
+    color: black !important;
+    transition-duration: 1s !important;    
+}
+
+.banner_parte_01{
     height: 100vh;
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
+
+.Texto{
+    width: 40%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.banner_parte_01 .Texto h2{
+    margin-left: 25%;
+    margin-right: 0%;
+    color: #FFF;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+font-family: Mulish;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.btn_trabalhe_conosco{
+    width: 48%;
+    height: 10%;
+    border-radius: 47.5px;
+background: #a033e300;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+color: #FFF;
+font-family: Mulish;
+font-size: 28px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px;
+}
+
+.btn_trabalhe_conosco:hover{
+    background-color: white !important;
+    cursor: pointer !important;
+    color: black !important;
+    transition-duration: 1s !important;    
+}
+
+.imagen{
+    width: 60%;
+    height: 100%;
+}
+
+.imagens{
+    width: 100%;
+    height: 100%;
+}
+
+
 
