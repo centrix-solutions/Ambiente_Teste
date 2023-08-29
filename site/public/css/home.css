@@ -16,9 +16,6 @@ body {
 .header {
     height: 20vh;
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
 }
 
 .navBar {
@@ -51,7 +48,7 @@ a:hover {
     border-radius: 50px;
     box-shadow: 4px black;
     padding: 10px 30px;
-    height:fit-content;
+    height: max-content;
     display: flex;
     align-items: center;
 
@@ -73,9 +70,8 @@ a:hover {
 
 .Texto{
     width: 50%;
-    height: 80%;
+    height: max-content;
     display: flex;
-    align-items: center;
     flex-direction: column;
     padding: 0%;
 }
@@ -94,7 +90,8 @@ a:hover {
 
 .btn_trabalhe_conosco{
     width: 48%;
-    height: 10%;
+    margin-left: 15%;
+    height: 50px;
     border-radius: 47.5px;
     background: #a033e300;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -131,8 +128,66 @@ a:hover {
 }
 
 .banner_parte_02 .Texto h2{
-    
+    font-size: 45px;
+    margin-left: 20%;
+    margin-bottom: 0;    
 }
 
+.banner_parte_02 .Texto p{
+    margin-left: 20%;
+    color: #FFF;
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150.5%; /* 30.1px */
+}
 
+.Texto ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 18%;
+    list-style-image: url(../assets/imgs/Vector.svg);
+}
 
+.Texto ul li{
+    font-size: 20px;
+    margin: 1%;
+}
+
+.botao_comeca{
+    width: 40%;
+    height: 50px;
+    margin-left: 20%;
+    margin-top: 5%;
+    border-radius: 47.5px;
+    background: #a033e300;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.botao_comeca:hover{
+    background-color: white !important;
+    cursor: pointer !important;
+    color: black !important;
+    transition-duration: 1s !important;    
+}
+
+.banner_parte_02 .imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner_parte_02 .imagen .imagens{
+    width: 40%;
+    height: 20%;
+}
