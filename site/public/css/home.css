@@ -61,13 +61,6 @@ a:hover {
     transition-duration: 1s;
 }
 
-.banner_parte_01{
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-}
-
 .Texto{
     width: 50%;
     height: max-content;
@@ -120,20 +113,20 @@ a:hover {
     height: 100%;
 }
 
-.banner_parte_02{
+.banner{
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.banner_parte_02 .Texto h2{
+.banner.Texto h2{
     font-size: 45px;
     margin-left: 20%;
     margin-bottom: 0;    
 }
 
-.banner_parte_02 .Texto p{
+.banner.Texto p{
     margin-left: 20%;
     color: #FFF;
     font-family: Mulish;
@@ -181,13 +174,14 @@ a:hover {
     transition-duration: 1s !important;    
 }
 
-.banner_parte_02 .imagen{
+.banner.imagen{
     display: flex;
     justify-content: center;
     align-items: center;
+    background: black;
 }
 
-.banner_parte_02 .imagen .imagens{
+.banner.imagen .imagens{
     width: 40%;
     height: 20%;
 }
