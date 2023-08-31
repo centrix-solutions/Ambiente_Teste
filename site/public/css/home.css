@@ -7,11 +7,14 @@ body {
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%, #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%, rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%, rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
     height: max-content;
     color:white;
+   overflow-x: hidden;
 }
 
 @media screen and (max-width: 900px) {
     
 }
+
+/* Inicio do Header */
 
 .header {
     height: 20vh;
@@ -61,6 +64,17 @@ a:hover {
     transition-duration: 1s;
 }
 
+/*Fim do Header*/
+
+/* Inicio da primeira parte do Banner */
+
+.banner_parte_01{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
 .Texto{
     width: 50%;
     height: max-content;
@@ -69,7 +83,7 @@ a:hover {
     padding: 0%;
 }
 
-.Texto h2{
+.banner_parte_01 .Texto h2{
     margin-top: 20%;
     margin-left: 15%;
     color: #FFF;
@@ -81,7 +95,7 @@ a:hover {
     line-height: normal;
 }
 
-.btn_trabalhe_conosco{
+.banner_parte_01 .btn_trabalhe_conosco{
     width: 48%;
     margin-left: 15%;
     height: 50px;
@@ -96,66 +110,81 @@ a:hover {
     line-height: 20px;
 }
 
-.btn_trabalhe_conosco:hover{
+.banner_parte_01 .btn_trabalhe_conosco:hover{
     background-color: white !important;
     cursor: pointer !important;
     color: black !important;
     transition-duration: 1s !important;    
 }
 
-.imagen{
+.imagens{
     width: 50%;
     height: 100%;
 }
 
-.imagens{
+.banner_parte_01 .imagen{
     width: 100%;
     height: 100%;
 }
 
-.banner{
+/*Fim da primeira parte do Banner*/
+/*Inicio da segunda parte do Banner*/
+
+.banner_parte_02{
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.banner.Texto h2{
-    font-size: 45px;
-    margin-left: 20%;
-    margin-bottom: 0;    
+.banner_parte_02 .Texto{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.banner.Texto p{
-    margin-left: 20%;
+.banner_parte_02 .Texto h2{
+    font-size: 45px;
+    margin-left: 15%;
+    margin-bottom: 1%;    
+}
+
+.banner_parte_02 .Texto p{
     color: #FFF;
     font-family: Mulish;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 150.5%; /* 30.1px */
+    margin-left: 15%;
+    margin-top: 0;
 }
 
-.Texto ul{
+.banner_parte_02 .Texto ul{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     margin: 0;
-    margin-left: 18%;
+    margin-left: 12%;
     list-style-image: url(../assets/imgs/Vector.svg);
 }
 
-.Texto ul li{
+.banner_parte_02 .Texto ul li{
     font-size: 20px;
     margin: 1%;
 }
 
-.botao_comeca{
-    width: 40%;
+.banner_parte_02 .botao_comeca{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
     height: 50px;
-    margin-left: 20%;
-    margin-top: 5%;
+    margin-left: 15%;
     border-radius: 47.5px;
     background: #a033e300;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -165,23 +194,114 @@ a:hover {
     font-style: normal;
     font-weight: 700;
     line-height: 20px;
+    margin-top: 2%;
 }
 
-.botao_comeca:hover{
+.banner_parte_02 .botao_comeca:hover{
     background-color: white !important;
     cursor: pointer !important;
     color: black !important;
     transition-duration: 1s !important;    
 }
 
-.banner.imagen{
+.banner_parte_02 .imagens{
+    width: 60%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black;
 }
 
-.banner.imagen .imagens{
-    width: 40%;
-    height: 20%;
+.banner_parte_02 .imagen{
+    width: 90%;
+    height: 90%;
+}
+
+
+/*Fim da segunda parte do Banner*/
+/*Inicio da terceira parte do Banner*/
+
+.banner_parte_03{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner_parte_03 h1{
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Mulish;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 110%; /* 55px */
+}
+
+.equipe {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    background-color:rgba(160, 51, 227, 0.199);
+}
+
+.swiffy-slider{
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+}
+
+.slider-container{
+    width: 100%;
+    height: 100%;
+}
+
+.slider-container li{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-container li img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 2%;
+}
+
+.slider-container li .nome-cargo{
+    color: #FFF;
+    font-weight: 2000;
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 110%;
+    margin-top: 2%;
+}
+
+.equipe .btn_conhecer_equipe{
+    width: 30%;
+    height: 7%;
+    border-radius: 47.5px;
+    background: #a033e300;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    font-family: Mulish;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+.equipe .btn_conhecer_equipe:hover{
+    background-color: white !important;
+    cursor: pointer !important;
+    color: black !important;
+    transition-duration: 1s !important;    
 }
