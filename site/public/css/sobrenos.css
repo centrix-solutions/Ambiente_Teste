@@ -229,7 +229,7 @@ span{
     width:50%;
     height:70%;
     padding:4%;
-    border-radius:20px;
+    border-radius:50px;
 }
 
 .membros span{
@@ -255,6 +255,7 @@ background-color:rgb(194, 63, 194);
 }
 .investidores{
     text-align: center;
+    margin-top:35px;
 }
 .card_investidor{
     background-color:#F6F6F6;
@@ -367,4 +368,7 @@ background-color:rgb(194, 63, 194);
     width:8%;
     height:5%;
     padding-right:10px;
+}
+.espaco{
+    height:200px;
 }
