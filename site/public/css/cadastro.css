@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300&display=swap');
+
+
+body {
+    margin: auto;
+    font-family: 'Mulish', sans-serif;
+    margin: 0;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%, #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%, rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%, rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
+    height: 100vh;
+    width: 100%;
+    color:white;
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+@media screen and (max-width: 900px) {
+    
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px;
+}
+.parte2 li {
+    display: flex;
+
+}
+
+.input {
+    border-radius: 20px;
+    border-color: #D9D9D9;
+    width: 300px;
+    height: 20px;
+    background-color: #D9D9D9;
+}
+
+.cadastro h2 {
+    margin-left: 40px
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+
+    border-bottom: 1px solid white;
+    transform: scale(1.5);
+
+}
+
+.img {
+    width: 30%;
+    height: 80%;
+}
+
+.cadastro {
+    background-color: #e75cff57;
+    padding: 20px;
+    border-radius: 0px 20px 20px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 75%;
+    height: 50%;
+    margin-left: 12%;
+    margin-top: 6%;
+}
+
+
+.botao_entrar {
+    border: 2px solid #E0E0E0;
+    background-color: rgba(255, 255, 255, 0.678);
+    color: black;
+    border-radius: 50px;
+    box-shadow: 4px black;
+    padding: 10px 30px;
+    height:fit-content;
+    display: flex;
+    align-items: center;
+
+}
+
+.entrar_login {
+    font-size: 10px;
+    align-items: center;
+}
+
+.campo a {
+    color: #5A34A9;
+}
+
+.botao_entrar:hover {
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    transition-duration: 1s;
+}
+.blocos img {
+    border-radius: 25px;
+}
+
+.botao {
+    background-color: #A033E3;
+    color: rgb(255, 255, 255);
+    border-radius: 50px;
+    box-shadow: 4px black;
+    padding: 10px 30px;
+    height:fit-content;
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+
+/* .elemento {
+    border-radius: 20px;
+    background: conic-gradient(from 138deg at 50.00% 50.00%, #9C7DDE 0deg, #7450CF 41.25000089406967deg, #9D81FF 110.62499642372131deg, #4528B9 148.1250035762787deg, #6653BB 170.6250035762787deg, #AE85D7 211.87500715255737deg, #584DB1 258.75deg, #7D70E4 258.7860059738159deg, #3C2CE3 310.08514165878296deg, #4846A6 360deg), conic-gradient(from 138deg at 50.00% 50.00%, #9C7DDE 0deg, #7450CF 41.25000089406967deg, #9D81FF 110.62499642372131deg, #4528B9 148.1250035762787deg, #6653BB 170.6250035762787deg, #AE85D7 211.87500715255737deg, #584DB1 258.75deg, #7D70E4 258.7860059738159deg, #3C2CE3 310.08514165878296deg, #4846A6 360deg);
+    text-align: center;
+    width:fit-content;
+    height:130px;
+    padding:4px 25px;
+}
+.elemento h1{
+    font-weight: 600;
+}
+.elemento p{
+    font-size:12px;
+}
+.blocos{
+    display:flex;
+    justify-content:center;
+
+} */
+

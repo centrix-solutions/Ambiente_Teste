@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>AquaTech | Cadastro</title>
+    <title>Centrix | Cadastro</title>
 
     <script src="./js/sessao.js"></script>
 
     <link rel="icon" href="./assets/icon/favicon2.ico" />
-    <link rel="stylesheet" href="./css/estilo.css" />
+   <link rel="stylesheet" href="./css/cadastro.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -20,10 +20,28 @@
 
   <body onload="listar()">
     <!--header inicio-->
-    <div class="header">
+    <!-- <div class="header">
       <div class="container">
         <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
+        <ul class="navbar"> -->
+          <div class="navBar">
+            <div class="parte1">
+                <h4>Centrix Solutions</h4>
+            </div>
+            <div class="parte2">
+                <li>
+                    <ul><a href="index.html">Home</a></ul>
+                    <ul><a href="sobre_nos.html">Sobre nós</a></ul>
+                    <ul><a href="">Equipe</a></ul>
+                    <ul><a href="">Valores</a></ul>
+                    <ul><a href="">Blog</a></ul>
+                </li>
+            </div>
+            <div class="botao_entrar">
+                 Sign In
+            </div>
+          </div> 
+        <!-- </div>
           <li>
             <a href="index.html">Inicial</a>
           </li>
@@ -39,72 +57,67 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div>  -->
     <!--header fim-->
-
+  <div class="cadastro">
+    <img src="https://static.vecteezy.com/system/resources/previews/015/329/351/original/call-center-3d-illustration-icon-png.png" class="img" alt="">
     <div class="login">
       <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
           <span id="mensagem_erro"></span>
         </div>
       </div>
+      <div>
       <div class="container">
         <div class="card card-cadastro">
-          <h2>Bem-vindo!</h2>
+          <h2>Cadastro</h2>
           <div class="formulario">
             <!--
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
-
             <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Seu nome" />
-            </div>
+              <span>Nome:</span> <br>
+              <input class="input" id="nome_input" type="text"  />
+            </div> <br>
             <div class="campo">
-              <span>E-mail:</span>
-              <input
-                id="email_input"
-                type="text"
-                placeholder="meuemail@provedor.com"
-              />
-            </div>
+              <span>E-mail:</span> <br>
+              <input class="input" id="email_input" type="text" />
+            </div> <br>
             <div class="campo">
-              <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="******" />
-            </div>
-            <div class="campo">
-              <span>Empresa:</span>
-              <select name="empresas" id="listaEmpresas">
+              <span>Senha:</span> <br>
+              <input class="input" id="senha_input" type="password"  />
+            </div> <br>
+            <!-- <div class="campo">
+              <span>Empresa:</span> <br>
+              <select class="input" name="empresas" id="listaEmpresas">
                 <option selected>Selecione uma empresa</option>
               </select>
-            </div>
+            </div> -->
             <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input
-                id="confirmacao_senha_input"
-                type="password"
-                placeholder="******"
-              />
+              <span>Confirmação da Senha:</span> <br>
+              <input class="input" id="confirmacao_senha_input" type="password"/><br>
+              <span class="entrar_login">Já tem um cadastro? Faça seu <a href="">Log in</a> aqui </span>
+              <br><br>
             </div>
             <button class="botao" onclick="cadastrar()">Cadastrar</button>
           </div>
           <div id="div_aguardar" class="loading-div">
             <img src="./assets/circle-loading.gif" id="loading-gif" />
           </div>
-
+        </div>
           <div id="div_erros_login"></div>
         </div>
       </div>
-    </div>
-
     <!--footer inicio-->
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="container">
         <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
         <span class="version">v1.0.0</span>
       </div>
     </div>
+  </div> -->
+  
     <!--footer fim-->
   </body>
 </html>
