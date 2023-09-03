@@ -8,7 +8,9 @@ body {
     height: max-content;
     color:white;
 }
+@media screen and (max-width: 900px) {
 
+}
 .navBar {
     display: flex;
     justify-content: space-evenly;
@@ -360,11 +362,12 @@ background-color:rgb(194, 63, 194);
 }
 .popular, .cnt, .entre_contato{
     padding:10px;
+    text-align:center;
 }
 .info .nf{
     display:flex;
 }
-.nf .vetor{
+.nf .icon_vetor{
     width:8%;
     height:5%;
     padding-right:10px;

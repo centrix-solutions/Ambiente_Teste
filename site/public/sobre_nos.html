@@ -20,10 +20,10 @@
                 <ul><a href="sobre_nos.html">Sobre nós</a></ul>
                 <ul><a href="#time_empresa">Equipe</a></ul>
                 <ul><a href="#valores_empresa">Valores</a></ul>
-                <ul><a href="">Blog</a></ul>
+                <ul><a href="blog.html">Blog</a></ul>
             </li>
         </div>
-        <div class="botao_entrar">
+        <div onclick="entrar()" class="botao_entrar">
             Sign In
         </div>
     </div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <button onclick="" class="btn_join"> Junte-se ao nosso time </button>
+            <button onclick="entrar()" class="btn_join"> Junte-se ao nosso time </button>
         </div>
     </div>
 
@@ -140,7 +140,7 @@
             <div class="card">
                 <img src="./assets/imgs/icon_teamwork.png" alt="teamwork">
                 <span> Trabalho em equipe </span>
-                <p> Nosso ambiente corporativo se baseia no trabalho conjunto de mentes revolucionárias em busca de resultados significativos. </p>
+                <p> Nosso ambiente corporativo se baseia no trabalho conjunto de mentes engenhosas em busca de resultados significativos. </p>
             </div>
             <div class="card">
                 <img src="./assets/imgs/icon_commitment.png" alt="commitment">
@@ -165,7 +165,7 @@
                 <p> Membros responsáveis pelo desenvolvimento e aplicação da Centrix Solutions 
                 </p>
             </div>
-            <button onclick="" class="btn_join team">Junte-se ao nosso time</button>
+            <button onclick="entrar()" class="btn_join team">Junte-se ao nosso time</button>
         </div>
         <div class="time_um">
             <div class="membros">
@@ -206,7 +206,7 @@
 
     <!-- investidores da centrix solutions -->
     <div class="investidores">
-        <span> Our Investors </span>
+        <span> Nossos Investidores </span>
         <div class="investidor_um">
             <div class="card_investidor">
                 <span> SPtech </span>
@@ -249,24 +249,24 @@
     <div class="contact_us">
         <div class="contato">
             <div class="popular"><span> Popular </span></div>
-            <span class="cnt"> Contact Us </span>
+            <span class="cnt"> Entre em contato </span>
             <div class="entre_contato"> Entre em contato </div>
         </div>
         <div class="info">
             <div class="nf">
-            <img class="vetor" src="./assets/imgs/vetor.png" alt="vetor">
+            <img class="icon_vetor" src="./assets/imgs/vetor.png" alt="vetor">
             <p> 5 usuários </p>
             </div>
             <div class="nf">
-            <img class="vetor" src="./assets/imgs/vetor.png" alt="vetor">
+            <img class="icon_vetor" src="./assets/imgs/vetor.png" alt="vetor">
             <p> Suporte técnico </p>
             </div>
             <div class="nf">
-            <img class="vetor" src="./assets/imgs/vetor.png" alt="vetor">
+            <img class="icon_vetor" src="./assets/imgs/vetor.png" alt="vetor">
             <p> Planejamento </p>
             </div>
             <div class="nf">
-            <img class="vetor" src="./assets/imgs/vetor.png" alt="vetor">
+            <img class="icon_vetor" src="./assets/imgs/vetor.png" alt="vetor">
             <p> Ferramentas de análise </p>
             </div>
         </div>
@@ -275,3 +275,8 @@
 </body>
 
 </html>
+<script>
+    function entrar(){
+        location.href="cadastro.html"
+    }
+</script>
