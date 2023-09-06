@@ -6,79 +6,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Login</title>
+    <title>Centrix Solutions | Login</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/login.css">
 
-    <script src="./js/sessao.js"></script>
-
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
 </head>
 
 <body>
 
     <!--Header-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
+    <div class="navBar">
+        <div class="parte1">
+            <h4>Centrix Solutions</h4>
+        </div>
+        <div class="parte2">
+            <li>
+                <ul><a href="index.html">Home</a></ul>
+                <ul><a href="sobre_nos.html">Sobre nós</a></ul>
+                <ul><a href="">Equipe</a></ul>
+                <ul><a href="">Valores</a></ul>
+                <ul><a href="">Blog</a></ul>
+            </li>
+        </div>
+        <div class="botao_entrar">
+            Sign In
         </div>
     </div>
-
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
+    <!-- End of Header -->
+    <!-- Start of Login  -->
+    <div class="card_log">
+        <div class="log_info">
+            <h1>Login</h1>
+            E-mail:
+            <input type="text" placeholder="Type email here...">
+            Password:
+            <input type="password" placeholder="Type password here...">
+            <p>Esqueceu sua senha? <a href="">Recuperar Senha</a></p>
+            <button>Entar</button>
         </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="text" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
-
-                <div id="div_erros_login"></div>
-            </div>
+        <div class="figure">
+            <img src="assets/icon/Group 24.png" alt="">
         </div>
     </div>
 
     <!--footer inicio-->
     <div class="footer">
         <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
+            <div class="right_resource">
+                <div class="right_startup">
+                    <div class="inner_right">
+                        <div class="startup_plan">
+                            <img src="assets/icon/Group 25.png" alt="">
+                            <h3>Startup Plan</h3>
+                            <button>Start Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left_resource">
+                <div class="main_separation">
+                    <div class="left_post">
+                        <p>Resources</p>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">About Us</a></li>
+                            <li><a href=""> Contact</a></li>
+                            <li><a href="">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="right_post">
+                        <ul>
+                            <li><a href="">Blog Post</a></li>
+                            <li><a href="">Why Choose Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--footer fim-->
