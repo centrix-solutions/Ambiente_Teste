@@ -26,7 +26,6 @@
     grid-template-columns: 1fr 1fr 1fr; */
 }
 
-
 .post{
     margin-top: 3vh;
     display: flex;
@@ -34,9 +33,9 @@
 }
 
 .post img{
-    /* width: 380px; */
+    width: 80%;
     height: 43vh;
-    max-width: 25vw;
+    /* width: 25vw; */
     border-radius:22px ;
 }
 
@@ -228,4 +227,40 @@
 
 .copyright{
     position: absolute;
+}
+
+
+
+/* BLOG RESPONSIVO */
+@media screen and (max-width: 768px){
+    .blog{
+        margin-left: 5%;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .post{
+        margin-top: 3vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .post img{
+    height: 43vh;
+    width: 90%;
+    }
+
+    .tag{
+        width: 25%;
+        height: 5%;
+    }
+
+    .contato{
+        margin-left: -12%;
+    }
+
+    .icones{
+        margin-top: 40%;
+        position: absolute;
+    }
 }
