@@ -8,7 +8,7 @@ body {
     height: max-content;
     color:white;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
 
 }
 .navBar {
@@ -64,16 +64,22 @@ a:hover {
     background: conic-gradient(from 138deg at 50.00% 50.00%, #9C7DDE 0deg, #7450CF 41.25000089406967deg, #9D81FF 110.62499642372131deg, #4528B9 148.1250035762787deg, #6653BB 170.6250035762787deg, #AE85D7 211.87500715255737deg, #584DB1 258.75deg, #7D70E4 258.7860059738159deg, #3C2CE3 310.08514165878296deg, #4846A6 360deg), conic-gradient(from 138deg at 50.00% 50.00%, #9C7DDE 0deg, #7450CF 41.25000089406967deg, #9D81FF 110.62499642372131deg, #4528B9 148.1250035762787deg, #6653BB 170.6250035762787deg, #AE85D7 211.87500715255737deg, #584DB1 258.75deg, #7D70E4 258.7860059738159deg, #3C2CE3 310.08514165878296deg, #4846A6 360deg);
     text-align: center;
     width: fit-content;
-    height:130px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     padding:4px 25px;
 }
 .elemento h1{
+    margin: 0%;
     font-weight: 600;
 }
 .elemento p{
-    font-size:12px;
+    font-size:15px;
 }
 .blocos{
+    margin-top: 30px;
+    margin-bottom: 30px;
     display:flex;
     justify-content:center;
 
@@ -101,14 +107,16 @@ a:hover {
     height: 100%;
     padding-left:5px;
 }
-span{
+.bloco_texto span{
     font-weight:600;
     font-size:27px;
+}
+.bloco_texto h1{
+    margin-bottom: 0%;
 }
 .texto_menor{
     font-size:15px;
     border-bottom:1px solid #DCDCDC;
-    padding:10px;
 }
 .txt{
     font-size:17px;
@@ -116,25 +124,37 @@ span{
 .bloco_minitexto{
     display:flex;
     padding:6px;
+    justify-content: center;
+    align-items: center;
 }
 .texto{
-    padding-left:15px;
+    align-self: center;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .texto p{
+    margin: 0;
     border:none;
 }
 .btn_join{
+    margin-top: 10px;
     border:none;
     color:white;
     border-radius:50px;
     background-color: #A033E3;;
-    padding:15px 30px;
+    max-width: 200px;
+    height: 50px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .btn_join:hover{
     cursor:pointer;
 }
 .bloco_texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width:30%;
 }
 .numeros{
@@ -143,15 +163,27 @@ span{
     padding-top:3%;
 }
 .numeros span{
-    font-size:130%;
+    font-size:26px;
+    font-weight: bold;
+}
+.numeros p{
+    font-size:20px;
 }
 .negocios{
     text-align:center;
-    padding:5%;
+    padding:6%;
+}
+.negocios h2{
+    font-size: 27px;
 }
 #valores_empresa{
+    height: 700px;
     justify-content:flex;
     text-align:center;
+}
+#valores_empresa h2{
+    color: black;
+    font-weight: bold;
 }
 .valores_um{
     display:flex;
@@ -163,24 +195,47 @@ span{
 }
 #valores_empresa span{
     font-size:130%;
+    font-weight: bold;
 }
 .missao_frases{
+    margin-left: 20px;
     display:flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+#missao_text{
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 .ticks{
     height:2%;
-    padding-top:4%;
     padding-right: 3%;
 }
 
 .missao_empresa{
-    width:30%;
+    background: #ffffff69;
+    border: none;
+    border-radius: 20px;
+    width: 30%;
+    color: black;
+}
+.missao_empresa h2{
+    margin-left: 20px;
+    color: black;
+    font-weight: bold;
+}
+.missao_frases p{
+    margin-left: 20px;
+    margin: 0%;
+    color: black;
 }
 
 .missao{
     display:flex;
     justify-content:center;
-    padding:3%;
+    margin-bottom: 150px;
+    align-items: center;
     /* width:30%; */
 }
 
@@ -195,13 +250,8 @@ span{
     display:flex;
     flex-direction: column;
     align-items:center;
-    width:20%;
+    max-width: 20%;
     padding:3%;
-}
-
-.card img{
-    width:20%;
-    height:40%;
 }
 
 .card:hover{
@@ -227,15 +277,29 @@ span{
     align-items:center;
 }
 
+.membros p{
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+#member_icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#member_icons img{
+    width: 30px;
+    height: 30px;
+}
 .membros img{
-    width:50%;
-    height:70%;
+    width:45%;
+    height:60%;
     padding:4%;
     border-radius:50px;
 }
 
 .membros span{
     font-size: 20px;
+    margin-bottom: 0%;
 }
 
 #time_empresa{
@@ -247,7 +311,23 @@ background-color:rgb(194, 63, 194);
 .inicio{
     display:flex;
     justify-content:space-between;
-    padding:3%;
+    padding:1.5%;
+}
+.inicio button{
+    border: none;
+    align-self: center;
+    border-radius: 30px;
+    width: 10%;
+    height: 50px;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
+}
+.inicio span {
+    font-size: 25px;
+    font-weight: bold;
+}
+.inicio p {
+    font-size: 18px;
+    margin-bottom: 0%;
 }
 
 .team{
@@ -259,14 +339,20 @@ background-color:rgb(194, 63, 194);
     text-align: center;
     margin-top:35px;
 }
+.investidores span{
+    font-size: 25px;
+    font-weight: bold;
+}
 .card_investidor{
     background-color:#F6F6F6;
     border-radius:20px;
-    color:#808080;
+    color:#474747;
     width:30%;
     padding:25px;
     text-align: left;
-
+}
+.card_investidor span{
+    font-weight: bold;
 }
 .investidor_um{
     display:flex;
@@ -278,100 +364,4 @@ background-color:rgb(194, 63, 194);
     justify-content:space-evenly;
     padding:30px;
     
-}
-.footer{
-    padding:20px;
-    border-top: 1px solid white;
-    border-bottom:1px solid white;
-    display:flex;
-    justify-content:space-evenly;
-    align-items:center;
-}
-.recursos{
-    display:flex;
-    border-right:1px solid white;
-    width:35%;
-}
-.footer span{
-    font-size:20px;
-}
-.recursos_dois{
-    padding-left:10%;
-}
-.contact_us{
-    background-color:#000;
-    border-radius:20px;
-    width:35%;
-
-}
-.contato{
-    border-right:1px solid white;
-}
-
-.popular{
-    background:linear-gradient(rgb(150, 150, 243),rgb(78, 15, 194),rgb(207, 0, 86));
-    border-radius:20px;
-    width:50%;
-    padding:5px;
-    text-align:center;
-}
-.contato .cnt{
-    font-size:25px;
-}
-.contato .entre_contato{
-    border-radius:20px;
-    background-color:#A033E3;
-    border:none;
-    color:white;
-    width:70%;
-    height:30%;
-    text-align:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    /* display:flex;
-    width:fit-content;
-    padding:0px 0px 20px 20px; */
-}
-.popular:hover{
-    cursor:pointer;
-    width:57%;
-    height:15%;
-}
-.contato .entre_contato:hover{
-    cursor:pointer;
-}
-.contact_us{
-    display:flex;
-    padding:50px;
-}
-.contato{
-    width:50%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:10px;
-    /* justify-content:center;
-    align-items:center; */
-}
-.info{
-    width:50%;
-    text-align:center;
-    padding-left:6%;
-}
-.popular, .cnt, .entre_contato{
-    padding:10px;
-    text-align:center;
-}
-.info .nf{
-    display:flex;
-}
-.nf .icon_vetor{
-    width:8%;
-    height:5%;
-    padding-right:10px;
-}
-.espaco{
-    height:200px;
 }
