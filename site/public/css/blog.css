@@ -3,7 +3,6 @@
 }
 
 .header{
-    margin-top: 4vh;
     height: 5%;
 }
 
@@ -20,13 +19,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 2.5%;
-    justify-content: space-evenly;
     flex-wrap: wrap;
     /* display: grid;
     grid-template-columns: 1fr 1fr 1fr; */
 }
-
+.blog_part2 {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 .post{
     margin-top: 3vh;
     display: flex;
@@ -56,24 +58,28 @@
 }
 
 .tag span{
-    margin-top: 2%;
+    display: flex;
     background-color: white;
     border-radius: 16px;
     width: 100%;
     height: 100%;
+    justify-content: center;
     align-items: center;
     color: black;
 }
 
 .tag_a{
     margin-left: 5%; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .tag_b{
     margin-left: 3%; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .data_postagem{
+    color: rgb(48, 48, 48);
     margin-top: 8%;
     width: 25vw;
     display: flex;
@@ -94,12 +100,14 @@
 }
 
 .tema_materia{
+    color: black;
     font-size: 30px;
     max-width: 27vw;
     font-weight: bold;
 }
 
 .descricao{
+    color: rgb(57, 57, 57);
     font-size: 18px;
     max-width: 26vw;
 }
@@ -120,124 +128,6 @@
 .visualizar:hover{
     text-decoration-line: underline;
 }
-
-.footer{
-    padding:20px;
-    border-top: 1px solid white;
-    border-bottom:1px solid white;
-    display:flex;
-    justify-content:space-evenly;
-    align-items:center;
-}
-.recursos{
-    display:flex;
-    border-right:1px solid white;
-    width:35%;
-}
-.footer span{
-    font-size:20px;
-}
-.recursos_dois{
-    padding-left:10%;
-    margin-top: 12vh;
-}
-.contact_us{
-    background-color:#000;
-    border-radius:20px;
-    width:35%;
-
-}
-.contato{
-    border-right:1px solid white;
-}
-
-.popular{
-    background:linear-gradient(rgb(150, 150, 243),rgb(78, 15, 194),rgb(207, 0, 86));
-    border-radius:20px;
-    width:50%;
-    padding:5px;
-    text-align:center;
-}
-.contato .cnt{
-    font-size:25px;
-}
-.contato .entre_contato{
-    border-radius:20px;
-    background-color:#A033E3;
-    border:none;
-    color:white;
-    width:70%;
-    height:30%;
-    text-align:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    /* display:flex;
-    width:fit-content;
-    padding:0px 0px 20px 20px; */
-}
-.popular:hover{
-    cursor:pointer;
-    width:57%;
-    height:15%;
-}
-.contato .entre_contato:hover{
-    cursor:pointer;
-}
-.contact_us{
-    display:flex;
-    padding:50px;
-}
-.contato{
-    width:50%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:10px;
-    /* justify-content:center;
-    align-items:center; */
-}
-.info{
-    width:50%;
-    text-align:center;
-    padding-left:6%;
-}
-.popular, .cnt, .entre_contato{
-    padding:10px;
-    text-align:center;
-}
-.info .nf{
-    display:flex;
-    align-items: center;
-}
-.nf .icon_vetor{
-    width:8%;
-    height:5%;
-    padding-right:10px;
-}
-.espaco{
-    height:200px;
-}
-
-.icons img{
-    width: auto;
-    height: 16vh;
-}
-
-.icons{
-    display: flex;
-    justify-content: space-evenly;
-    position: absolute;
-    margin-top: 15%;
-    margin-left: -7%;
-}
-
-.copyright{
-    position: absolute;
-}
-
-
 
 /* BLOG RESPONSIVO */
 @media screen and (max-width: 768px){
