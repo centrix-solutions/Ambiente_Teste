@@ -29,7 +29,11 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+.blog_part2_3 {
+    display: none;
+}
 .post{
+    max-width: 50%;
     margin-top: 3vh;
     display: flex;
     flex-direction: column;
@@ -65,7 +69,7 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 .tag_a{
@@ -100,7 +104,7 @@
 }
 
 .tema_materia{
-    color: black;
+    color: rgb(44, 44, 45);
     font-size: 30px;
     max-width: 27vw;
     font-weight: bold;
@@ -131,12 +135,38 @@
 
 /* BLOG RESPONSIVO */
 @media screen and (max-width: 768px){
+    .linha {
+        min-height: 0.1vh;
+        min-width: 100%;
+    }
+    .data_postagem {
+        margin-top: 8%;
+        min-width: 100%;
+        font-size: 18px;
+    }
+    #part_2{
+        display: none;
+    }
+    .blog_part2_3 {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
     .blog{
-        margin-left: 9%;
         flex-wrap: wrap;
         justify-content: space-evenly;
     }
-
+    #post{
+        width: 45%;
+        margin-top: 3vh;
+        display: flex;
+        flex-direction: column;
+        word-wrap: break-word;
+    }
+    .tag span{
+        min-width: 100px;
+    }
     .post{
         margin-top: 3vh;
         display: flex;
@@ -148,13 +178,25 @@
         width: 90%;
     }
 
+    #post img{
+        height: 43vh;
+        width: 90%;
+        border-radius:22px ;
+    }
+
     .descricao{
-        max-width: 37vw;
+        font-size: 16px;
+        min-width: 100%;
     }
 
     .tag{
-        width: 25%;
+        width: 30%;
         height: 5%;
+    }
+
+    .tema_materia{
+        min-width: 100%;
+        font-size: 20px;
     }
 
     .contato{
