@@ -79,9 +79,9 @@ body {
         flex-direction: column;
     }
 
-    .inicio button{
+    .inicio button {
         float: left;
-        min-width:200px;
+        min-width: 200px;
         min-height: 40px;
         margin-right: 550px;
         margin-top: 10px;
@@ -90,6 +90,10 @@ body {
     .inicio p {
         font-size: 15px;
         margin-top: 0;
+    }
+
+    .card:hover {
+        background-color: #FFF;
     }
 
 }
@@ -292,7 +296,7 @@ a:hover {
 }
 
 #valores_empresa {
-    height: 700px;
+    height: 800px;
     justify-content: flex;
     text-align: center;
 }
@@ -376,6 +380,10 @@ a:hover {
     align-items: center;
     max-width: 20%;
     padding: 3%;
+}
+
+.card p {
+    font-size: 18px;
 }
 
 .card:hover {
