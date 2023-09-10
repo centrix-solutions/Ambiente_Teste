@@ -64,8 +64,8 @@
     justify-content: center;
     max-height: 900px;
     max-width: 80%;
-    background-color: #5934a9c1;
-    border-radius: 4vh;
+    background-color: #e75cff8e;
+    border-radius: 0vh 4vh 4vh 4vh;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
