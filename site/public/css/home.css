@@ -10,10 +10,6 @@ body {
    overflow-x: hidden;
 }
 
-@media screen and (max-width: 900px) {
-    
-}
-
 .header {
     height: 20vh;
     width: 100%;
@@ -211,8 +207,9 @@ a:hover {
 }
 
 .banner_parte_02 .imagen{
-    width: 90%;
-    height: 90%;
+    width: 70%;
+    height: 70%;
+    border-radius: 5%;
 }
 
 
@@ -279,6 +276,14 @@ a:hover {
     font-size: 20px;
     font-style: normal;
     line-height: 110%;
+    margin-top: 2%;
+}
+
+.slider-container li .texto-funcionario{
+    width: 80%;
+    height: 100%;
+    font-size: 200%;
+    text-align: center;
     margin-top: 2%;
 }
 
