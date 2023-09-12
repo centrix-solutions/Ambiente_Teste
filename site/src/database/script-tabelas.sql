@@ -1,117 +1,99 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
 
-/*
-comandos para mysql - banco local - ambiente de desenvolvimento
-*/
 
-CREATE DATABASE aquatech;
+DROP DATABASE CentrixSolutions;
 
-USE aquatech;
+CREATE DATABASE CentrixSolutions;
 
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj VARCHAR(14)
+USE CentrixSolutions;
+
+CREATE TABLE Empressa(
+	IDEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(70),
+    CNPJ CHAR(18)
 );
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+CREATE TABLE Local(
+	IDLocal INT AUTO_INCREMENT,
+    Nome VARCHAR(60),
+    FKEmpresa INT,
+	CONSTRAINT CT_Empressa_Local FOREIGN KEY (FKEmpresa) 
+		REFERENCES Empressa(IDEmpresa),
+	PRIMARY KEY (IDLocal,FKEmpresa)
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+CREATE TABLE Acesso(
+	IDUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(70),
+    Email VARCHAR(70),
+    CPF CHAR(14),
+    Senha CHAR(8),
+	FKLocal INT,
+    CONSTRAINT CT_Local_Acesso FOREIGN KEY (FKLocal) 
+		REFERENCES Local(IDLocal),
+	FKDiretor INT,
+	CONSTRAINT CT_Diretor_Supervisor FOREIGN KEY (FKDiretor) 
+		REFERENCES Acesso(IDUsuario)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+CREATE TABLE Maquinas(
+	IDMaquinas INT AUTO_INCREMENT,
+    Modelo VARCHAR(70),
+    SistemaOperacional VARCHAR(50),
+    Fabricante VARCHAR(70),
+    FKLocal INT,
+    CONSTRAINT CT_Local_Maquinas FOREIGN KEY (FKLocal) 
+		REFERENCES Local(IDLocal),
+	PRIMARY KEY (IDMaquinas,FKLocal)
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE Componentes(
+	IDComponentes INT AUTO_INCREMENT,
+    Nome VARCHAR(50),
+    FKMaquina INT,
+	CONSTRAINT CT_Maquina_Componente FOREIGN KEY (FKMaquina) 
+		REFERENCES Maquinas(IDMaquinas),
+	PRIMARY KEY (IDComponentes,FKMaquina)
 );
 
-
-/*
-comando para sql server - banco remoto - ambiente de produção
-*/
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	razao_social VARCHAR(50),
-	cnpj VARCHAR(14)
+CREATE TABLE Leitura(
+	IDLeitura INT AUTO_INCREMENT,
+    DadosCapturados FLOAT,
+    FKComponente INT,
+    CONSTRAINT CT_Leitura_Componente FOREIGN KEY (FKComponente) 
+		REFERENCES Componentes(IDComponentes),
+	PRIMARY KEY (IDleitura,FKComponente)
 );
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT FOREIGN KEY REFERENCES empresa(id)
-);
+INSERT INTO Empressa VALUES (null,"GrapeTech","40.523.614/0001-72");
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT FOREIGN KEY REFERENCES usuario(id)
-);
+SELECT * FROM Empressa;
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY IDENTITY(1,1),
-	descricao VARCHAR(300),
-	fk_empresa INT FOREIGN KEY REFERENCES empresa(id)
-);
+INSERT INTO Local VALUES (null,"Area de Atendimento",1);
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+SELECT * FROM Local;
 
-CREATE TABLE medida (
-	id INT PRIMARY KEY IDENTITY(1,1),
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT FOREIGN KEY REFERENCES aquario(id)
-);
+INSERT INTO Acesso VALUES(null,"Admin","Admin@gmail.com","400.568.590-07","admin@01", 1,null);
 
-/*
-comandos para criar usuário em banco de dados azure, sqlserver,
-com permissão de insert + update + delete + select
-*/
+SELECT * FROM Acesso;
 
-CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
-WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
-DEFAULT_SCHEMA = dbo;
+INSERT INTO Maquinas VALUES(null,"Lenovo IdealPad","Windows","Lenovo",1);
+INSERT INTO Maquinas VALUES(null,"Asus Gaming","Linux","Asus",1);
+INSERT INTO Maquinas VALUES(null,"Positivo New","Windows","Positivo",1);
 
-EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+SELECT * FROM Maquinas;
 
-EXEC sys.sp_addrolemember @rolename = N'db_datareader',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+INSERT INTO Componentes VALUES(null,"CPU",1);
+INSERT INTO Componentes VALUES(null,"Memoria RAM",1);
+INSERT INTO Componentes VALUES(null,"Disco",1);
+INSERT INTO Componentes VALUES(null,"CPU",2);
+INSERT INTO Componentes VALUES(null,"Memoria RAM",2);
+INSERT INTO Componentes VALUES(null,"Disco",2);
+INSERT INTO Componentes VALUES(null,"CPU",3);
+INSERT INTO Componentes VALUES(null,"Memoria RAM",3);
+INSERT INTO Componentes VALUES(null,"Disco",3);
+
+SELECT * FROM Componentes;
+
+SELECT * FROM Leitura JOIN Componentes ON FKComponente = IDComponentes WHERE FKMaquina = 2;
+
+
