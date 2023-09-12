@@ -431,7 +431,7 @@ a:hover {
     justify-content: space-between;
 }
 
-.post .tema_materia{
+.posts .post .tema_materia{
     color: rgb(255, 255, 255);
     font-size: 20px;
 }
