@@ -2,21 +2,29 @@
 
 @media screen and (max-width: 768px) {
     .card_log {
-        min-height: 70vh;
+        min-height: 90vh;
         min-width: 80%;
     }
 
     .log_info {
         display: flex;
-        margin-left: 50%;
+        margin-right: 10%;
         width: 60%;
+        margin-bottom: 1%;
+        margin-top: 1%;
+    }
+
+    .log_info p {
+        margin-right: 10%;
+        min-width: 60%;
+        margin-top: 1%;
     }
 
     .card_log img {
         position: relative;
         top: 0;
         left: 10px;
-        max-width: 95%;
+        max-width: 99%;
         max-height: 45vh;
     }
 
@@ -65,7 +73,8 @@
     height: 500px;
     max-height: 900px;
     max-width: 80%;
-    background-color: #e75cff8e;;
+    background-color: #e75cff8e;
+    ;
     border-radius: 0vh 4vh 4vh 4vh;
     display: flex;
     flex-direction: row;
@@ -277,18 +286,22 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    text-decoration: none;
 }
+
 
 .social_icons {
     margin-top: 5px;
     display: flex;
     flex-direction: row;
+    text-decoration: none;
 }
 
 .social_icons img {
     margin-right: 15px;
     width: 25px;
     height: 25px;
+    text-decoration: none;
 }
 
 .social_icons a {
@@ -305,11 +318,12 @@
     position: fixed;
     float: right;
     right: 1%;
+    text-decoration: none;
 }
 
 .contact_icons img {
     margin-right: 15px;
     width: 60px;
     height: 60px;
+    text-decoration: none;
 }
-
