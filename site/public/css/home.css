@@ -13,11 +13,6 @@ body {
    flex-direction: column;
 }
 
-.header {
-    height: 20vh;
-    width: 100%;
-}
-
 .navBar {
     display: flex;
     justify-content: space-evenly;
@@ -25,6 +20,7 @@ body {
     font-weight: 600;
     font-size: 15px;
     padding: 10px;
+    width: 100%;
 }
 
 .parte2 li {
