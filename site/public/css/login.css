@@ -127,6 +127,7 @@
 }
 
 .footer {
+    width: 100vh;
     height: 75vh;
     display: flex;
     align-self: center;
