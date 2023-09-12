@@ -10,6 +10,14 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    .botao_entrar {
+        margin-left: 20px;
+    }
+
+    .navBar{
+        margin-right: 20px;
+    }
+    
     .segunda_parte img {
         display: none;
         width: 100%;
@@ -98,14 +106,19 @@ body {
 
 }
 
+.parte1 img {
+    max-width: 100px;
+    max-height: 100px;
+}
 
 .navBar {
     display: flex;
     justify-content: space-evenly;
     color: white;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 18px;
     padding: 10px;
+    align-items: center;
 }
 
 .parte2 li {
@@ -113,12 +126,12 @@ body {
 
 }
 
-a {
+.parte2 a {
     text-decoration: none;
     color: white;
 }
 
-a:hover {
+.parte2 a:hover {
 
     border-bottom: 1px solid white;
     transform: scale(1.5);

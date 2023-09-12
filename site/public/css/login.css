@@ -136,6 +136,7 @@
     justify-content: center;
 }
 
+
 .container {
     border-top: white 1.5px solid;
     border-bottom: white 1.5px solid;
@@ -162,6 +163,12 @@
 
 .left_resource a {
     text-decoration: none;
+    color: #ffffff;
+}
+
+.left_resource  a:hover {
+    border-bottom: 1px solid white;
+    transform: scale(1.5);
 }
 
 .main_separation {
@@ -294,9 +301,12 @@
 }
 
 .social_icons a {
-    cursor: pointer;
     text-decoration: none;
-    display: block;
+    color: #ffffff;
+}
+
+.social_icons a:hover {
+    transform: scale(1.5);
 }
 
 .contact_icons {
@@ -307,6 +317,15 @@
     position: fixed;
     float: right;
     right: 1%;
+}
+
+.contact_icons a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.contact_icons a:hover {
+    transform: scale(1.5);
 }
 
 .contact_icons img {
