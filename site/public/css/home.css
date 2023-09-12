@@ -8,6 +8,9 @@ body {
     height: max-content;
     color:white;
    overflow-x: hidden;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
 }
 
 .header {
@@ -389,5 +392,116 @@ a:hover {
 
 .banner_parte_05{
     width: 100%;
+    height: 130vh;
+    margin-top: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner_parte_05 .cabecalho{
+    width: 100%;
+    height: 20%;
+}
+
+.banner_parte_05 .cabecalho .texto{
+    width: 50%;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 10%;
+}
+
+.banner_parte_05 .cabecalho .butao{
+    width: 50%;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.banner_parte_05 .cabecalho .butao .btn-contact{
+    width: 30%;
+    height: 40%;
+}
+
+.banner_parte_05 .posts{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post .tema_materia{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.post .descricao{
+    color: white;
+}
+
+/*Final da parte 5 do banner*/
+/*Inicio da parte 6 do banner*/
+
+.banner_parte_06{
+    width: 80%;
     height: 100vh;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+
+.banner_parte_06 .mapa{
+    width: 50%;
+    height: 70%;
+    background-image: url(../assets/imgs/mapa.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 53px 0px 0px 53px;
+}
+
+.banner_parte_06 .contato{
+    width: 50%;
+    height: 70%;
+    border-radius: 0px 53px 53px 0px;
+    background: rgba(231, 92, 255, 0.44);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.banner_parte_06 .contato .contatos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contatos #localizacao{
+    margin-left: 5%;
+}
+
+.contatos img{
+    margin-left: 10%;
+}
+
+.contatos #endereco{
+    margin-left: 5%;
+}
+
+.contatos h2{
+    margin-left: 10%;
+}
+
+.contato button{
+    width: 60%;
+    height: 35%;
+    margin-top: 3%;
+    border-radius: 15%;
+    background-color: #A033E3;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
 }
