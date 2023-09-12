@@ -13,11 +13,6 @@ body {
    flex-direction: column;
 }
 
-.header {
-    height: 20vh;
-    width: 100%;
-}
-
 .navBar {
     display: flex;
     justify-content: space-evenly;
@@ -66,10 +61,11 @@ a:hover {
 /* Inicio da primeira parte do Banner */
 
 .banner_parte_01{
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .Texto{
@@ -121,7 +117,7 @@ a:hover {
 
 .banner_parte_01 .imagen{
     width: 100%;
-    height: 100%;
+    height: 90%;
 }
 
 /*Fim da primeira parte do Banner*/

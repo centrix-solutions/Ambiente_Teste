@@ -2,7 +2,7 @@
 
 @media screen and (max-width: 768px) {
     .card_log {
-        min-height: 70vh;
+        max-height: 65vh;
         min-width: 80%;
     }
 
@@ -10,6 +10,7 @@
         display: flex;
         margin-left: 50%;
         width: 60%;
+        margin-bottom: 15px;
     }
 
     .card_log img {
@@ -17,7 +18,7 @@
         top: 0;
         left: 10px;
         max-width: 95%;
-        max-height: 45vh;
+        max-height: 43vh;
     }
 
     .left_post {
@@ -62,9 +63,9 @@
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    max-height: 900px;
-    max-width: 80%;
-    background-color: #e75cff8e;
+    height: 460px;
+    width: 80%;
+    background-color: rgb(90 52 169 / 76%);
     border-radius: 0vh 4vh 4vh 4vh;
     display: flex;
     flex-direction: row;
@@ -92,6 +93,7 @@
     align-self: center;
     font-size: 15px;
     font-weight: normal;
+    margin-top: 0%;
 }
 
 .log_info h1 {

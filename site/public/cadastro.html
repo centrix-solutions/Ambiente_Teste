@@ -21,33 +21,33 @@
         </div>
         <div class="parte2">
             <li>
-                <ul><a href="index.html">Home</a></ul>
-                <ul><a href="sobre_nos.html">Sobre nós</a></ul>
-                <ul><a href="">Equipe</a></ul>
-                <ul><a href="">Valores</a></ul>
-                <ul><a href="">Blog</a></ul>
+              <ul><a href="index.html">Home</a></ul>
+              <ul><a href="sobre_nos.html">Sobre nós</a></ul>
+              <ul><a href="sobre_nos.html#time_empresa">Equipe</a></ul>
+              <ul><a href="sobre_nos.html#valores_empresa">Valores</a></ul>
+              <ul><a href="blog.html">Blog</a></ul>
             </li>
         </div>
-        <div class="botao_entrar">
-            Sign In
-        </div>
+        <div onclick="entrar()" class="botao_entrar">
+          Sign In
+      </div>
     </div>
     <!-- End of Header -->
     <!-- Start of Login  -->
-    <div class="card_log">
-      <div class="figure">
+    <div class="card_logC">
+      <div class="figureC">
         <img src="assets/icon/Group 24.png" alt="">
     </div>
-        <div class="log_info">
+        <div class="log_infoC">
             <h1>Cadastro</h1>
             Nome:
-            <input type="text">
+            <input type="text" placeholder="Digite o seu nome...">
             E-mail:
-            <input type="text">
+            <input type="text" placeholder="Digite o seu email...">
             Senha:
-            <input type="password">
+            <input type="password" placeholder="Digite o sua senha...">
             Confirmação de senha:
-            <input type="password">
+            <input type="password" placeholder="Digite sua senha novamente...">
             <p>Já tem um cadastro? Faça seu <a href="login.html">Log in</a> aqui</p>
             <button onclick="" class="entrar">Entar</button>
         </div>
@@ -56,80 +56,83 @@
 
     <!--footer inicio-->
     <div class="footer">
-        <div class="container">
-            <div class="right_resource">
-                <div class="right_startup">
-                    <div class="inner_right">
-                        <div class="startup_plan">
-                            <img src="assets/icon/Group 25.png" alt="">
-                            <h3>Startup Plan</h3>
-                            <button>Start Now</button>
-                        </div>
-                        <div class="start_options">
-                            <div class="list_options">
-                                <img src="assets/icon/Group 27.png" alt="">
-                                <p>5 Usuários</p>
-                            </div>
-                            <div class="list_options">
-                                <img src="assets/icon/Group 27.png" alt="">
-                                <p>Suporte técnico</p>
-                            </div>
-                            <div class="list_options">
-                                <img src="assets/icon/Group 27.png" alt="">
-                                <p>Planejamento</p>
-                            </div>
-                            <div class="list_options">
-                                <img src="assets/icon/Group 27.png" alt="">
-                                <p>Ferramentas de análise</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="left_resource">
-                <div class="main_separation">
-                    <div class="left_post">
-                        <p>Resources</p>
-                        <ul>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">About Us</a></li>
-                            <li><a href=""> Contact</a></li>
-                            <li><a href="">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="right_post">
-                        <ul>
-                            <li><a href="">Blog Post</a></li>
-                            <li><a href="">Why Choose Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Começo do copyrights -->
-            <div class="copyrights">
-                <span>Copyrights | Centrix Solutions</span>
-                <div class="social_icons">
-                    <a href="" style="text-decoration:none"><img src="assets/icon/Insta.png" alt=""></a>
-                    <a href="" style="text-decoration:none"><img src="assets/icon/Fb.png" alt=""></a>
-                    <a href="" style="text-decoration:none"><img src="assets/icon/Twiter.png" alt=""></a>
-                    <a href="" style="text-decoration:none"><img src="assets/icon/linken.png" alt=""></a>
-                </div>
-            </div>
-            <!-- Fim do copyrights -->
-            <!-- Começo dos contatos -->
-            <div class="contact_icons">
-                <img src="assets/icon/email.png" alt="">
-                <img src="assets/icon/whatsapp.webp" alt="">
-            </div>
-            <!-- Fim dos contatos -->
-        </div>
-    </div>
-    <!--footer fim-->
+      <div class="container">
+          <div class="right_resource">
+              <div class="right_startup">
+                  <div class="inner_right">
+                      <div class="startup_plan">
+                          <img src="assets/icon/Group 25.png" alt="">
+                          <h3>Startup Plan</h3>
+                          <button>Start Now</button>
+                      </div>
+                      <div class="start_options">
+                          <div class="list_options">
+                              <img src="assets/icon/Group 27.png" alt="">
+                              <p>5 Usuários</p>
+                          </div>
+                          <div class="list_options">
+                              <img src="assets/icon/Group 27.png" alt="">
+                              <p>Suporte técnico</p>
+                          </div>
+                          <div class="list_options">
+                              <img src="assets/icon/Group 27.png" alt="">
+                              <p>Planejamento</p>
+                          </div>
+                          <div class="list_options">
+                              <img src="assets/icon/Group 27.png" alt="">
+                              <p>Ferramentas de análise</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="left_resource">
+              <div class="main_separation">
+                  <div class="left_post">
+                      <p>Resources</p>
+                      <ul>
+                          <li><a href="index.html">Home</a></li>
+                          <li><a href="sobre_nos.html">About Us</a></li>
+                          <li><a href=""> Contact</a></li>
+                          <li><a href="blog.html">Blog</a></li>
+                      </ul>
+                  </div>
+                  <div class="right_post">
+                      <ul>
+                          <li><a href="blog.html">Blog Post</a></li>
+                          <li><a href="sobre_nos.html#valores_empresa">Why Choose Us</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- Começo do copyrights -->
+          <div class="copyrights">
+              <span>Copyrights | Centrix Solutions</span>
+              <div class="social_icons">
+                  <a href="" style="text-decoration:none"><img src="assets/icon/Insta.png" alt=""></a>
+                  <a href="" style="text-decoration:none"><img src="assets/icon/Fb.png" alt=""></a>
+                  <a href="" style="text-decoration:none"><img src="assets/icon/Twiter.png" alt=""></a>
+                  <a href="" style="text-decoration:none"><img src="assets/icon/linken.png" alt=""></a>
+              </div>
+          </div>
+          <!-- Fim do copyrights -->
+          <!-- Começo dos contatos -->
+          <div class="contact_icons">
+              <a href="" style="text-decoration:none"><img src="assets/icon/email.png" alt=""></a>
+              <a href="" style="text-decoration:none"><img src="assets/icon/whatsapp.webp" alt=""></a>
+          </div>
+          <!-- Fim dos contatos -->
+      </div>
+  </div>
+  <!--footer fim-->
 </body>
 </html>
-
-<script>
-  function cadastrar() {
+  <script>
+    function entrar() {
+        location.href = "cadastro.html"
+    }
+</script>
+  <!-- function cadastrar() {
     aguardar();
 
     //Recupere o valor da nova input pelo nome do id
@@ -217,4 +220,4 @@
   function sumirMensagem() {
     cardErro.style.display = "none";
   }
-</script>
+</script> -->

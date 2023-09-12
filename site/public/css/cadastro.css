@@ -1,31 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300&display=swap');
 
 @media screen and (max-width: 768px) {
-    .card_log {
-        min-height: 90vh;
+    .card_logC {
+        min-height: 80vh;
         min-width: 80%;
     }
 
-    .log_info {
+    .log_infoC {
         display: flex;
-        margin-right: 10%;
+        margin-right: 25px;
         width: 60%;
         margin-bottom: 1%;
         margin-top: 1%;
     }
 
-    .log_info p {
+    .log_infoC p {
         margin-right: 10%;
         min-width: 60%;
         margin-top: 1%;
     }
 
-    .card_log img {
+    .card_logC img {
         position: relative;
         top: 0;
         left: 10px;
         max-width: 99%;
-        max-height: 45vh;
+        max-height: 43vh;
     }
 
     .left_post {
@@ -64,24 +64,22 @@
     }
 }
 
-.card_log {
-    margin-top: 10vh;
+.card_logC {
+    margin-top: 5vh;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    height: 500px;
-    max-height: 900px;
-    max-width: 80%;
-    background-color: #e75cff8e;
-    ;
+    height: 530px;
+    width: 80%;
+    background-color: rgb(90 52 169 / 76%);
     border-radius: 0vh 4vh 4vh 4vh;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.log_info {
+.log_infoC {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -91,26 +89,27 @@
     font-weight: bold;
 }
 
-.log_info a {
+.log_infoC a {
     color: #ffffff;
     align-self: center;
     font-size: 15px;
     font-weight: bold;
 }
 
-.log_info p {
+.log_infoC p {
     align-self: center;
     font-size: 15px;
     font-weight: normal;
+    margin-top: 0%;
 }
 
-.log_info h1 {
+.log_infoC h1 {
     align-self: center;
     margin-bottom: 20px;
     margin: 0px;
 }
 
-.log_info input {
+.log_infoC input {
     background-color: #eee;
     border: none;
     border-radius: 30vh;
@@ -118,7 +117,7 @@
     margin: 10px 0;
 }
 
-.log_info button {
+.log_infoC button {
     /* margin-left: 10%; */
     background-color: #9E00FF;
     box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
@@ -131,7 +130,7 @@
     font-size: 20px;
 }
 
-.card_log img {
+.card_logC img {
     width: 28em;
     height: 25em;
 }
