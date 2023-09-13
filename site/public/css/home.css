@@ -179,6 +179,10 @@
         height: 50px;
     }
 
+    #id_img{
+        margin-top: 0px;
+    }
+
 }
 
 body {
@@ -628,12 +632,17 @@ body {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.btn-contact a {
+    text-decoration: none;
+    color: #FFF;
+}
+
 .banner_parte_04 .imagens {
-    width: 60%;
+    width: 50%;
     height: 65%;
     border: none;
     border-radius: 80px;
-    margin-top: 0;
+    margin-top: 20px;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
@@ -641,8 +650,8 @@ body {
 
 .banner_parte_04 .imagens img{
     width: 100%;
-    height: 80%;
-    margin-top: 0;
+    height: 90%;
+    margin-top: 60px;
     border-radius: 3%;
 }
 
