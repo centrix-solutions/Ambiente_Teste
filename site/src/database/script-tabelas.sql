@@ -57,6 +57,7 @@ CREATE TABLE Componentes(
 
 CREATE TABLE Leitura(
 	IDLeitura INT AUTO_INCREMENT,
+    Data_Hora DATETIME DEFAULT CURRENT_TIMESTAMP,
     DadosCapturados FLOAT,
     FKComponente INT,
     CONSTRAINT CT_Leitura_Componente FOREIGN KEY (FKComponente) 
@@ -94,6 +95,6 @@ INSERT INTO Componentes VALUES(null,"Disco",3);
 
 SELECT * FROM Componentes;
 
-SELECT * FROM Leitura JOIN Componentes ON FKComponente = IDComponentes WHERE FKMaquina = 2;
+SELECT * FROM Leitura JOIN Componentes ON FKComponente = IDComponentes WHERE FKMaquina = 3;
 
 

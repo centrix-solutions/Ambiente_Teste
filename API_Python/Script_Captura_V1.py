@@ -18,18 +18,6 @@ while(True):
     DISK2 = round(DISK1*0.95,2)
     DISK3 = round(DISK2*3,2)
 
-    print('\nUso de CPU da Maquina 1: ',CPU1)
-    print('Uso da memória RAM da Maquina 1: ',RAM1)
-    print('Uso do Disco da Maquina 1: ',DISK1)
-
-    print('\nUso de CPU da Maquina 2: ',CPU2)
-    print('Uso da memória RAM da Maquina 2: ',RAM2)
-    print('Uso do Disco da Maquina 2: ',DISK2)
-
-    print('\nUso de CPU da Maquina 3: ',CPU3)
-    print('Uso da memória RAM da Maquina 3: ',RAM3)
-    print('Uso do Disco da Maquina 3: ',DISK3)
-
     cursor = cnx.cursor()
 
     dados_CPU_PC_01 = [CPU1]
@@ -107,3 +95,4 @@ while(True):
     cnx.commit()
 
     time.sleep(5)
+
