@@ -25,7 +25,7 @@
                     <ul><a href="blog.html">Blog</a></ul>
                 </li>
             </div>
-            <div class="botao_entrar">
+            <div onclick="entrar()" class="botao_entrar">
                 Sign In
             </div>
         </div>
@@ -297,3 +297,9 @@
 </body>
 
 </html>
+
+<script>
+    function entrar() {
+        location.href = "cadastro.html"
+    }
+</script>
