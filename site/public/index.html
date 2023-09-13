@@ -50,7 +50,7 @@
        Monitoramento de hardware em call centers
       </span>
 
-      <button class="btn_trabalhe_conosco">
+      <button onclick="cadastro()" class="btn_trabalhe_conosco">
         Trabalhe Conosco
       </button>
     </div>
@@ -72,7 +72,7 @@
         <div class="icons_chck"><img src="assets/icon/Vector.png" alt=""> <span>Graphics para melhor visão</span></div>
         <div class="icons_chck"><img src="assets/icon/Vector.png" alt=""> <span>Melhor agilidade</span></div>
       </div>
-      <button class="botao_comeca">
+      <button onclick="cadastro()" class="botao_comeca">
         Começe agora
       </button>
     </div>
@@ -182,7 +182,7 @@
           <button></button>
         </div>
       </div>
-      <button id="btn_teams" class="btn_conhecer_equipe">Conhecer mais nossa equipe</button>
+      <button onclick="sobrenos()" id="btn_teams" class="btn_conhecer_equipe">Conhecer mais nossa equipe</button>
     </div>
   </div>
 
@@ -217,7 +217,7 @@
         </span>
       </div>
       <div class="butao">
-        <button id="btn_cnt" class="btn-contact"> Veja Mais posts </button>
+        <button onclick="blog()" id="btn_cnt" class="btn-contact"> Veja Mais posts </button>
       </div>
     </div>
     <div id="pst" class="posts">
@@ -412,3 +412,21 @@
 </body>
 
 </html>
+
+
+<script>
+
+  function cadastro() {
+    location.href = "cadastro.html"
+  }
+
+  function sobrenos() {
+    location.href = "sobre_nos.html"
+  }
+
+  function blog(){
+    location.href = "blog.html"
+  }
+
+
+</script>
