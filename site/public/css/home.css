@@ -581,7 +581,7 @@ body {
 
 .cabecalho {
     width: 100%;
-    height: 50%;
+    height: 35%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 0;
@@ -630,15 +630,20 @@ body {
 
 .banner_parte_04 .imagens {
     width: 60%;
-    background-image: url(../assets/imgs/imagens-video.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center;
-    background-size: contain;
+    height: 65%;
     border: none;
-    border-radius: 30px;
+    border-radius: 80px;
     margin-top: 0;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.banner_parte_04 .imagens img{
+    width: 100%;
+    height: 80%;
+    margin-top: 0;
+    border-radius: 3%;
 }
 
 /* Fim do Banner parte 04 */
