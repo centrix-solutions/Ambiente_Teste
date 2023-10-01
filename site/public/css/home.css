@@ -230,6 +230,13 @@ body {
 
 }
 
+.botoes_login{
+    display: flex;
+    flex-direction: row;
+    width: 22vw;
+    justify-content: space-evenly;
+}
+
 .botao_entrar {
     border: 2px solid #E0E0E0;
     border-radius: 50px;
