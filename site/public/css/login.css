@@ -309,7 +309,8 @@
     transform: scale(1.5);
 }
 
-.contact_icons {
+/* icones email e whatsapp */
+/* .contact_icons {
     display: flex;
     flex-direction: row;
     z-index: 999;
@@ -331,8 +332,8 @@
 .contact_icons img {
     margin-right: 15px;
     width: 60px;
-    height: 60px;
-}
+    height: 60px; 
+}*/
 
 /* @media screen and (min-width: 768px){
     .figure img{

@@ -149,6 +149,11 @@ body {
 
 }
 
+.botao_entrar a {
+    text-decoration: none;
+    color: white;
+}
+
 .botao_entrar:hover {
     background-color: white;
     cursor: pointer;
