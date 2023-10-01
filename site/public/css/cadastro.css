@@ -64,13 +64,28 @@
     }
 }
 
+.log_info_resumo {
+    margin-top: 5vh;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    height: 600px;
+    width: 80%;
+    background-color: rgb(90 52 169 / 76%);
+    border-radius: 0vh 4vh 4vh 4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .card_logC {
     margin-top: 5vh;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    height: 530px;
+    height: 600px;
     width: 80%;
     background-color: rgb(90 52 169 / 76%);
     border-radius: 0vh 4vh 4vh 4vh;
@@ -116,7 +131,13 @@
     padding: 10px 20px;
     margin: 10px 0;
 }
-
+.log_infoC select {
+    background-color: #eee;
+    border: none;
+    border-radius: 30vh;
+    padding: 10px 20px;
+    margin: 10px 0;
+}
 .log_infoC button {
     /* margin-left: 10%; */
     background-color: #9E00FF;

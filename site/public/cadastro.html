@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="css/cadastro.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="icon" href="assets/icon/favicon.ico">
-  <title>Centrix Solutions | Login</title>
+  <script src="js/cadastro_empresa.js"></script>
+  <title>Centrix Solutions | Cadastro Empresa</title>
 
 </head>
 
@@ -39,25 +40,152 @@
     </div>
   </div>
   <!-- End of Header -->
-  <!-- Start of Login  -->
   <div class="card_logC">
     <div class="figureC">
       <img src="assets/icon/Group 29.png" alt="">
     </div>
-    <div class="log_infoC">
-      <h1>Cadastro</h1>
-      Nome:
-      <input type="text" placeholder="Digite o seu nome...">
-      E-mail:
-      <input type="text" placeholder="Digite o seu email...">
-      Senha:
-      <input type="password" placeholder="Digite o sua senha...">
-      Confirmação de senha:
-      <input type="password" placeholder="Digite sua senha novamente...">
-      <p>Já tem um cadastro? Faça seu <a href="login.html">Login</a> aqui</p>
-      <button onclick="" class="entrar">Entrar</button>
+    <div class="log_infoC" id="parte1">
+      <h1>Cadastro empresarial</h1>
+      Nome Fantasia
+      <input type="text" placeholder="Digite o nome fantasia..." id="nome_fantasia_input">
+      Apelido Interno
+      <input type="text" placeholder="Digite o apelido interno..." id="apelido_interno_input">
+      Razão social
+      <input type="text" placeholder="Digite a razão social da sua empresa..." id="razao_social_input">
+      CNPJ
+      <input type="text" maxlength="18" placeholder="Insira seu CNPJ..." onkeyup="formatarCNPJ(this)" id="cnpj_input">
+      Horario de operação do call center
+      <div>
+        Início <input type="time" id="horario_inicio_input">
+        Fim <input type="time" id="horario_fim_input">
+      </div>
+      Sede ou Filial
+      <select id="tipo_empresa_input">
+        <option value="1">Sede</option>
+        <option value="2">Filial</option>
+      </select>
+      <button onclick="continuar1()" class="entrar">Prosseguir</button>
     </div>
 
+    <div class="log_infoC" id="parte2" style="display: none;">
+      <h1>Cadastre seu endereço</h1>
+      CEP
+      <input type="text" maxlength="9" placeholder="Digite o CEP" onkeyup="formatarCEP(this)" oninput="ApiCEP()"
+        id="cep_input">
+      Estado
+      <input type="text" placeholder="Digite o estado da sua empresa" id="estado_input">
+      Cidade
+      <input type="text" placeholder="Digite a cidade da sua empresa..." id="cidade_input">
+      Bairro
+      <input type="text" placeholder="Digite o bairro da sua empresa..." id="bairro_input">
+      Rua
+      <input type="text" placeholder="Digite a rua da sua empresa..." id="rua_input">
+      Número
+      <input type="number" placeholder="Digite o número da sua empresa..." id="numero_input">
+
+      <button onclick="continuar2()" class="entrar">Prosseguir</button>
+      <button onclick="voltar1()" class="entrar">Voltar</button>
+    </div>
+
+    <div class="log_infoC" id="parte3" style="display: none;">
+      <h1>Cadastro do funcionário responsável</h1>
+      Nome
+      <input type="text" placeholder="" id="funcionario_nome_imput">
+      Email
+      <input type="text" placeholder="" id="funcionario_email_input">
+      Senha
+      <input type="text" placeholder="" id="senha_input">
+      Confirmar Senha
+      <input type="text" placeholder="" id="confirmar_senha_input">
+
+      <button onclick="continuar3()" class="entrar">Prosseguir</button>
+      <button onclick="voltar2()" class="entrar">Voltar</button>
+    </div>
+
+    <div class="log_info_resumo" id="parte4" style="display: none;">
+
+      <div class="area">
+        <h2 class="area-titulo">Informações da Empresa</h2>
+        <div class="info">
+          <span class="info-titulo">Nome Fantasia:</span>
+          <span class="info-valor" id="nomeFantasia_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Razão Social:</span>
+          <span class="info-valor" id="razaoSocial_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Apelido interno:</span>
+          <span class="info-valor" id="apelidoInterno_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">CNPJ:</span>
+          <span class="info-valor" id="CNPJ_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Filial/Sede:</span>
+          <span class="info-valor" id="tipoEmpresa_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Inicio do horário de Operação:</span>
+          <span class="info-valor" id="inicio_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Fim do horário de Operação:</span>
+          <span class="info-valor" id="fim_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Período:</span>
+          <span class="info-valor" id="periodo_valor"></span>
+        </div>
+      </div>
+
+      <div class="area">
+        <h2 class="area-titulo">Informações de Endereço</h2>
+        <div class="info">
+          <span class="info-titulo">CEP:</span>
+          <span class="info-valor" id="CEP_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Estado:</span>
+          <span class="info-valor" id="estado_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Cidade:</span>
+          <span class="info-valor" id="cidade_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Bairro:</span>
+          <span class="info-valor" id="bairro_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Rua:</span>
+          <span class="info-valor" id="rua_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Número:</span>
+          <span class="info-valor" id="numero_valor"></span>
+        </div>
+      </div>
+
+      <div class="area">
+        <h2 class="area-titulo">Informações do Responsável</h2>
+        <div class="info">
+          <span class="info-titulo">Nome do Responsável:</span>
+          <span class="info-valor" id="nomeResponsavel_valor"></span>
+        </div>
+        <div class="info">
+          <span class="info-titulo">Email do Responsável:</span>
+          <span class="info-valor" id="emailResponsavel_valor"></span>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button>Cadastrar</button>
+        <button>Voltar</button>
+      </div>
+
+    </div>
   </div>
 
   <!--footer inicio-->
@@ -134,97 +262,3 @@
 </body>
 
 </html>
-<script>
-  function entrar() {
-    location.href = "cadastro.html"
-  }
-</script>
-<!-- function cadastrar() {
-    aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var empresaVar = listaEmpresas.value
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      empresaVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        empresaServer: empresaVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
-
-    return false;
-  }
-
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
-</script> -->
