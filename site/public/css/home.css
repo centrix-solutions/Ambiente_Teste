@@ -440,10 +440,12 @@ body {
 
 /*Fim da segunda parte do Banner*/
 /*Inicio da terceira parte do Banner*/
+
+/* equipe -> display: none para ficar de fora da home */
 .banner_parte_03 {
     height: 150vh;
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
@@ -467,8 +469,9 @@ body {
     flex-direction: column;
 }
 
+/* equipe -> display: none para ficar de fora da home */    
 .equipe {
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     width: 100%;
@@ -621,20 +624,27 @@ body {
 }
 
 .butao .btn-contact {
-    width: 20%;
-    height: 40%;
+    width: 30%;
+    height: 60%;
     margin-top: 50px;
     border-radius: 50px;
     background-color: #A033E3;
     border: none;
     color: white;
-    font-size: 17px;
+    font-size: 3.5vh;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .btn-contact a {
     text-decoration: none;
     color: #FFF;
+}
+
+.butao :hover{
+    background-color: #E0E0E0;
+    color: #4B3753;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .banner_parte_04 .imagens {
