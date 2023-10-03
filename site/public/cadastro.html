@@ -42,9 +42,9 @@
   <!-- End of Header -->
   <div class="card_logC">
     <div class="figureC">
-      <img src="assets/icon/Group 29.png" alt="">
+      <img src="assets/icon/Group 29.png" alt=""  id = "imagemEsquerda" style="display: ''">
     </div>
-    <div class="log_infoC" id="parte1">
+    <div class="log_infoC" id="cadastroEmpresa">
       <h1>Cadastro empresarial</h1>
       Nome Fantasia
       <input type="text" placeholder="Digite o nome fantasia..." id="nome_fantasia_input">
@@ -59,15 +59,24 @@
         Início <input type="time" id="horario_inicio_input">
         Fim <input type="time" id="horario_fim_input">
       </div>
+      Período de operação
+      <select id="periodo_input">
+        <option value="Horário Comercial">Horário Comercial</option>
+        <option value="Matutino">Matutino</option>
+        <option value="Vespertino">Vespertino</option>
+        <option value="Noturno">Noturno</option>
+        <option value="Madrugada">Madrugada</option>
+        <option value="24 horas">24 horas</option>
+      </select>
       Sede ou Filial
       <select id="tipo_empresa_input">
         <option value="1">Sede</option>
         <option value="2">Filial</option>
       </select>
-      <button onclick="continuar1()" class="entrar">Prosseguir</button>
+      <button onclick="continuarEndereco()" class="entrar">Prosseguir</button>
     </div>
 
-    <div class="log_infoC" id="parte2" style="display: none;">
+    <div class="log_infoC" id="cadastroEndereco" style="display: none;">
       <h1>Cadastre seu endereço</h1>
       CEP
       <input type="text" maxlength="9" placeholder="Digite o CEP" onkeyup="formatarCEP(this)" oninput="ApiCEP()"
@@ -83,11 +92,11 @@
       Número
       <input type="number" placeholder="Digite o número da sua empresa..." id="numero_input">
 
-      <button onclick="continuar2()" class="entrar">Prosseguir</button>
-      <button onclick="voltar1()" class="entrar">Voltar</button>
+      <button onclick="continuarFuncionario()" class="entrar">Prosseguir</button>
+      <button onclick="voltarEmpresa()" class="entrar">Voltar</button>
     </div>
 
-    <div class="log_infoC" id="parte3" style="display: none;">
+    <div class="log_infoC" id="cadastroFuncionario" style="display: none;">
       <h1>Cadastro do funcionário responsável</h1>
       Nome
       <input type="text" placeholder="" id="funcionario_nome_imput">
@@ -98,11 +107,11 @@
       Confirmar Senha
       <input type="text" placeholder="" id="confirmar_senha_input">
 
-      <button onclick="continuar3()" class="entrar">Prosseguir</button>
-      <button onclick="voltar2()" class="entrar">Voltar</button>
+      <button onclick="continuarResumo()" class="entrar">Prosseguir</button>
+      <button onclick="voltarEndereco()" class="entrar">Voltar</button>
     </div>
 
-    <div class="log_info_resumo" id="parte4" style="display: none;">
+    <div class="log_info_resumo" id="resumo" style="display: none;">
 
       <div class="area">
         <h2 class="area-titulo">Informações da Empresa</h2>
@@ -181,8 +190,8 @@
       </div>
 
       <div class="buttons">
-        <button>Cadastrar</button>
-        <button>Voltar</button>
+        <button onclick="cadastrar()">Cadastrar</button>
+        <button onclick="voltarFuncionario()">Voltar</button>
       </div>
 
     </div>

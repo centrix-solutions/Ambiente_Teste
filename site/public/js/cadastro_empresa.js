@@ -19,17 +19,18 @@ function formatarCNPJ(cnpj_input) {
     cnpj_input.value = cnpj
 }
 
-function continuar1() {
+function continuarEndereco() {
 
-    document.getElementById('parte1').style.display = 'none'
-    document.getElementById('parte2').style.display = ''
+    document.getElementById('cadastroEmpresa').style.display = 'none'
+    document.getElementById('cadastroEndereco').style.display = ''
+    document.getElementById('imagemEsquerda').style.display = ''
 
 }
-function voltar1() {
+function voltarEmpresa() {
 
-    document.getElementById('parte1').style.display = ''
-    document.getElementById('parte2').style.display = 'none'
-
+    document.getElementById('cadastroEmpresa').style.display = ''
+    document.getElementById('cadastroEndereco').style.display = 'none'
+    document.getElementById('imagemEsquerda').style.display = ''
 
 }
 
@@ -72,30 +73,33 @@ function ApiCEP() {
     }
 }
 
-function continuar2() {
+function continuarFuncionario() {
 
-    document.getElementById('parte1').style.display = 'none'
-    document.getElementById('parte2').style.display = 'none'
-    document.getElementById('parte3').style.display = ''
-
-}
-function voltar2() {
-
-    document.getElementById('parte1').style.display = 'none'
-    document.getElementById('parte2').style.display = ''
-    document.getElementById('parte3').style.display = 'none'
+    document.getElementById('cadastroEmpresa').style.display = 'none'
+    document.getElementById('cadastroEndereco').style.display = 'none'
+    document.getElementById('cadastroFuncionario').style.display = ''
+    document.getElementById('imagemEsquerda').style.display = ''
 
 }
+function voltarEndereco() {
+
+    document.getElementById('cadastroEmpresa').style.display = 'none'
+    document.getElementById('cadastroEndereco').style.display = ''
+    document.getElementById('cadastroFuncionario').style.display = 'none'
+    document.getElementById('imagemEsquerda').style.display = ''
+
+}
 
 
 
-function continuar3() {
+function continuarResumo() {
 
 
-    document.getElementById('parte1').style.display = 'none'
-    document.getElementById('parte2').style.display = 'none'
-    document.getElementById('parte3').style.display = 'none'
-    document.getElementById('parte4').style.display = ''
+    document.getElementById('cadastroEmpresa').style.display = 'none'
+    document.getElementById('cadastroEndereco').style.display = 'none'
+    document.getElementById('cadastroFuncionario').style.display = 'none'
+    document.getElementById('resumo').style.display = ''
+    document.getElementById('imagemEsquerda').style.display = 'none'
 
     nomeFantasia_valor.innerHTML = nome_fantasia_input.value
     razaoSocial_valor.innerHTML = razao_social_input.value
@@ -103,14 +107,15 @@ function continuar3() {
     CNPJ_valor.innerHTML = cnpj_input.value
     inicio_valor.innerHTML = horario_inicio_input.value
     fim_valor.innerHTML = horario_fim_input.value
-    periodo_valor.innerHTML = periodo
+    periodo_valor.innerHTML = periodo_input.value
+
     if (tipo_empresa_input.value == 1) {
-        tipoEmpresa_valor.innerHTML = "Sede"    
+        tipoEmpresa_valor.innerHTML = "Sede"
     }
     if (tipo_empresa_input.value == 2) {
-        tipoEmpresa_valor.innerHTML = "Filial"    
+        tipoEmpresa_valor.innerHTML = "Filial"
     }
-     
+
     CEP_valor.innerHTML = cep_input.value
     estado_valor.innerHTML = estado_input.value
     cidade_valor.innerHTML = cidade_input.value
@@ -121,4 +126,15 @@ function continuar3() {
     nomeResponsavel_valor.innerHTML = funcionario_nome_imput.value
     emailResponsavel_valor.innerHTML = funcionario_email_input.value
 
-}                               
+
+}
+
+function voltarFuncionario() {
+
+    document.getElementById('cadastroEmpresa').style.display = 'none'
+    document.getElementById('cadastroEndereco').style.display = 'none'
+    document.getElementById('cadastroFuncionario').style.display = ''
+    document.getElementById('resumo').style.display = 'none'
+    document.getElementById('imagemEsquerda').style.display = ''
+
+}
