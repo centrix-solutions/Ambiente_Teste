@@ -9,103 +9,6 @@ body {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    .botao_entrar {
-        margin-left: 20px;
-    }
-
-    .navBar{
-        margin-right: 20px;
-    }
-    
-    .segunda_parte img {
-        display: none;
-        width: 100%;
-        height: 50%;
-    }
-
-    .elemento {
-        margin-top: 10px;
-        min-width: 78%;
-        min-height: 100px;
-    }
-
-    .type_1 {
-        display: none;
-    }
-
-    .type_2 {
-        height: 450px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        min-width: 20%;
-    }
-
-    .img_missao {
-        min-width: 230px;
-    }
-
-    .negocios {
-        display: none;
-    }
-
-    .missao_empresa {
-        min-width: 40%;
-        margin-left: 20px;
-    }
-
-    .img_missao {
-        min-width: 90%;
-        min-height: 8%;
-        border-radius: 30px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 0;
-    }
-
-    .missao {
-        margin-bottom: 50px;
-        margin-top: 100px;
-    }
-
-    .card {
-        min-width: 200px;
-    }
-
-    .membros img {
-        border-radius: 30px;
-    }
-
-    #time_empresa {
-        height: 710px;
-    }
-
-    .inicio {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .inicio button {
-        float: left;
-        min-width: 200px;
-        min-height: 40px;
-        margin-right: 550px;
-        margin-top: 10px;
-    }
-
-    .inicio p {
-        font-size: 15px;
-        margin-top: 0;
-    }
-
-    .card:hover {
-        background-color: #FFF;
-    }
-
-}
-
 .parte1 img {
     max-width: 100px;
     max-height: 100px;
@@ -138,7 +41,7 @@ body {
 
 }
 
-.botoes_login{
+.botoes_login {
     display: flex;
     flex-direction: row;
     width: 22vw;
@@ -198,7 +101,6 @@ body {
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
-
 }
 
 .bloco_imagens {
@@ -279,7 +181,6 @@ body {
     color: white;
     border-radius: 50px;
     background-color: #A033E3;
-    ;
     max-width: 200px;
     height: 50px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -287,6 +188,10 @@ body {
 
 .btn_join:hover {
     cursor: pointer;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    transition-duration: 1s;
 }
 
 .bloco_texto {
@@ -347,7 +252,6 @@ body {
 }
 
 .missao_frases {
-    margin-left: 20px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -355,7 +259,6 @@ body {
 
 #missao_text {
     margin-right: 10px;
-    margin-left: 20px;
     margin-bottom: 20px;
 }
 
@@ -373,15 +276,17 @@ body {
 }
 
 .missao_empresa h2 {
-    margin-left: 20px;
     color: black;
     font-weight: bold;
 }
 
 .missao_frases p {
-    margin-left: 20px;
     margin: 0%;
     color: black;
+}
+
+.container-missao_empresa {
+    margin-left: 5%;
 }
 
 .missao {
@@ -509,6 +414,13 @@ body {
     font-weight: bold;
 }
 
+.startup_plan button:hover {
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    transition-duration: 1s;
+}
+
 .card_investidor {
     background-color: #F6F6F6;
     border-radius: 20px;
@@ -532,5 +444,433 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding: 30px;
+}
 
+.left_post p {
+    margin-top: 0%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.left_post li {
+    margin-bottom: 20%;
+}
+
+.left_post ul {
+    list-style-type: none;
+    width: 100%;
+    margin-left: -40px;
+    margin-top: 40%;
+    font-size: 18px;
+}
+
+.left_post {
+    margin-top: 0%;
+    font-size: 10px;
+}
+
+.right_post ul {
+    margin-top: none;
+}
+
+.right_post {
+    margin-bottom: 11.5%;
+}
+
+.right_post ul {
+    list-style-type: none;
+    margin-left: -7%;
+    font-size: 18px;
+    margin-top: 37%;
+}
+
+.right_post li {
+    margin-bottom: 10%;
+}
+
+.main_separation {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left_resource {
+    width: 49.99%;
+    height: 100%;
+    border-top: white 1.5px solid;
+    border-bottom: white 1.5px solid;
+}
+
+.left_resource a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.left_resource a:hover {
+    border-bottom: 1px solid white;
+    transform: scale(1.5);
+}
+
+.copyrights {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.right_resource {
+    border-top: white 1.5px solid;
+    border-left: white 1.5px solid;
+    border-bottom: white 1.5px solid;
+    float: right;
+    width: 49.99%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.right_startup {
+    background-color: black;
+    width: 80%;
+    height: 80%;
+    border-radius: 5vh;
+    border: none;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+}
+
+.right_startup {
+    margin-left: 30px;
+    min-width: 350px;
+    min-height: 80%;
+}
+
+.inner_right {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 80%;
+    align-self: center;
+    justify-content: center;
+}
+
+.container {
+    margin-top: 13vh;
+    background-color: transparent;
+    width: 90%;
+    height: 50vh;
+}
+
+.footer {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.start_options {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list_options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.list_options p {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.list_options img {
+    width: 10px;
+    height: 10px;
+}
+
+.social_icons {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.social_icons img {
+    margin-right: 15px;
+    width: 25px;
+    height: 25px;
+}
+
+.social_icons a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.social_icons a:hover {
+    transform: scale(1.5);
+}
+
+.startup_plan button {
+    background-color: #9E00FF;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
+    border-radius: 30px;
+    border: none;
+    width: 85%;
+    height: 40px;
+    color: #eee;
+    align-self: center;
+    font-size: 15px;
+
+}
+
+.startup_plan {
+    border-right: #eee 1.5px solid;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.startup_plan img {
+    max-width: 60%;
+    max-height: 20%;
+}
+
+.right_post li {
+    margin-bottom: 4vh;
+}
+
+.right_post ul {
+    list-style-type: none;
+    width: 100%;
+    margin-top: 13vh;
+    font-size: 18px;
+
+}
+
+.right_post {
+    margin-top: 0%;
+    font-size: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .valores {
+        display: none;
+    }
+
+    .empresa {
+        display: none;
+    }
+
+    .startup_plan img {
+        width: 150px;
+        height: 30px;
+    }
+
+    .startup_plan {
+        border-right: #eee 1.5px solid;
+        min-width: 50%;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .startup_plan button {
+        width: 70%;
+        font-size: 10px;
+    }
+
+    .botao_entrar {
+        margin: 1px;
+        padding: 10px;
+    }
+
+    .navBar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .segunda_parte img {
+        display: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    .elemento {
+        margin-top: 10px;
+        min-width: 78%;
+        min-height: 100px;
+    }
+
+    .type_1 {
+        display: none;
+    }
+
+    .type_2 {
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        min-width: 20%;
+    }
+
+    .img_missao {
+        min-width: 230px;
+    }
+
+    .negocios {
+        display: none;
+    }
+
+    .missao_empresa {
+        min-width: 40%;
+        margin-left: 20px;
+    }
+
+    .img_missao {
+        min-width: 90%;
+        min-height: 8%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .missao {
+        margin-bottom: 50px;
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: 200px;
+    }
+
+    .membros img {
+        border-radius: 30px;
+    }
+
+    #time_empresa {
+        height: 710px;
+        margin-top: -115%;
+        height: fit-content;
+        text-align: center;
+    }
+
+    .inicio {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inicio button {
+        float: left;
+        min-width: 200px;
+        min-height: 40px;
+        margin-right: 550px;
+        margin-top: 10px;
+    }
+
+    .inicio p {
+        font-size: 15px;
+        margin-top: 0;
+    }
+
+    .card:hover {
+        background-color: #FFF;
+    }
+
+    .botoes_login {
+        margin-left: 10%;
+    }
+
+    .parte1 img {
+        margin-left: 20%;
+    }
+
+    .navBar {
+        margin-left: -8%;
+    }
+
+    .blocos {
+        margin-left: -12%;
+    }
+
+    .bloco_texto {
+        margin-left: 2%;
+    }
+
+    .bloco_texto h1 {
+        font-size: x-large;
+    }
+
+    .missao_empresa {
+        display: flex;
+        flex-direction: column;
+        padding: 15%;
+        margin-left: 0%;
+        margin-top: -15%;
+        width: 60%;
+
+    }
+
+    .missao_empresa h2 {
+        font-size: xx-large;
+        text-align: center;
+        margin-left: -4%;
+    }
+
+    #missao_text {
+        width: 110%;
+        margin-left: -4%;
+    }
+
+    #imagem2,
+    #imagem1 {
+        display: none;
+    }
+
+
+    #valores_empresa {
+        display: none
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right_resource {
+        margin-top: -30%;
+        margin-left: 20%;
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .left_resource {
+        display: none;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .footer {
+        height: fit-content;
+    }
 }

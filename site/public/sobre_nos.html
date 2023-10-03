@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/sobrenos.css">
-    <link rel="stylesheet" href="css/login.css">
     <link rel="icon" href="assets/icon/favicon.ico">
     <title>Sobre nós</title>
 </head>
@@ -20,19 +19,19 @@
             <li>
                 <ul><a href="index.html">Home</a></ul>
                 <ul><a href="sobre_nos.html">Sobre Nós</a></ul>
-                <ul><a href="#time_empresa">Equipe</a></ul>
-                <ul><a href="#valores_empresa">Valores</a></ul>
+                <ul class="empresa"><a href="#time_empresa">Equipe</a></ul>
+                <ul class="valores"><a href="#valores_empresa">Valores</a></ul>
                 <ul><a href="blog.html">Blog</a></ul>
             </li>
         </div>
         <div class="botoes_login">
             <div class="botao_entrar">
-              <a href="cadastro.html">Cadastrar</a>
+                <a href="cadastro.html">Cadastrar</a>
             </div>
             <div class="botao_entrar">
-              <a href="login.html">Login</a>
+                <a href="login.html">Login</a>
             </div>
-          </div>
+        </div>
     </div>
     <!-- fim da navBar -->
 
@@ -105,27 +104,31 @@
     <!-- missão da empresa -->
     <div class="missao">
         <div class="missao_empresa">
-            <h2> Nossa missão </h2>
-            <p id="missao_text"> A Centrix Solution busca prover monitoramento para hardware de máquinas de Call Center
-                devido a grande demanda de funcionalidade e a proteção contra a quantidade exorbitante de vazamento de
-                dados. Buscamos inovar e dinamizar o gerenciamento dos recursos computacionais de forma intuitiva e
-                clara. </p>
-            <div class="missao_frases">
-                <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
-                <p> Inovações </p>
-            </div>
-            <div class="missao_frases">
-                <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
-                <p> Postagens e vídeos </p>
-            </div>
-            <div class="missao_frases">
-                <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
-                <p> O futuro do gerenciamento </p>
+            <div class="container-missao_empresa">
+                <h2> Nossa missão </h2>
+                <p id="missao_text"> A Centrix Solution busca prover monitoramento para hardware de máquinas de Call
+                    Center
+                    devido a grande demanda de funcionalidade e a proteção contra a quantidade exorbitante de vazamento
+                    de
+                    dados. Buscamos inovar e dinamizar o gerenciamento dos recursos computacionais de forma intuitiva e
+                    clara. </p>
+                <div class="missao_frases">
+                    <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
+                    <p> Inovações </p>
+                </div>
+                <div class="missao_frases">
+                    <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
+                    <p> Postagens e vídeos </p>
+                </div>
+                <div class="missao_frases">
+                    <img class="ticks" src="./assets/imgs/Tick.png" alt="tick">
+                    <p> O futuro do gerenciamento </p>
+                </div>
             </div>
         </div>
         <div class="type_2">
-            <img class="img_missao" src="./assets/imgs/missao2.jpg" alt="imagem missão">
-            <img class="img_missao" src="./assets/imgs/missao1.jpg" alt="imagem missão">
+            <img id="imagem1" class="img_missao" src="./assets/imgs/missao2.jpg" alt="imagem missão">
+            <img id="imagem2" class="img_missao" src="./assets/imgs/missao1.jpg" alt="imagem missão">
         </div>
     </div>
     <!-- missão da empresa -->
@@ -184,13 +187,11 @@
                 <p> Membros responsáveis pelo desenvolvimento e aplicação da Centrix Solutions
                 </p>
             </div>
-            <button onclick="entrar()">Junte-se ao nosso time</button>
         </div>
         <div class="time_um">
             <div class="membros">
                 <img src="./assets/imgs/Davi.jpeg" alt="membro da equipe">
-                <span> Davi Rodrigues </span>
-                <p> Desenvolvedor Back-End </p>
+                <span> Alexandre Murata </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -199,8 +200,7 @@
             </div>
             <div class="membros">
                 <img src="./assets/imgs/Erica.jpeg" alt="membro da equipe">
-                <span> Erica Cunha </span>
-                <p> Scrum Master </p>
+                <span> Edson Nogueira </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -209,8 +209,7 @@
             </div>
             <div class="membros">
                 <img src="./assets/imgs/Gabriella.jpeg" alt="membro da equipe">
-                <span> Gabriella Inácio </span>
-                <p> Administradora de Banco de Dados </p>
+                <span> Lucas Buriola </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -221,8 +220,7 @@
         <div class="time_dois">
             <div class="membros">
                 <img src="./assets/imgs/Henryque.jpeg" alt="membro da equipe">
-                <span> Henrique Lipert </span>
-                <p> Gestor da ferramenta de suporte </p>
+                <span> Paola Gomes </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -231,8 +229,7 @@
             </div>
             <div class="membros">
                 <img src="./assets/imgs/Kaory.jpeg" alt="membro da equipe">
-                <span> Michelly Kaori </span>
-                <p> Desenvolvedora Front-End </p>
+                <span> Rafael Cebrian </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -240,9 +237,8 @@
                 </div>
             </div>
             <div class="membros">
-                <img src="./assets/imgs/Sarah.jpeg" alt="membro da equipe">
-                <span> Sarah de Lucia </span>
-                <p> Product Owner </p>
+                <img src="./assets/imgs/Ruan.jpeg" alt="membro da equipe">
+                <span> Ruan Cardozo </span>
                 <div id="member_icons">
                     <img src="assets/icon/facebook.png" alt="">
                     <img src="assets/icon/instagram-icon-white-png-2.jpg" alt="">
@@ -263,21 +259,11 @@
                     garantido. </p>
             </div>
             <div class="card_investidor">
-                <span> Banco Safra </span>
-                <p>Quarto maior banco de controle privado do país. Oferece uma grande linha de produtos e serviços
-                    financeiros.</p>
-            </div>
-        </div>
-        <div class="investidor_dois">
-            <div class="card_investidor">
-                <span> Accenture </span>
-                <p> Empresa multinacional de consultoria de gestão, tecnologia da informação e outsourcing.</p>
-            </div>
-            <div class="card_investidor">
                 <span> C6 Bank</span>
                 <p>Instituição bancária digital para pessoas físicas e jurídicas.</p>
             </div>
         </div>
+
     </div>
     <!-- investidores da centrix solutions -->
     <!--footer inicio-->
@@ -289,7 +275,7 @@
                         <div class="startup_plan">
                             <img src="assets/icon/Group 25.png" alt="">
                             <h3>Plano Inicial</h3>
-                            <button>Comece Agora</button>
+                            <button><a href="cadastro.html">Comece Agora</a></button>
                         </div>
                         <div class="start_options">
                             <div class="list_options">
