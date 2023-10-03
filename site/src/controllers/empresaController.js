@@ -1,47 +1,111 @@
 var empresaModel = require("../models/empresaModel");
 
-function buscarPorCnpj(req, res) {
-  var cnpj = req.query.cnpj;
+function cadastrarEmpresa(req, res) {
 
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
+    var Nome_fantasia = req.body.nomeFantasiaServer;
+    var Razao_social = req.body.razaoSocialServer;
+    var Apelido_interno = req.body.apelidoInternoServer;
+    var CNPJ = req.body.cnpjServer;
+    var Responsavel_legal = req.body.responsavelLegalServer;
+    var sede = req.body.sedeServer;
 
-function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function buscarPorId(req, res) {
-  var id = req.params.id;
-
-  empresaModel.buscarPorId(id).then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function cadastrar(req, res) {
-  var cnpj = req.body.cnpj;
-  var razaoSocial = req.body.razaoSocial;
-
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    if (resultado.length > 0) {
-      res
-        .status(401)
-        .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
+    if (Nome_fantasia == undefined) {
+        res.status(400).send("Seu nome fantasia está undefined!");
+    } else if (Razao_social == undefined) {
+        res.status(400).send("Sua razão social está undefined!");
+    } else if (Apelido_interno == undefined) {
+        res.status(400).send("Seu apelido interno está undefined!");
+    } else if (CNPJ == undefined) {
+        res.status(400).send("Seu cnpj está undefined!");
+    } else if (Responsavel_legal == undefined) {
+        res.status(400).send("Seu responsavel legal está undefined!");
+    } else if (sede == undefined) {
+      res.status(400).send("Sua sede está undefined!");
     } else {
-      empresaModel.cadastrar(razaoSocial, cnpj).then((resultado) => {
-        res.status(201).json(resultado);
-      });
-    }
-  });
-}
 
+        empresaModel.cadastrarEmpresa(Nome_fantasia, Razao_social, Apelido_interno, CNPJ, Responsavel_legal, sede)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+function buscarFk(req, res) {
+
+    var cnpj = req.body.cnpjServer;
+
+    console.log(`Recuperando a fkEmpresa`);
+    if (cnpj == undefined) {
+        res.status(400).send("Seu cnpj está undefined!");
+    } else {
+    empresaModel.buscarFk(cnpj)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao buscar a fk Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+function cadastrarEndereco(req, res) {
+        var rua = req.body.ruaServer
+        var bairro = req.body.bairroServer
+        var cidade = req.body.cidadeServer
+        var estado = req.body.estadoServer
+        var numero = req.body.numeroServer
+        var cep = req.body.CEPServer
+        var fkempresa = req.body.fkEmpresaServer
+
+    
+    if (rua == undefined) {
+        res.status(400).send("Seu rua está undefined!");
+    } else if ( bairro == undefined) {
+        res.status(400).send("Seu emailInstituicao está undefined!");
+    } else if ( senha == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else if (fkempresa == undefined) {
+        res.status(400).send("Seu fkempresa undefined!");
+    } else {
+
+
+        faculdadeModel.cadastrarEndereco(responsavel, emailInstituicao, senha, fkempresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
 module.exports = {
-  buscarPorCnpj,
-  buscarPorId,
-  cadastrar,
-  listar,
-};
+    cadastrarEmpresa,
+    buscarFk,
+    cadastrarEndereco,
+    cadastrarFuncionario,
+}

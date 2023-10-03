@@ -1,27 +1,15 @@
 var database = require("../database/config");
 
-function buscarPorId(id) {
-  var query = `select * from empresa where id = '${id}'`;
+f
+
+function cadastrarEmpresa(Nome_fantasia, Razao_social, Apelido_interno, CNPJ, Responsavel_legal, sede) {
+  var query = `insert into Empresa (Nome_fantasia, Razao_social, Apelido_interno, CNPJ, Responsavel_legal, FkSede) values 
+  ('${Nome_fantasia}', '${Razao_social}', '${Apelido_interno}', '${CNPJ}','${Responsavel_legal}', ${sede})`;
 
   return database.executar(query);
 }
 
-function listar() {
-  var query = `select * from empresa`;
-
-  return database.executar(query);
+module.exports = {
+  cadastrarEmpresa,
+  buscarFk,
 }
-
-function buscarPorCnpj(cnpj) {
-  var query = `select * from empresa where cnpj = '${cnpj}'`;
-
-  return database.executar(query);
-}
-
-function cadastrar(razaoSocial, cnpj) {
-  var query = `insert into empresa (razao_social, cnpj) values ('${razaoSocial}', '${cnpj}')`;
-
-  return database.executar(query);
-}
-
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };

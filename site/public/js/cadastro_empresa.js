@@ -138,3 +138,99 @@ function voltarFuncionario() {
     document.getElementById('imagemEsquerda').style.display = ''
 
 }
+
+function cadastrar() {
+
+    cadastrarEmpresa()
+                .then(() => buscarFk(cnpjVar))
+                .then((fkEmpresaVar) => {
+                    return cadastrarEndereco(fkEmpresaVar[0].fkEmpresa);
+                })
+                .then(() => buscarFk(cnpjVar))
+                .then((fkEmpresaVar) => {
+                    return cadastrarFuncionario(fkEmpresaVar[0].fkEmpresa);
+                })
+                .then(() => {
+                    window.location = 'login.html';
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+    
+}
+
+function cadastrarEmpresa() {
+    var nomeFantasiaVar = nome_fantasia_input.value
+    var razaoSocialVar = razao_social_input.value
+    var apelidoInternoVar = apelido_interno_input.value
+    var cnpjVar = cnpj_input.value
+    var responsavelLegalVar = funcionario_nome_imput.value
+    var sedeVar = tipo_empresa_input.value
+
+    return fetch("/empresa/cadastrarEmpresa", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nomeFantasiaServer: nomeFantasiaVar,
+            razaoSocialServer: razaoSocialVar,
+            apelidoInternoServer: apelidoInternoVar,
+            cnpjServer: cnpjVar,
+            responsavelLegalServer: responsavelLegalVar,
+            sedeServer: sedeVar,
+        })
+    });
+}
+
+function buscarFk(cnpjVar) {
+    return fetch("/empresa/buscarFk", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            cnpjServer: cnpjVar,
+        }),
+    })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .then(function (fkEmpresaVar) {
+            return fkEmpresaVar;
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function cadastrarEndereco(fkEmpresaVar) {
+
+    var ruaVar = rua_input.value;
+    var bairroVar = bairro_input.value;
+    var cidadeVar = cidade_input.value;
+    var estadoVar = estado_input.value;
+    var numeroVar = numero_input.value;
+    var CEPVar = cep_input.value;
+    
+    return fetch("/empresa/cadastrarEndereco", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ruaServer: ruaVar,
+            bairroServer: bairroVar,
+            cidadeServer: cidadeVar,
+            estadoServer: estadoVar,
+            numeroServer: numeroVar,
+            CEPServer: CEPVar,
+            fkEmpresaServer: fkEmpresaVar,
+        })
+    });
+}
