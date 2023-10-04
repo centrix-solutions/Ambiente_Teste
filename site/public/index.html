@@ -7,11 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="./js/sessao.js"></script>
+ 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
-    defer></script>
-  <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 
   <link rel="icon" href="assets/icon/favicon.ico">
   <link rel="stylesheet" href="./css/home.css">
@@ -87,7 +89,6 @@
       <img id="mt" class="imagen" src="assets/imgs/InicioDash.png" alt="">
 
     </div>
-  </div>
   </div>
 
   <!-- equipe -->
@@ -216,7 +217,7 @@
       </div>
     </div>
     <div class="imagens">
-      <img id="id_img" src="assets/imgs/Fundo_Bunito.jpeg" alt="">
+      <img id="id_img" src="" alt="">
     </div>
   </div>
 
@@ -307,50 +308,26 @@
     </div>
   </div>
 
-  <div id="bnr_pt6" class="banner_parte_06">
-    <div class="mapa"></div>
-    <div class="contato">
-      <div class="divisao">
-        <h1> Contato </h1>
-        <div class="contatos">
-          <img id="id_frts" src="assets/icon/local.png" alt="">
-          <span id="ad">Rua Haddock Lobo, 595</span>
-        </div>
-        <div class="contatos">
-          <img src="assets/imgs/telefone.png" alt="">
-          <span>(11) 3589-4043</span>
-        </div>
-        <div class="  contatos">
-          <img id="id_secn" src="assets/imgs/email.png" alt="">
-          <span>centrixSolutions@outlook.com</span>
-        </div>
-        <button>Mande uma mensagem</button>
-        <span id="desc">Aberto das 08:00 até 22:00</span>
-      </div>
-    </div>
-  </div>
 
-  <div id="contato" class="contact">
-    <img id="mapa" src="assets/imgs/mapa.png" alt="">
-    <div class="divisao">
-      <h1> Contato </h1>
-      <div class="contatos">
-        <img id="id_frts" src="assets/icon/local.png" alt="">
-        <span id="ad">Rua Haddock Lobo, 595</span>
-      </div>
-      <div class="contatos">
-        <img src="assets/imgs/telefone.png" alt="">
-        <span>(11) 3589-4043</span>
-      </div>
-      <div class="contatos">
-        <img id="id_secn" src="assets/imgs/email.png" alt="">
-        <span>centrixSolutions@outlook.com</span>
-      </div>
-      <button><a href="https://centrix-solutions.atlassian.net/servicedesk/customer/portals">Mande uma
-          mensagem</a></button>
-      <span id="desc">Aberto das 08:00 até 22:00</span>
+  <div class="cotato_conteiner">
+    <div class="conteiner_notes">
+        <div class="note0">
+            <span class="Tnote0"><span class="cinza">Informações</span> <span class="negrito">de Contato</span></span>
+        </div>
+        <div class="note1">
+            <span class="negrito cursor"><a href="https://www.sptech.school/" target="_blank">SPTech</a></span>
+            <span class="cursor" onclick="Copiar_Endereco()">Rua Haddock Lobo 595</span>
+            <span class="cursor" onclick="Copiar_Endereco()">São Paulo - SP, 01414-905</span>
+        </div>
+        <div class="note2">
+            <span class="negrito cursor" onclick="Copiar_Telefone()">(11) 98888-7777</span>
+        </div>
+        <div class="note3 Tnote3">
+            <span class="negrito cursor" onclick="Copiar_Email()" >test@sptech.school</span>
+        </div>
     </div>
-  </div>
+    <div id="map"></div>
+</div>
 
   <!--footer inicio-->
   <div class="footer">
@@ -423,6 +400,7 @@
       <!-- Fim dos contatos -->
     </div>
   </div>
+
   <!--footer fim-->
 </body>
 
@@ -442,6 +420,28 @@
   function blog() {
     location.href = "blog.html"
   }
+
+ 
+    function Copiar_Endereco() {
+        navigator.clipboard.writeText("Rua Haddock Lobo 595 São Paulo - SP, 01414-905");
+        alert("Endereço copiado!");
+    }
+    function Copiar_Telefone() {
+        navigator.clipboard.writeText("(11) 98888-7777");
+        alert("Telefone copiado!");
+    }
+    function Copiar_Email() {
+        navigator.clipboard.writeText("test@sptech.school");
+        alert("Email copiado!");
+    }
+    var map = L.map('map').setView([-23.558101168408747, -46.66160636041288], 22);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([-23.558101168408747, -46.66160636041288]).addTo(map).bindPopup('São Paulo Tech School').openPopup();
+
 
 
 </script>
