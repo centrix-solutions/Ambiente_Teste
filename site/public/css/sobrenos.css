@@ -26,7 +26,6 @@ body {
 
 .parte2 li {
     display: flex;
-
 }
 
 .parte2 a {
@@ -38,7 +37,6 @@ body {
 
     border-bottom: 1px solid white;
     transform: scale(1.5);
-
 }
 
 .botoes_login {

@@ -5,9 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/cadastro.css">
-  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="icon" href="assets/icon/favicon.ico">
   <script src="js/cadastro_empresa.js"></script>
   <title>Centrix Solutions | Cadastro Empresa</title>
@@ -25,13 +24,13 @@
       <li>
         <ul><a href="index.html">Home</a></ul>
         <ul><a href="sobre_nos.html">Sobre Nós</a></ul>
-        <ul><a href="sobre_nos.html#time_empresa">Equipe</a></ul>
-        <ul><a href="sobre_nos.html#valores_empresa">Valores</a></ul>
+        <ul class="empresa"><a href="#time_empresa">Equipe</a></ul>
+        <ul class="valores"><a href="#valores_empresa">Valores</a></ul>
         <ul><a href="blog.html">Blog</a></ul>
       </li>
     </div>
     <div class="botoes_login">
-      <div class="botao_entrar">
+      <div id="cadastro_botao" class="botao_entrar">
         <a href="cadastro.html">Cadastrar</a>
       </div>
       <div class="botao_entrar">
@@ -98,13 +97,13 @@
 
     <div class="log_infoC" id="cadastroFuncionario" style="display: none;">
       <h1>Cadastro do funcionário responsável</h1>
-      Nome
+      <span id="texto_input">Nome</span>
       <input type="text" placeholder="Digite seu nome" id="funcionario_nome_imput">
-      Email
+      <span id="texto_input">Email</span>
       <input type="text" placeholder="Digite seu email" id="funcionario_email_input">
-      Senha
+      <span id="texto_in  put">Senha</span>
       <input type="text" placeholder="Digite sua senha" id="senha_input">
-      Confirmar Senha
+      <span id="texto_input">Confirmar Senha</span>
       <input type="text" placeholder="Confirme sua senha" id="confirmar_senha_input">
 
       <button onclick="continuarResumo()" class="entrar">Prosseguir</button>
@@ -201,91 +200,75 @@
   <!--footer inicio-->
   <div class="footer">
     <div class="container">
-        <div class="right_resource">
-            <div class="right_startup">
-                <div class="inner_right">
-                    <div class="startup_plan">
-                        <img src="assets/icon/Group 25.png" alt="">
-                        <h3>Plano Inicial</h3>
-                        <button><a href="cadastro.html">Comece Agora</a></button>
-                    </div>
-                    <div class="start_options">
-                        <div class="list_options">
-                            <img src="assets/icon/Group 27.png" alt="">
-                            <p>5 Usuários</p>
-                        </div>
-                        <div class="list_options">
-                            <img src="assets/icon/Group 27.png" alt="">
-                            <p>Suporte técnico</p>
-                        </div>
-                        <div class="list_options">
-                            <img src="assets/icon/Group 27.png" alt="">
-                            <p>Planejamento</p>
-                        </div>
-                        <div class="list_options">
-                            <img src="assets/icon/Group 27.png" alt="">
-                            <p>Ferramentas de análise</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="right_resource">
+        <div class="right_startup">
+          <div class="inner_right">
+            <div class="startup_plan">
+              <img src="assets/icon/Group 25.png" alt="">
+              <h3>Plano Inicial</h3>
+              <button><a href="cadastro.html">Comece Agora</a></button>
             </div>
-        </div>
-        <div class="left_resource">
-            <div class="main_separation">
-                <div class="left_post">
-                    <p>Nossas Páginas</p>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="sobre_nos.html">Sobre Nós</a></li>
-                        <li><a href="index.html#bnr_pt6">Contato</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="right_post">
-                    <ul>
-                        <li><a href="blog.html">Blog Post</a></li>
-                        <li><a href="sobre_nos.html#valores_empresa">Valores</a></li>
-                    </ul>
-                </div>
+            <div class="start_options">
+              <div class="list_options">
+                <img src="assets/icon/Group 27.png" alt="">
+                <p>5 Usuários</p>
+              </div>
+              <div class="list_options">
+                <img src="assets/icon/Group 27.png" alt="">
+                <p>Suporte técnico</p>
+              </div>
+              <div class="list_options">
+                <img src="assets/icon/Group 27.png" alt="">
+                <p>Planejamento</p>
+              </div>
+              <div class="list_options">
+                <img src="assets/icon/Group 27.png" alt="">
+                <p>Ferramentas de análise</p>
+              </div>
             </div>
-        </div>
-        <!-- Começo do copyrights -->
-        <div class="copyrights">
-            <span>Copyrights | Centrix Solutions</span>
-            <div class="social_icons">
-                <a href="" style="text-decoration:none"><img src="assets/icon/Insta.png" alt=""></a>
-                <a href="" style="text-decoration:none"><img src="assets/icon/Fb.png" alt=""></a>
-                <a href="" style="text-decoration:none"><img src="assets/icon/Twiter.png" alt=""></a>
-                <a href="" style="text-decoration:none"><img src="assets/icon/linken.png" alt=""></a>
-            </div>
-        </div>
-        <!-- Fim do copyrights -->
-        <!-- Começo dos contatos -->
-        <!-- <div class="contact_icons">
-            <a href="" style="text-decoration:none"><img src="assets/icon/email.png" alt=""></a>
-            <a href="" style="text-decoration:none"><img src="assets/icon/whatsapp.webp" alt=""></a>
-        </div> -->
-        <!-- Fim dos contatos -->
-    </div>
-</div>
-      <!-- Começo do copyrights -->
-      <div class="copyrights">
-        <span>Copyrights | Centrix Solutions</span>
-        <div class="social_icons">
-          <a href="" style="text-decoration:none"><img src="assets/icon/Insta.png" alt=""></a>
-          <a href="" style="text-decoration:none"><img src="assets/icon/Fb.png" alt=""></a>
-          <a href="" style="text-decoration:none"><img src="assets/icon/Twiter.png" alt=""></a>
-          <a href="" style="text-decoration:none"><img src="assets/icon/linken.png" alt=""></a>
+          </div>
         </div>
       </div>
-      <!-- Fim do copyrights -->
-      <!-- Começo dos contatos -->
-      <!-- <div class="contact_icons">
+      <div class="left_resource">
+        <div class="main_separation">
+          <div class="left_post">
+            <p>Nossas Páginas</p>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="sobre_nos.html">Sobre Nós</a></li>
+              <li><a href="index.html#bnr_pt6">Contato</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="right_post">
+            <ul>
+              <li><a href="blog.html">Blog Post</a></li>
+              <li><a href="sobre_nos.html#valores_empresa">Valores</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Começo do copyrights -->
+  <div class="copyrights">
+    <span>Copyrights | Centrix Solutions</span>
+    <div class="social_icons">
+      <a href="" style="text-decoration:none"><img src="assets/icon/Insta.png" alt=""></a>
+      <a href="" style="text-decoration:none"><img src="assets/icon/Fb.png" alt=""></a>
+      <a href="" style="text-decoration:none"><img src="assets/icon/Twiter.png" alt=""></a>
+      <a href="" style="text-decoration:none"><img src="assets/icon/linken.png" alt=""></a>
+    </div>
+  </div>
+  <!-- Fim do copyrights -->
+  <!-- Começo dos contatos -->
+  <!-- <div class="contact_icons">
         <a href="" style="text-decoration:none"><img src="assets/icon/email.png" alt=""></a>
         <a href="" style="text-decoration:none"><img src="assets/icon/whatsapp.webp" alt=""></a>
       </div> -->
-      <!-- Fim dos contatos -->
-    </div>
+  <!-- Fim dos contatos -->
+  </div>
   </div>
   <!--footer fim-->
 </body>
