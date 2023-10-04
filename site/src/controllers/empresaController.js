@@ -76,17 +76,23 @@ function cadastrarEndereco(req, res) {
 
     
     if (rua == undefined) {
-        res.status(400).send("Seu rua está undefined!");
+        res.status(400).send("Sua rua está undefined!");
     } else if ( bairro == undefined) {
-        res.status(400).send("Seu emailInstituicao está undefined!");
-    } else if ( senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    } else if (fkempresa == undefined) {
-        res.status(400).send("Seu fkempresa undefined!");
-    } else {
+        res.status(400).send("Sua bairro está undefined!");
+    } else if ( cidade == undefined) {
+        res.status(400).send("Sua cidade está undefined!");
+    } else if (estado == undefined) {
+        res.status(400).send("Seu estado está undefined!");
+    } else if (numero == undefined) {
+        res.status(400).send("Seu numero está undefined!");
+    }else if (cep == undefined) {
+        res.status(400).send("Seu cep está undefined!");
+    }else if (fkempresa == undefined) {
+        res.status(400).send("Seu fkempresa está undefined!");
+    }else {
 
 
-        faculdadeModel.cadastrarEndereco(responsavel, emailInstituicao, senha, fkempresa)
+        empresaModel.cadastrarEndereco(rua, bairro, cidade, estado, numero, cep, fkempresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
