@@ -44,7 +44,7 @@ function buscarFk(req, res) {
 
     var cnpj = req.body.cnpjServer;
 
-    console.log(`Recuperando a fkEmpresa`);
+    console.log(`Recuperando a fkempresa`);
     if (cnpj == undefined) {
         res.status(400).send("Seu cnpj está undefined!");
     } else {
@@ -57,7 +57,7 @@ function buscarFk(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao buscar a fk Erro: ",
+                        "\nHouve um erro ao buscar a fkempresa Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -72,7 +72,7 @@ function cadastrarEndereco(req, res) {
         var estado = req.body.estadoServer
         var numero = req.body.numeroServer
         var cep = req.body.CEPServer
-        var fkempresa = req.body.fkEmpresaServer
+        var fkempresa = req.body.fkempresaServer
 
     
     if (rua == undefined) {
@@ -113,5 +113,6 @@ module.exports = {
     cadastrarEmpresa,
     buscarFk,
     cadastrarEndereco,
+    cadastrarHorario,
     cadastrarFuncionario,
 }
