@@ -102,19 +102,7 @@ function continuarResumo() {
     document.getElementById('imagemEsquerda').style.display = 'none'
 
     nomeFantasia_valor.innerHTML = nome_fantasia_input.value
-    razaoSocial_valor.innerHTML = razao_social_input.value
-    apelidoInterno_valor.innerHTML = apelido_interno_input.value
     CNPJ_valor.innerHTML = cnpj_input.value
-    inicio_valor.innerHTML = horario_inicio_input.value
-    fim_valor.innerHTML = horario_fim_input.value
-    periodo_valor.innerHTML = periodo_input.value
-
-    if (tipo_empresa_input.value == 1) {
-        tipoEmpresa_valor.innerHTML = "Sede"
-    }
-    if (tipo_empresa_input.value == 2) {
-        tipoEmpresa_valor.innerHTML = "Filial"
-    }
 
     CEP_valor.innerHTML = cep_input.value
     estado_valor.innerHTML = estado_input.value
@@ -122,6 +110,7 @@ function continuarResumo() {
     bairro_valor.innerHTML = bairro_input.value
     rua_valor.innerHTML = rua_input.value
     numero_valor.innerHTML = numero_input.value
+    complemento_valor.innerHTML = complemento_input.value
 
     nomeResponsavel_valor.innerHTML = funcionario_nome_imput.value
     emailResponsavel_valor.innerHTML = funcionario_email_input.value
@@ -141,32 +130,29 @@ function voltarFuncionario() {
 
 function cadastrar() {
 
-    cadastrarEmpresa()
-                .then(() => buscarFk(cnpjVar))
-                .then((fkEmpresaVar) => {
-                    return cadastrarEndereco(fkEmpresaVar[0].fkEmpresa);
-                })
-                .then(() => buscarFk(cnpjVar))
-                .then((fkEmpresaVar) => {
-                    return cadastrarFuncionario(fkEmpresaVar[0].fkEmpresa);
-                })
-                .then(() => {
-                    window.location = 'login.html';
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
 
-    
+    cadastrarEmpresa()
+        .then(() => buscarFk(cnpjVar))
+        .then((fkEmpresaVar) => {
+            return cadastrarFuncionario(fkEmpresaVar[0].fkEmpresa);
+        })
+        
+        .then(() => {
+            window.location = 'login.html';
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
 }
 
 function cadastrarEmpresa() {
     var nomeFantasiaVar = nome_fantasia_input.value
-    var razaoSocialVar = razao_social_input.value
-    var apelidoInternoVar = apelido_interno_input.value
     var cnpjVar = cnpj_input.value
     var responsavelLegalVar = funcionario_nome_imput.value
-    var sedeVar = tipo_empresa_input.value
+    var cepVar = cep_input.value
+    var numeroVar = numero_input.value
+    var complementoVar = complemento_input.value
 
     return fetch("/empresa/cadastrarEmpresa", {
         method: "POST",
@@ -175,11 +161,11 @@ function cadastrarEmpresa() {
         },
         body: JSON.stringify({
             nomeFantasiaServer: nomeFantasiaVar,
-            razaoSocialServer: razaoSocialVar,
-            apelidoInternoServer: apelidoInternoVar,
             cnpjServer: cnpjVar,
             responsavelLegalServer: responsavelLegalVar,
-            sedeServer: sedeVar,
+            CEPServer: cepVar,
+            numeroServer: numeroVar,
+            complementoServer: complementoVar
         })
     });
 }
@@ -209,28 +195,23 @@ function buscarFk(cnpjVar) {
         });
 }
 
-function cadastrarEndereco(fkEmpresaVar) {
+function cadastrarFuncionario(fkEmpresaVar) {
 
-    var ruaVar = rua_input.value;
-    var bairroVar = bairro_input.value;
-    var cidadeVar = cidade_input.value;
-    var estadoVar = estado_input.value;
-    var numeroVar = numero_input.value;
-    var CEPVar = cep_input.value;
-    
-    return fetch("/empresa/cadastrarEndereco", {
+    var nomeVar = funcionario_nome_imput.value
+    var emailVar = funcionario_email_input.value
+    var senhaVar = senha_input.value
+
+
+    return fetch("/empresa/cadastrarFuncionario", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            ruaServer: ruaVar,
-            bairroServer: bairroVar,
-            cidadeServer: cidadeVar,
-            estadoServer: estadoVar,
-            numeroServer: numeroVar,
-            CEPServer: CEPVar,
-            fkEmpresaServer: fkEmpresaVar,
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            fkEmpresaServer: fkEmpresaVar
         })
     });
 }

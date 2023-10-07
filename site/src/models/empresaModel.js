@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
-function cadastrarEmpresa(Nome_fantasia, Razao_social, Apelido_interno, CNPJ, Responsavel_legal, sede) {
-  var instrucaoSql1 = `insert into Empresa (Nome_fantasia, Razao_social, Apelido_interno, CNPJ, Responsavel_legal, FkSede) values 
-  ('${Nome_fantasia}', '${Razao_social}', '${Apelido_interno}', '${CNPJ}','${Responsavel_legal}', ${sede})`;
+function cadastrarEmpresa(Nome_fantasia, CNPJ, Responsavel_legal, cep, numero, complemento) {
+  var instrucaoSql1 = `insert into Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento, fkSede) values 
+  ('${Nome_fantasia}', '${CNPJ}','${Responsavel_legal}', ${cep}, ${numero}, '${complemento}', null)`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql1);
   return database.executar(instrucaoSql1);
@@ -15,16 +15,16 @@ function buscarFk(cnpj) {
   return database.executar(instrucaoSql2);
 }
 
-function cadastrarEndereco(rua, bairro, cidade, estado, numero, cep, fkempresa) {
-  var instrucaoSql3 = `insert into Empresa_endereco (rua, bairro, cidade, estado, numero, cep, fkempresa) values 
-  ('${rua}', '${bairro}', '${cidade}', '${estado}', ${numero}, '${cep}', ${fkempresa})`;
+function cadastrarFuncionario(nome, email, senha, fkEmpresa) {
+  var instrucaoSql3 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkTurno) values 
+  ('${nome}', '${email}','${senha}', ${fkEmpresa}, 5, null)`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql3);
-  return database.executar(instrucaoSql3);
+  return database.executar(instrucaoSql1);
 }
 
 module.exports = {
   cadastrarEmpresa,
   buscarFk,
-  cadastrarEndereco,
+  cadastrarFuncionario
 }
