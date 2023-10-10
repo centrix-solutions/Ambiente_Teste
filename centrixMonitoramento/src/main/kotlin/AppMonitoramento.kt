@@ -1,9 +1,13 @@
 import com.github.britooo.looca.api.core.Looca
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 import java.util.*
 
+
 fun main() {
+
+    val looca = Looca()
     val sn = Scanner(System.`in`)
     val usuarioLogado = Usuario()
     val repositorioUser = UsuarioRepositorio()
@@ -11,12 +15,12 @@ fun main() {
     val repositorioComponentes = ComponentesRepositorio()
     val repositorioMonitoramento = MonitoramentoRepositorio()
 
+
     repositorioUser.iniciar()
     repositorioMaquina.iniciar()
     repositorioComponentes.iniciar()
     repositorioMonitoramento.iniciar()
 
-    val looca = Looca()
 
     println(" ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
             "██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██║╚██╗██╔╝                   \n" +
@@ -87,7 +91,9 @@ fun main() {
 
         val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
 
-        val valores = listOf(100.0, looca.grupoDeDiscos.tamanhoTotal.toDouble(), looca.memoria.total.toDouble(),
+        val valores = listOf(100.0,
+            looca.grupoDeDiscos.tamanhoTotal.toDouble() / (1024 * 1024),
+            looca.memoria.total.toDouble() / (1024 * 1024),
             looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toDouble())
         val componentes = listOf(1, 2, 3, 5)
 
@@ -99,14 +105,19 @@ fun main() {
 
         println("Máquina cadastrada com monitoramento padrão.....")
         println("A cada quantos segundos quer obter os dados?")
+
         val tempo = sn.nextLine().toInt()
+        val idMaquinaDado = repositorioComponentes.buscarIdMaq(novaMaquina)
+        val idEmpresaDado = novaMaquina.fkEmpMaq
+
+        scriptPadraoPython.criarScript(tempo, idMaquinaDado, idEmpresaDado)
         println("Iniciando o monitoramento....")
 
         while (true) {
             val dados = listOf(
                 looca.processador.uso.toFloat(),
-                looca.grupoDeDiscos.tamanhoTotal.toFloat(),
-                looca.memoria.emUso.toFloat(),
+                looca.grupoDeDiscos.tamanhoTotal.toFloat() / (1024 * 1024),
+                looca.memoria.emUso.toFloat() / (1024 * 1024),
                 looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat()
             )
 
@@ -114,10 +125,9 @@ fun main() {
             val fkcomponentesExistentes = listOf(1, 2, 3, 5)
 
             for (i in dados.indices) {
-                val idMaquinaDado = repositorioComponentes.buscarIdMaq(novaMaquina)
-                val idEmpresaDado = novaMaquina.fkEmpMaq
+                val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
                 val data = LocalDate.now()
-                val hora = LocalTime.now()
+                val hora = LocalTime.now(zonaFusoHorario)
                 val dado = dados[i]
                 val fkcompMoni = fkcomponentesMonitorados[i]
                 val fkcompExis = fkcomponentesExistentes[i]

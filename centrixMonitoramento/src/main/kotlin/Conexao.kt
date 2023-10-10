@@ -14,7 +14,7 @@ object Conexao {
                 println("////Login no banco bem sucedido!\\\\")
 
                 jdbcTemplate!!.execute("""
-                  create database if not exists Centrix
+                  create database if not exists centrix
               """)
                 jdbcTemplate!!.execute("""
                   use Centrix

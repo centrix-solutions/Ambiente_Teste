@@ -2,7 +2,7 @@ import psutil
 import time
 from mysql.connector import connect
 
-cnx = connect(user='insertPy', password='Admin@Admin01', host='localhost', database='CentrixSolutions')
+cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 
 while(True):
 
