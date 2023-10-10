@@ -1,7 +1,20 @@
 import java.io.File
 
 object scriptPadraoPython {
+   /* fun baixarBibliotecas() {
 
+        val codigoBash = """
+            sudo apt-get install python-pip;
+            pip install psutil;
+            pip install time;
+            pip install mysql-connector-python
+        """.trimIndent()
+
+        val arquivoPyInstall = "centrixInstall.sh"
+        File(arquivoPyInstall).writeText(codigoBash)
+        Thread.sleep(2 * 1000L)
+        Runtime.getRuntime().exec("Bash $nomeArquivoPyDefault")
+    }*/
     fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int){
 
         val codigoPythonDefault = """
@@ -9,7 +22,7 @@ object scriptPadraoPython {
         import time
         from mysql.connector import connect
 
-        cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+        cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 
         while(True):
 
