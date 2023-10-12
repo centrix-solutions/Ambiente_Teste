@@ -693,11 +693,6 @@ a {
         font-size: 10px;
     }
 
-    .botao_entrar {
-        margin: 1px;
-        padding: 10px;
-    }
-
     .navBar {
         width: 100%;
         display: flex;
@@ -870,5 +865,9 @@ a {
 
     .footer {
         height: fit-content;
+    }
+
+    #login{
+        margin-left: 35%;
     }
 }

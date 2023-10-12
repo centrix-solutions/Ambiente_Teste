@@ -7,12 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="./js/sessao.js"></script>
- 
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 
   <link rel="icon" href="assets/icon/favicon.ico">
@@ -20,7 +22,7 @@
   <link rel="stylesheet" href="css/blog.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <title> Centrix Solutions - CS </title>
+  <title> Centrix Solutions | Home </title>
 
 </head>
 
@@ -34,8 +36,8 @@
       <li>
         <ul><a href="index.html">Home</a></ul>
         <ul><a href="sobre_nos.html">Sobre Nós</a></ul>
-        <ul><a href="sobre_nos.html#time_empresa">Equipe</a></ul>
-        <ul><a href="sobre_nos.html#valores_empresa">Valores</a></ul>
+        <ul id="retirado"><a href="sobre_nos.html#time_empresa">Equipe</a></ul>
+        <ul id="retirado"><a href="sobre_nos.html#valores_empresa">Valores</a></ul>
         <ul><a href="blog.html">Blog</a></ul>
       </li>
     </div>
@@ -200,7 +202,7 @@
     </div>
   </div> -->
 
-  <div class="banner_parte_04">
+  <div id="manutenacao" class="banner_parte_04">
     <div id="cabeca" class="cabecalho">
       <div class="texto">
         <H2>
@@ -216,12 +218,12 @@
             href="https://centrix-solutions.atlassian.net/servicedesk/customer/portals">Contacte-nos</a></button>
       </div>
     </div>
-    <div class="imagens">
+    <div id="retirado" class="imagens">
       <img id="id_img" src="" alt="">
     </div>
   </div>
 
-  <div class="banner_parte_05">
+  <div id="retirado" class="banner_parte_05">
     <div id="blogs_hm" class="cabecalho">
       <div class="texto">
         <H2>
@@ -308,27 +310,25 @@
     </div>
   </div>
 
-
-  <div class="cotato_conteiner">
-    <div class="conteiner_notes">
+  <div class="container_mapacontato">
+    <div id="map"></div>
+    <div class="cotato_conteiner">
+      <div class="conteiner_notes">
         <div class="note0">
-            <span class="Tnote0"><span class="cinza">Informações</span> <span class="negrito">de Contato</span></span>
+          <span class="Tnote0"><span class="negrito">Contato</span></span>
         </div>
         <div class="note1">
-            
-            <span class="cursor" onclick="Copiar_Endereco()">Rua Haddock Lobo 595</span>
-            <span class="cursor" onclick="Copiar_Endereco()">São Paulo - SP, 01414-905</span>
+          <img id="local" src="assets/icon/Rectangle 333 (1).png" alt=""><span class="cursor negrito" onclick="Copiar_Endereco()">Rua Haddock Lobo 595</span>
         </div>
         <div class="note2">
-            <span class="negrito cursor" onclick="Copiar_Telefone()">(11) 98888-7777</span>
+          <img id="telefone"src="assets/icon/Rectangle 334 (1).png" alt=""><span class="negrito cursor" onclick="Copiar_Telefone()">(11) 98888-7777</span>
         </div>
-        
-        <div class="note3 Tnote3">
-            <span class="negrito cursor" onclick="Copiar_Email()" >centrixsolutions@sptech.school</span>
+        <div class="note3">
+          <img id="email"src="assets/icon/Rectangle 335.png" alt=""><span class="negrito cursor" onclick="Copiar_Email()">centrixsolutions@sptech.school</span>
         </div>
+      </div>
     </div>
-    <div id="map"></div>
-</div>
+  </div>
 
   <!--footer inicio-->
   <div class="footer">
@@ -339,7 +339,7 @@
             <div class="startup_plan">
               <img src="assets/icon/Group 25.png" alt="">
               <h3>Plano Inicial</h3>
-              <button>Comece Agora</button>
+              <button><a href="cadastro.html">Comece Agora</a></button>
             </div>
             <div class="start_options">
               <div class="list_options">
@@ -363,8 +363,8 @@
         </div>
       </div>
       <div class="left_resource">
-        <div class="main_separation">
-          <div class="left_post">
+        <div id="retirado" class="main_separation">
+          <div id="retirado" class="left_post">
             <p>Nossas Páginas</p>
             <ul>
               <li><a href="index.html">Home</a></li>
@@ -422,26 +422,26 @@
     location.href = "blog.html"
   }
 
- 
-    function Copiar_Endereco() {
-        navigator.clipboard.writeText("Rua Haddock Lobo 595 São Paulo - SP, 01414-905");
-        alert("Endereço copiado!");
-    }
-    function Copiar_Telefone() {
-        navigator.clipboard.writeText("(11) 98888-7777");
-        alert("Telefone copiado!");
-    }
-    function Copiar_Email() {
-        navigator.clipboard.writeText("test@sptech.school");
-        alert("Email copiado!");
-    }
-    var map = L.map('map').setView([-23.558101168408747, -46.66160636041288], 22);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+  function Copiar_Endereco() {
+    navigator.clipboard.writeText("Rua Haddock Lobo 595 São Paulo - SP, 01414-905");
+    alert("Endereço copiado!");
+  }
+  function Copiar_Telefone() {
+    navigator.clipboard.writeText("(11) 98888-7777");
+    alert("Telefone copiado!");
+  }
+  function Copiar_Email() {
+    navigator.clipboard.writeText("test@sptech.school");
+    alert("Email copiado!");
+  }
+  var map = L.map('map').setView([-23.558101168408747, -46.66160636041288], 22);
 
-    L.marker([-23.558101168408747, -46.66160636041288]).addTo(map).bindPopup('São Paulo Tech School').openPopup();
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([-23.558101168408747, -46.66160636041288]).addTo(map).bindPopup('São Paulo Tech School').openPopup();
 
 
 

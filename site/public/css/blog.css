@@ -1,12 +1,12 @@
-*{
+* {
     font-family: 'Mulish', sans-serif;
 }
 
-.header{
+.header {
     height: 5%;
 }
 
-.titulo{
+.titulo {
     font-size: 50px;
     display: flex;
     align-items: center;
@@ -15,7 +15,7 @@
     font-weight: bolder;
 }
 
-.blog{
+.blog {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,16 +23,19 @@
     /* display: grid;
     grid-template-columns: 1fr 1fr 1fr; */
 }
+
 .blog_part2 {
     width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
+
 .blog_part2_3 {
     display: none;
 }
-.post{
+
+.post {
     max-width: 50%;
     margin-top: 3vh;
     display: flex;
@@ -40,16 +43,16 @@
     word-wrap: break-word;
 }
 
-.post img{
+.post img {
     width: 90%;
     height: 43vh;
     /* width: 25vw; */
-    border-radius:22px ;
+    border-radius: 22px;
 }
 
 
 
-.tag{
+.tag {
     display: flex;
     font-weight: bold;
     position: absolute;
@@ -61,7 +64,7 @@
     justify-content: center;
 }
 
-.tag span{
+.tag span {
     display: flex;
     background-color: white;
     border-radius: 16px;
@@ -72,17 +75,17 @@
     color: rgb(0, 0, 0);
 }
 
-.tag_a{
-    margin-left: 5%; 
+.tag_a {
+    margin-left: 5%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.tag_b{
-    margin-left: 3%; 
+.tag_b {
+    margin-left: 3%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.data_postagem{
+.data_postagem {
     color: rgb(48, 48, 48);
     margin-top: 8%;
     width: 25vw;
@@ -91,11 +94,11 @@
     font-size: 20px;
 }
 
-.hora{
+.hora {
     margin-left: 10%;
 }
 
-.linha{
+.linha {
     margin-top: 5%;
     background-color: #ffff;
     min-height: 0.1vh;
@@ -103,24 +106,24 @@
     margin-left: 0.25%;
 }
 
-.tema_materia{
+.tema_materia {
     color: rgb(44, 44, 45);
     font-size: 30px;
     max-width: 27vw;
     font-weight: bold;
 }
 
-.descricao{
+.descricao {
     color: rgb(57, 57, 57);
     font-size: 18px;
     max-width: 26vw;
 }
 
-.descricao span{
+.descricao span {
     color: black;
 }
 
-.visualizar{
+.visualizar {
     font-weight: bold;
     color: black;
     font-size: 20px;
@@ -129,90 +132,118 @@
     cursor: pointer;
 }
 
-.visualizar:hover{
+.visualizar:hover {
     text-decoration-line: underline;
 }
 
 a:hover {
-    border:none;
+    border: none;
     transform: none
 }
 
 /* BLOG RESPONSIVO */
-@media screen and (max-width: 768px){
+
+@media screen and (max-width: 768px) {
+
+    .tag_a {
+        margin-left: -40%;
+    }
+
+    .blog_part2 {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+        
+
+    .titulo {
+        font-size: xx-large;
+    }
+
     .linha {
         min-height: 0.1vh;
         min-width: 100%;
     }
+
     .data_postagem {
         margin-top: 8%;
         min-width: 100%;
         font-size: 18px;
     }
-    #part_2{
+
+    #part_2 {
         display: none;
     }
+
     .blog_part2_3 {
         width: 90%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
-    .blog{
+
+    .blog {
         flex-wrap: wrap;
         justify-content: space-evenly;
     }
-    #post{
+
+    #post {
         width: 45%;
         margin-top: 3vh;
         display: flex;
         flex-direction: column;
         word-wrap: break-word;
     }
-    .tag span{
+
+    .tag span {
         min-width: 100px;
     }
-    .post{
+
+    .post {
         margin-top: 3vh;
         display: flex;
         flex-direction: column;
     }
-    
-    .post img{
-        height: 43vh;
-        width: 90%;
+
+    .post img {
+        height: auto;
+        width: 200%;
+        margin-left: -50%;
     }
 
-    #post img{
+    #post img {
         height: 43vh;
         width: 90%;
-        border-radius:22px ;
+        border-radius: 22px;
     }
 
-    .descricao{
+    .descricao {
         font-size: 16px;
-        min-width: 100%;
+        min-width: 200%;
+        margin-left: -50%;
     }
 
-    .tag{
+    .tag {
         width: 30%;
         height: 5%;
     }
 
-    .tema_materia{
-        min-width: 100%;
+    .tema_materia {
+        min-width: 200%;
         font-size: 20px;
+        margin-left: -50%;
     }
 
-    .contato{
+    .contato {
         margin-left: -12%;
     }
 
-    .icones{
+    .icones {
         margin-top: 40%;
         position: absolute;
     }
 
-    
-   
+
+
 }
