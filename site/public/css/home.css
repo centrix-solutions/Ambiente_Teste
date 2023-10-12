@@ -462,7 +462,7 @@ body {
     align-items: center;
 }
 
-.butao .btn-contact {
+.butao button{
     width: 30%;
     height: 60%;
     margin-top: 50px;
@@ -480,10 +480,11 @@ body {
 }
 
 .butao :hover {
-    background-color: #E0E0E0;
-    color: #4B3753;
+    background-color: white !important;
+    cursor: pointer !important;
+    color: black !important;
+    transition-duration: 1s !important;
     cursor: pointer;
-    transform: scale(1.1);
 }
 
 .banner_parte_04 .imagens {
@@ -679,7 +680,6 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
-    margin-top: -10%;
 }
 
 #telefone {
