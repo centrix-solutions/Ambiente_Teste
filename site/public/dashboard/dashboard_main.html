@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/dashboard_main.css">
 </head>
-<body>
+<body onload="buscarComputadores()">
     <div class="container_principal">
         <div class="barra_lateral">
             <div id="option1" class="barraLateral_option cursor primeiro">
@@ -146,4 +146,24 @@
 <script>
     const atual = document.getElementById('option1');
     atual.style.backgroundColor = "blueviolet";
+    async function buscarComputadores() {
+        var idEmpresaVar = sessionStorage.Empresa;  
+        try {
+            var resposta = await fetch("/dashboard/buscarComputadores", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresaVar
+            })
+        });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON: ', respostaJson)
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
 </script>
