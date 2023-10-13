@@ -19,15 +19,6 @@ function autenticar(req, res) {
                 if (resultadoAutenticar.length == 1) {
                     console.log(resultadoAutenticar);
 
-
-                    sessionStorage.setItem("id", resultadoAutenticar[0].idfuncionario);
-                    sessionStorage.setItem("nome", resultadoAutenticar[0].nome);
-                    sessionStorage.setItem("email", resultadoAutenticar[0].email);
-                    sessionStorage.setItem("senha", resultadoAutenticar[0].senha);
-                    sessionStorage.setItem("NivelAcesso", resultadoAutenticar[0].fkNivelAcesso);
-                    sessionStorage.setItem("Turno", resultadoAutenticar[0].fkTurno);
-                    sessionStorage.setItem("Empresa", resultadoAutenticar[0].empresaId);
-
                     res.json({
                         id: resultadoAutenticar[0].idfuncionario,
                         nome: resultadoAutenticar[0].nome,
