@@ -12,8 +12,10 @@ body{
     display: flex;
 }
 .area_dash{
+    position: relative;
     height: 100%;
-    width: 100%;
+    width: 93%;
+    left: 7%;
     background-color: blueviolet;
     color: white;
     font-weight: bold;
@@ -38,7 +40,8 @@ body{
 }
 .dash_perfil{
     display: flex;
-    margin-left: 30%;
+    position: relative;
+    left: 20%;
     justify-content: center;
 }
 .perfil_nome{
