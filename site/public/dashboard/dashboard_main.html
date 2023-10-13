@@ -132,10 +132,16 @@
                 </div>
             </div>
             <div class="div_inferior">
-                <div>
+                <div class="inferior_computadores">
                     <span>Computadores</span>
+                    <div>
+                        <span>Id</span>
+                        <span>Nome</span>
+                        <span>Data</span>
+                        <span>Status</span>
+                    </div>
                 </div>
-                <div>
+                <div class="inferior_notificacores">
                     <span>Últimas notificações</span>
                 </div>
             </div>
@@ -160,7 +166,12 @@
         });
             if (resposta.ok) {
                 var respostaJson = await resposta.json();
-                console.log('JSON: ', respostaJson)
+                console.log('JSON: ', respostaJson);
+                var vetorMaquinas = [];
+                for (let i = 0; i < respostaJson.length; i++) {
+                    vetorMaquinas.push(respostaJson[i].idMaquina);
+                }
+                sessionStorage.VetorMaquinas = vetorMaquinas;
             }
         } catch (erro) {
             console.log("Erro: ", erro);
