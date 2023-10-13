@@ -44,4 +44,4 @@ while(True):
 
     cnx.commit()
 
-    time.sleep(30)
+    time.sleep(2)

@@ -129,34 +129,14 @@
 
 </html>
 <script>
-    function entrar() {
-        location.href = "cadastro.html"
-    }
-</script>
+   function verificar(){
+    var emailVar = input_email.value
+    var senhaVar = input_senha.value
+    if(emailVar == "" || senhaVar == ""){
+        alert('preencha todos os campos')
+    } 
 
-<!-- <script>
-
-
-    function entrar() {
-        aguardar();
-
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
+fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -174,13 +154,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
+
+                    sessionStorage.EMAIL_USUARIO = json.Email;
+                    sessionStorage.NOME = json.Nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "./dashboard/dashboard.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -200,10 +180,5 @@
         })
 
         return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
-</script> -->
+}
+</script>

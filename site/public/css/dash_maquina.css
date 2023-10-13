@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
+            #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
+            rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
+            rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
+}
+
+.card_monitoramento {
+    width: 90vw;
+    height: 85vh;
+    background-color: rgba(36, 36, 36, 1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    margin-left: 3.5%;
+    margin-right: 3.5%;
+    border-radius: 40px;
+}
+
+.info {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    color: white;
+}
+
+.area_meio {
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+.area_meio_esquerda {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.barra_uso {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: white;
+}
+
+.bar {
+    width: 0%;
+    height: 20px;
+    background-color: #3498db;
+    transition: width 1s;
+}
+
+.area_meio_direita {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.kpi {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 28px;
+    background-color: rgba(36, 36, 36, 1);
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2), 0px 4px 10px 0px rgba(0, 0, 0, 0.3), 0px 14px 36px 0px rgba(0, 0, 0, 0.4);
+    margin: 20px;
+}
+
+/* Terceira Parte - Gráficos Lado a Lado */
+.area_inferior {
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+.area_inferior_esquerda {
+    width: 50%;
+    display: flex;
+}
+
+.area_inferior_direita {
+    width: 50%;
+    display: flex;
+}
+
+.chart {
+    flex: 1;
+    border: 1px solid #ccc;
+}

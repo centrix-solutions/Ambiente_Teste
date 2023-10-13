@@ -3,6 +3,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
+
 fun main() {
 
     val looca = Looca()
@@ -77,6 +78,7 @@ fun main() {
         }
     } else {
         println("Essa máquina não existe na base de dados")
+        Thread.sleep(1 * 1000L)
         println("Iniciando o cadastro.....")
 
         val novaMaquina = Maquina()
@@ -89,11 +91,15 @@ fun main() {
 
         val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
 
-        val valores = listOf(100.0,
-            looca.grupoDeDiscos.tamanhoTotal.toDouble() / (1024 * 1024),
-            looca.memoria.total.toDouble() / (1024 * 1024),
-            looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toDouble())
-        val componentes = listOf(1, 2, 3, 5)
+        val valores = listOf(
+            100.0, //cpu 1
+            looca.grupoDeDiscos.tamanhoTotal.toDouble() / (1024 * 1024), //disco 2
+            looca.memoria.total.toDouble() / (1024 * 1024), //ram 3
+            looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toDouble(), //usb 4
+            0.0, // janelas do sistema 7
+            0.0 // processos 8
+        )
+        val componentes = listOf(1, 2, 3, 4, 7, 8)
 
         for (i in 0 until valores.size) {
             val valor = valores[i]
@@ -102,25 +108,28 @@ fun main() {
         }
 
         println("Máquina cadastrada com monitoramento padrão.....")
+        Thread.sleep(2 * 1000L)
         println("A cada quantos segundos quer obter os dados?")
 
         val tempo = sn.nextLine().toInt()
         val idMaquinaDado = repositorioComponentes.buscarIdMaq(novaMaquina)
         val idEmpresaDado = novaMaquina.fkEmpMaq
 
-        scriptPadraoPython.criarScript(tempo, idMaquinaDado, idEmpresaDado)
+        val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquinaDado, idEmpresaDado)
         println("Iniciando o monitoramento....")
+        ScriptPadraoPython.executarScript(arquivo)
 
         while (true) {
             val dados = listOf(
                 looca.processador.uso.toFloat(),
-                looca.grupoDeDiscos.tamanhoTotal.toFloat() / (1024 * 1024),
                 looca.memoria.emUso.toFloat() / (1024 * 1024),
-                looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat()
+                looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
+                looca.grupoDeJanelas.totalJanelas.toFloat(),
+                looca.grupoDeProcessos.totalProcessos.toFloat(),
             )
 
-            val fkcomponentesMonitorados = listOf(1, 2, 3, 4)
-            val fkcomponentesExistentes = listOf(1, 2, 3, 5)
+            val fkcomponentesMonitorados = listOf(1, 2, 3, 4, 5)
+            val fkcomponentesExistentes = listOf(1, 3, 4, 7, 8)
 
             for (i in dados.indices) {
                 val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
@@ -132,6 +141,13 @@ fun main() {
                 repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquinaDado, idEmpresaDado)
             }
             Thread.sleep(tempo * 1000L)
+            println("Digite 1 para encerrar:")
+            val opcao = sn.nextLine().toInt()
+
+            if (opcao == 1){
+                ScriptPadraoPython.pararScript()
+                break
+            }
         }
 
 

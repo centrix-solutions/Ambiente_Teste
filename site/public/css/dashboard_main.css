@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+}
+.container_principal{
+    height: 619px;
+    display: flex;
+}
+.area_dash{
+    height: 100%;
+    width: 100%;
+}

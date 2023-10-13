@@ -1,15 +1,17 @@
 import java.io.File
 
-object scriptPadraoPython {
+object ScriptPadraoPython {
 
-    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int){
+    var pythonProcess: Process? = null
+
+    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int):String{
 
         val codigoPythonDefault = """
         import psutil
         import time
         from mysql.connector import connect
 
-        cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
+        cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 
         while(True):
 
@@ -57,8 +59,15 @@ object scriptPadraoPython {
         val nomeArquivoPyDefault = "centrixMonitoramento.py"
 
         File(nomeArquivoPyDefault).writeText(codigoPythonDefault)
-        Thread.sleep(9 * 1000L)
-        Runtime.getRuntime().exec("python $nomeArquivoPyDefault")
+        Thread.sleep(5 * 1000L)
+
+        return nomeArquivoPyDefault
+    }
+    fun executarScript(arquivo: String){
+        pythonProcess = Runtime.getRuntime().exec("python $arquivo")
+    }
+    fun pararScript(){
+        pythonProcess?.destroy()
     }
     /*fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int) {
 
