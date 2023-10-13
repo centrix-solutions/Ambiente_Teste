@@ -18,5 +18,3 @@ function limparSessao() {
     window.location = "../login.html";
 }
 
-
-
