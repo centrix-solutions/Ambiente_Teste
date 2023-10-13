@@ -555,6 +555,10 @@ a {
     transform: scale(1.5);
 }
 
+.span_alerta{
+    font-size: 1.0rem;
+}
+
 
 
 @media screen and (max-width: 768px) {
