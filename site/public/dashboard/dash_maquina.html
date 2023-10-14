@@ -110,7 +110,7 @@
                     <div class="area_barra">
                         <h3>Uso de Disco</h3>
                         <h2>49%</h2>
-                        <input class="barra_painel" type="range" value="49" disabled> 
+                        <input class="barra_painel" type="range" value="49" disabled>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,6 @@
                 <div class="kpi">
                     <h3>Uso de Rede</h3>
                     <h4>Dowload 100mb</h4>
-
                     <h4>Upload 200mb</h4>
                     <img src="../assets/icon/wifi.png" alt="" class="img_wifi">
                 </div>
@@ -136,26 +135,70 @@
                 </div>
             </div>
         </div>
-
         <div class="area_inferior">
-            <div class="area_inferior_esquerda">
-                <div class="chart">
-                    <canvas id="grafico_cpu"></canvas>
-                </div>
+            <div class="chart">
+                <canvas id="grafico_cpu"></canvas>
             </div>
-            <div class="area_inferior_direita">
-                <div class="chart">
-                    <canvas id="grafico_ram"></canvas>
-                </div>
+            <div class="chart">
+                <canvas id="grafico_ram"></canvas>
             </div>
         </div>
+    </div>
     </div>
 </body>
 
 </html>
 <script>
     window.onload = function () {
+        var idEmpresa = sessionStorage.getItem('Empresa')
+        idMaquina = 1
+        console.log(idEmpresa)
+        buscarComponentes(idMaquina, idEmpresa)
         obterDadosGraficos();
+    }
+
+    function buscarComponentes(idMaquina, idEmpresa) {
+
+        fetch("/medidas/buscarComponentes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idMaquinaServer: idMaquina,
+                idEmpresaServer: idEmpresa
+            })
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    var vetoridComponentes = []
+                    var vetorValor = []
+
+
+                    for (var i = 0; i < resposta.length; i++) {
+
+                        var registroId = resposta[i].idComponente
+                        var registroValor = resposta[i].valor
+
+                        vetoridComponentes.push(registroId);
+                        vetorValor.push(registroValor);
+                    }
+                    console.log(vetoridComponentes);
+                    console.log(vetorValor);
+
+                    sessionStorage.vetoridComponentes = vetoridComponentes;
+                    sessionStorage.vetorValor = vetorValor;
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
     }
 
     function obterDadosGraficos() {

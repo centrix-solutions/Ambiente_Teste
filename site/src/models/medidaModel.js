@@ -1,5 +1,13 @@
 var database = require("../database/config");
 
+function buscarComponentes(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT valor, fkComponentesExistentes as idComponente FROM Componentes_Monitorados where fkEmpMaqComp = ${fkEmpresa} and fkMaquina = ${fkMaquina}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function buscarUltimasMedidas(idMaquina, limite_linhas) {
 
     instrucaoSql = ''
@@ -71,5 +79,6 @@ function buscarMedidasEmTempoReal(idMaquina) {
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
+    buscarComponentes
 }
 

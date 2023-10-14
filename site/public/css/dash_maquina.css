@@ -9,7 +9,7 @@ body {
 
 .card_monitoramento {
     width: 90vw;
-    height: 90vh;
+    height: 95vh;
     background-color: rgba(36, 36, 36, 1);
     position: absolute;
     top: 50%;
@@ -23,9 +23,11 @@ body {
 }
 
 .info {
-    height: 20%;
+    width: 92%;
+    margin: auto;
+    height: 15%;
     display: flex;
-    margin: 2%;
+    margin-top: 1%;
     background-color: #3C375C;
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04), 0px 2px 6px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.06), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: white;
@@ -51,14 +53,14 @@ body {
     justify-content: center;
     align-items: center;
     width: 200px;
-    height: 50px;
+    height: 40px;
     border-radius: 14px;
     background-color: rgba(0, 0, 0, 0.49);
 
 }
 
 .area_meio {
-    height: 40%;
+    height: 45%;
     display: flex;
     flex-direction: row;
 }
@@ -67,64 +69,69 @@ body {
     width: 50%;
     display: flex;
     flex-direction: row;
-    border-right: 1px solid #ccc;
+    
 }
 
 .painel {
-    width: 100px;
-    margin-left: 200px;
+    width: 100%;
+    margin-left: 70px;
     color: white;
+    border-right: 1px solid #ccc;
+}
+.painel input {
+    width: 50%;
+}
+.painel h2 {
+    margin: 10px;
+    text-align: left;
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.painel h3 {
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .area_meio_direita {
-    width: 50%;
+    width: 65%;
     display: flex;
     flex-direction: row;
+    margin: 20px;
 }
 
 .kpi {
     flex: 1;
     text-align: center;
-    padding: 10px;
     color: white;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 227px;
     border-radius: 28px;
     background-color: rgba(36, 36, 36, 1);
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2), 0px 4px 10px 0px rgba(0, 0, 0, 0.3), 0px 14px 36px 0px rgba(0, 0, 0, 0.4);
-    margin: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-right: 50px;
 }
 
 .area_inferior {
-    height: 40%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
-}
-
-.area_inferior_esquerda {
-    width: 50%;
-    display: flex;
-}
-
-.area_inferior_direita {
-    width: 50%;
-    display: flex;
+    justify-content: space-around;
 }
 
 .chart {
-    flex: 1;
+    width: 35vw;
 }
 
-#grafico_cpu {
-    background-color: #000000;
-    border-radius: 20px;
-    margin-top: -50px;
-    margin-left: 50px;
-}
-
+#grafico_cpu,
 #grafico_ram {
     background-color: #000000;
     border-radius: 20px;
-    margin-top: -50px;
-    margin-right: 50px;
 }

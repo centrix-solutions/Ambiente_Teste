@@ -7,6 +7,10 @@ router.get("/ultimas/:idMaquina", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.post("/buscarComponentes", function (req, res) {
+    medidaController.buscarComponentes(req, res);
+});
+
 router.get("/tempo-real/:idMaquina", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
