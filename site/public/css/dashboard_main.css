@@ -12,10 +12,8 @@ body{
     display: flex;
 }
 .area_dash{
-    position: relative;
     height: 100%;
-    width: 93%;
-    left: 7%;
+    width: 100%;
     background-color: blueviolet;
     color: white;
     font-weight: bold;
