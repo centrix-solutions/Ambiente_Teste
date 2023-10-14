@@ -249,7 +249,7 @@
     var emailInput = funcionario_email_input.value;
       if(emailInput.indexOf("@") < 0){
       spanEmail.innerHTML = "@ ausente, verifique o Email";
-      spanEmail.style.color ="red";
+      spanEmail.style.color ="#690606";
       
       }else{
         spanEmail.innerHTML = "Email válido";
@@ -263,7 +263,7 @@
 
       if (senhaInput != confimacaoSenhaInput){
         spanConfirmaSenha.innerHTML = "As senhas não coincidem!";
-        spanConfirmaSenha.style.color = "red";
+        spanConfirmaSenha.style.color = "#690606";
       }else{
         spanConfirmaSenha.innerHTML = "As senhas são iguais.";
         spanConfirmaSenha.style.color = "lime";
@@ -293,7 +293,7 @@
         spanSenha.style.color = "lime";
       }else{
             spanSenha.innerHTML = mensagemErro
-            spanSenha.style.color = "red";
+            spanSenha.style.color = "#690606";
           }
     }
 </script>
