@@ -137,15 +137,17 @@
             </div>
             <div class="div_inferior">
                 <div class="inferior_computadores">
+                    <span class="text_computadores">Computadores</span>
                     <div class="div_computadores">
-                        <span class="text_computadores">Computadores</span>
                         <table class="computadores_table" id="lista_computador">
-                            <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Data</th>
-                                <th>Status</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>SO</th>
+                                    <th>?</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
                         </table>
                     </div>
                 </div>
@@ -184,28 +186,31 @@
                 sessionStorage.VetorMaquinas = vetorMaquinas;
                 var tableLista = document.getElementById("lista_computador");
                 for (let i = 0; i < respostaJson.length; i++) {
-                    var criaTr = document.createElement("tr");
+                    var tr = document.createElement("tr");
                     var tdId = document.createElement("td");
                     var tdNome = document.createElement("td");
                     var tdData = document.createElement("td");
                     var tdStatus = document.createElement("td");
 
-                    tableLista.appendChild(criaTr);
+                    tableLista.appendChild(tr);
 
                     tdId.innerHTML = `${i + 1}`;
                     tdNome.innerHTML = respostaJson[i].Sistema_Operacional;
-                    tdData.innerHTML = "Teste";
+                    tdData.innerHTML = "?";
                     tdStatus.innerHTML = "Teste";
 
-                    // criaTr.className = "computadores_individual";
-                    criaTr.appendChild(tdId);
-                    criaTr.appendChild(tdNome);
-                    criaTr.appendChild(tdData);
-                    criaTr.appendChild(tdStatus);
+                    tr.className = "computadores_individual";
+                    tr.appendChild(tdId);
+                    tr.appendChild(tdNome);
+                    tr.appendChild(tdData);
+                    tr.appendChild(tdStatus);
                 }
             }
         } catch (erro) {
             console.log("Erro: ", erro);
         }
+    }
+    function cadastrarAndar() {
+        
     }
 </script>

@@ -14,9 +14,12 @@ body{
 .area_dash{
     height: 100%;
     width: 100%;
-    background-color: blueviolet;
     color: white;
     font-weight: bold;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
+            #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
+            rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
+            rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
 }
 .dash_superior{
     width: 100%;
@@ -126,7 +129,7 @@ body{
 .div_inferior{
     margin-top: 2%;
     background-color: #161717;
-    height: 225px;
+    height: 250px;
     width: 95%;
     border-radius: 20px;
     margin-left: 2.5%;
@@ -137,9 +140,6 @@ body{
 }
 .inferior_notificacores{
     width: 40%;
-}
-.computadores_table{
-    overflow: auto;
 }
 ::-webkit-scrollbar{
     width: 10px;
@@ -158,9 +158,12 @@ body{
 .div_computadores{
     margin-left: 2%;
     margin-top: 2%;
+    max-height: 200px;
+    overflow-y: auto;
 }
 .text_computadores{
     font-size: 18px;
+    margin-left: 5%;
 }
 .div_notificacoes{
     margin-left: 5%;
@@ -168,14 +171,19 @@ body{
 }
 .computadores_table{
     width: 100%;
+    text-align: center;
+    border-collapse: collapse;
 }
 .computadores_individual{
-    margin-top: 10px;
     border-top: 1px solid gray;
     font-weight: 100;
     height: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+}
+.computadores_table tr:first-child td {
+    border-top: 2px solid #FFFFFF;
+}
+.computadores_table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
