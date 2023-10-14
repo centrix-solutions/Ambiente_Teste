@@ -4,8 +4,8 @@ function buscarComponentes(req, res) {
 
     var fkMaquina = req.body.idMaquina
 
-    var fkEmpresa = req.body.idEmpresa
-
+    var fkEmpresa = sessionStorage.getItem.Empresa
+    
     console.log(`Recuperando os componentes`);
     if (fkMaquina == undefined || fkEmpresa == undefined) {
         res.status(400).send("Suas fks estão undefined!");
@@ -32,6 +32,7 @@ function buscarUltimasMedidas(req, res) {
     const limite_linhas = 7;
 
     var idMaquina = req.params.idMaquina;
+    var idMaquina = 1 
 
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
@@ -52,7 +53,9 @@ function buscarUltimasMedidas(req, res) {
 
 function buscarMedidasEmTempoReal(req, res) {
 
+    
     var idMaquina = req.params.idMaquina;
+    var idMaquina = 1 
 
     console.log(`Recuperando medidas em tempo real`);
 
