@@ -33,7 +33,7 @@ function buscarUltimasMedidas(idMaquina, limite_linhas) {
                     where fkMaqCompMoni = ${idMaquina}
                     order by idMonitoramento desc limit ${limite_linhas}`;
 
-        //esse select nao executa no sql
+
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -49,8 +49,6 @@ function buscarMedidasEmTempoReal(idMaquina) {
     idMaquina = 1
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        // top 1? ta certo isso? mudar para select sem "top 1"
-        //tentar fazer esse select funcionar , talvez o problema esteja nele
         instrucaoSql = `SELECT TOP 1
         Dado_Capturado AS cpu,
         Hora_captura AS momento_grafico,  
@@ -76,9 +74,108 @@ function buscarMedidasEmTempoReal(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+
+function buscarCpu(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 1 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarRam(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 3 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarDisco(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 2 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarUsb(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 4 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarJanelas(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 7 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarProcessos(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 8 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+function buscarLogin(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT
+    L.Nome AS NomeFuncionario,
+    L.Atividade AS Atividade,
+    T.inicio AS HoraInicioTurno,
+    T.fim AS HoraFimTurno
+FROM
+    Login AS L
+JOIN
+    Turno AS T ON L.Turno = T.idPeriodo_de_Operacao
+WHERE
+    L.idEmpresa = ${fkEmpresa}
+    AND L.idMaquina = ${fkMaquina};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarComponentes
+    buscarComponentes,
+    buscarCpu,
+    buscarRam,
+    buscarDisco,
+    buscarUsb,
+    buscarJanelas,
+    buscarProcessos,
+    buscarLogin
 }
 
