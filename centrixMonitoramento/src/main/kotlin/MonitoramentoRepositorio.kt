@@ -11,8 +11,10 @@ class MonitoramentoRepositorio {
 
     }
 
-    fun registrarDados(data: LocalDate, hora: LocalTime, dado: Float, fkcompMoni: Int, fkcompExis: Int,
-                       idMaquinaDado: Int, idEmpresaDado: Int) {
+    fun registrarDados(
+        data: LocalDate, hora: LocalTime, dado: Float, fkcompMoni: Int, fkcompExis: Int,
+        idMaquinaDado: Int, idEmpresaDado: Int
+    ) {
         jdbcTemplate.update(
             """
         INSERT INTO Monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, 

@@ -20,6 +20,7 @@ class UsuarioRepositorio {
 
         return consulta == 1
     }
+
     fun logarFuncionario(logarUsuarioEmail: String, logarUsuarioSenha: String): Usuario {
         val funcionario = jdbcTemplate.queryForObject(
             "SELECT idFuncionario, nome, email, senha, fkEmpFunc, fkNivelAcesso, fkTurno FROM Funcionario WHERE email = ? AND senha = ?",

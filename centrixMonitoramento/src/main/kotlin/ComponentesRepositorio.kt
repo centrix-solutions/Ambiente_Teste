@@ -17,16 +17,42 @@ class ComponentesRepositorio {
         )
         return idMaquinaComp
     }
+
     fun registrarComponente(valor: Double, fkComponente: Int, idMaq: Int, novaMaquina: Maquina) {
         jdbcTemplate.update(
             """
         INSERT INTO Componentes_Monitorados (valor, fkComponentesExistentes, fkMaquina, fkEmpMaqComp)
         VALUES (?, ?, ?, ?)
-        """.trimIndent(),
-            valor,
-            fkComponente,
-            idMaq,
-            novaMaquina.fkEmpMaq
+        """.trimIndent(), valor, fkComponente, idMaq, novaMaquina.fkEmpMaq
         )
+    }
+
+    fun obterComponentesExistentes(): List<Componente> {
+        val query = "SELECT * FROM Componentes_Existentes"
+        return jdbcTemplate.query(query, BeanPropertyRowMapper(Componente::class.java))
+    }
+
+    fun monitorarComponentes(componentesMonitorados: List<Componente>) {
+        while (true) {
+            val looca = Looca()
+            for (componente in componentesMonitorados) {
+                when (componente.nome) {
+                    "CPU" -> monitorarCPU(looca)
+                    "RAM" -> monitorarRAM(looca)
+                    // Adicionar outros, caso dê certo
+                }
+            }
+            Thread.sleep(5000)
+        }
+    }
+
+    private fun monitorarCPU(looca: Looca) {
+        val usoCPU = looca.processador.uso.toFloat()
+        println("Uso de CPU: $usoCPU%")
+    }
+
+    private fun monitorarRAM(looca: Looca) {
+        val usoRAM = looca.memoria.emUso.toFloat() / (1024 * 1024)
+        println("Uso de RAM: $usoRAM MB")
     }
 }

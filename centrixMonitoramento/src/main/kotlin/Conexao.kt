@@ -3,8 +3,8 @@ import org.springframework.jdbc.core.JdbcTemplate
 
 object Conexao {
     var jdbcTemplate: JdbcTemplate? = null
-        get(){
-            if(field == null){
+        get() {
+            if (field == null) {
                 val dataSource = BasicDataSource()
                 dataSource.url = "jdbc:mysql://localhost?serverTimezone=UTC"
                 dataSource.username = "root"
@@ -13,12 +13,16 @@ object Conexao {
                 field = novoJdbcTemplate
                 println("////Login no banco bem sucedido!\\\\")
 
-                jdbcTemplate!!.execute("""
+                jdbcTemplate!!.execute(
+                    """
                   create database if not exists centrix
-              """)
-                jdbcTemplate!!.execute("""
+              """
+                )
+                jdbcTemplate!!.execute(
+                    """
                   use Centrix
-              """)
+              """
+                )
             }
             return field
         }

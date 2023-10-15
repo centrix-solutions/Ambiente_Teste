@@ -4,7 +4,7 @@ object ScriptPadraoPython {
 
     var pythonProcess: Process? = null
 
-    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int):String{
+    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int): String {
 
         val codigoPythonDefault = """
         import psutil
@@ -63,10 +63,12 @@ object ScriptPadraoPython {
 
         return nomeArquivoPyDefault
     }
-    fun executarScript(arquivo: String){
+
+    fun executarScript(arquivo: String) {
         pythonProcess = Runtime.getRuntime().exec("python $arquivo")
     }
-    fun pararScript(){
+
+    fun pararScript() {
         pythonProcess?.destroy()
     }
     /*fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int) {
