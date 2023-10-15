@@ -14,7 +14,6 @@ fun main() {
     val repositorioComponentes = ComponentesRepositorio()
     val repositorioMonitoramento = MonitoramentoRepositorio()
 
-
     repositorioUser.iniciar()
     repositorioMaquina.iniciar()
     repositorioComponentes.iniciar()
@@ -87,9 +86,12 @@ fun main() {
         novaMaquina.idCPU = looca.processador.id
         novaMaquina.fkEmpMaq = usuarioLogado.fkEmpFunc
 
+        val horaLogin = LocalTime.now()
         repositorioMaquina.registrarMaquina(novaMaquina)
 
         val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
+
+        repositorioUser.registrarLogin(usuarioLogado, idMaq, horaLogin)
 
         val valores = listOf(
             100.0, //cpu 1
@@ -117,19 +119,27 @@ fun main() {
 
         val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquinaDado, idEmpresaDado)
         println("Iniciando o monitoramento....")
+
         ScriptPadraoPython.executarScript(arquivo)
 
         while (true) {
+
+            ScriptPadraoPython.executarScript(arquivo)
+            val atividade =  looca.grupoDeJanelas.janelas[3].titulo
+            repositorioUser.atualizarAtividade(usuarioLogado, idMaq, atividade)
+
             val dados = listOf(
-                looca.processador.uso.toFloat(),
-                looca.memoria.emUso.toFloat() / (1024 * 1024),
+                //looca.processador.uso.toFloat(),
+                //looca.memoria.emUso.toFloat() / (1024 * 1024),
                 looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
+                //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesEnviados.toFloat() / (1024 * 1024),
+                //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesRecebidos.toFloat() / (1024 * 1024),
                 looca.grupoDeJanelas.totalJanelas.toFloat(),
                 looca.grupoDeProcessos.totalProcessos.toFloat(),
             )
 
-            val fkcomponentesMonitorados = listOf(1, 2, 3, 4, 5)
-            val fkcomponentesExistentes = listOf(1, 3, 4, 7, 8)
+            val fkcomponentesMonitorados = listOf(1, 2, 3)
+            val fkcomponentesExistentes = listOf(4, 7, 8)
 
             for (i in dados.indices) {
                 val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
@@ -140,17 +150,11 @@ fun main() {
                 val fkcompExis = fkcomponentesExistentes[i]
                 repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquinaDado, idEmpresaDado)
             }
+
             Thread.sleep(tempo * 1000L)
-            println("Digite 1 para encerrar:")
-            val opcao = sn.nextLine().toInt()
+            ScriptPadraoPython.pararScript()
 
-            if (opcao == 1){
-                ScriptPadraoPython.pararScript()
-                break
-            }
         }
-
-
 
     }
 

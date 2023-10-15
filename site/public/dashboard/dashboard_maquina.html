@@ -79,19 +79,19 @@
         <div class="info">
             <div class="bloco_info">
                 <h2>Funcionario</h2>
-                <h2 class="info_status">AAA</h2>
+                <h2 class="info_status" id="nome_funcionario"></h2>
             </div>
             <div class="bloco_info">
                 <h2>Computador</h2>
-                <h2 class="info_status">0132</h2>
+                <h2 class="info_status" id="numero_maquina"></h2>
             </div>
             <div class="bloco_info">
                 <h2>Atividade</h2>
-                <h2 class="info_status">Youtube</h2>
+                <h2 class="info_status" id="atividade"></h2>
             </div>
             <div class="bloco_info">
                 <h2>Turno</h2>
-                <h2 class="info_status">13:00</h2>
+                <h2 class="info_status" id="inicio_turno"></h2>
             </div>
         </div>
         <div class="area_meio">
@@ -99,38 +99,37 @@
                 <div class="painel">
                     <div class="area_barra">
                         <h3>Uso de CPU</h3>
-                        <h2>49%</h2>
-                        <input class="barra_painel" type="range" value="80" disabled>
+                        <h2 id="cpu">49%</h2>
+                        <input class="barra_painel" type="range" value="80" id="barra_cpu" disabled>
                     </div>
                     <div class="area_barra">
                         <h3>Uso de RAM</h3>
-                        <h2>80%</h2>
-                        <input class="barra_painel" type="range" value="80" disabled>
+                        <h2 id="ram">80%</h2>
+                        <input class="barra_painel" type="range" value="80" id="barra_ram" disabled>
                     </div>
                     <div class="area_barra">
                         <h3>Uso de Disco</h3>
-                        <h2>49%</h2>
-                        <input class="barra_painel" type="range" value="49" disabled>
+                        <h2 id="disco">49%</h2>
+                        <input class="barra_painel" type="range" value="49" id="barra_disco" disabled>
                     </div>
                 </div>
             </div>
             <div class="area_meio_direita">
                 <div class="kpi">
                     <h3>Uso de Rede</h3>
-                    <h4>Dowload 100mb</h4>
-                    <h4>Upload 200mb</h4>
+                    <h4>Dowload:<span id="dowload"></span></h4>
+                    <h4>Upload:<span id="upload"></span></h4>
                     <img src="../assets/icon/wifi.png" alt="" class="img_wifi">
                 </div>
                 <div class="kpi">
                     <h3>Uso de USB</h3>
-                    <h4>Dowload 100mb</h4>
-                    <h4>Upload 200mb</h4>
+                    <h4 id="usb"></h4>
                     <img src="../assets/icon/usb.png" alt="" class="img_wifi">
                 </div>
                 <div class="kpi">
                     <h3>Sistema</h3>
-                    <h4>Janelas</h4>
-                    <h4>Processos</h4>
+                    <h4>Janelas:<span id="janelas"></span></h4>
+                    <h4>Processos:<span id="processos"></span></h4>
                     <img src="../assets/icon/sistema.png" alt="" class="img_wifi">
                 </div>
             </div>
@@ -149,12 +148,17 @@
 
 </html>
 <script>
+    var idEmpresa = sessionStorage.getItem('Empresa')
+    var vetoridComponentes = []
+    var vetorValor = []
+
     window.onload = function () {
-        var idEmpresa = sessionStorage.getItem('Empresa')
+
         idMaquina = 1
         console.log(idEmpresa)
         buscarComponentes(idMaquina, idEmpresa)
         obterDadosGraficos();
+        buscarDadosMonitoramento(idMaquina, idEmpresa)
     }
 
     function buscarComponentes(idMaquina, idEmpresa) {
@@ -173,10 +177,6 @@
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    var vetoridComponentes = []
-                    var vetorValor = []
-
-
                     for (var i = 0; i < resposta.length; i++) {
 
                         var registroId = resposta[i].idComponente
@@ -190,7 +190,7 @@
 
                     sessionStorage.vetoridComponentes = vetoridComponentes;
                     sessionStorage.vetorValor = vetorValor;
-                    
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -320,4 +320,220 @@
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
     }
+
+    function buscarDadosMonitoramento(idMaquina, idEmpresa) {
+
+        function buscarCpu(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarCpu", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        cpu.innerHTML = `${resposta[0].dado.toFixed(2)}%`
+                        barra_cpu.value = resposta[0].dado.toFixed(2)
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+
+        function buscarRam(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarRam", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        var ramAtual = resposta[0].dado
+                        var ramTotal = vetorValor[2]
+                        ramTotal = ramTotal / 1024;
+
+                        porcentagemUsoRam = Number((ramAtual / ramTotal) * 100).toFixed(2)
+                
+                        ram.innerHTML = `${porcentagemUsoRam}%`
+                        barra_ram.value = porcentagemUsoRam
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+
+        function buscarDisco(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarDisco", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        var discoAtual = resposta[0].dado
+                        var discoTotal = vetorValor[1]
+                        discoTotal = discoTotal / 1024;
+                        
+                        console.log(discoAtual)
+                        console.log(discoTotal)
+                        porcentagemUsoDisco = Number((discoAtual / discoTotal) * 100).toFixed(2)
+                
+                        disco.innerHTML = `${porcentagemUsoDisco}%`
+                        barra_disco.value = porcentagemUsoDisco
+                        
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+        function buscarUsb(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarUsb", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        usb.innerHTML = `Quantidade: ${resposta[0].dado}`
+            
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+        function buscarJanelas(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarJanelas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        janelas.innerHTML = ` ${resposta[0].dado}`
+                    
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+        function buscarProcessos(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarProcessos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+
+                        processos.innerHTML = ` ${resposta[0].dado}`
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+
+        function buscarLogin(idMaquina, idEmpresa) {
+            fetch("/medidas/buscarLogin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idMaquinaServer: idMaquina,
+                    idEmpresaServer: idEmpresa
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        
+                        console.log(resposta[0])
+                        nome_funcionario.innerHTML = resposta[0].NomeFuncionario
+                        numero_maquina.innerHTML = idMaquina
+                        atividade.innerHTML = resposta[0].Atividade
+                        inicio_turno.innerHTML = resposta[0].HoraInicioTurno
+                        
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados: ${error.message}`);
+                });
+        }
+
+        buscarCpu(idMaquina, idEmpresa)
+        buscarRam(idMaquina, idEmpresa)
+        buscarDisco(idMaquina, idEmpresa)
+        buscarUsb(idMaquina, idEmpresa)
+        buscarLogin(idMaquina, idEmpresa)
+        buscarJanelas(idMaquina, idEmpresa)
+        buscarProcessos(idMaquina, idEmpresa)
+    }
+
+
+    setInterval(function () {
+        buscarDadosMonitoramento(idMaquina, idEmpresa);
+    }, 2000); 
 </script>

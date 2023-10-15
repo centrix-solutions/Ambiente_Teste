@@ -59,7 +59,7 @@ object ScriptPadraoPython {
         val nomeArquivoPyDefault = "centrixMonitoramento.py"
 
         File(nomeArquivoPyDefault).writeText(codigoPythonDefault)
-        Thread.sleep(5 * 1000L)
+        Thread.sleep(2 * 1000L)
 
         return nomeArquivoPyDefault
     }

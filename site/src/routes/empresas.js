@@ -12,8 +12,8 @@ router.post("/buscarFk", function (req, res) {
     empresaController.buscarFk(req, res);
 })
 
-router.post("/cadastrarfuncionario", function (req, res) {
-    empresaController.cadastrarfuncionario(req, res);
+router.post("/cadastrarFuncionario", function (req, res) {
+    empresaController.cadastrarFuncionario(req, res);
 })
 
 

@@ -1,6 +1,8 @@
+var cnpjVar = ''
+
 function formatarCNPJ(cnpj_input) {
     // Busca tudo oq não for número com a expressão /\D/g e remove com ''
-    var cnpj = cnpj_input.value.replace(/\D/g, '');
+    cnpj = cnpj_input.value.replace(/\D/g, '');
 
     if (cnpj.length >= 2) {
         cnpj = cnpj.substring(0, 2) + '.' + cnpj.substring(2)
@@ -16,7 +18,7 @@ function formatarCNPJ(cnpj_input) {
     }
 
 
-    cnpj_input.value = cnpj
+    cnpjVar = cnpj_input.value
 }
 
 function continuarEndereco() {
@@ -117,7 +119,8 @@ function continuarResumo() {
 
 
 }
-
+    
+    
 function voltarFuncionario() {
 
     document.getElementById('cadastroEmpresa').style.display = 'none'
@@ -131,10 +134,10 @@ function voltarFuncionario() {
 function cadastrar() {
 
 
-    cadastrarEmpresa()
+    cadastrarEmpresa(cnpjVar)
         .then(() => buscarFk(cnpjVar))
-        .then((fkEmpresaVar) => {
-            return cadastrarFuncionario(fkEmpresaVar[0].fkEmpresa);
+        .then((idEmpresa) => {
+            return cadastrarFuncionario(idEmpresa);
         })
         
         .then(() => {
@@ -146,15 +149,14 @@ function cadastrar() {
 
 }
 
-function cadastrarEmpresa() {
+function cadastrarEmpresa(cnpjVar) {
     var nomeFantasiaVar = nome_fantasia_input.value
-    var cnpjVar = cnpj_input.value
     var responsavelLegalVar = funcionario_nome_imput.value
     var cepVar = cep_input.value
     var numeroVar = numero_input.value
     var complementoVar = complemento_input.value
 
-    return fetch("/empresa/cadastrarEmpresa", {
+    return fetch("/empresas/cadastrarEmpresa", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -163,15 +165,16 @@ function cadastrarEmpresa() {
             nomeFantasiaServer: nomeFantasiaVar,
             cnpjServer: cnpjVar,
             responsavelLegalServer: responsavelLegalVar,
-            CEPServer: cepVar,
+            cepServer: cepVar,
             numeroServer: numeroVar,
             complementoServer: complementoVar
         })
     });
+
 }
 
 function buscarFk(cnpjVar) {
-    return fetch("/empresa/buscarFk", {
+    return fetch("/empresas/buscarFk", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -188,21 +191,23 @@ function buscarFk(cnpjVar) {
             }
         })
         .then(function (fkEmpresaVar) {
-            return fkEmpresaVar;
+            console.log(fkEmpresaVar)
+            var idEmpresa = fkEmpresaVar[0].fkempresa
+            console.log(idEmpresa)
+            return idEmpresa;
         })
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
 }
 
-function cadastrarFuncionario(fkEmpresaVar) {
+function cadastrarFuncionario(idEmpresa) {
 
     var nomeVar = funcionario_nome_imput.value
     var emailVar = funcionario_email_input.value
     var senhaVar = senha_input.value
-
-
-    return fetch("/empresa/cadastrarFuncionario", {
+    
+    return fetch("/empresas/cadastrarFuncionario", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -211,7 +216,7 @@ function cadastrarFuncionario(fkEmpresaVar) {
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,
-            fkEmpresaServer: fkEmpresaVar
+            fkEmpresaServer: idEmpresa
         })
     });
 }

@@ -75,7 +75,7 @@
       </div>
 
     </div>
-
+    
     <div class="log_infoC" id="cadastroFuncionario" style="display: none;">
       <h1>Cadastro do funcionário responsável</h1>
       <span id="texto_input">Nome</span>
@@ -86,14 +86,14 @@
       <span id="texto_in  put">Senha</span>
       <input oninput="verificarRequisitoSenha()" type="password" placeholder="Digite sua senha" id="senha_input">
       <span class="span_alerta" id="span_alerta_senha"></span>
-      <span  id="texto_input">Confirmar Senha</span>
-      <input  oninput="verificarSenhas()" type="password" placeholder="Confirme sua senha" id="confirmar_senha_input">
+      <span id="texto_input">Confirmar Senha</span>
+      <input oninput="verificarSenhas()" type="password" placeholder="Confirme sua senha" id="confirmar_senha_input">
       <span class="span_alerta" id="span_alerta_confirmar_senha"></span>
 
-      <div class="log_info_botoes_func">    
-         <button onclick="voltarEndereco()" class="voltar">Voltar</button>
+      <div class="log_info_botoes_func">
+        <button onclick="voltarEndereco()" class="voltar">Voltar</button>
         <button onclick="continuarResumo()" class="entrar">Prosseguir</button>
-    </div>
+      </div>
     </div>
 
     <div class="log_info_resumo" id="resumo" style="display: none;">
@@ -245,55 +245,55 @@
   var spanConfirmaSenha = document.getElementById("span_alerta_confirmar_senha");
   var spanSenha = document.getElementById("span_alerta_senha")
 
-  function verificarEmail(){
+  function verificarEmail() {
     var emailInput = funcionario_email_input.value;
-      if(emailInput.indexOf("@") < 0){
+    if (emailInput.indexOf("@") < 0) {
       spanEmail.innerHTML = "@ ausente, verifique o Email";
-      spanEmail.style.color ="#690606";
-      
-      }else{
-        spanEmail.innerHTML = "Email válido";
-        spanEmail.style.color ="lime";
-      }  
+      spanEmail.style.color = "#690606";
+
+    } else {
+      spanEmail.innerHTML = "Email válido";
+      spanEmail.style.color = "lime";
+    }
+  }
+
+  function verificarSenhas() {
+    var senhaInput = senha_input.value;
+    var confimacaoSenhaInput = confirmar_senha_input.value;
+
+    if (senhaInput != confimacaoSenhaInput) {
+      spanConfirmaSenha.innerHTML = "As senhas não coincidem!";
+      spanConfirmaSenha.style.color = "#690606";
+    } else {
+      spanConfirmaSenha.innerHTML = "As senhas são iguais.";
+      spanConfirmaSenha.style.color = "lime";
+    }
+  }
+
+  function verificarRequisitoSenha() {
+    var senhaInput = senha_input.value;
+    var senhaEscopo = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
+    var mensagemErro = "";
+
+    if (!/(?=.*[a-z])/.test(senhaInput)) {
+      mensagemErro += "A senha deve conter pelo menos um caractere minúsculo. ";
+    }
+    if (!/(?=.*[0-9])/.test(senhaInput)) {
+      mensagemErro += "<br>A senha deve conter pelo menos um caractere númerico. ";
+    }
+    if (!/(?=.*[!@#$%^&*])/.test(senhaInput)) {
+      mensagemErro += "<br>A senha deve conter pelo menos um caractere especial. ";
+    }
+    if (senhaInput.length < 8) {
+      mensagemErro += "<br>A senha deve ter pelo menos 8 caracteres. ";
     }
 
-    function verificarSenhas(){
-      var senhaInput = senha_input.value;
-      var confimacaoSenhaInput = confirmar_senha_input.value;
-
-      if (senhaInput != confimacaoSenhaInput){
-        spanConfirmaSenha.innerHTML = "As senhas não coincidem!";
-        spanConfirmaSenha.style.color = "#690606";
-      }else{
-        spanConfirmaSenha.innerHTML = "As senhas são iguais.";
-        spanConfirmaSenha.style.color = "lime";
-      }
+    if (mensagemErro === "") {
+      spanSenha.innerHTML = "A senha atende aos requisitos mínimos.";
+      spanSenha.style.color = "lime";
+    } else {
+      spanSenha.innerHTML = mensagemErro
+      spanSenha.style.color = "#690606";
     }
-
-    function verificarRequisitoSenha(){
-      var senhaInput = senha_input.value;
-      var senhaEscopo = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
-      var mensagemErro = "";
-
-      if (!/(?=.*[a-z])/.test(senhaInput)){
-        mensagemErro += "A senha deve conter pelo menos um caractere minúsculo. ";
-      }
-      if (!/(?=.*[0-9])/.test(senhaInput)){
-        mensagemErro += "<br>A senha deve conter pelo menos um caractere númerico. ";
-      }
-      if (!/(?=.*[!@#$%^&*])/.test(senhaInput)){
-        mensagemErro += "<br>A senha deve conter pelo menos um caractere especial. ";
-      }
-      if (senhaInput.length < 8){
-        mensagemErro += "<br>A senha deve ter pelo menos 8 caracteres. ";
-      }
-
-      if (mensagemErro === ""){
-        spanSenha.innerHTML = "A senha atende aos requisitos mínimos.";
-        spanSenha.style.color = "lime";
-      }else{
-            spanSenha.innerHTML = mensagemErro
-            spanSenha.style.color = "#690606";
-          }
-    }
+  }
 </script>
