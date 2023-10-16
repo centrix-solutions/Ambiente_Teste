@@ -1,8 +1,8 @@
-drop database centrix;
-CREATE DATABASE centrix;
+-- drop database centrix;
+CREATE DATABASE IF NOT EXISTS centrix;
 USE centrix;
 
-CREATE TABLE Niveis_de_Acesso (
+CREATE TABLE IF NOT EXISTS Niveis_de_Acesso (
     idNivel_Acesso INT PRIMARY KEY AUTO_INCREMENT,
     tipo_acesso VARCHAR(45),
     descricao VARCHAR(45)
@@ -16,12 +16,15 @@ VALUES
     ('Convidado', 'Acesso limitado para convidados'),
     ('Visitante', 'Acesso mínimo como visitante');
 
-CREATE TABLE Andar_de_trabalho (
+CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
     idAndar_de_trabalho INT PRIMARY KEY AUTO_INCREMENT,
+    num_andar INT,
+    largura_andar INT,
+    comprimento_andar INT,
     Foto_Andar VARCHAR(45)
 );
 
-CREATE TABLE Empresa(
+CREATE TABLE IF NOT EXISTS Empresa(
     idempresa INT PRIMARY KEY AUTO_INCREMENT,
     Nome_fantasia VARCHAR(45),
     CNPJ CHAR(18),
@@ -33,13 +36,13 @@ CREATE TABLE Empresa(
     CONSTRAINT fk_Sede FOREIGN KEY (fkSede) REFERENCES Empresa(idempresa)
 );
 
-CREATE TABLE Turno (
+CREATE TABLE IF NOT EXISTS Turno (
     idPeriodo_de_Operacao INT PRIMARY KEY AUTO_INCREMENT,
     inicio TIME,
     fim TIME
 );
 
-CREATE TABLE Funcionario(
+CREATE TABLE IF NOT EXISTS Funcionario(
     idfuncionario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(70),
     email VARCHAR(70),
@@ -52,22 +55,24 @@ CREATE TABLE Funcionario(
     CONSTRAINT fk_turno FOREIGN KEY (fkTurno) REFERENCES Turno(idPeriodo_de_Operacao)
 );
 
-CREATE TABLE Maquinas (
+CREATE TABLE IF NOT EXISTS Maquinas (
     idMaquina INT PRIMARY KEY AUTO_INCREMENT,
     Sistema_Operacional VARCHAR(45),
     Id_do_dispositivo CHAR(16),
+    posicaoX INT,
+    posicaoY INT,
     fkEmpMaq INT,
     CONSTRAINT fk_EmpMaq FOREIGN KEY (fkEmpMaq) REFERENCES Empresa(idempresa),
     fkAndarDeTrabalho INT,
     CONSTRAINT fk_Andar_De_Trabalho FOREIGN KEY (fkAndarDeTrabalho) REFERENCES Andar_de_trabalho(idAndar_de_trabalho)
 );
 
-CREATE TABLE ComponentesQuePrestamosServico(
+CREATE TABLE IF NOT EXISTS ComponentesQuePrestamosServico(
 	idComponentes_Que_PrestamosServicos INT PRIMARY KEY auto_increment,
     nome varchar(45)
 );
 
-CREATE TABLE Componentes_Monitorados (
+CREATE TABLE IF NOT EXISTS Componentes_Monitorados (
 	idComponente_monitorado INT PRIMARY KEY auto_increment,
     valor Double,
     fkComponentesExistentes INT,
@@ -78,7 +83,7 @@ CREATE TABLE Componentes_Monitorados (
     constraint fk_EmpMaqComp foreign key (fkEmpMaqComp) references Maquinas(fkEmpMaq)
 );
 
-CREATE TABLE Monitoramento (
+CREATE TABLE IF NOT EXISTS Monitoramento (
 	idMonitoramento INT primary key auto_increment,
     Data_captura DATE,
     Hora_captura TIME,
@@ -93,7 +98,7 @@ CREATE TABLE Monitoramento (
     constraint fk_EmpMaqCompMoni foreign key (fkEmpMaqCompMoni) references Componentes_Monitorados(fkEmpMaqComp)
 );
 
-CREATE TABLE Login (
+CREATE TABLE IF NOT EXISTS Login (
     idFuncionario INT,
     idMaquina INT,
     idEmpresa INT,
@@ -142,6 +147,13 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Janelas do Sistema'),
     ('Processos');
     
+insert into maquinas values
+	(null, "Windows", "123", 0, 0, 1, 1),
+    (null, "Linux", "321", 0, 0, 1, 1),
+    (null, "MacOs", "123", 0, 0, 1, 2);
+	
+desc maquinas;
+select * from andar_de_trabalho;
 select * from Login;    
 select * from Maquinas;
 select * from Monitoramento;
@@ -159,7 +171,3 @@ JOIN
 WHERE
     L.idEmpresa = 1
     AND L.idMaquina = 1;
-
-
-
-

@@ -72,10 +72,11 @@ body{
     border-radius: 20px;
     margin-left: 2.5%;
     align-items: center;
+    justify-content: space-around;
 }
 .div_mapa{
     height: 400px;
-    width: 750px;
+    width: 500px;
     background-image: url("../assets/imgs/planta.png");
     background-size: contain;
     background-position: center;
@@ -111,6 +112,16 @@ body{
 }
 .roxa{
     background-color: blueviolet;
+}
+.azul{
+    background-color: blue;
+}
+.bola_posicao{
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
 }
 .div_func{
     display: flex;
@@ -167,7 +178,11 @@ body{
 }
 .div_notificacoes{
     margin-left: 5%;
-    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
 }
 .computadores_table{
     width: 100%;
@@ -182,8 +197,107 @@ body{
 .computadores_table tr:first-child td {
     border-top: 2px solid #FFFFFF;
 }
-.computadores_table thead {
+.computadores_table thead{
     position: sticky;
     top: 0;
     z-index: 1;
+}
+.div_cadastrarAndar{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.conteudo_cadastrarAndar{
+    color: white;
+    background-color: #161717;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 20px;
+    width: 50%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.div_tituloCadastrarAndar{
+    text-align: center;
+}
+.titulo_novoAndar{
+    font-size: 30px;
+    font-weight: bold;
+}
+.div_crudAndar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.div_cadastrarAndarInput{
+    display: flex;
+    flex-direction: column;
+}
+.input_cadastrarAndar{
+    height: 40px;
+    width: 140px;
+    background-color: #FCFCFC75;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+.div_dropImg{
+    height: 120px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #FCFCFC75;
+}
+.div_btnCadastrarAndar{
+    display: flex;
+    justify-content: center;
+}
+.btn_cadastrarAndar{
+    height: 40px;
+    width: 140px;
+    background-color: #FCFCFC75;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.div_andares{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.select_andares{
+    height: 30px;
+    width: 60px;
+    background-color: #FCFCFC75;
+    border: none;
+    border-radius: 10px;
+}
+.btn_andares{
+    height: 60px;
+    width: 140px;
+    background-color: #FCFCFC75;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
 }

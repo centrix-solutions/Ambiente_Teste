@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="../css/dashboard_main.css">
 </head>
 <body onload="buscarComputadores()">
+    <div id="cadastroAndar_div" class="div_cadastrarAndar">
+        <div class="conteudo_cadastrarAndar">
+            <div class="div_tituloCadastrarAndar">
+                <span class="close" onclick="aparecerTelaCadastroAndar()">&times;</span>
+                <span class="titulo_novoAndar">Cadastre um novo andar</span>
+            </div>
+            <div class="div_crudAndar">
+                <div>
+                    <div class="div_cadastrarAndarInput">
+                        <span>Andar</span>
+                        <input class="input_cadastrarAndar" type="number" id="numeroAndar"/>
+                    </div>
+                    <div class="div_cadastrarAndarInput">
+                        <span>Largura</span>
+                        <input class="input_cadastrarAndar" type="number" id="larguraAndar"/>
+                    </div>
+                    <div class="div_cadastrarAndarInput">
+                        <span>Comprimento</span>
+                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar"/>
+                    </div>
+                </div>
+                <div>
+                    <span>Foto da planta do andar</span>
+                    <div class="div_dropImg"></div>
+                </div>
+            </div>
+            <div class="div_btnCadastrarAndar">
+                <button class="btn_cadastrarAndar cursor" onclick="cadastrarAndar()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
     <div class="container_principal">
         <div class="barra_lateral">
             <div id="option1" class="barraLateral_option cursor primeiro">
@@ -65,8 +96,8 @@
                 </div>
                 <div class="dash_perfil">
                     <div class="perfil_nome">
-                        <span class="text_perfilNome">Nishikigi Chisato</span>
-                        <span class="text_perfilEmail">nishikigi.chisato@gmail.com</span>
+                        <span class="text_perfilNome" id="nomeFuncionario">Nishikigi Chisato</span>
+                        <span class="text_perfilEmail" id="emailFuncionario">nishikigi.chisato@gmail.com</span>
                     </div>
                     <div class="perfil_img">
                         <div class="perfil_imagem"></div>
@@ -79,7 +110,7 @@
                 </div>
             </div>
             <div class="div_central">
-                <div class="div_mapa"></div>
+                <div class="div_mapa" id="mapa_div"></div>
                 <div class="div_funcionalidades">
                     <div class="div_legenda">
                         <span class="text_legenda">Legenda</span>
@@ -100,12 +131,16 @@
                                 <div class="bola roxa"></div>
                                 <span>desativado</span>
                             </div>
+                            <div class="div_bola">
+                                <div class="bola azul"></div>
+                                <span>computador selecionado</span>
+                            </div>
                         </div>
                     </div>
                     <div class="div_funcoes">
                         <div class="div_func">
                             <span class="text_legenda">Cadastre um novo andar</span>
-                            <button class="func_btn cursor">
+                            <button class="func_btn cursor" onclick="aparecerTelaCadastroAndar()">
                                 Novo Andar
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" viewBox="0 0 28 16" fill="none">
                                     <path d="M27.7071 8.70711C28.0976 8.31658 28.0976 7.68342 27.7071 7.29289L21.3431 0.928932C20.9526 0.538408 20.3195 0.538408 19.9289 0.928932C19.5384 1.31946 19.5384 1.95262 19.9289 2.34315L25.5858 8L19.9289 13.6569C19.5384 14.0474 19.5384 14.6805 19.9289 15.0711C20.3195 15.4616 20.9526 15.4616 21.3431 15.0711L27.7071 8.70711ZM0 9H13V7H0L0 9ZM13 9H27V7H13V9Z" fill="white" fill-opacity="0.69"/>
@@ -116,7 +151,7 @@
                             <span class="text_legenda">
                                 Veja o monitoramento individual
                             </span>
-                            <button class="func_btn cursor">
+                            <button class="func_btn cursor" onclick="irMonitoramento(sessionStorage.idComputador)">
                                 Monitoramento
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" viewBox="0 0 28 16" fill="none">
                                     <path d="M27.7071 8.70711C28.0976 8.31658 28.0976 7.68342 27.7071 7.29289L21.3431 0.928932C20.9526 0.538408 20.3195 0.538408 19.9289 0.928932C19.5384 1.31946 19.5384 1.95262 19.9289 2.34315L25.5858 8L19.9289 13.6569C19.5384 14.0474 19.5384 14.6805 19.9289 15.0711C20.3195 15.4616 20.9526 15.4616 21.3431 15.0711L27.7071 8.70711ZM0 9H13V7H0L0 9ZM13 9H27V7H13V9Z" fill="white" fill-opacity="0.69"/>
@@ -124,9 +159,9 @@
                             </button>
                         </div>
                         <div class="div_func">
-                            <span class="text_legenda">Monitoramento da Rede e últimos alertas</span>
-                            <button class="func_btn cursor">
-                                Rede e Alertas
+                            <span class="text_legenda">Salvar posição dos computadores</span>
+                            <button class="func_btn cursor" onclick="salvarPosicaoComputadores()">
+                                Salvar
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" viewBox="0 0 28 16" fill="none">
                                     <path d="M27.7071 8.70711C28.0976 8.31658 28.0976 7.68342 27.7071 7.29289L21.3431 0.928932C20.9526 0.538408 20.3195 0.538408 19.9289 0.928932C19.5384 1.31946 19.5384 1.95262 19.9289 2.34315L25.5858 8L19.9289 13.6569C19.5384 14.0474 19.5384 14.6805 19.9289 15.0711C20.3195 15.4616 20.9526 15.4616 21.3431 15.0711L27.7071 8.70711ZM0 9H13V7H0L0 9ZM13 9H27V7H13V9Z" fill="white" fill-opacity="0.69"/>
                                 </svg>
@@ -140,20 +175,28 @@
                     <span class="text_computadores">Computadores</span>
                     <div class="div_computadores">
                         <table class="computadores_table" id="lista_computador">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>SO</th>
-                                    <th>?</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
+                            <tr>
+                                <td>Selecione um andar para começar!</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
                 <div class="inferior_notificacores">
                     <div class="div_notificacoes">
-                        <span class="text_legenda">Últimas notificações</span>
+                        <span class="text_legenda">Andar</span>
+                        <div class="div_andares">
+                            <div>
+                                <label for="andares">Selecione o Andar que deseja monitorar</label>
+                                <select name="andares" class="select_andares" id="andares">
+                                    <option value="vazio"></option>
+                                    <option value="andar-1">1</option>
+                                    <option value="andar-2">2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn_andares cursor" onclick="buscarComputadores()">Selecionar Andar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,10 +205,23 @@
 </body>
 </html>
 <script>
+    nomeFuncionario.innerHTML = sessionStorage.nome;
+    emailFuncionario.innerHTML = sessionStorage.email;
+    window.addEventListener('keydown', function(e) {
+        if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
+    });
     const atual = document.getElementById('option1');
     atual.style.backgroundColor = "blueviolet";
+    sessionStorage.idComputador = 0;
+    var vetorIdComputador = [];
+    var vetorPosicaoComputador = [];
+    var vetorIdComputador = [];
+
     async function buscarComputadores() {
-        var idEmpresaVar = sessionStorage.Empresa;  
+        var idEmpresaVar = sessionStorage.Empresa;
+        var idAndarVar = andares.value.split('-')[1];
         try {
             var resposta = await fetch("/dashboard/buscarComputadores", {
             method: "POST",
@@ -173,18 +229,34 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                idEmpresaServer: idEmpresaVar
+                idEmpresaServer: idEmpresaVar,
+                idAndarServer: idAndarVar
             })
         });
             if (resposta.ok) {
                 var respostaJson = await resposta.json();
                 console.log('JSON: ', respostaJson);
-                var vetorMaquinas = [];
-                for (let i = 0; i < respostaJson.length; i++) {
-                    vetorMaquinas.push(respostaJson[i].idMaquina);
-                }
-                sessionStorage.VetorMaquinas = vetorMaquinas;
                 var tableLista = document.getElementById("lista_computador");
+                var div_mapa = document.getElementById("mapa_div");
+                div_mapa.innerHTML = "";
+                tableLista.innerHTML = "";
+                var thead = document.createElement("thead");
+                var tr = document.createElement("tr");
+                var idThead = document.createElement("th");
+                var SOThead = document.createElement("th");
+                var thThead = document.createElement("th");
+                var statusThead = document.createElement("th");
+                idThead.innerHTML = "Id";
+                SOThead.innerHTML = "SO";
+                thThead.innerHTML = "?";
+                statusThead.innerHTML = "Status";
+                tr.appendChild(idThead);
+                tr.appendChild(SOThead);
+                tr.appendChild(thThead);
+                tr.appendChild(statusThead);
+                thead.appendChild(tr);
+                tableLista.appendChild(thead);
+            
                 for (let i = 0; i < respostaJson.length; i++) {
                     var tr = document.createElement("tr");
                     var tdId = document.createElement("td");
@@ -204,13 +276,164 @@
                     tr.appendChild(tdNome);
                     tr.appendChild(tdData);
                     tr.appendChild(tdStatus);
+
+                    var bola = document.createElement("div");
+                    bola.className = "verde bola_posicao";
+                    div_mapa.appendChild(bola);
+                    bola.id = respostaJson[i].idMaquina;
+
+                    if (vetorIdComputador.indexOf(Number(bola.id)) == -1) {
+                        vetorIdComputador.push(Number(bola.id));
+                        vetorPosicaoComputador.push([respostaJson[i].posicaoX,respostaJson[i].posicaoY]);
+                        sessionStorage.vetorIdComputador = vetorIdComputador;
+                    }
+
+                    bola.addEventListener('click', function(){
+                        var computadorId = sessionStorage.idComputador;
+                        var idBola = this.id;
+                        var computadorAtual = document.getElementById(idBola);
+                        var descobreIdComputador = vetorIdComputador.indexOf(Number(idBola));
+                        alert(`Você clickou no computador de id ${descobreIdComputador + 1}`);
+                        if (computadorId == 0) {
+                            computadorAtual.classList.add("azul");
+                            console.log(idBola);
+                            sessionStorage.setItem('idComputador', idBola);
+                        } else {
+                            var computadorAntigo = document.getElementById(computadorId);
+                            computadorAntigo.classList.remove("azul");
+                            computadorAtual.classList.add("azul");
+                            sessionStorage.setItem('idComputador', idBola);
+                        }
+                    });
                 }
+                atualizarPosicao();
             }
         } catch (erro) {
             console.log("Erro: ", erro);
         }
     }
-    function cadastrarAndar() {
-        
+    function atualizarPosicao() {
+        for (let i = 0; i < vetorIdComputador.length; i++) {
+            var bola = document.getElementById(`${vetorIdComputador[i]}`);
+            bola.style.left = vetorPosicaoComputador[i][0] + 'px';
+            bola.style.top = vetorPosicaoComputador[i][1] + 'px';
+        }
+    }
+    document.addEventListener('click', function(){
+        if (!event.target.classList.contains('bola_posicao')) {
+            var computadorId = sessionStorage.idComputador;
+            var computadorAtual = document.getElementById(computadorId);
+            computadorAtual.classList.remove("azul");
+            sessionStorage.setItem('idComputador', 0);
+        }
+    });
+    function aparecerTelaCadastroAndar() {
+        var modal = document.getElementById('cadastroAndar_div');
+        if (modal.style.display === 'none' || modal.style.display === '') modal.style.display = 'block'; else modal.style.display = 'none';
+    }
+    window.onclick = function(event) {
+        var modal = document.getElementById('cadastroAndar_div');
+        if (event.target == modal) modal.style.display = 'none';
+    }
+    function irMonitoramento(id) {
+        if (id == 0) alert("Selecione um computador para monitorar"); else window.location = "dash_maquina.html";
+    }
+    function irRede() {
+        alert("Tela em construção!");
+    }
+    async function cadastrarAndar() {
+        var numAndar = numeroAndar.value;
+        var largAndar = larguraAndar.value;
+        var compAndar = comprimentoAndar.value;
+        try {
+            var resposta = await fetch("/dashboard/cadastrarAndar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                numAndarServer: numAndar,
+                largAndarServer: largAndar,
+                compAndarServer: compAndar
+            })
+        });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON: ', respostaJson);
+                alert("Andar cadastrado com sucesso!");
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
+    document.onkeydown = function(e) {
+        var id = sessionStorage.idComputador;
+        if (id != 0 && e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
+            console.log("teste")
+            const bola = document.getElementById(`${id}`);
+            var posicaoComputador = vetorIdComputador.indexOf(Number(bola.id));
+            var horizontal = vetorPosicaoComputador[posicaoComputador][0];
+            var vertical = vetorPosicaoComputador[posicaoComputador][1];
+            switch (e.keyCode) {
+                case 37:
+                    if (horizontal > 0) {
+                        horizontal -= 1;
+                        vetorPosicaoComputador[posicaoComputador][0] = horizontal;
+                        bola.style.left = horizontal + 'px';
+                    }
+                    break;
+                case 38:
+                    if (vertical > 0) {
+                        vertical -= 1;
+                        vetorPosicaoComputador[posicaoComputador][1] = vertical;
+                        bola.style.top = vertical + 'px';
+                    }
+                    break;
+                case 39:
+                    if (horizontal < 500) {
+                        console.log("ok")
+                        horizontal += 1;
+                        vetorPosicaoComputador[posicaoComputador][0] = horizontal;
+                        bola.style.left = horizontal + 'px';
+                    }
+                    break;
+                case 40:
+                    if (vertical < 400) {
+                        vertical += 1;
+                        vetorPosicaoComputador[posicaoComputador][1] = vertical;
+                        bola.style.top = vertical + 'px';
+                    }
+                    break;
+            }
+        }
+    };
+    async function salvarPosicaoComputadores(){
+        for (let i = 0; i < vetorIdComputador.length; i++) {
+            var idComputador = vetorIdComputador[i];
+            var x = vetorPosicaoComputador[i][0];
+            var y = vetorPosicaoComputador[i][1];
+            try {
+                var resposta = await fetch("/dashboard/salvarPosicaoComputadores", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idComputadorServer: idComputador,
+                    xServer: x,
+                    yServer: y
+                })
+            });
+                if (resposta.ok) {
+                    var respostaJson = await resposta.json();
+                    console.log('JSON: ', respostaJson);
+                }
+            } catch (erro) {
+                console.log("Erro: ", erro);
+            }
+        }
+        if(resposta.ok){
+            alert("Posições salvas!");
+        }
     }
 </script>
