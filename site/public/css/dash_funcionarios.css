@@ -1,0 +1,113 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.cursor{
+    cursor: pointer;
+}
+body{
+    margin: 0;
+}
+.container_principal{
+    height: 850px;
+    display: flex;
+}
+.area_dash{
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
+            #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
+            rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
+            rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
+}
+.dash_superior{
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+.bem_vindo{
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+}
+.text_bemVindo1{
+    font-size: 32px;
+}
+.text_bemVindo2{
+    font-size: 20px;
+}
+
+/*DIV CENTRAL*/
+.div_central{
+    background-color: #5518ff;
+    height: 450px;
+    display: flex;
+    /* border-radius: 1.5rem;
+    margin-left: 2.5%;
+    align-items: center; */
+    justify-content: space-around;
+}
+
+
+/* DIV DA ESQUERDA */
+
+.div_funcionarios{
+    background-color: black;
+    width: 50%;
+    height: 90%;
+}
+
+.div_funcionario1 {
+    background-color: #290f72;
+    display: flex;
+    height: fit-content;
+    width: 100%;
+}
+
+.div_informacoes{
+    width: 40%;
+    padding: 1vh;
+}
+
+.div_botoes {
+    width: 60%;
+    padding: 1vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.div_botao1{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5vh;
+}
+
+.div_botao2{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5vh;
+}
+
+.div_botao3{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5vh;
+}
+
+.div_funcionario2 {
+    background-color: #240086;
+    display: flex;
+    height: fit-content;
+    width: 100%;
+}
+
+/* DIV DA DIREITA */
+
+.div_direita {
+    background-color: rgb(173, 33, 216);
+    width: 40%;
+    height: 90%;
+}
