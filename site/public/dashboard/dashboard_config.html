@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Funcionários</title>
+    <title>Dashboard | Configurações</title>
     <link rel="stylesheet" href="../css/barra_lateral.css">
-    <link rel="stylesheet" href="../css/dash_funcionarios.css">
+    <link rel="stylesheet" href="../css/dash_config.css">
 </head>
 
 <body>
@@ -82,143 +82,50 @@
             </div>
         </div>
         <div class="area_dash">
-            <div class="dash_superior">
-                <div class="bem_vindo">
-                    <span class="text_bemVindo1">Funcionários</span>
-                    <span class="text_bemVindo2">Veja as princípais informações dos seus funcionários, cadastre e de
-                        permissões para eles.</span>
-                </div>
-            </div>
+
             <div class="div_central">
-                <div class="div_funcionarios">
-                    <div class="div_funcionario1">
-
-                        <div class="div_informacoes">
-                            <p>Nome do Funcionário</p>
-                            <p>Email do Funcionário</p>
-                            <p>Computador do Funcionário</p>
-                        </div>
-
-                        <div class="div_botoes">
-                            <div class="div_botao1">
-                                <span>NÍVEL DE ACESSO</span>
-                                <select name="acesso" id="select_acesso" class="select_acesso">
-                                    <option value="nivel1">Nível 1</option>
-                                    <option value="nivel2">Nível 2</option>
-                                    <option value="nivel3">Nível 3</option>
-                                    <option value="nivel4">Nível 4</option>
-                                    <option value="nivel5">Nível 5</option>
-                                </select>
-                            </div>
-                            <div class="div_botao2">
-                                <span>ENVIAR ALERTA</span>
-                                <button onclick="enviarAlerta()">
-                                    ENVIAR
-                                </button>
-                            </div>
-                            <div class="div_botao3">
-                                <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario1">
-                                    <span>
-                                        INATIVO
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="div_esquerda">
+                    <div class="div_dados">
+                        <p>
+                            Nome:
+                        </p>
+                        <input type="text" class="input_dados" id="nome">
+                        <p>
+                            Email:
+                        </p>
+                        <input type="text" class="input_dados" id="email">
+                        <button onclick="mudarDados()" class="botao_dados">
+                            Salvar Mudanças
+                        </button>
                     </div>
 
-                    <div class="div_funcionario2">
-
-                        <div class="div_informacoes">
-                            <p>Nome do Funcionário</p>
-                            <p>Email do Funcionário</p>
-                            <p>Computador do Funcionário</p>
-                        </div>
-
-                        <div class="div_botoes">
-                            <div class="div_botao1">
-                                <span>NÍVEL DE ACESSO</span>
-                                <select name="acesso" id="select_acesso" class="select_acesso">
-                                    <option value="nivel1">Nível 1</option>
-                                    <option value="nivel2">Nível 2</option>
-                                    <option value="nivel3">Nível 3</option>
-                                    <option value="nivel4">Nível 4</option>
-                                    <option value="nivel5">Nível 5</option>
-                                </select>
-                            </div>
-                            <div class="div_botao2">
-                                <span>ENVIAR ALERTA</span>
-                                <button onclick="enviarAlerta()">
-                                    ENVIAR
-                                </button>
-                            </div>
-                            <div class="div_botao3">
-                                <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario2">
-                                    <span>
-                                        INATIVO
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="div_direita">
 
-                    <div class="titulo">
-                        Cadastrar Funcionário
-                    </div>
-
-                    <div class="div_cadastro">
+                    <div class="div_senha div_dados">
                         <p>
-                            Nome
+                            Senha Atual:
                         </p>
-                        <input type="text" class="input_cadastro" id="nome">
+                        <input type="text" class="input_dados" id="senhaAtual">
                         <p>
-                            Email
+                            Nova Senha:
                         </p>
-                        <input type="text" class="input_cadastro" id="nome">
+                        <input type="text" class="input_dados" id="novaSenha">
                         <p>
-                            Nivel de Acesso
+                            Repitaa a Nova Senha:
                         </p>
-                        <select name="acesso" id="acesso" class="select_cadastro">
-                            <option value="nivel1">Nível 1</option>
-                            <option value="nivel2">Nível 2</option>
-                            <option value="nivel3">Nível 3</option>
-                            <option value="nivel4">Nível 4</option>
-                            <option value="nivel5">Nível 5</option>
-                        </select>
-                        <p>
-                            Turno
-                        </p>
-                        <select name="turno" id="turno" class="select_cadastro">
-                            <option value="turno1">Turno 1</option>
-                            <option value="turno2">Turno 2</option>
-                            <option value="turno3">Turno 3</option>
-                        </select>
-
-                        <button onclick="cadastrarFuncionario()" class="botao_cadastrar">
-                            Cadastrar
+                        <input type="text" class="input_dados" id="confirmacaoNovaSenha">
+                        <button onclick="mudarDados()" class="botao_dados">
+                            Salvar Mudanças
                         </button>
-                    </div>
-
-                    <div>
-                        <p>
-                            Token de Acesso
-                        </p>
-
-                        <p>
-                            *Não perca este acesso, será necessário para fazer a alteração de senha
-                        </p>
                     </div>
 
                 </div>
 
             </div>
 
-            
+
 
         </div>
     </div>
