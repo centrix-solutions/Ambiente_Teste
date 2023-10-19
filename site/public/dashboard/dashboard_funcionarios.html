@@ -91,10 +91,10 @@
             </div>
             <div class="div_central">
                 <div class="div_funcionarios">
-                    <div class="div_funcionario1">
+                    <div class="div_funcionario">
 
                         <div class="div_informacoes">
-                            <p>Nome do Funcionário</p>
+                            <p class="p_nome">Nome do Funcionário</p>
                             <p>Email do Funcionário</p>
                             <p>Computador do Funcionário</p>
                         </div>
@@ -110,13 +110,13 @@
                                     <option value="nivel5">Nível 5</option>
                                 </select>
                             </div>
-                            <div class="div_botao2">
+                            <div class="div_botao1 div_botao2">
                                 <span>ENVIAR ALERTA</span>
                                 <button onclick="enviarAlerta()">
                                     ENVIAR
                                 </button>
                             </div>
-                            <div class="div_botao3">
+                            <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
                                 <div class="div_atividade" id="atividadeFuncionario1">
                                     <span>
@@ -128,7 +128,7 @@
 
                     </div>
 
-                    <div class="div_funcionario2">
+                    <div class="div_funcionario">
 
                         <div class="div_informacoes">
                             <p>Nome do Funcionário</p>
@@ -167,7 +167,7 @@
 
                 <div class="div_direita">
 
-                    <div class="titulo">
+                    <div class="div_titulo">
                         Cadastrar Funcionário
                     </div>
 
@@ -199,16 +199,16 @@
                             <option value="turno3">Turno 3</option>
                         </select>
 
-                        <button onclick="cadastrarFuncionario()" class="botao_cadastrar">
-                            Cadastrar
-                        </button>
                     </div>
+
+                    <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
+                        Cadastrar
+                </div>
 
                     <div>
                         <p>
                             Token de Acesso
                         </p>
-
                         <p>
                             *Não perca este acesso, será necessário para fazer a alteração de senha
                         </p>
