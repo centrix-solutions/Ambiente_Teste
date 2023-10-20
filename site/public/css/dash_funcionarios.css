@@ -8,7 +8,7 @@ body{
     margin: 0;
 }
 .container_principal{
-    height: fit-content;
+    height: 110vh;
     display: flex;
 }
 .area_dash{
@@ -20,9 +20,10 @@ body{
             rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
             rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
 }
+
 .dash_superior{
     width: 100%;
-    height: 100px;
+    height: fit-content;
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -50,16 +51,35 @@ body{
 /* DIV DA ESQUERDA */
 
 .div_funcionarios{
-    width: 50%;
-    height: 90%;
+    width: 65%;
+    margin: 2vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 1vw;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1rem grey;
+    border-radius: 1rem;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 1rem;
+  }
+
 .div_funcionario {
-    background-color: #8565c9b4;
+    background-color: #ac8deb5d;
     display: flex;
     height: fit-content;
     border-radius: 1.5rem;
-    width: 100%;
+    width: 95%;
     column-gap: 2rem;
     margin: 1rem;
     color: black
@@ -78,16 +98,20 @@ body{
 }
 
 .div_botoes select {
-    width: 7vw;
-    height: 5vh;
-    border-radius: 1rem;
+    width: 9vw;
+    height: 6vh;
+    border-radius: 0.5rem;
+    background: none;
+    border: black solid 1px;
 }
 
 .div_botoes button {
-    width: 7vw;
-    height: 5vh;
-    border-radius: 1rem;
+    width: 9vw;
+    height: 6vh;
+    border-radius: 0.5rem;
     border: none;
+    background: none;
+    border: black solid 1px;
 }
 
 .div_botao1{
@@ -95,7 +119,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     margin: 0.5vh;
     width: 12vw;
 }
@@ -112,19 +135,26 @@ body{
     padding: 0.5vh;
 }
 
-/* .div_funcionario2 {
-    background-color: #240086;
-    display: flex;
-    height: fit-content;
-    width: 100%;
-} */
+.p_nome {
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.p_email {
+    font-size: 2.5vh;
+    text-decoration: underline;
+}
+
+.p_computador {
+    font-size: 2vh;
+}
 
 /* DIV DA DIREITA */
 
 .div_direita {
-    background-color: #492757;
-    width: 30%;
-    height: 90%;
+    background-color: #231F40;
+    width: 25%;
+    height: fit-content;
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -140,13 +170,15 @@ body{
 
 .div_cadastro {
     width: 90%;
+    padding: 1vh;
 }
 
 .div_cadastro input{
     width: 100%;
     height: 5vh;
-    border-radius: 1rem;
     border: none;
+    border-radius: 0.5rem;
+    background-color: #fcfcfc63;
 }
 
 input:focus {
@@ -158,7 +190,8 @@ input:focus {
 .div_cadastro select {
     width: 7vw;
     height: 5vh;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    background-color: #fcfcfc63;
 }
 
 select:focus {
@@ -172,9 +205,9 @@ select:focus {
     justify-content: center;
     align-items: center;
     width: 10vw;
-    height: 5vh;
-    border-radius: 1rem;
-    background-color: white;
-    color: #360149;
+    height: 6vh;
+    border-radius: 0.5rem;
+    background-color: #fcfcfc63;
+    color: white;
     font-weight: bold;
   }

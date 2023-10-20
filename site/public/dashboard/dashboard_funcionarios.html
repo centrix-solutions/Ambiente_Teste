@@ -84,19 +84,28 @@
         <div class="area_dash">
             <div class="dash_superior">
                 <div class="bem_vindo">
-                    <span class="text_bemVindo1">Funcionários</span>
-                    <span class="text_bemVindo2">Veja as princípais informações dos seus funcionários, cadastre e de
-                        permissões para eles.</span>
+                    <span class="text_bemVindo1">
+                        Funcionários
+                    </span>
+                    <span class="text_bemVindo2">
+                        Veja as princípais informações dos seus funcionários, cadastre e de
+                        permissões para eles.
+                    </span>
                 </div>
             </div>
             <div class="div_central">
                 <div class="div_funcionarios">
                     <div class="div_funcionario">
-
                         <div class="div_informacoes">
-                            <p class="p_nome">Nome do Funcionário</p>
-                            <p>Email do Funcionário</p>
-                            <p>Computador do Funcionário</p>
+                            <p class="p_nome">
+                                Nome do Funcionário
+                            </p>
+                            <p class="p_email">
+                                Email do Funcionário
+                            </p>
+                            <p class="p_computador">
+                                Computador do Funcionário
+                            </p>
                         </div>
 
                         <div class="div_botoes">
@@ -129,11 +138,16 @@
                     </div>
 
                     <div class="div_funcionario">
-
                         <div class="div_informacoes">
-                            <p>Nome do Funcionário</p>
-                            <p>Email do Funcionário</p>
-                            <p>Computador do Funcionário</p>
+                            <p class="p_nome">
+                                Nome do Funcionário
+                            </p>
+                            <p class="p_email">
+                                Email do Funcionário
+                            </p>
+                            <p class="p_computador">
+                                Computador do Funcionário
+                            </p>
                         </div>
 
                         <div class="div_botoes">
@@ -147,28 +161,116 @@
                                     <option value="nivel5">Nível 5</option>
                                 </select>
                             </div>
-                            <div class="div_botao2">
+                            <div class="div_botao1 div_botao2">
                                 <span>ENVIAR ALERTA</span>
                                 <button onclick="enviarAlerta()">
                                     ENVIAR
                                 </button>
                             </div>
-                            <div class="div_botao3">
+                            <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario2">
+                                <div class="div_atividade" id="atividadeFuncionario1">
                                     <span>
                                         INATIVO
                                     </span>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+                    <div class="div_funcionario">
+                        <div class="div_informacoes">
+                            <p class="p_nome">
+                                Nome do Funcionário
+                            </p>
+                            <p class="p_email">
+                                Email do Funcionário
+                            </p>
+                            <p class="p_computador">
+                                Computador do Funcionário
+                            </p>
+                        </div>
+
+                        <div class="div_botoes">
+                            <div class="div_botao1">
+                                <span>NÍVEL DE ACESSO</span>
+                                <select name="acesso" id="select_acesso" class="select_acesso">
+                                    <option value="nivel1">Nível 1</option>
+                                    <option value="nivel2">Nível 2</option>
+                                    <option value="nivel3">Nível 3</option>
+                                    <option value="nivel4">Nível 4</option>
+                                    <option value="nivel5">Nível 5</option>
+                                </select>
+                            </div>
+                            <div class="div_botao1 div_botao2">
+                                <span>ENVIAR ALERTA</span>
+                                <button onclick="enviarAlerta()">
+                                    ENVIAR
+                                </button>
+                            </div>
+                            <div class="div_botao1 div_botao3">
+                                <span>ATIVIDADE</span>
+                                <div class="div_atividade" id="atividadeFuncionario1">
+                                    <span>
+                                        INATIVO
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="div_funcionario">
+                        <div class="div_informacoes">
+                            <p class="p_nome">
+                                Nome do Funcionário
+                            </p>
+                            <p class="p_email">
+                                Email do Funcionário
+                            </p>
+                            <p class="p_computador">
+                                Computador do Funcionário
+                            </p>
+                        </div>
+
+                        <div class="div_botoes">
+                            <div class="div_botao1">
+                                <span>NÍVEL DE ACESSO</span>
+                                <select name="acesso" id="select_acesso" class="select_acesso">
+                                    <option value="nivel1">Nível 1</option>
+                                    <option value="nivel2">Nível 2</option>
+                                    <option value="nivel3">Nível 3</option>
+                                    <option value="nivel4">Nível 4</option>
+                                    <option value="nivel5">Nível 5</option>
+                                </select>
+                            </div>
+                            <div class="div_botao1 div_botao2">
+                                <span>ENVIAR ALERTA</span>
+                                <button onclick="enviarAlerta()">
+                                    ENVIAR
+                                </button>
+                            </div>
+                            <div class="div_botao1 div_botao3">
+                                <span>ATIVIDADE</span>
+                                <div class="div_atividade" id="atividadeFuncionario1">
+                                    <span>
+                                        INATIVO
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+
                 </div>
 
                 <div class="div_direita">
 
                     <div class="div_titulo">
-                        Cadastrar Funcionário
+                        Novo Funcionário
                     </div>
 
                     <div class="div_cadastro">
@@ -201,7 +303,7 @@
 
                     </div>
 
-                    <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
+                <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
                         Cadastrar
                 </div>
 
