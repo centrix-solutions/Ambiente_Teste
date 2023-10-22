@@ -7,6 +7,10 @@
     transition-duration: 1s;
 }
 
+.botao_entrar a:hover {
+    color: black;
+}
+
 .log_info button:hover {
     background-color: white;
     cursor: pointer;
@@ -26,7 +30,7 @@ a {
     margin-right: auto;
     justify-content: center;
     height: 460px;
-    width: 80%;
+    width: 50%;
     background-color: rgb(90 52 169 / 76%);
     border-radius: 4vh 4vh 4vh 4vh;
     display: flex;
@@ -45,7 +49,7 @@ a {
 }
 
 .nome_input {
-    margin-left: 3%;
+    margin-left: -35%;
 }
 
 .log_info a {
@@ -64,8 +68,8 @@ a {
 
 .log_info h1 {
     align-self: center;
-    margin-bottom: 20px;
-    margin: 0px;
+    margin-bottom: 5vh;
+    margin-left: -10%;
 }
 
 .log_info input {
@@ -74,6 +78,8 @@ a {
     border-radius: 30vh;
     padding: 10px 20px;
     margin: 10px 0;
+    width: 150%;
+    margin-left: -35%;
 }
 
 .log_info button {
@@ -82,11 +88,12 @@ a {
     box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
     border-radius: 30vh;
     border: none;
-    width: 150px;
-    height: 45px;
+    width: 125px;
+    height: 55px;
     color: #eee;
     align-self: center;
     font-size: 20px;
+    margin-top: 10%;
 }
 
 .card_log img {
@@ -435,8 +442,8 @@ a {
     .botao_entrar {
         margin-left: 25px;
     }
-    
-    input{
+
+    input {
         text-align: center;
     }
 }

@@ -30,19 +30,20 @@
       </li>
     </div>
     <div class="botoes_login">
-      <div id="cadastro_botao" class="botao_entrar">
-        <a href="cadastro.html">Cadastrar</a>
-      </div>
-      <div class="botao_entrar">
-        <a href="login.html">Login</a>
-      </div>
+      <a href="cadastro.html">
+        <div class="botao_entrar">
+          Cadastrar
+        </div>
+      </a>
+      <a href="login.html">
+        <div id="login" class="botao_entrar">
+          Login
+        </div>
+      </a>  
     </div>
   </div>
   <!-- End of Header -->
   <div class="card_logC">
-    <div class="figureC">
-      <img src="assets/icon/Group 29.png" alt="" id="imagemEsquerda" style="display: ''">
-    </div>
     <div class="log_infoC" id="cadastroEmpresa">
       <h1>Cadastro empresarial</h1>
       Nome Fantasia
@@ -75,7 +76,7 @@
       </div>
 
     </div>
-    
+
     <div class="log_infoC" id="cadastroFuncionario" style="display: none;">
       <h1>Cadastro do funcionário responsável</h1>
       <span id="texto_input">Nome</span>
@@ -83,7 +84,7 @@
       <span id="texto_input">Email</span>
       <input type="text" oninput="verificarEmail()" placeholder="Digite seu email" id="funcionario_email_input">
       <span class="span_alerta" id="span_alerta_email"></span>
-      <span id="texto_in  put">Senha</span>
+      <span id="texto_input">Senha</span>
       <input oninput="verificarRequisitoSenha()" type="password" placeholder="Digite sua senha" id="senha_input">
       <span class="span_alerta" id="span_alerta_senha"></span>
       <span id="texto_input">Confirmar Senha</span>

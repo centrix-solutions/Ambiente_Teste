@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300&display=swap');
 
+.botao_entrar a:hover {
+    color: black;
+}
+
 .log_info_resumo {
     margin-top: 5vh;
     margin-left: auto;
@@ -7,11 +11,16 @@
     justify-content: center;
     height: 600px;
     width: 80%;
-    background-color: rgb(90 52 169 / 76%);
     border-radius: 0vh 4vh 4vh 4vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
+}
+
+.info {
+    display: flex;
+    justify-content: left;
+    margin-left: 5%;
 }
 
 .log_info_resumo .area {
@@ -29,7 +38,7 @@
     color: #eee;
     align-self: center;
     font-size: 20px;
-    padding: 15%;
+    padding: 5%;
     margin-bottom: 4%;
     margin: 2%;
 }
@@ -48,25 +57,26 @@
     justify-content: center;
 }
 
-.log_info_resumo .voltar{
-    background-color: white;
+.log_info_resumo .voltar {
+    background-color: rgba(255, 255, 255, 0);
     box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
     border-radius: 30vh;
-    border: none;
+    border-style: solid;
+    border-color: white;
     width: fit-content;
     height: fit-content;
-    color: black;
+    color: white;
     align-self: center;
     font-size: 20px;
-    padding: 15%;
+    padding: 5%;
     margin-bottom: 4%;
     margin: 2%;
 }
 
-.log_info_resumo .voltar:hover{
-    background-color: #9E00FF;
+.log_info_resumo .voltar:hover {
+    background-color: white;
     cursor: pointer;
-    color: #eee;
+    color: black;
     transition-duration: 1s;
 }
 
@@ -76,10 +86,11 @@
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
-    height: 111vh;
-    width: 80%;
+    min-height: 70vh;
+    height: fit-content;
+    width: 50%;
     background-color: rgb(90 52 169 / 76%);
-    border-radius: 0vh 4vh 4vh 4vh;
+    border-radius: 4vh;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -89,7 +100,6 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    margin-left: 5%;
     font-size: 18px;
     font-weight: bold;
     height: 70%;
@@ -113,8 +123,8 @@
 
 .log_infoC h1 {
     align-self: center;
-    margin-bottom: 20px;
-    margin: 0px;
+    margin-top: 25vh;
+    margin-bottom: 5vh;
 }
 
 .log_infoC input {
@@ -133,28 +143,28 @@
     margin: 10px 0;
 }
 
-#cadastroEmpresa{
+#cadastroEmpresa {
     justify-content: flex-end;
 }
 
 #cadastroFuncionario input {
     width: 60%;
     display: flex;
+    margin-left: 15%;
+}
+
+#cadastroFuncionario #texto_input {
+    margin-left: 15%;
 }
 
 #cadastroFuncionario {
-    margin-right: -20%;
     justify-content: flex-end;
     min-height: 95vh;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
 }
 
-#cadastroFuncionario h1 {
-    margin-right: 10%;
-}
-
-#cadastroFuncionario button {
-    padding: 5%;
-}
 
 .log_infoC button {
     /* margin-left: 10%; */
@@ -178,35 +188,37 @@
     transition-duration: 1s;
 }
 
-.log_info_botoes{
+.log_info_botoes {
     display: flex;
     justify-content: space-evenly;
 }
 
-.log_info_botoes_func{
+.log_info_botoes_func {
     max-width: 67%;
     display: flex;
     justify-content: space-evenly;
+    margin-left: 15%;
 }
 
 .log_infoC .voltar {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     box-shadow: 0 14px 28px rgb(0 0 0 / 9%), 0 10px 10px rgb(0 0 0 / 10%);
     border-radius: 30vh;
-    border: none;
     width: fit-content;
     height: fit-content;
-    color: black;
+    color: white;
     align-self: center;
     font-size: 20px;
     padding: 5%;
     margin-bottom: 4%;
+    border-style: solid;
+    border-color: white;
 }
 
 .log_infoC .voltar:hover {
-    background-color: #9E00FF;
+    background-color: white;
     cursor: pointer;
-    color: #eee;
+    color: black;
     transition-duration: 1s;
 }
 
@@ -555,7 +567,7 @@ a {
     transform: scale(1.5);
 }
 
-.span_alerta{
+.span_alerta {
     font-size: 1.0rem;
 }
 
@@ -563,13 +575,13 @@ a {
 
 @media screen and (max-width: 768px) {
 
-.copyrights {
-    text-align: center;
-    margin-top: 13vh;
-    background-color: transparent;
-    width: 90%;
-    height: 10vh;
-}
+    .copyrights {
+        text-align: center;
+        margin-top: 13vh;
+        background-color: transparent;
+        width: 90%;
+        height: 10vh;
+    }
 
     .botoes_login {
         display: flex;
@@ -726,7 +738,7 @@ a {
         padding: 10px;
     }
 
-    .botao_voltar{
+    .botao_voltar {
         padding: 10px;
     }
 
@@ -734,14 +746,14 @@ a {
         display: none;
     }
 
-    .log_info_resumo{
+    .log_info_resumo {
         text-align: center;
         display: flex;
         flex-direction: column;
         height: fit-content;
     }
 
-    .log_info_resumo button{
+    .log_info_resumo button {
         width: fit-content;
         height: fit-content;
         padding: 5%;
