@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../assets/icon/favicon.ico">
+    <link rel="icon" href="../assets/icon/favicon.ico">
     <title>Dashboard | Funcionários</title>
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/dash_funcionarios.css">
@@ -128,14 +128,13 @@
                             </div>
                             <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario1">
+                                <div class="div_atividade" id="atividadeFuncionario">
                                     <span>
                                         INATIVO
                                     </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="div_funcionario">
@@ -170,14 +169,13 @@
                             </div>
                             <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario1">
+                                <div class="div_atividade" id="atividadeFuncionario">
                                     <span>
                                         INATIVO
                                     </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="div_funcionario">
@@ -212,14 +210,13 @@
                             </div>
                             <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario1">
+                                <div class="div_atividade" id="atividadeFuncionario">
                                     <span>
                                         INATIVO
                                     </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="div_funcionario">
@@ -254,18 +251,55 @@
                             </div>
                             <div class="div_botao1 div_botao3">
                                 <span>ATIVIDADE</span>
-                                <div class="div_atividade" id="atividadeFuncionario1">
+                                <div class="div_atividade" id="atividadeFuncionario">
                                     <span>
                                         INATIVO
                                     </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    
+                    <div class="div_funcionario">
+                        <div class="div_informacoes">
+                            <p class="p_nome">
+                                Nome do Funcionário
+                            </p>
+                            <p class="p_email">
+                                Email do Funcionário
+                            </p>
+                            <p class="p_computador">
+                                Computador do Funcionário
+                            </p>
+                        </div>
 
+                        <div class="div_botoes">
+                            <div class="div_botao1">
+                                <span>NÍVEL DE ACESSO</span>
+                                <select name="acesso" id="select_acesso" class="select_acesso">
+                                    <option value="nivel1">Nível 1</option>
+                                    <option value="nivel2">Nível 2</option>
+                                    <option value="nivel3">Nível 3</option>
+                                    <option value="nivel4">Nível 4</option>
+                                    <option value="nivel5">Nível 5</option>
+                                </select>
+                            </div>
+                            <div class="div_botao1 div_botao2">
+                                <span>ENVIAR ALERTA</span>
+                                <button onclick="enviarAlerta()">
+                                    ENVIAR
+                                </button>
+                            </div>
+                            <div class="div_botao1 div_botao3">
+                                <span>ATIVIDADE</span>
+                                <div class="div_atividade" id="atividadeFuncionario">
+                                    <span>
+                                        INATIVO
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="div_direita">
@@ -301,27 +335,24 @@
                             <option value="turno2">Turno 2</option>
                             <option value="turno3">Turno 3</option>
                         </select>
-
                     </div>
 
-                <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
+                    <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
                         Cadastrar
-                </div>
+                    </div>
 
                     <div>
                         <p>
                             Token de Acesso
                         </p>
+                        <div class="div_token" id="divToken"></div>
                         <p>
-                            *Não perca este acesso, será necessário para fazer a alteração de senha
+                            *Não perca este acesso, será necessário para fazer a alteração da senha
                         </p>
                     </div>
 
                 </div>
-
             </div>
-
-            
 
         </div>
     </div>
