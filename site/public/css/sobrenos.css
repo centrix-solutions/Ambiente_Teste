@@ -54,12 +54,11 @@ body {
     height: fit-content;
     display: flex;
     align-items: center;
-
 }
 
 .botao_entrar a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .botao_entrar a:hover {
@@ -797,7 +796,7 @@ a {
     }
 
     .botoes_login {
-        margin-left: 10%;
+        margin-left: 18%;
     }
 
     .parte1 img {
@@ -819,7 +818,7 @@ a {
     .bloco_texto h1 {
         font-size: x-large;
     }
-
+    
     .missao_empresa {
         display: flex;
         flex-direction: column;
@@ -874,7 +873,7 @@ a {
         height: fit-content;
     }
 
-    #login {
-        margin-left: 35%;
+    .botao_entrar{
+        margin-right: 8vw;
     }
 }

@@ -104,7 +104,6 @@
     font-weight: bold;
     height: 70%;
     width: fit-content;
-    margin-top: -15%;
 }
 
 .log_infoC a {
@@ -123,7 +122,6 @@
 
 .log_infoC h1 {
     align-self: center;
-    margin-top: 25vh;
     margin-bottom: 5vh;
 }
 
@@ -569,8 +567,9 @@ a {
 
 .span_alerta {
     font-size: 1.0rem;
+    margin-left: 15%;
+    margin-bottom: 5%;
 }
-
 
 
 @media screen and (max-width: 768px) {
@@ -594,25 +593,25 @@ a {
         margin-left: 10%;
     }
 
-    #cadastroFuncionario button {
-        margin-left: 35%;
-    }
-
     #texto_input {
         margin-right: 10%;
     }
 
     .card_logC h1 {
-        font-size: 27px;
         margin-bottom: 20%;
     }
 
-    #cadastroFuncionario input {
-        width: 70%;
+    .log_infoC h1{
+        margin-top: none;
     }
 
-    #cadastroFuncionario {
-        margin-left: -50%;
+    #cadastroFuncionario input {
+        margin-left: 0;
+        width: 80%;
+    }
+
+    #cadastroFuncionario button {
+        padding: 10%;
     }
 
     .footer {
@@ -696,7 +695,7 @@ a {
 
 
     .card_logC {
-        min-height: 80vh;
+        min-height: fit-content;
         min-width: 80%;
         text-align: center;
         height: fit-content;
@@ -705,10 +704,8 @@ a {
 
     .log_infoC {
         display: flex;
-        margin-right: 25px;
         width: 60%;
-        margin-bottom: 1%;
-        margin-top: 1%;
+        height: fit-content;
     }
 
     .log_infoC p {
@@ -757,5 +754,13 @@ a {
         width: fit-content;
         height: fit-content;
         padding: 5%;
+    }
+
+    #retirado {
+        display: none;
+    }
+
+    .log_infoC input {
+        margin-left: 5%;
     }
 }
