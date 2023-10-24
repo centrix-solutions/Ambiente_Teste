@@ -27,7 +27,7 @@ function buscarComputadores(req, res) {
     }
 }
 function cadastrarAndar(req, res) {
-
+    // const imagem = req.file.filename;
     var numeroAndar = req.body.numAndarServer;
     var larguraAndar = req.body.largAndarServer;
     var comprimentoAndar = req.body.compAndarServer;
@@ -51,6 +51,18 @@ function cadastrarAndar(req, res) {
                 }
             );
     }
+}
+function cadastrarFoto(req, res) {
+    const imagem = req.file.filename;
+    const {numAndar, largAndar, compAndar} = req.body;
+  
+    const cadastro = {numAndar, largAndar, compAndar, imagem};
+    dashboardModel.cadastrarFoto(cadastro)
+        .then(resultado => {
+            res.status(201).send("Usuario criado com sucesso");
+        }).catch(err => {
+            res.status(500).send(err);
+        });
 }
 function salvarPosicaoComputadores(req, res) {
 
@@ -82,5 +94,6 @@ function salvarPosicaoComputadores(req, res) {
 module.exports = {
     buscarComputadores,
     cadastrarAndar,
-    salvarPosicaoComputadores
+    salvarPosicaoComputadores,
+    cadastrarFoto
 }

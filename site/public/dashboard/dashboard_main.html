@@ -21,24 +21,25 @@
                 <div>
                     <div class="div_cadastrarAndarInput">
                         <span>Andar</span>
-                        <input class="input_cadastrarAndar" type="number" id="numeroAndar" />
+                        <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar"/>
                     </div>
                     <div class="div_cadastrarAndarInput">
                         <span>Largura</span>
-                        <input class="input_cadastrarAndar" type="number" id="larguraAndar" />
+                        <input class="input_cadastrarAndar" type="number" id="larguraAndar" name="largAndar"/>
                     </div>
                     <div class="div_cadastrarAndarInput">
                         <span>Comprimento</span>
-                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar" />
+                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar" name="compAndar"/>
                     </div>
                 </div>
-                <div>
+                <div class="">
+                    <!-- MUDAR O CSS DAQ DPS -->
                     <span>Foto da planta do andar</span>
-                    <div class="div_dropImg"></div>
+                    <input type="file" id="foto" name="foto"/>
                 </div>
             </div>
             <div class="div_btnCadastrarAndar">
-                <button class="btn_cadastrarAndar cursor" onclick="cadastrarAndar()">Cadastrar</button>
+                <button class="btn_cadastrarAndar cursor" onclick="cadastrarFoto()">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -130,7 +131,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12"
                                 fill="none">
                                 <path d="M1 1.75L9 10.25L17 1.75" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                                stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -230,8 +231,9 @@
                                 </select>
                             </div>
                             <div>
-                                <button class="btn_andares cursor" onclick="buscarComputadores()">Selecionar
-                                    Andar</button>
+                                <button class="btn_andares cursor" onclick="buscarComputadores()">
+                                    Selecionar Andar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -387,6 +389,8 @@
         var numAndar = numeroAndar.value;
         var largAndar = larguraAndar.value;
         var compAndar = comprimentoAndar.value;
+        // const formData = new FormData();
+        // formData.append('foto', foto.files[0])
         try {
             var resposta = await fetch("/dashboard/cadastrarAndar", {
                 method: "POST",
@@ -407,6 +411,24 @@
         } catch (erro) {
             console.log("Erro: ", erro);
         }
+    }
+    function cadastrarFoto(){
+        const formData = new FormData();
+        formData.append('foto', foto.files[0]);
+        formData.append('numAndar', numeroAndar.value);
+        formData.append('largAndar', larguraAndar.value);
+        formData.append('compAndar', comprimentoAndar.value);
+        fetch("/dashboard/cadastrarFoto", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => {
+            // window.location = "./listaGatos.html"
+            alert("foi");
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
     document.onkeydown = function (e) {
         var id = sessionStorage.idComputador;

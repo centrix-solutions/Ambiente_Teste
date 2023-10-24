@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
     num_andar INT,
     largura_andar INT,
     comprimento_andar INT,
-    Foto_Andar VARCHAR(45)
+    foto_andar VARCHAR(255),
+    fkEmpAndar INT,
+    CONSTRAINT fkEmpAndar FOREIGN KEY (fkEmpAndar) REFERENCES Empresa(idempresa)
 );
 
 CREATE TABLE IF NOT EXISTS Empresa(
@@ -52,7 +54,9 @@ CREATE TABLE IF NOT EXISTS Funcionario(
     fkNivelAcesso INT,
     CONSTRAINT fk_Nivel_Acesso FOREIGN KEY (fkNivelAcesso) REFERENCES Niveis_de_Acesso(idNivel_Acesso),
     fkTurno INT,
-    CONSTRAINT fk_turno FOREIGN KEY (fkTurno) REFERENCES Turno(idPeriodo_de_Operacao)
+    CONSTRAINT fk_turno FOREIGN KEY (fkTurno) REFERENCES Turno(idPeriodo_de_Operacao),
+    fkAndar INT,
+    CONSTRAINT fk_andar FOREIGN KEY (fkAndar) REFERENCES Andar_de_trabalho(idAndar_de_trabalho)
 );
 
 CREATE TABLE IF NOT EXISTS Maquinas (
@@ -102,8 +106,8 @@ CREATE TABLE IF NOT EXISTS Login (
     idFuncionario INT,
     idMaquina INT,
     idEmpresa INT,
-    Nome VARCHAR(30),
-    Atividade VARCHAR(70),
+    Nome VARCHAR(45),
+    Atividade VARCHAR(255),
     HoraLogin TIME,
     Turno INT,
     PRIMARY KEY (idFuncionario, idMaquina, idEmpresa),
@@ -113,12 +117,33 @@ CREATE TABLE IF NOT EXISTS Login (
     FOREIGN KEY (idEmpresa) REFERENCES Funcionario (fkEmpFunc)
 );
 
-INSERT INTO Andar_de_trabalho (Foto_Andar)
-VALUES
-    ('andar1.jpg'),
-    ('andar2.jpg'),
-    ('andar3.jpg');
-    
+CREATE TABLE IF NOT EXISTS Tipo_Alerta_Parametros (
+    idTipo_Alerta INT primary key auto_increment,
+    Importancia VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS Parametros (
+    idParametro INT primary key auto_increment,
+    Componente VARCHAR(45),
+    Alcance FLOAT,
+    FKTipo_Alerta_Parametros INT,
+    FOREIGN KEY (FKTipo_Alerta_Parametros) REFERENCES Tipo_Alerta_Parametros (idTipo_Alerta)
+);
+
+CREATE TABLE IF NOT EXISTS Tipo_Alerta (
+    idTipo_Alerta INT primary key auto_increment,
+    Importancia VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS Alertas (
+    idAlertas INT,
+    Descricao VARCHAR(100),
+    FKTipo_Alerta INT
+    FOREIGN KEY (FKTipo_Alerta) REFERENCES Tipo_Alerta(idTipo_Alerta),
+    FKMonitoramento INT,
+    FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento),
+);
+
 INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento, fkSede)
 VALUES
     ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A', 1),
@@ -146,19 +171,7 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Taxa Upload'),
     ('Janelas do Sistema'),
     ('Processos');
-    
-insert into maquinas values
-	(null, "Windows", "123", 0, 0, 1, 1),
-    (null, "Linux", "321", 0, 0, 1, 1),
-    (null, "MacOs", "123", 0, 0, 1, 2);
 	
-desc maquinas;
-select * from andar_de_trabalho;
-select * from Login;    
-select * from Maquinas;
-select * from Monitoramento;
-select * from Componentes_Monitorados;
-select * from ComponentesQuePrestamosServico;
 SELECT
     L.Nome AS NomeFuncionario,
     L.Atividade,
