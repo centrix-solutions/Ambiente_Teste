@@ -21,21 +21,21 @@
                 <div>
                     <div class="div_cadastrarAndarInput">
                         <span>Andar</span>
-                        <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar"/>
+                        <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar" />
                     </div>
                     <div class="div_cadastrarAndarInput">
                         <span>Largura</span>
-                        <input class="input_cadastrarAndar" type="number" id="larguraAndar" name="largAndar"/>
+                        <input class="input_cadastrarAndar" type="number" id="larguraAndar" name="largAndar" />
                     </div>
                     <div class="div_cadastrarAndarInput">
                         <span>Comprimento</span>
-                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar" name="compAndar"/>
+                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar" name="compAndar" />
                     </div>
                 </div>
                 <div class="">
                     <!-- MUDAR O CSS DAQ DPS -->
                     <span>Foto da planta do andar</span>
-                    <input type="file" id="foto" name="foto"/>
+                    <input type="file" id="foto" name="foto" />
                 </div>
             </div>
             <div class="div_btnCadastrarAndar">
@@ -45,11 +45,13 @@
     </div>
     <div class="container_principal">
         <div class="barra_lateral">
-            <div id="option1" class="barraLateral_option cursor primeiro">
-                <a href="dashboard_main.html"><img src="../assets/imgs/casinha.png" alt="home"></a>
-            </div>
-            <div id="option2" class="barraLateral_option cursor">
-                <a href="dashboard_maquina.html">
+            <a href="dashboard_main.html">
+                <div id="option1" class="barraLateral_option cursor primeiro">
+                    <img src="../assets/imgs/casinha.png" alt="home">
+                </div>
+            </a>
+            <a href="dashboard_maquina.html">
+                <div id="option2" class="barraLateral_option cursor">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24" fill="none">
                         <g style="mix-blend-mode:darken">
                             <rect width="26" height="23.0567" fill="#87888C" />
@@ -58,18 +60,20 @@
                             d="M1.85718 1.64679H3.25003V20.1745H24.1429V21.4097H1.85718V1.64679ZM22.4951 5.4919C22.566 5.5433 22.6247 5.60657 22.6679 5.67809C22.7112 5.74962 22.7381 5.82801 22.7471 5.90876C22.7562 5.98952 22.7472 6.07107 22.7207 6.14875C22.6942 6.22643 22.6507 6.29871 22.5926 6.36147L16.3248 13.155C16.2632 13.2216 16.1865 13.2761 16.0997 13.315C16.0129 13.3538 15.9179 13.3761 15.8208 13.3804C15.7238 13.3847 15.6267 13.3709 15.536 13.34C15.4453 13.309 15.3629 13.2616 15.2941 13.2007L11.6907 10.0052L6.59846 16.2145C6.48707 16.3401 6.3251 16.4225 6.1466 16.4445C5.9681 16.4664 5.78696 16.4261 5.64125 16.3321C5.49555 16.238 5.39661 16.0976 5.36524 15.9402C5.33387 15.7829 5.37251 15.6208 5.47303 15.4882L11.0445 8.69472C11.1036 8.62248 11.1797 8.56247 11.2675 8.51882C11.3553 8.47516 11.4527 8.44891 11.5531 8.44187C11.6534 8.43482 11.7543 8.44716 11.8488 8.47801C11.9432 8.50887 12.029 8.55752 12.1002 8.62061L15.7342 11.8444L21.5146 5.57836C21.5725 5.51555 21.6439 5.46349 21.7245 5.42515C21.8052 5.38681 21.8936 5.36294 21.9846 5.35491C22.0757 5.34688 22.1677 5.35484 22.2553 5.37835C22.3429 5.40186 22.4244 5.44044 22.4951 5.4919Z"
                             fill="#87888C" stroke="#87888C" stroke-width="0.5" />
                     </svg>
-                </a>
-            </div>
-            <div id="option3" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 27 26" fill="none">
-                    <path
-                        d="M4.24275 11.4229V20.9467H8.87132V11.4229H4.24275ZM11.1856 4.28V20.9467H15.8142V4.28H11.1856ZM18.1285 13.8038V20.9467H22.757V13.8038H18.1285ZM22.757 23.3276H4.24275C3.60632 23.3276 3.0617 23.0947 2.60887 22.6288C2.15527 22.1621 1.92847 21.6014 1.92847 20.9467V11.4229C1.92847 10.7681 2.15527 10.2074 2.60887 9.74072C3.0617 9.27484 3.60632 9.04191 4.24275 9.04191H8.87132V4.28C8.87132 3.62524 9.09812 3.06452 9.55172 2.59786C10.0046 2.13198 10.5492 1.89905 11.1856 1.89905H15.8142C16.4506 1.89905 16.9956 2.13198 17.4492 2.59786C17.9021 3.06452 18.1285 3.62524 18.1285 4.28V11.4229H22.757C23.3935 11.4229 23.9385 11.6558 24.3921 12.1217C24.8449 12.5883 25.0713 13.149 25.0713 13.8038V20.9467C25.0713 21.6014 24.8449 22.1621 24.3921 22.6288C23.9385 23.0947 23.3935 23.3276 22.757 23.3276Z"
-                        fill="#8C8C8C" />
-                    <rect x="17" y="0.0566711" width="9" height="9" rx="4.5" fill="#FF0000" />
-                </svg>
-            </div>
-            <div id="option4" class="barraLateral_option cursor">
-                <a href="dashboard_funcionarios.html">
+                </div>
+            </a>
+            <a href="dashboard_main.html">
+                <div id="option3" class="barraLateral_option cursor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 27 26" fill="none">
+                        <path
+                            d="M4.24275 11.4229V20.9467H8.87132V11.4229H4.24275ZM11.1856 4.28V20.9467H15.8142V4.28H11.1856ZM18.1285 13.8038V20.9467H22.757V13.8038H18.1285ZM22.757 23.3276H4.24275C3.60632 23.3276 3.0617 23.0947 2.60887 22.6288C2.15527 22.1621 1.92847 21.6014 1.92847 20.9467V11.4229C1.92847 10.7681 2.15527 10.2074 2.60887 9.74072C3.0617 9.27484 3.60632 9.04191 4.24275 9.04191H8.87132V4.28C8.87132 3.62524 9.09812 3.06452 9.55172 2.59786C10.0046 2.13198 10.5492 1.89905 11.1856 1.89905H15.8142C16.4506 1.89905 16.9956 2.13198 17.4492 2.59786C17.9021 3.06452 18.1285 3.62524 18.1285 4.28V11.4229H22.757C23.3935 11.4229 23.9385 11.6558 24.3921 12.1217C24.8449 12.5883 25.0713 13.149 25.0713 13.8038V20.9467C25.0713 21.6014 24.8449 22.1621 24.3921 22.6288C23.9385 23.0947 23.3935 23.3276 22.757 23.3276Z"
+                            fill="#8C8C8C" />
+                        <rect x="17" y="0.0566711" width="9" height="9" rx="4.5" fill="#FF0000" />
+                    </svg>
+                </div>
+            </a>
+            <a href="dashboard_funcionarios.html">
+                <div id="option4" class="barraLateral_option cursor">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         class="option_icon">
                         <path
@@ -81,10 +85,10 @@
                         <line x1="20.5" y1="2" x2="20.5" y2="7" stroke="#8C8C8C" />
                         <line x1="23.0046" y1="4.49998" x2="18.0048" y2="4.548" stroke="#8C8C8C" />
                     </svg>
-                </a>
-            </div>
-            <div id="option5" class="barraLateral_option cursor">
-                <a href="dashboard_config.html">
+                </div>
+            </a>
+            <a href="dashboard_config.html">
+                <div id="option5" class="barraLateral_option cursor">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         class="option_icon">
                         <g clip-path="url(#clip0_4_2337)">
@@ -101,18 +105,30 @@
                             </clipPath>
                         </defs>
                     </svg>
-                </a>
-            </div>
-            <div id="option6" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-                    <g style="mix-blend-mode:darken">
-                        <rect y="0.113342" width="23" height="21" fill="#87888C" />
-                    </g>
-                    <path
-                        d="M13.4714 5.51464V3.65272C13.4714 3.37065 13.4148 3.09166 13.3052 2.83336C13.1957 2.57507 13.0355 2.3431 12.8348 2.15211C12.6342 1.96112 12.3974 1.81526 12.1395 1.72376C11.8815 1.63227 11.6081 1.59711 11.3363 1.62052L3.45062 2.29962C2.95782 2.34208 2.49843 2.57457 2.16357 2.951C1.82872 3.32742 1.64285 3.82027 1.64282 4.33182V16.8941C1.64285 17.4057 1.82872 17.8985 2.16357 18.275C2.49843 18.6514 2.95782 18.8839 3.45062 18.9263L11.3363 19.6065C11.6082 19.6299 11.8817 19.5947 12.1397 19.5031C12.3977 19.4116 12.6345 19.2656 12.8352 19.0745C13.0359 18.8834 13.196 18.6513 13.3055 18.3929C13.415 18.1345 13.4715 17.8554 13.4714 17.5732V15.7113M12.4857 10.613H21.3571H12.4857ZM21.3571 10.613L18.0717 6.5343L21.3571 10.613ZM21.3571 10.613L18.0717 14.6917L21.3571 10.613Z"
-                        stroke="#87888C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </div>
+                </div>
+            </a>
+            <a href="https://centrix-solution.atlassian.net/servicedesk/customer/portal/1">
+                <div id="option6" class="barraLateral_option cursor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                        stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+            </a>
+            <a href="../login.html">
+                <div id="option7" class="barraLateral_option cursor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+                        <g style="mix-blend-mode:darken">
+                            <rect y="0.113342" width="23" height="21" fill="#87888C" />
+                        </g>
+                        <path
+                            d="M13.4714 5.51464V3.65272C13.4714 3.37065 13.4148 3.09166 13.3052 2.83336C13.1957 2.57507 13.0355 2.3431 12.8348 2.15211C12.6342 1.96112 12.3974 1.81526 12.1395 1.72376C11.8815 1.63227 11.6081 1.59711 11.3363 1.62052L3.45062 2.29962C2.95782 2.34208 2.49843 2.57457 2.16357 2.951C1.82872 3.32742 1.64285 3.82027 1.64282 4.33182V16.8941C1.64285 17.4057 1.82872 17.8985 2.16357 18.275C2.49843 18.6514 2.95782 18.8839 3.45062 18.9263L11.3363 19.6065C11.6082 19.6299 11.8817 19.5947 12.1397 19.5031C12.3977 19.4116 12.6345 19.2656 12.8352 19.0745C13.0359 18.8834 13.196 18.6513 13.3055 18.3929C13.415 18.1345 13.4715 17.8554 13.4714 17.5732V15.7113M12.4857 10.613H21.3571H12.4857ZM21.3571 10.613L18.0717 6.5343L21.3571 10.613ZM21.3571 10.613L18.0717 14.6917L21.3571 10.613Z"
+                            stroke="#87888C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </a>
         </div>
         <div class="area_dash">
             <div class="dash_superior">
@@ -131,7 +147,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12"
                                 fill="none">
                                 <path d="M1 1.75L9 10.25L17 1.75" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -412,7 +428,7 @@
             console.log("Erro: ", erro);
         }
     }
-    function cadastrarFoto(){
+    function cadastrarFoto() {
         const formData = new FormData();
         formData.append('foto', foto.files[0]);
         formData.append('numAndar', numeroAndar.value);
@@ -422,13 +438,13 @@
             method: "POST",
             body: formData
         })
-        .then(res => {
-            // window.location = "./listaGatos.html"
-            alert("foi");
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(res => {
+                // window.location = "./listaGatos.html"
+                alert("foi");
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     document.onkeydown = function (e) {
         var id = sessionStorage.idComputador;
