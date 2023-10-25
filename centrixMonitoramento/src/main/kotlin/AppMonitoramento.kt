@@ -19,17 +19,7 @@ fun main() {
     repositorioComponentes.iniciar()
     repositorioMonitoramento.iniciar()
 
-<<<<<<< HEAD
     var idEmpresa:Int = 0;
-=======
-    //Var "globais"
-    var idMaqG = 0
-    var idMaquinaDadoG = 0
-    val componentesExistentes:MutableList<String> = mutableListOf()
-    val fkcomponentesMonitorados:MutableList<Int> = mutableListOf()
-    var idEmpresa = 0
-
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
 
     println(" ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
             "██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██║╚██╗██╔╝                   \n" +
@@ -81,25 +71,8 @@ fun main() {
 
     val id = looca.processador.id
     val verificacao = repositorioMaquina.autenticarMaquina(id)
-<<<<<<< HEAD
-    if (!verificacao){
-=======
-    if (verificacao){
-        println("Essa máquina já foi cadastrada")
-        val idMaquina:Int = repositorioComponentes.buscarIdMaqPorId(id)
-        idMaquinaDadoG = idMaquina
-        val componentes:List<Int> = repositorioComponentes.buscarComponetesMaq(idMaquina)
-        val nomeComponentes:List<String> = listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos")
-        componentes.forEach{
-            componentesExistentes.add(nomeComponentes[it - 1])
-            when (it){
-                4 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it))
-                7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it))
-                8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it))
-            }
-        }
-    } else {
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
+
+    if (!verificacao) {
         println("Essa máquina não existe na base de dados")
         Thread.sleep(1 * 1000L)
         println("Iniciando o cadastro.....")
@@ -113,15 +86,8 @@ fun main() {
         val horaLogin = LocalTime.now()
         repositorioMaquina.registrarMaquina(novaMaquina)
         val idMaquina:Int = repositorioComponentes.buscarIdMaqPorId(id)
-        idMaquinaDadoG = idMaquina
-        idMaqG = repositorioComponentes.buscarIdMaq(novaMaquina)
 
-<<<<<<< HEAD
-        val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
-=======
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
-
-        repositorioUser.registrarLogin(usuarioLogado, idMaqG, horaLogin)
+        repositorioUser.registrarLogin(usuarioLogado, idMaquina, horaLogin)
 
         val valores = listOf(
             100.0, //cpu 1
@@ -138,13 +104,13 @@ fun main() {
         for (i in 0 until valores.size) {
             val valor = valores[i]
             val fkComponente = componentes[i]
-            repositorioComponentes.registrarComponente(valor, fkComponente, idMaqG, novaMaquina)
+            repositorioComponentes.registrarComponente(valor, fkComponente, idMaquina, novaMaquina)
         }
 
         println("Máquina cadastrada com monitoramento padrão.....")
         Thread.sleep(2 * 1000L)
-<<<<<<< HEAD
-    } else println("Essa máquina já foi cadastrada");
+    }
+    else println("Essa máquina já foi cadastrada");
 
     /* FIM VERIFICAÇÃO DE MAQUINA EXISTENTE */
 
@@ -172,16 +138,10 @@ fun main() {
     if (usuarioLogado.fkNivelAcesso > 1){
         // colocar os secs aq dentro?
     }
-    println("A cada quantos segundos quer obter os dados?")
-    val tempo = sn.nextLine().toInt()
-    val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
-=======
-    } // FIM ELSE
 
     println("A cada quantos segundos quer obter os dados?")
     val tempo = sn.nextLine().toInt()
-    val arquivo = scriptPadraoPython.criarScript(tempo, idMaquinaDadoG, idEmpresa)
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
+    val arquivo = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
 
     println("Iniciando o monitoramento....")
 
@@ -229,7 +189,6 @@ fun main() {
                 repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquina, idEmpresa)
             }
             Thread.sleep(tempo * 1000L)
-
         }
     /* FIM MONITORAMENTO */
 }
