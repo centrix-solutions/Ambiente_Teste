@@ -24,7 +24,7 @@ class UsuarioRepositorio {
 
     fun logarFuncionario(logarUsuarioEmail: String, logarUsuarioSenha: String): Usuario {
         val funcionario = jdbcTemplate.queryForObject(
-            "SELECT idFuncionario, nome, email, senha, fkEmpFunc, fkNivelAcesso, fkTurno FROM Funcionario WHERE email = ? AND senha = ?",
+            "SELECT idFuncionario, nome, email, senha, fkEmpFunc, fkNivelAcesso FROM Funcionario WHERE email = ? AND senha = ?",
             arrayOf(logarUsuarioEmail, logarUsuarioSenha),
             BeanPropertyRowMapper(Usuario::class.java)
         )
@@ -33,15 +33,14 @@ class UsuarioRepositorio {
     fun registrarLogin(usuarioLogado: Usuario, idMaq: Int, horaLogin: LocalTime) {
         jdbcTemplate.update(
             """
-        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Nome, HoraLogin, Turno)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Nome, HoraLogin)
+        VALUES (?, ?, ?, ?, ?)
         """.trimIndent(),
             usuarioLogado.idFuncionario,
             idMaq,
             usuarioLogado.fkEmpFunc,
             usuarioLogado.nome,
-            horaLogin,
-            usuarioLogado.fkTurno
+            horaLogin
         )
     }
     fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividade: String) {

@@ -19,13 +19,7 @@ fun main() {
     repositorioComponentes.iniciar()
     repositorioMonitoramento.iniciar()
 
-    //Var "globais"
-    var idMaqG:Int = 0;
-    var idMaquinaDadoG = 0;
-    val componentesExistentes:MutableList<String> = mutableListOf();
-    val fkcomponentesMonitorados:MutableList<Int> = mutableListOf();
-    var idEmpresa = 0;
-
+    var idEmpresa:Int = 0;
 
     println(" ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
             "██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██║╚██╗██╔╝                   \n" +
@@ -40,6 +34,8 @@ fun main() {
             "╚════██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║\n" +
             "███████║╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║███████║\n" +
             "╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝")
+
+    /* INICIO LOGIN */
 
     while (true) {
         println("-----login-----")
@@ -60,7 +56,6 @@ fun main() {
             usuarioLogado.senha = user.senha
             usuarioLogado.fkEmpFunc = user.fkEmpFunc
             usuarioLogado.fkNivelAcesso = user.fkNivelAcesso
-            usuarioLogado.fkTurno = user.fkTurno
 
             idEmpresa = user.fkEmpFunc;
             println("Bem vindo ${usuarioLogado.nome}")
@@ -70,23 +65,13 @@ fun main() {
         }
     }
 
+    /* FIM LOGIN */
+
+    /* INICIO VERIFICAÇÃO DE MAQUINA EXISTENTE */
+
     val id = looca.processador.id
     val verificacao = repositorioMaquina.autenticarMaquina(id)
-    if (verificacao){
-        println("Essa máquina já foi cadastrada");
-        val idMaquina:Int = repositorioComponentes.buscarIdMaqPorId(id);
-        idMaquinaDadoG = idMaquina;
-        val componentes:List<Int> = repositorioComponentes.buscarComponetesMaq(idMaquina);
-        val nomeComponentes:List<String> = listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos");
-        componentes.forEach{
-            componentesExistentes.add(nomeComponentes[it - 1]);
-            when (it){
-                4 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
-                7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
-                8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
-            }
-        }
-    } else {
+    if (!verificacao){
         println("Essa máquina não existe na base de dados")
         Thread.sleep(1 * 1000L)
         println("Iniciando o cadastro.....")
@@ -101,7 +86,6 @@ fun main() {
         repositorioMaquina.registrarMaquina(novaMaquina)
 
         val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
-        idMaqG = idMaq;
 
         repositorioUser.registrarLogin(usuarioLogado, idMaq, horaLogin)
 
@@ -123,13 +107,37 @@ fun main() {
 
         println("Máquina cadastrada com monitoramento padrão.....")
         Thread.sleep(2 * 1000L)
-    } // FIM ELSE
+    } else println("Essa máquina já foi cadastrada");
+
+    /* FIM VERIFICAÇÃO DE MAQUINA EXISTENTE */
+
+    /* INICIO BUSCA DE DADOS, COMPONENTES E IDS */
+
+    val idMaquina:Int = repositorioComponentes.buscarIdMaqPorId(id);
+
+    val componentesExistentes:MutableList<String> = mutableListOf();
+    val fkcomponentesMonitorados:MutableList<Int> = mutableListOf();
+    val componentes:List<Int> = repositorioComponentes.buscarComponetesMaq(idMaquina);
+    val nomeComponentes:List<String> = listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos");
+    componentes.forEach{
+        componentesExistentes.add(nomeComponentes[it - 1]);
+        when (it){
+            4 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
+            7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
+            8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
+        }
+    }
+
+    /* FIM BUSCA DE DADOS, COMPONENTES E IDS */
+
+    /* INICIO MONITORAMENTO */
+
     if (usuarioLogado.fkNivelAcesso > 1){
         // colocar os secs aq dentro?
     }
     println("A cada quantos segundos quer obter os dados?")
     val tempo = sn.nextLine().toInt()
-    val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquinaDadoG, idEmpresa)
+    val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
 
     println("Iniciando o monitoramento....")
 
@@ -138,7 +146,7 @@ fun main() {
 
             ScriptPadraoPython.executarScript(arquivo);
             val atividade =  looca.grupoDeJanelas.janelas[3].titulo
-            repositorioUser.atualizarAtividade(usuarioLogado, idMaqG, atividade)
+            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade)
 
             val dados:MutableList<Float> = mutableListOf(
                 //looca.processador.uso.toFloat(),
@@ -174,9 +182,10 @@ fun main() {
                 val dado = dados[i]
                 val fkcompMoni = fkcomponentesMonitorados[i]
                 val fkcompExis = fkcomponentesExistentes[i]
-                repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquinaDadoG, idEmpresa)
+                repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquina, idEmpresa)
             }
             Thread.sleep(tempo * 1000L)
             ScriptPadraoPython.pararScript()
         }
+    /* FIM MONITORAMENTO */
 }
