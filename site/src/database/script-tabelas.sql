@@ -10,18 +10,10 @@ CREATE TABLE IF NOT EXISTS Niveis_de_Acesso (
 
 INSERT INTO Niveis_de_Acesso (tipo_acesso, descricao)
 VALUES
-<<<<<<< HEAD
     ('Lílas', 'Tela de Configurações - Visualização e Alteração; HelpDesk - Abertura de chamado; Download do Sistema - Visualizar e Baixar.'),
     ('Magenta', 'Tela Inicial - Visualização; Tela Individual - Visualização Geral; Tela de Alertas e Rede - Visualização; Tela de Configurações - Visualização e Alteração; Tela de Gráficos - Visualização;  HelpDesk - Abertura de chamado; Download do Sistema - Visualizar e Baixar.'),
     ('Violeta', 'Tela Inicial - Visualização e Alteração do lugar do computador; Tela Individual - Visualização do seu andar; Tela de Alertas e Rede - Visualização; Tela dos Funcionários - Visualização dos funcionários do seu andar; Tela de Configurações - Visualização e Alteração; Tela de Gráficos - Visualização;  HelpDesk - Abertura de chamado; Download do Sistema - Visualizar e Baixar.'),
     ('Púrpura', 'Tela Inicial - Visualização e Cadastro de andar; Tela Individual - Visualização Geral; Tela de Alertas e Rede - Visualização; Tela dos Funcionários - Visualização, Cadastro e Edição dos Funcionários; Tela de Configurações - Visualização e Alteração; Tela de Gráficos - Visualização;  HelpDesk - Abertura de chamado; Download do Sistema - Visualizar e Baixar.');
-=======
-    ('Administrador', 'Acesso total ao sistema'),
-    ('Moderador', 'Acesso para moderar conteúdo'),
-    ('Usuário Registrado', 'Acesso básico como usuário registrado'),
-    ('Convidado', 'Acesso limitado para convidados'),
-    ('Visitante', 'Acesso mínimo como visitante');
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
 
 CREATE TABLE IF NOT EXISTS Empresa(
     idempresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -43,15 +35,6 @@ CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
     foto_andar VARCHAR(255),
     fkEmpAndar INT,
     CONSTRAINT fkEmpAndar FOREIGN KEY (fkEmpAndar) REFERENCES Empresa(idempresa)
-<<<<<<< HEAD
-=======
-);
-
-CREATE TABLE IF NOT EXISTS Turno (
-    idPeriodo_de_Operacao INT PRIMARY KEY AUTO_INCREMENT,
-    inicio TIME,
-    fim TIME
->>>>>>> 3bdffd3ed30feb38db58c3fc55c7989aa29c1215
 );
 
 CREATE TABLE IF NOT EXISTS Funcionario(
@@ -184,4 +167,5 @@ select * from Componentes_Monitorados;
 select * from funcionario;
 select * from monitoramento;
 select * from login;
+select * from maquinas;
  
