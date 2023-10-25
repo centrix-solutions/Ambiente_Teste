@@ -16,16 +16,6 @@ VALUES
     ('Convidado', 'Acesso limitado para convidados'),
     ('Visitante', 'Acesso mínimo como visitante');
 
-CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
-    idAndar_de_trabalho INT PRIMARY KEY AUTO_INCREMENT,
-    num_andar INT,
-    largura_andar INT,
-    comprimento_andar INT,
-    foto_andar VARCHAR(255),
-    fkEmpAndar INT,
-    CONSTRAINT fkEmpAndar FOREIGN KEY (fkEmpAndar) REFERENCES Empresa(idempresa)
-);
-
 CREATE TABLE IF NOT EXISTS Empresa(
     idempresa INT PRIMARY KEY AUTO_INCREMENT,
     Nome_fantasia VARCHAR(45),
@@ -36,6 +26,16 @@ CREATE TABLE IF NOT EXISTS Empresa(
     complemento VARCHAR(45),
     fkSede INT,
     CONSTRAINT fk_Sede FOREIGN KEY (fkSede) REFERENCES Empresa(idempresa)
+);
+
+CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
+    idAndar_de_trabalho INT PRIMARY KEY AUTO_INCREMENT,
+    num_andar INT,
+    largura_andar INT,
+    comprimento_andar INT,
+    foto_andar VARCHAR(255),
+    fkEmpAndar INT,
+    CONSTRAINT fkEmpAndar FOREIGN KEY (fkEmpAndar) REFERENCES Empresa(idempresa)
 );
 
 CREATE TABLE IF NOT EXISTS Turno (
@@ -138,10 +138,10 @@ CREATE TABLE IF NOT EXISTS Tipo_Alerta (
 CREATE TABLE IF NOT EXISTS Alertas (
     idAlertas INT,
     Descricao VARCHAR(100),
-    FKTipo_Alerta INT
+    FKTipo_Alerta INT,
     FOREIGN KEY (FKTipo_Alerta) REFERENCES Tipo_Alerta(idTipo_Alerta),
     FKMonitoramento INT,
-    FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento),
+    FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento)
 );
 
 INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento, fkSede)
