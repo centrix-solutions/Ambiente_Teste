@@ -19,6 +19,13 @@ fun main() {
     repositorioComponentes.iniciar()
     repositorioMonitoramento.iniciar()
 
+    //Var "globais"
+    var idMaqG:Int = 0;
+    var idMaquinaDadoG = 0;
+    val componentesExistentes:MutableList<String> = mutableListOf();
+    val fkcomponentesMonitorados:MutableList<Int> = mutableListOf();
+    var idEmpresa = 0;
+
 
     println(" ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
             "██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██║╚██╗██╔╝                   \n" +
@@ -55,6 +62,7 @@ fun main() {
             usuarioLogado.fkNivelAcesso = user.fkNivelAcesso
             usuarioLogado.fkTurno = user.fkTurno
 
+            idEmpresa = user.fkEmpFunc;
             println("Bem vindo ${usuarioLogado.nome}")
             break
         } else {
@@ -64,15 +72,18 @@ fun main() {
 
     val id = looca.processador.id
     val verificacao = repositorioMaquina.autenticarMaquina(id)
-
     if (verificacao){
-        if (usuarioLogado.fkNivelAcesso == 1) {
-            println("Essa máquina já foi cadastrada")
-            println("Iniciando o monitoramento ......")
-        }
-        if (usuarioLogado.fkNivelAcesso > 1){
-            while (true) {
-                println("Essa máquina já foi cadastrada")
+        println("Essa máquina já foi cadastrada");
+        val idMaquina:Int = repositorioComponentes.buscarIdMaqPorId(id);
+        idMaquinaDadoG = idMaquina;
+        val componentes:List<Int> = repositorioComponentes.buscarComponetesMaq(idMaquina);
+        val nomeComponentes:List<String> = listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos");
+        componentes.forEach{
+            componentesExistentes.add(nomeComponentes[it - 1]);
+            when (it){
+                4 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
+                7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
+                8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa,idMaquina,it));
             }
         }
     } else {
@@ -90,6 +101,7 @@ fun main() {
         repositorioMaquina.registrarMaquina(novaMaquina)
 
         val idMaq = repositorioComponentes.buscarIdMaq(novaMaquina)
+        idMaqG = idMaq;
 
         repositorioUser.registrarLogin(usuarioLogado, idMaq, horaLogin)
 
@@ -111,36 +123,50 @@ fun main() {
 
         println("Máquina cadastrada com monitoramento padrão.....")
         Thread.sleep(2 * 1000L)
-        println("A cada quantos segundos quer obter os dados?")
+    } // FIM ELSE
+    if (usuarioLogado.fkNivelAcesso > 1){
+        // colocar os secs aq dentro?
+    }
+    println("A cada quantos segundos quer obter os dados?")
+    val tempo = sn.nextLine().toInt()
+    val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquinaDadoG, idEmpresa)
 
-        val tempo = sn.nextLine().toInt()
-        val idMaquinaDado = repositorioComponentes.buscarIdMaq(novaMaquina)
-        val idEmpresaDado = novaMaquina.fkEmpMaq
+    println("Iniciando o monitoramento....")
 
-        val arquivo = ScriptPadraoPython.criarScript(tempo, idMaquinaDado, idEmpresaDado)
-        println("Iniciando o monitoramento....")
-
-        ScriptPadraoPython.executarScript(arquivo)
-
+    ScriptPadraoPython.executarScript(arquivo)
         while (true) {
 
-            ScriptPadraoPython.executarScript(arquivo)
+            ScriptPadraoPython.executarScript(arquivo);
             val atividade =  looca.grupoDeJanelas.janelas[3].titulo
-            repositorioUser.atualizarAtividade(usuarioLogado, idMaq, atividade)
+            repositorioUser.atualizarAtividade(usuarioLogado, idMaqG, atividade)
 
-            val dados = listOf(
+            val dados:MutableList<Float> = mutableListOf(
                 //looca.processador.uso.toFloat(),
                 //looca.memoria.emUso.toFloat() / (1024 * 1024),
-                looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
+                //looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
                 //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesEnviados.toFloat() / (1024 * 1024),
                 //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesRecebidos.toFloat() / (1024 * 1024),
-                looca.grupoDeJanelas.totalJanelas.toFloat(),
-                looca.grupoDeProcessos.totalProcessos.toFloat(),
+                //looca.grupoDeJanelas.totalJanelas.toFloat(),
+                //looca.grupoDeProcessos.totalProcessos.toFloat(),
             )
 
-            val fkcomponentesMonitorados = listOf(1, 2, 3)
-            val fkcomponentesExistentes = listOf(4, 7, 8)
+            val fkcomponentesExistentes:MutableList<Int> = mutableListOf();
 
+            if (componentesExistentes.contains("Usb")){
+                val usb:Float = looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat();
+                dados.add(usb);
+                fkcomponentesExistentes.add(4)
+            }
+            if (componentesExistentes.contains("Janelas do Sistema")) {
+                val janelas:Float = looca.grupoDeJanelas.totalJanelas.toFloat();
+                dados.add(janelas);
+                fkcomponentesExistentes.add(7);
+            }
+            if (componentesExistentes.contains("Processos")) {
+                val processos:Float = looca.grupoDeProcessos.totalProcessos.toFloat();
+                dados.add(processos);
+                fkcomponentesExistentes.add(8);
+            }
             for (i in dados.indices) {
                 val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
                 val data = LocalDate.now()
@@ -148,14 +174,9 @@ fun main() {
                 val dado = dados[i]
                 val fkcompMoni = fkcomponentesMonitorados[i]
                 val fkcompExis = fkcomponentesExistentes[i]
-                repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquinaDado, idEmpresaDado)
+                repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquinaDadoG, idEmpresa)
             }
-
             Thread.sleep(tempo * 1000L)
             ScriptPadraoPython.pararScript()
-
         }
-
-    }
-
 }

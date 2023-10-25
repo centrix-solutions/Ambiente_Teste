@@ -11,7 +11,7 @@ object ScriptPadraoPython {
         import time
         from mysql.connector import connect
 
-        cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+        cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 
         while(True):
 

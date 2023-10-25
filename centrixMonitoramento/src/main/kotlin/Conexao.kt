@@ -7,8 +7,8 @@ object Conexao {
             if (field == null) {
                 val dataSource = BasicDataSource()
                 dataSource.url = "jdbc:mysql://localhost?serverTimezone=UTC"
-                dataSource.username = "root"
-                dataSource.password = "38762"
+                dataSource.username = "aluno"
+                dataSource.password = "sptech"
                 val novoJdbcTemplate = JdbcTemplate(dataSource)
                 field = novoJdbcTemplate
                 println("////Login no banco bem sucedido!\\\\")
