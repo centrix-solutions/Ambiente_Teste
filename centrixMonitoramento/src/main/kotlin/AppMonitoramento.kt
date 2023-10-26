@@ -168,7 +168,7 @@ fun main() {
 
             scriptPadraoPython.executarScript(arquivo)
             val atividade = looca.grupoDeJanelas.janelas[3].titulo
-            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade)
+            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
 
             val dados: MutableList<Float> = mutableListOf(
                 //looca.processador.uso.toFloat(),

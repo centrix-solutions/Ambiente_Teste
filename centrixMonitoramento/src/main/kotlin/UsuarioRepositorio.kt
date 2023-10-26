@@ -45,14 +45,25 @@ class UsuarioRepositorio {
             horaLogin
         )
     }
-    fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividade: String) {
+    fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividade: String, horaLogin: LocalDateTime) {
         jdbcTemplate.update(
             """
                 UPDATE Login
                 SET Atividade = '${atividade}'
-                WHERE idFuncionario = ${usuarioLogado.idFuncionario} and idMaquina = ${idMaq};
+                WHERE idFuncionario = ${usuarioLogado.idFuncionario} and idMaquina = ${idMaq} 
+                and idEmpresa = ${usuarioLogado.fkEmpFunc};
         """.trimIndent(),
 
+        )
+    }
+    fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogin: LocalDateTime, horaLogout: LocalDateTime){
+        jdbcTemplate.update(
+            """
+                UPDATE Login
+                SET dataHoraSaida = '${horaLogout}'
+                WHERE idFuncionario = ${usuarioLogado.idFuncionario}
+                and idMaquina = ${idMaquina} and idEmpresa = ${usuarioLogado.fkEmpFunc}
+            """.trimIndent()
         )
     }
 

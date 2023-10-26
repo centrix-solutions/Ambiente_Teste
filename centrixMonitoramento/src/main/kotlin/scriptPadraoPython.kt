@@ -96,6 +96,7 @@ object scriptPadraoPython {
     }
 
     fun executarScript(arquivo: String) {
+        pythonProcess = Runtime.getRuntime().exec("py $arquivo")
         pythonProcess = Runtime.getRuntime().exec("python $arquivo")
     }
 

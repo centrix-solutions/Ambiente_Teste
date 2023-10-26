@@ -3,7 +3,7 @@ import psutil
 import time
 from mysql.connector import connect
 
-cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 speed_test = st.Speedtest()
 
 while(True):
@@ -73,4 +73,4 @@ while(True):
     bd.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
     cnx.commit()
 
-    time.sleep(1)
+    time.sleep(20)

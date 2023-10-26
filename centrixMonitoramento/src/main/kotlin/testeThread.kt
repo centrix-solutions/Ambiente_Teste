@@ -167,12 +167,12 @@ fun main() {
 
     println("Iniciando o monitoramento....")
     var opcaoMonitoramento = true
-
+        scriptPadraoPython.executarScript(arquivo)
     val MonitoramentoThread = thread {
         while (opcaoMonitoramento) {
-            scriptPadraoPython.executarScript(arquivo)
+
             val atividade = looca.grupoDeJanelas.janelas[3].titulo
-            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade)
+            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
 
             val dados: MutableList<Float> = mutableListOf(
                 //looca.processador.uso.toFloat(),
@@ -231,6 +231,8 @@ fun main() {
                     opcaoMenu = false
                     opcaoMonitoramento = false
                     scriptPadraoPython.pararScript()
+                    val horaLogout = LocalDateTime.now()
+                    repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
                 }
 
                 2 -> {
@@ -240,6 +242,8 @@ fun main() {
 
                     opcaoMonitoramento = false
 
+                    val horaLogout = LocalDateTime.now()
+                    repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
                     exitProcess(0)
                 }
 
