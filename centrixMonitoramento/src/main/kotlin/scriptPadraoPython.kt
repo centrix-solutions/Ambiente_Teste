@@ -100,6 +100,6 @@ object scriptPadraoPython {
     }
 
     fun pararScript() {
-        pythonProcess?.destroy()
+        pythonProcess?.destroyForcibly()
     }
 }

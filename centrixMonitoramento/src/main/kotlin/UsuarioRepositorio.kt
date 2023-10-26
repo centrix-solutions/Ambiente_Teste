@@ -1,6 +1,7 @@
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import org.springframework.jdbc.core.JdbcTemplate
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 class UsuarioRepositorio {
 
@@ -30,16 +31,17 @@ class UsuarioRepositorio {
         )
         return funcionario
     }
-    fun registrarLogin(usuarioLogado: Usuario, idMaq: Int, horaLogin: LocalTime) {
+    fun registrarLogin(usuarioLogado: Usuario, idMaq: Int, maquinaSpecs:Maquina, horaLogin: LocalDateTime) {
         jdbcTemplate.update(
             """
-        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Nome, HoraLogin)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Nome, Id_do_dispositivo, dataHoraEntrada)
+        VALUES (?, ?, ?, ?, ?, ?)
         """.trimIndent(),
             usuarioLogado.idFuncionario,
             idMaq,
             usuarioLogado.fkEmpFunc,
             usuarioLogado.nome,
+            maquinaSpecs.idCPU,
             horaLogin
         )
     }
