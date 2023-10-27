@@ -328,28 +328,20 @@
                         <p>
                             Nome
                         </p>
-                        <input type="text" class="input_cadastro" id="nome">
+                        <input type="text" class="input_cadastro" id="nome_input">
                         <p>
                             Email
                         </p>
-                        <input type="text" class="input_cadastro" id="nome">
+                        <input type="text" class="input_cadastro" id="email_input">
                         <p>
                             Nivel de Acesso
                         </p>
-                        <select name="acesso" id="acesso" class="select_cadastro">
+                        <select name="acesso" id="acesso_input" class="select_cadastro">
                             <option value="nivel1">Nível 1</option>
                             <option value="nivel2">Nível 2</option>
                             <option value="nivel3">Nível 3</option>
                             <option value="nivel4">Nível 4</option>
                             <option value="nivel5">Nível 5</option>
-                        </select>
-                        <p>
-                            Turno
-                        </p>
-                        <select name="turno" id="turno" class="select_cadastro">
-                            <option value="turno1">Turno 1</option>
-                            <option value="turno2">Turno 2</option>
-                            <option value="turno3">Turno 3</option>
                         </select>
                     </div>
 
@@ -375,3 +367,30 @@
 </body>
 
 </html>
+<script>
+    var idEmpresa = sessionStorage.getItem('Empresa')
+    //criar logica pra so o admim poder cadastrar se nao da um alerta
+    // pega do session storage o nivel de acesso de quem ta logado
+    function cadastrarFuncionario() {
+
+        var nomeVar = nome_imput.value
+        var emailVar = email_input.value
+        var senhaVar = senha_input.value
+        var idEmpresaVar = idEmpresa
+        var nivelAcessoVar = acesso_input.value
+
+        return fetch("/funcionarios/cadastrarFuncionario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                fkEmpresaServer: idEmpresaVar,
+                nivelAcessoServer: nivelAcessoVar
+            })
+        });
+    }
+</script>

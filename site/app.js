@@ -12,6 +12,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuariosRouter = require("./src/routes/usuarios");
+var funcionariosRouter = require("./src/routes/funcionarios");
 var empresasRouter = require("./src/routes/empresas");
 var medidasRouter = require("./src/routes/medidas");
 var dashboardRouter = require("./src/routes/dashboard");
@@ -25,6 +26,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuariosRouter);
 app.use("/empresas", empresasRouter);
+app.use("/funcionarios", funcionariosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/dashboard", dashboardRouter);
 
