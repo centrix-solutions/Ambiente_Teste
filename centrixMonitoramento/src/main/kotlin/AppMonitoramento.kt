@@ -4,6 +4,8 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
+import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 fun main() {
 
@@ -20,10 +22,10 @@ fun main() {
     repositorioMaquina.iniciar()
     repositorioComponentes.iniciar()
     repositorioMonitoramento.iniciar()
-    var idEmpresa:Int = 0
+    var idEmpresa: Int = 0
 
     /* INICIO LOGIN */
-
+    while (true){
         while (true) {
             println(
                         " ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
@@ -42,9 +44,11 @@ fun main() {
             )
 
             println("-----login-----")
+            Thread.sleep(1 * 1000L)
             println("Digite o seu email:")
             val logarUsuarioEmail = sn.nextLine()
             println("Digite sua senha:")
+            Thread.sleep(2 * 1000L)
             val logarUsuarioSenha = sn.nextLine()
 
             val autenticado = repositorioUser.autenticarLogin(logarUsuarioEmail, logarUsuarioSenha)
@@ -86,7 +90,6 @@ fun main() {
             novaMaquina.idCPU = looca.processador.id
             novaMaquina.fkEmpMaq = usuarioLogado.fkEmpFunc
 
-
             repositorioMaquina.registrarMaquina(novaMaquina)
             val idMaquina: Int = repositorioComponentes.buscarIdMaqPorId(id)
 
@@ -111,7 +114,8 @@ fun main() {
             println("Máquina cadastrada com monitoramento padrão.....")
             Thread.sleep(2 * 1000L)
         } else println("Essa máquina já foi cadastrada")
-
+        println("")
+        Thread.sleep(1 * 1000L)
         /* FIM VERIFICAÇÃO DE MAQUINA EXISTENTE */
 
         /* INICIO BUSCA DE DADOS, COMPONENTES E IDS */
@@ -156,56 +160,120 @@ fun main() {
         /* FIM BUSCA DE DADOS, COMPONENTES E IDS */
 
         /* INICIO MONITORAMENTO */
-
+        println("")
         println("A cada quantos segundos quer obter os dados?")
         val tempo = sn.nextLine().toInt()
         val arquivo = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
 
         println("Iniciando o monitoramento....")
-
+        var opcaoMonitoramento = true
         scriptPadraoPython.executarScript(arquivo)
-        while (true) {
+        val MonitoramentoThread = thread {
+            while (opcaoMonitoramento) {
 
-            scriptPadraoPython.executarScript(arquivo)
-            val atividade = looca.grupoDeJanelas.janelas[3].titulo
-            repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
+                val atividade = looca.grupoDeJanelas.janelas[3].titulo
+                repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
 
-            val dados: MutableList<Float> = mutableListOf(
-                //looca.processador.uso.toFloat(),
-                //looca.memoria.emUso.toFloat() / (1024 * 1024),
-                //looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
-                //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesEnviados.toFloat() / (1024 * 1024),
-                //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesRecebidos.toFloat() / (1024 * 1024),
-                //looca.grupoDeJanelas.totalJanelas.toFloat(),
-                //looca.grupoDeProcessos.totalProcessos.toFloat(),
-            )
+                val dados: MutableList<Float> = mutableListOf(
+                    //looca.processador.uso.toFloat(),
+                    //looca.memoria.emUso.toFloat() / (1024 * 1024),
+                    //looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat(),
+                    //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesEnviados.toFloat() / (1024 * 1024),
+                    //looca.rede.grupoDeInterfaces.interfaces.get(0).bytesRecebidos.toFloat() / (1024 * 1024),
+                    //looca.grupoDeJanelas.totalJanelas.toFloat(),
+                    //looca.grupoDeProcessos.totalProcessos.toFloat(),
+                )
 
-            val fkcomponentesExistentes: MutableList<Int> = mutableListOf()
+                val fkcomponentesExistentes: MutableList<Int> = mutableListOf()
 
-            if (componentesExistentes.contains("Usb")) {
-                val usb: Float = looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat()
-                dados.add(usb)
-                fkcomponentesExistentes.add(4)
+                if (componentesExistentes.contains("Usb")) {
+                    val usb: Float = looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat()
+                    dados.add(usb)
+                    fkcomponentesExistentes.add(4)
+                }
+                if (componentesExistentes.contains("Janelas do Sistema")) {
+                    val janelas: Float = looca.grupoDeJanelas.totalJanelas.toFloat()
+                    dados.add(janelas)
+                    fkcomponentesExistentes.add(7)
+                }
+                if (componentesExistentes.contains("Processos")) {
+                    val processos: Float = looca.grupoDeProcessos.totalProcessos.toFloat()
+                    dados.add(processos)
+                    fkcomponentesExistentes.add(8)
+                }
+                for (i in dados.indices) {
+                    val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
+                    val data = LocalDate.now()
+                    val hora = LocalTime.now(zonaFusoHorario)
+                    val dado = dados[i]
+                    val fkcompMoni = fkcomponentesMonitorados[i]
+                    val fkcompExis = fkcomponentesExistentes[i]
+                    repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquina, idEmpresa)
+                }
+                Thread.sleep(tempo * 1000L)
             }
-            if (componentesExistentes.contains("Janelas do Sistema")) {
-                val janelas: Float = looca.grupoDeJanelas.totalJanelas.toFloat()
-                dados.add(janelas)
-                fkcomponentesExistentes.add(7)
-            }
-            if (componentesExistentes.contains("Processos")) {
-                val processos: Float = looca.grupoDeProcessos.totalProcessos.toFloat()
-                dados.add(processos)
-                fkcomponentesExistentes.add(8)
-            }
-            for (i in dados.indices) {
-                val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
-                val data = LocalDate.now()
-                val hora = LocalTime.now(zonaFusoHorario)
-                val dado = dados[i]
-                val fkcompMoni = fkcomponentesMonitorados[i]
-                val fkcompExis = fkcomponentesExistentes[i]
-                repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquina, idEmpresa)
-            }
-            Thread.sleep(tempo * 1000L)
         }
+        val MenuThread = thread {
+
+            var opcaoMenu = true
+
+            while (opcaoMenu) {
+                println(
+                    """
+            Digite....
+            1-Trocar de usuário
+            2-Encerrar o programa
+        """.trimIndent()
+                )
+                val opcao = sn.nextInt()
+                when (opcao) {
+                    1 -> {
+                        opcaoMenu = false
+                        opcaoMonitoramento = false
+                        scriptPadraoPython.pararScript()
+
+                        val horaLogout = LocalDateTime.now()
+                        val datahj = LocalDateTime.now()
+
+                        val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+
+                        val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+
+                        if (diferencaEmDias!! > 7){
+                            repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                        }
+                        repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
+                    }
+
+                    2 -> {
+                        println("Encerrando o programa...")
+
+                        scriptPadraoPython.pararScript()
+                        opcaoMonitoramento = false
+
+                        val datahj = LocalDateTime.now()
+                        val horaLogout = LocalDateTime.now()
+
+                        val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+
+                        val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+
+                        if (diferencaEmDias!! > 7){
+                            repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                        }
+
+                        repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
+
+                        exitProcess(0)
+                    }
+
+                    else -> {
+                        println("Opção inválida. Por favor, escolha uma opção válida.")
+                    }
+                }
+            }
+        }
+        MonitoramentoThread.join()
+        MenuThread.join()
     }
+}
