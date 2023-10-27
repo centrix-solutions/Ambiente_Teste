@@ -15,7 +15,7 @@ function buscarFk(cnpj) {
 }
 
 function cadastrarFuncionario(nome, email, senha, fkEmpresa) {
-  var instrucaoSql3 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkTurno) values 
+  var instrucaoSql3 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso) values 
   ('${nome}', '${email}','${senha}', ${fkEmpresa}, 1, null)`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql3);

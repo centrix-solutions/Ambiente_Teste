@@ -25,7 +25,6 @@ function autenticar(req, res) {
                         email: resultadoAutenticar[0].email,
                         senha: resultadoAutenticar[0].senha,
                         NivelAcesso: resultadoAutenticar[0].fkNivelAcesso,
-                        Turno: resultadoAutenticar[0].fkTurno,
                         Empresa: resultadoAutenticar[0].empresaId
                     });
                 } else if (resultadoAutenticar.length == 0) {
