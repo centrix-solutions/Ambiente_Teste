@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Funcionario(
     email VARCHAR(70),
     senha VARCHAR(45),
     fkEmpFunc INT,
-    CONSTRAINT fk_EmpFunc FOREIGN KEY (fkEmpFunc) REFERENCES Andar_de_trabalho(fkEmpAndar),
+    CONSTRAINT fk_EmpFunc FOREIGN KEY (fkEmpFunc) REFERENCES Empresa(idempresa),
     fkNivelAcesso INT,
     CONSTRAINT fk_Nivel_Acesso FOREIGN KEY (fkNivelAcesso) REFERENCES Niveis_de_Acesso(idNivel_Acesso),
     fkAndar INT,
