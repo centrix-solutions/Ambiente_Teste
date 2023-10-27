@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS centrix;
+DROP DATABASE IF EXISTS centrix;
 CREATE DATABASE IF NOT EXISTS centrix;
 USE centrix;
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Funcionario(
     email VARCHAR(70),
     senha VARCHAR(45),
     fkEmpFunc INT,
-    CONSTRAINT fk_EmpFunc FOREIGN KEY (fkEmpFunc) REFERENCES Andar_de_trabalho(fkEmpAndar),
+    CONSTRAINT fk_EmpFunc FOREIGN KEY (fkEmpFunc) REFERENCES Empresa(idempresa),
     fkNivelAcesso INT,
     CONSTRAINT fk_Nivel_Acesso FOREIGN KEY (fkNivelAcesso) REFERENCES Niveis_de_Acesso(idNivel_Acesso),
     fkAndar INT,
@@ -94,18 +94,16 @@ CREATE TABLE IF NOT EXISTS Monitoramento (
 );
 
 CREATE TABLE IF NOT EXISTS Login (
-	-- idLogin INT,
-    -- arrumar esse idLogin colocar auto increment sla
+    idLogin INT auto_increment,
     idFuncionario INT,
     idMaquina INT,
     idEmpresa INT,
     Nome VARCHAR(45),
     Atividade VARCHAR(255),
-    HoraLogin TIME,
     Id_do_dispositivo CHAR(16),
-    dataHoraEntrada DATETIME DEFAULT CURRENT_TIMESTAMP,
-    dataHoraSaida DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (idFuncionario, idMaquina, idEmpresa),
+    dataHoraEntrada DATETIME,
+    dataHoraSaida DATETIME,
+    PRIMARY KEY (idLogin, idFuncionario, idMaquina, idEmpresa),
     FOREIGN KEY (idFuncionario) REFERENCES Funcionario(idfuncionario),
     FOREIGN KEY (idMaquina) REFERENCES Maquinas(idMaquina),
     FOREIGN KEY (Id_do_dispositivo) REFERENCES Maquinas(Id_do_dispositivo),
@@ -165,7 +163,6 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
 
 select * from Componentes_Monitorados;
 select * from funcionario;
-select * from monitoramento;
+select * from monitoramento order by fkCompMoniExistentes;
 select * from login;
 select * from maquinas;
- 
