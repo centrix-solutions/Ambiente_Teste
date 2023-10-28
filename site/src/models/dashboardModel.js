@@ -1,7 +1,11 @@
 var database = require("../database/config");
 
 function buscarComputadores(idEmpresa, idAndar) {
-    var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
+    if (idAndar == null) {
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho IS NULL`;
+    } else {
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
+    }
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -21,10 +25,27 @@ function cadastrarFoto(cadastro) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function buscarComputadores(idEmpresa, idAndar) {
+    if (idAndar == null) {
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho IS NULL`;
+    } else {
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
+    }
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function buscarAndares(idEmpresa) {
+    
+    var instrucao = `select * from andar_de_trabalho where fkEmpAndar = ${idEmpresa};`;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     buscarComputadores,
     cadastrarAndar,
     salvarPosicaoComputadores,
-    cadastrarFoto
+    cadastrarFoto,
+    buscarAndares
 }

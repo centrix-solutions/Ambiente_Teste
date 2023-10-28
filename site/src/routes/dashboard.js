@@ -12,10 +12,6 @@ router.get("", (req, res) => {
 router.post("/cadastrarFoto", upload.single('foto'), (req, res) => {
     dashboardController.cadastrarFoto(req, res);
 })
-// upload.single('foto') vai buscar no json alguma propriedade chamada foto 
-// router.post('/cadastro', upload.single('foto'), (req, res) => {
-//     dashboardController.salvar(req, res);
-// });
 
 // FIM FOTO
 
@@ -26,9 +22,11 @@ router.post("/buscarComputadores", function (req, res) {
 router.post("/cadastrarAndar", function (req, res) {
     dashboardController.cadastrarAndar(req, res);
 })
-
 router.post("/salvarPosicaoComputadores", function (req, res) {
     dashboardController.salvarPosicaoComputadores(req, res);
+})
+router.post("/buscarAndares", function (req, res) {
+    dashboardController.buscarAndares(req, res);
 })
 
 module.exports = router;

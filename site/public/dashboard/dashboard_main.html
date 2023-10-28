@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/dashboard_main.css">
 </head>
 
-<body onload="buscarComputadores()">
+<body onload="buscarComputadores(), buscarAndares()">
     <div id="cadastroAndar_div" class="div_cadastrarAndar">
         <div class="conteudo_cadastrarAndar">
             <div class="div_tituloCadastrarAndar">
@@ -241,9 +241,7 @@
                             <div>
                                 <label for="andares">Selecione o Andar que deseja monitorar</label>
                                 <select name="andares" class="select_andares" id="andares">
-                                    <option value="vazio"></option>
-                                    <option value="andar-1">1</option>
-                                    <option value="andar-2">2</option>
+                                    <option value="andar-0">Sem Andar</option>
                                 </select>
                             </div>
                             <div>
@@ -273,15 +271,14 @@
     sessionStorage.idComputador = 0;
     var vetorIdComputador = [];
     var vetorPosicaoComputador = [];
-    var vetorIdComputador = [];
 
     async function buscarComputadores() {
         vetorIdComputador = [];
         vetorPosicaoComputador = [];
-        vetorIdComputador = [];
 
         var idEmpresaVar = sessionStorage.Empresa;
         var idAndarVar = andares.value.split('-')[1];
+        if(idAndarVar == 0) idAndarVar = null;
         try {
             var resposta = await fetch("/dashboard/buscarComputadores", {
                 method: "POST",
@@ -326,7 +323,7 @@
 
                     tableLista.appendChild(tr);
 
-                    tdId.innerHTML = `${i + 1}`;
+                    tdId.innerHTML = respostaJson[i].Id_do_dispositivo;
                     tdNome.innerHTML = respostaJson[i].Sistema_Operacional;
                     tdData.innerHTML = "?";
                     tdStatus.innerHTML = "Teste";
@@ -347,7 +344,6 @@
                         vetorPosicaoComputador.push([respostaJson[i].posicaoX, respostaJson[i].posicaoY]);
                         sessionStorage.vetorIdComputador = vetorIdComputador;
                     }
-
                     bola.addEventListener('click', function () {
                         var computadorId = sessionStorage.idComputador;
                         var idBola = this.id;
@@ -514,6 +510,33 @@
         }
         if (resposta.ok) {
             alert("Posições salvas!");
+        }
+    }
+    async function buscarAndares(){
+        var idEmpresaVar = sessionStorage.Empresa;
+        try {
+            var resposta = await fetch("/dashboard/buscarAndares", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresaVar,
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON: ', respostaJson);
+                var select = document.getElementById('andares');
+                for (let i = 0; i < respostaJson.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = respostaJson[i].num_andar;
+                    option.value = `andar-${respostaJson[i].idAndar_de_trabalho}`;
+                    select.appendChild(option);
+                }
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
         }
     }
 </script>
