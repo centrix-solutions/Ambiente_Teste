@@ -1,11 +1,11 @@
-DROP DATABASE IF EXISTS centrix;
+-- DROP DATABASE IF EXISTS centrix;
 CREATE DATABASE IF NOT EXISTS centrix;
 USE centrix;
 
 CREATE TABLE IF NOT EXISTS Niveis_de_Acesso (
     idNivel_Acesso INT PRIMARY KEY AUTO_INCREMENT,
     tipo_acesso VARCHAR(45),
-    descricao VARCHAR(500)
+    descricao VARCHAR(600)
 );
 
 INSERT INTO Niveis_de_Acesso (tipo_acesso, descricao)
