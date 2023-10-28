@@ -22,6 +22,9 @@ body{
             rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
 }
 
+.quinto {
+    background-color: blueviolet;
+}
 
 /*DIV CENTRAL*/
 .div_central{

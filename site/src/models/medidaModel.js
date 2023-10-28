@@ -182,18 +182,13 @@ function buscarProcessos(fkMaquina, fkEmpresa) {
 function buscarLogin(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT
-    L.Nome AS NomeFuncionario,
-    L.Atividade AS Atividade,
-    T.inicio AS HoraInicioTurno,
-    T.fim AS HoraFimTurno
-FROM
-    Login AS L
-JOIN
-    Turno AS T ON L.Turno = T.idPeriodo_de_Operacao
-WHERE
-    L.idEmpresa = ${fkEmpresa}
-    AND L.idMaquina = ${fkMaquina};`;
-
+    Nome AS NomeFuncionario,
+    Atividade AS Atividade,
+    Id_do_dispositivo AS idComputador,
+    DATE_FORMAT(dataHoraEntrada, '%Y-%m-%d %H:%i:%s') AS HoraInicioTurno
+    FROM Login where idEmpresa = ${fkEmpresa} and idMaquina = ${fkMaquina}
+    ORDER BY dataHoraEntrada DESC
+	LIMIT 1;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 
