@@ -269,6 +269,8 @@
     var vetorImagensAndar = [];
     var vetorPosicaoImagensAndar = [];
 
+    var maxMapaHorizontal = 0;
+    var maxMapaVertical = 0;
 
     async function buscarComputadores() {
         vetorIdComputador = [];
@@ -439,7 +441,7 @@
                     }
                     break;
                 case 39:
-                    if (horizontal < 500) {
+                    if (horizontal < maxMapaHorizontal) {
                         console.log("ok")
                         horizontal += 1;
                         vetorPosicaoComputador[posicaoComputador][0] = horizontal;
@@ -447,7 +449,7 @@
                     }
                     break;
                 case 40:
-                    if (vertical < 400) {
+                    if (vertical < maxMapaVertical) {
                         vertical += 1;
                         vetorPosicaoComputador[posicaoComputador][1] = vertical;
                         bola.style.top = vertical + 'px';
@@ -525,7 +527,7 @@
         }
     }
     async function carregarImagem(idImagem) {
-    var div_mapa = document.getElementById("div_mapa");
+    var div_mapa = document.getElementById("mapa_div");
 
     var larguraDaDiv = div_mapa.offsetWidth;
     var alturaDaDiv = div_mapa.offsetHeight;
@@ -542,6 +544,9 @@
 
     var larguraImagem = img.naturalWidth;
     var alturaImagem = img.naturalHeight;
+
+    maxMapaHorizontal = larguraImagem;
+    maxMapaVertical = alturaImagem;
 
     div_mapa.style.backgroundImage = `url(${imageURL})`;
 
