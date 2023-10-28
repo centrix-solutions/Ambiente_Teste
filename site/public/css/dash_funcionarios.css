@@ -204,7 +204,7 @@ body{
 input:focus {
     outline: none;
     border: none;
-    box-shadow: 0 0 1.5rem #360149;
+    box-shadow: 0 0 1.5rem #ffffff4d;
   }
 
 .div_cadastro select {
@@ -218,7 +218,13 @@ input:focus {
 select:focus {
     outline: none;
     border: none;
-    box-shadow: 0 0 1rem #360149;
+    box-shadow: 0 0 1rem  #ffffff4d;
+  }
+
+  option:nth-child(1), option:nth-child(2),
+  option:nth-child(3),option:nth-child(4) {
+    font-weight: bold;
+    color: black;
   }
 
   .botao_cadastrar {
@@ -233,10 +239,14 @@ select:focus {
     font-weight: bold;
   }
 
-  .div_token{
+  .div_paiToken{
     width: 100%;
     height: 5vh;
     border: none;
     border-radius: 0.5rem;
     background-color: #fcfcfc63;
+  }
+
+  .div_token{
+    padding: 0.5rem;
   }
