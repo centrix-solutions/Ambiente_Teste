@@ -54,9 +54,9 @@ function cadastrarAndar(req, res) {
 }
 function cadastrarFoto(req, res) {
     const imagem = req.file.filename;
-    const {numAndar, largAndar, compAndar} = req.body;
+    const {numAndar, largAndar, compAndar, idEmpresa} = req.body;
   
-    const cadastro = {numAndar, largAndar, compAndar, imagem};
+    const cadastro = {numAndar, largAndar, compAndar, imagem, idEmpresa};
     dashboardModel.cadastrarFoto(cadastro)
         .then(resultado => {
             res.status(201).send("Usuario criado com sucesso");

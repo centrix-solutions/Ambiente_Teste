@@ -270,15 +270,18 @@
             e.preventDefault();
         }
     });
-    const atual = document.getElementById('option1');
+    const atual = document.getElementById('option1');x
     atual.style.backgroundColor = "blueviolet";
     sessionStorage.idComputador = 0;
     var vetorIdComputador = [];
     var vetorPosicaoComputador = [];
+    var vetorIdDispositivo = [];
+
 
     async function buscarComputadores() {
         vetorIdComputador = [];
         vetorPosicaoComputador = [];
+        vetorIdDispositivo = [];
 
         var idEmpresaVar = sessionStorage.Empresa;
         var idAndarVar = andares.value.split('-')[1];
@@ -347,13 +350,14 @@
                         vetorIdComputador.push(Number(bola.id));
                         vetorPosicaoComputador.push([respostaJson[i].posicaoX, respostaJson[i].posicaoY]);
                         sessionStorage.vetorIdComputador = vetorIdComputador;
+                        vetorIdDispositivo.push(respostaJson[i].Id_do_dispositivo);
                     }
                     bola.addEventListener('click', function () {
                         var computadorId = sessionStorage.idComputador;
                         var idBola = this.id;
                         var computadorAtual = document.getElementById(idBola);
                         var descobreIdComputador = vetorIdComputador.indexOf(Number(idBola));
-                        alert(`Você clickou no computador de id ${descobreIdComputador + 1}`);
+                        alert(`Você clicou no computador de id ${vetorIdDispositivo[descobreIdComputador]}`);
                         if (computadorId == 0) {
                             computadorAtual.classList.add("azul");
                             console.log(idBola);
@@ -398,9 +402,6 @@
     function irMonitoramento(id) {
         if (id == 0) alert("Selecione um computador para monitorar"); else window.location = "dash_maquina.html";
     }
-    function irRede() {
-        alert("Tela em construção!");
-    }
     async function cadastrarAndar() {
         var numAndar = numeroAndar.value;
         var largAndar = larguraAndar.value;
@@ -429,11 +430,13 @@
         }
     }
     function cadastrarFoto() {
+        var idEmpresaVar = sessionStorage.Empresa;
         const formData = new FormData();
         formData.append('foto', foto.files[0]);
         formData.append('numAndar', numeroAndar.value);
         formData.append('largAndar', larguraAndar.value);
         formData.append('compAndar', comprimentoAndar.value);
+        formData.append('idEmpresa', idEmpresaVar);
         fetch("/dashboard/cadastrarFoto", {
             method: "POST",
             body: formData
