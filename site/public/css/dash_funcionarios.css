@@ -21,6 +21,10 @@ body{
             rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
 }
 
+.quarto {
+    background-color: blueviolet;
+}
+
 .dash_superior{
     width: 100%;
     height: fit-content;
@@ -58,22 +62,6 @@ body{
     overflow-y: scroll;
 }
 
-/* width */
-::-webkit-scrollbar {
-    width: 1vw;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1rem grey;
-    border-radius: 1rem;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: white;
-    border-radius: 1rem;
-  }
 
 .div_funcionario {
     background-color: #ac8deb5d;
@@ -106,6 +94,12 @@ body{
     background: none;
     border: black solid 1px;
 }
+
+.div_botoes select:focus {
+    outline: none;
+    border: none;
+    box-shadow: 0 0 1rem  #360149;
+  }
 
 .div_botoes button {
     width: 9vw;
@@ -215,7 +209,7 @@ input:focus {
     color: white;
 }
 
-select:focus {
+.div_cadastro select:focus {
     outline: none;
     border: none;
     box-shadow: 0 0 1rem  #ffffff4d;

@@ -8,14 +8,13 @@ body{
     margin: 0;
 }
 .container_principal{
-    height: 850px;
+    height: 150vh;
     display: flex;
 }
 .area_dash{
     height: 100%;
     width: 100%;
     color: white;
-    font-weight: bold;
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
             #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
             rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
@@ -34,31 +33,31 @@ body{
     margin-left: 80px;
 }
 .text_bemVindo1{
-    font-size: 32px;
+    font-size: 4vh;
+    font-weight: bolder;
 }
 .text_bemVindo2{
-    font-size: 20px;
+    font-size: 3vh;
 }
 .dash_perfil{
     display: flex;
     position: relative;
-    left: 20%;
-    justify-content: center;
+    left: 20rem;
 }
 .perfil_nome{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 2.5vh;
 }
 .perfil_img{
     display: flex;
     align-items: center;
-    margin-right: 35%;
 }
 .perfil_imagem{
     height: 70px;
     width: 70px;
-    background-image: url("https://media.karousell.com/media/photos/products/2022/12/2/wts_chisato_nishikigi_cos_cosp_1669995238_840334c8.jpg");
+    background-image: url("../assets/imgs/supervisoraGeral.png");
     background-size: cover;
     border-radius: 100%;
     margin: 15px;
@@ -88,9 +87,7 @@ body{
     flex-direction: column;
     justify-content: space-evenly;
 }
-.text_legenda{
-    font-size: 22px;
-}
+
 .div_bola{
     display: flex;
     align-items: center;
@@ -136,12 +133,18 @@ body{
     width: 200px;
     font-size: 20px;
 }
+
+.div_funcoes {
+    font-size: 3vh;
+}
+
 /* DIV INFERIOR */
 .div_inferior{
     margin-top: 2%;
+    padding: 2vh;
     background-color: #161717;
-    height: 250px;
-    width: 95%;
+    height: 45vh;
+    width: 93%;
     border-radius: 20px;
     margin-left: 2.5%;
     display: flex;
@@ -293,11 +296,16 @@ body{
     border-radius: 10px;
 }
 .btn_andares{
-    height: 60px;
-    width: 140px;
+    height: 5vh;
+    width: 15vw;
     background-color: #FCFCFC75;
     border: none;
-    border-radius: 10px;
+    border-radius: 1rem;
     color: white;
-    font-size: 20px;
+    font-size: 3vh;
 }
+
+.btn_andares:active {
+    outline: none;
+    box-shadow: 0 0 1.5rem #ffffff4d;
+  }

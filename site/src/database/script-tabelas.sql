@@ -164,5 +164,8 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
 select * from Componentes_Monitorados;
 select * from funcionario;
 select * from monitoramento order by fkCompMoniExistentes;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento order by fkCompMoniExistentes;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
 select * from login;
 select * from maquinas;
