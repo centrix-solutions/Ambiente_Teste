@@ -23,14 +23,6 @@
                         <span>Andar</span>
                         <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar" />
                     </div>
-                    <div class="div_cadastrarAndarInput">
-                        <span>Largura</span>
-                        <input class="input_cadastrarAndar" type="number" id="larguraAndar" name="largAndar" />
-                    </div>
-                    <div class="div_cadastrarAndarInput">
-                        <span>Comprimento</span>
-                        <input class="input_cadastrarAndar" type="number" id="comprimentoAndar" name="compAndar" />
-                    </div>
                 </div>
                 <div class="">
                     <!-- MUDAR O CSS DAQ DPS -->
@@ -39,7 +31,7 @@
                 </div>
             </div>
             <div class="div_btnCadastrarAndar">
-                <button class="btn_cadastrarAndar cursor" onclick="cadastrarFoto()">Cadastrar</button>
+                <button class="btn_cadastrarAndar cursor" onclick="cadastrarAndar()">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -244,9 +236,7 @@
                         <div class="div_andares">
                             <div>
                                 <label for="andares">Selecione o Andar que deseja monitorar</label>
-                                <select name="andares" class="select_andares" id="andares">
-                                    <option value="andar-0">Sem Andar</option>
-                                </select>
+                                <select name="andares" class="select_andares" id="andares"></select>
                             </div>
                             <div>
                                 <button class="btn_andares cursor" onclick="buscarComputadores()">
@@ -270,12 +260,14 @@
             e.preventDefault();
         }
     });
-    const atual = document.getElementById('option1');x
+    const atual = document.getElementById('option1');
     atual.style.backgroundColor = "blueviolet";
     sessionStorage.idComputador = 0;
     var vetorIdComputador = [];
     var vetorPosicaoComputador = [];
     var vetorIdDispositivo = [];
+    var vetorImagensAndar = [];
+    var vetorPosicaoImagensAndar = [];
 
 
     async function buscarComputadores() {
@@ -320,6 +312,9 @@
                 tr.appendChild(statusThead);
                 thead.appendChild(tr);
                 tableLista.appendChild(thead);
+
+                var andar = vetorPosicaoImagensAndar.indexOf(Number(idAndarVar));
+                carregarImagem(andar);
 
                 for (let i = 0; i < respostaJson.length; i++) {
                     var tr = document.createElement("tr");
@@ -402,48 +397,19 @@
     function irMonitoramento(id) {
         if (id == 0) alert("Selecione um computador para monitorar"); else window.location = "dash_maquina.html";
     }
-    async function cadastrarAndar() {
-        var numAndar = numeroAndar.value;
-        var largAndar = larguraAndar.value;
-        var compAndar = comprimentoAndar.value;
-        // const formData = new FormData();
-        // formData.append('foto', foto.files[0])
-        try {
-            var resposta = await fetch("/dashboard/cadastrarAndar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    numAndarServer: numAndar,
-                    largAndarServer: largAndar,
-                    compAndarServer: compAndar
-                })
-            });
-            if (resposta.ok) {
-                var respostaJson = await resposta.json();
-                console.log('JSON: ', respostaJson);
-                alert("Andar cadastrado com sucesso!");
-            }
-        } catch (erro) {
-            console.log("Erro: ", erro);
-        }
-    }
-    function cadastrarFoto() {
+    function cadastrarAndar() {
         var idEmpresaVar = sessionStorage.Empresa;
         const formData = new FormData();
         formData.append('foto', foto.files[0]);
         formData.append('numAndar', numeroAndar.value);
-        formData.append('largAndar', larguraAndar.value);
-        formData.append('compAndar', comprimentoAndar.value);
         formData.append('idEmpresa', idEmpresaVar);
-        fetch("/dashboard/cadastrarFoto", {
+        fetch("/dashboard/cadastrarAndar", {
             method: "POST",
             body: formData
         })
             .then(res => {
-                // window.location = "./listaGatos.html"
-                alert("foi");
+                buscarAndares();
+                alert("Andar cadastrado com sucesso!");
             })
             .catch(err => {
                 console.log(err);
@@ -520,6 +486,9 @@
         }
     }
     async function buscarAndares(){
+        vetorImagensAndar = [];
+        vetorPosicaoImagensAndar = []
+        
         var idEmpresaVar = sessionStorage.Empresa;
         try {
             var resposta = await fetch("/dashboard/buscarAndares", {
@@ -535,15 +504,52 @@
                 var respostaJson = await resposta.json();
                 console.log('JSON: ', respostaJson);
                 var select = document.getElementById('andares');
+                select.innerHTML = "";
+
+                var option = document.createElement('option');
+                option.innerHTML = "Sem Andar";
+                option.value = `andar-0`;
+                select.appendChild(option);
+
                 for (let i = 0; i < respostaJson.length; i++) {
                     var option = document.createElement('option');
                     option.innerHTML = respostaJson[i].num_andar;
                     option.value = `andar-${respostaJson[i].idAndar_de_trabalho}`;
                     select.appendChild(option);
+                    vetorImagensAndar.push(respostaJson[i].foto_andar);
+                    vetorPosicaoImagensAndar.push(respostaJson[i].idAndar_de_trabalho)
                 }
             }
         } catch (erro) {
             console.log("Erro: ", erro);
         }
     }
+    async function carregarImagem(idImagem) {
+    var div_mapa = document.getElementById("div_mapa");
+
+    var larguraDaDiv = div_mapa.offsetWidth;
+    var alturaDaDiv = div_mapa.offsetHeight;
+
+    var imagem = vetorImagensAndar[idImagem];
+    var imageURL = `../assets/andares/${imagem}`;
+
+    var img = new Image();
+    img.src = imageURL;
+
+    await new Promise((resolve) => {
+        img.onload = resolve;
+    });
+
+    var larguraImagem = img.naturalWidth;
+    var alturaImagem = img.naturalHeight;
+
+    div_mapa.style.backgroundImage = `url(${imageURL})`;
+
+    if (larguraImagem > larguraDaDiv || alturaImagem > alturaDaDiv) {
+        div_mapa.style.backgroundSize = "contain";
+    } else {
+        div_mapa.style.backgroundSize = "cover";
+    }
+}
+
 </script>
