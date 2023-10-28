@@ -3,10 +3,8 @@ var router = express.Router();
 
 var funcionarioController = require("../controllers/funcionarioController");
 
-router.post("/cadastrarfuncionario", function (req, res) {
-   funcionarioController.cadastrarfuncionario(req, res);
+router.post("/cadastrarFuncionario", function (req, res) {
+   funcionarioController.cadastrarFuncionario(req, res);
 })
-
-
 
 module.exports = router;

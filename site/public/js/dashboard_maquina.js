@@ -10,7 +10,9 @@ window.onload = function () {
     obterDadosGraficos();
     buscarDadosMonitoramento(idMaquina, idEmpresa)
 }
-
+function buscar(params) {
+    
+}
 function buscarComponentes(idMaquina, idEmpresa) {
 
     fetch("/medidas/buscarComponentes", {
@@ -306,7 +308,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    download.innerHTML = `Download: ${resposta[0].dado}mb/s`
+                    download.innerHTML = ` ${resposta[0].dado}mb/s`
 
                 });
             } else {
@@ -331,7 +333,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    usb.innerHTML = `Upload: ${resposta[0].dado}mb/s`
+                    upload.innerHTML = ` ${resposta[0].dado}mb/s`
 
                 });
             } else {
@@ -410,6 +412,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                     console.log(resposta[0])
                     nome_funcionario.innerHTML = resposta[0].NomeFuncionario
                     numero_maquina.innerHTML = idMaquina
+                    id_maquina.innerHTML = resposta[0].idComputador
                     atividade.innerHTML = resposta[0].Atividade
                     inicio_turno.innerHTML = resposta[0].HoraInicioTurno
 

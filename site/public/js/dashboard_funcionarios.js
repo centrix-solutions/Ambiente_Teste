@@ -1,37 +1,41 @@
-var idEmpresa = sessionStorage.getItem('Empresa')
-    window.onload = resetarToken;
+var idEmpresa = sessionStorage.getItem('Empresa');
+var token
 
-    //criar logica pra so o admim poder cadastrar se nao da um alerta
-    // pega do session storage o nivel de acesso de quem ta logado
+window.onload = resetarToken;
 
-    function gerarToken() {
-        const caracteres = '0123456789';
-        let token = '';
-        for (let i = 0; i < 8; i++) {
-            const aleatorizar = Math.floor(Math.random() * caracteres.length);
-            token += caracteres.charAt(aleatorizar);
-        }
-        return token;
+function gerarToken() {
+    const caracteres = '0123456789';
+    let novoToken = '';
+    for (let i = 0; i < 8; i++) {
+        const aleatorizar = Math.floor(Math.random() * caracteres.length);
+        novoToken += caracteres.charAt(aleatorizar);
     }
+    return novoToken;
+}
 
-    function resetarToken() {
+function resetarToken() {
+    token = gerarToken()
 
-        var tokenVar = gerarToken();
+    document.getElementById('divToken').innerText = 'Token: ' + token;
+}
 
-        document.getElementById('divToken').innerText = 'Token: ' + tokenVar;
-    }
+function cadastrarFuncionario() {
+    var email_input = document.getElementById('email_input').value;
 
-    
+    if (email_input.indexOf("@") < 0) {
+        spanEmail.innerHTML = "@ ausente, verifique o Email";
+        spanEmail.style.color = "#690606";
+    } else {
+        spanEmail.innerHTML = "Email válido";
+        spanEmail.style.color = "lime";
 
-    function cadastrarFuncionario() {
+        var nomeVar = nome_input.value;
+        var emailVar = email_input;
+        var senhaVar = token;
+        var idEmpresaVar = idEmpresa;
+        var nivelAcessoVar = acesso_input.value;
 
-        var nomeVar = nome_imput.value
-        var emailVar = email_input.value
-        var senhaVar = tokenVar
-        var idEmpresaVar = idEmpresa
-        var nivelAcessoVar = acesso_input.value
-
-        return fetch("/funcionarios/cadastrarFuncionario", {
+        fetch("/funcionarios/cadastrarFuncionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,5 +47,12 @@ var idEmpresa = sessionStorage.getItem('Empresa')
                 fkEmpresaServer: idEmpresaVar,
                 nivelAcessoServer: nivelAcessoVar
             })
+        })
+        .then(function(response) {
+            if (response.status === 200) {
+                location.reload();
+            } else {
+            }
         });
     }
+}
