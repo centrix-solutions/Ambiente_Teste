@@ -1,19 +1,21 @@
-*{
+* {
     font-family: Arial, Helvetica, sans-serif;
 }
-.cursor{
+
+.cursor {
     cursor: pointer;
 }
+
 body {
     margin: 0;
 }
 
-.container_principal{
+.container_principal {
     height: 120vh;
     display: flex;
 }
 
-.area_dash{
+.area_dash {
     height: 100%;
     width: 100%;
     color: white;
@@ -52,23 +54,26 @@ body {
     align-items: flex-start;
 }
 
-.dash_superior{
+.dash_superior {
     width: 100%;
     height: fit-content;
     margin-top: 20px;
     display: flex;
     align-items: center;
 }
-.bem_vindo{
+
+.bem_vindo {
     display: flex;
     flex-direction: column;
     margin-left: 80px;
 }
-.text_bemVindo1{
+
+.text_bemVindo1 {
     font-size: 4vh;
     font-weight: bolder;
 }
-.text_bemVindo2{
+
+.text_bemVindo2 {
     font-size: 3vh;
 }
 
@@ -121,10 +126,23 @@ body {
     flex-direction: column;
 }
 
-.painel input {
-    width: 90%;
-    background-color:linear-gradient(90deg, #A36BFD 0%, #6B8AEB 103.21%) ;
+.barra_painel {
+    width: 95%;
+    height: 20px;
+    border-radius: 8px;
 }
+
+progress::-webkit-progress-bar {
+    background: #3D344D;
+    border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, #A36BFD 0%, #6B8AEB 103.21%);
+    border-radius: 8px;
+}
+
+
 .painel h2 {
     margin: 0.5rem;
     /* text-align: left; */

@@ -292,6 +292,56 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
+    function buscarDownload(idMaquina, idEmpresa) {
+        fetch("/medidas/buscarDownload", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idMaquinaServer: idMaquina,
+                idEmpresaServer: idEmpresa
+            })
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+                    download.innerHTML = `Download: ${resposta[0].dado}mb/s`
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
+    function buscarUpload(idMaquina, idEmpresa) {
+        fetch("/medidas/buscarUpload", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idMaquinaServer: idMaquina,
+                idEmpresaServer: idEmpresa
+            })
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+                    usb.innerHTML = `Upload: ${resposta[0].dado}mb/s`
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
     function buscarJanelas(idMaquina, idEmpresa) {
         fetch("/medidas/buscarJanelas", {
             method: "POST",
@@ -377,6 +427,8 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
     buscarRam(idMaquina, idEmpresa)
     buscarDisco(idMaquina, idEmpresa)
     buscarUsb(idMaquina, idEmpresa)
+    buscarDownload(idMaquina, idEmpresa)
+    buscarUpload(idMaquina, idEmpresa)
     buscarLogin(idMaquina, idEmpresa)
     buscarJanelas(idMaquina, idEmpresa)
     buscarProcessos(idMaquina, idEmpresa)

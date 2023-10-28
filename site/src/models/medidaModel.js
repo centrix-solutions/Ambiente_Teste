@@ -87,6 +87,7 @@ function buscarCpu(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
 function buscarRam(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT Dado_Capturado as dado
@@ -99,6 +100,7 @@ function buscarRam(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
 function buscarDisco(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT Dado_Capturado as dado
@@ -111,6 +113,7 @@ function buscarDisco(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
 function buscarUsb(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT Dado_Capturado as dado
@@ -123,6 +126,33 @@ function buscarUsb(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
+function buscarDownload(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 5 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+function buscarUpload(fkMaquina, fkEmpresa) {
+
+    var instrucao = `SELECT Dado_Capturado as dado
+    FROM Monitoramento
+    WHERE fkCompMoniExistentes = 6 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
+    ORDER BY Data_captura DESC, Hora_captura DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
 function buscarJanelas(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT Dado_Capturado as dado
@@ -135,6 +165,7 @@ function buscarJanelas(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
 function buscarProcessos(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT Dado_Capturado as dado
@@ -147,6 +178,7 @@ function buscarProcessos(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 
 }
+
 function buscarLogin(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT
@@ -166,6 +198,7 @@ WHERE
     return database.executar(instrucao);
 
 }
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -174,6 +207,8 @@ module.exports = {
     buscarRam,
     buscarDisco,
     buscarUsb,
+    buscarDownload,
+    buscarUpload,
     buscarJanelas,
     buscarProcessos,
     buscarLogin

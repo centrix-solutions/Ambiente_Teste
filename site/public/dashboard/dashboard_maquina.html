@@ -106,11 +106,10 @@
             <div class="dash_superior">
                 <div class="bem_vindo">
                     <span class="text_bemVindo1">
-                        Funcionários
+                        Computadores
                     </span>
                     <span class="text_bemVindo2">
-                        Veja as princípais informações dos seus funcionários, cadastre e de
-                        permissões para eles.
+                        Veja as princípais informações das suas máquinas cadastradas.                    
                     </span>
                 </div>
             </div>
@@ -124,6 +123,10 @@
                     <div class="bloco_info">
                         <h2>Computador</h2>
                         <h2 class="info_status" id="numero_maquina"></h2>
+                    </div>
+                    <div class="bloco_info">
+                        <h2>ID Computador</h2>
+                        <h2 class="info_status" id="id_maquina"></h2>
                     </div>
                     <div class="bloco_info">
                         <h2>Atividade</h2>
@@ -143,24 +146,24 @@
                             <div class="area_barra">
                                 <h3>Uso de CPU</h3>
                                 <h2 id="cpu"></h2>
-                                <input class="barra_painel" type="range" value="80" id="barra_cpu" disabled>
+                                <progress class="barra_painel"  max="100" value="60" id="barra_cpu">
                             </div>
                             <div class="area_barra">
                                 <h3>Uso de RAM</h3>
                                 <h2 id="ram"></h2>
-                                <input class="barra_painel" type="range" value="80" id="barra_ram" disabled>
+                                <progress class="barra_painel" max="100" value="90" id="barra_ram">
                             </div>
                             <div class="area_barra">
                                 <h3>Uso de Disco</h3>
                                 <h2 id="disco"></h2>
-                                <input class="barra_painel" type="range" value="49" id="barra_disco" disabled>
+                                <progress class="barra_painel" max="100" value="49" id="barra_disco">
                             </div>
                         </div>
                     </div>
                     <div class="area_meio_direita">
                         <div class="kpi">
-                            <h3>Velocidade da Rede</h3>
-                            <h4>Dowload:<span id="dowload"></span></h4>
+                            <h3>Velocidade de  Rede</h3>
+                            <h4>Download:<span id="download"></span></h4>
                             <h4>Upload:<span id="upload"></span></h4>
                             <img src="../assets/icon/wifi.png" alt="" class="img_wifi">
                         </div>

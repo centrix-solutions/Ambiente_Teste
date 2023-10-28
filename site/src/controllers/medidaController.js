@@ -138,6 +138,7 @@ function buscarDisco(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
 function buscarUsb(req, res) {
 
     var fkMaquina = req.body.idMaquinaServer
@@ -157,6 +158,47 @@ function buscarUsb(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function buscarDownload(req, res) {
+
+    var fkMaquina = req.body.idMaquinaServer
+    var fkEmpresa = req.body.idEmpresaServer
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarDownload(fkMaquina, fkEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os ultimos dados de velocidade de download.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUpload(req, res) {
+
+    var fkMaquina = req.body.idMaquinaServer
+    var fkEmpresa = req.body.idEmpresaServer
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarUpload(fkMaquina, fkEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os ultimos dados de velocidade de upload.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarJanelas(req, res) {
 
     var fkMaquina = req.body.idMaquinaServer
@@ -222,6 +264,8 @@ module.exports = {
     buscarRam,
     buscarDisco,
     buscarUsb,
+    buscarDownload,
+    buscarUpload,
     buscarJanelas,
     buscarProcessos,
     buscarLogin,

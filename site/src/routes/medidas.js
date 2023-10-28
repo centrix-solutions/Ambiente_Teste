@@ -31,6 +31,14 @@ router.post("/buscarUsb", function (req, res) {
     medidaController.buscarUsb(req, res);
 });
 
+router.post("/buscarDownload", function (req, res) {
+    medidaController.buscarDownload(req, res);
+});
+
+router.post("/buscarUpload", function (req, res) {
+    medidaController.buscarUpload(req, res);
+});
+
 router.post("/buscarJanelas", function (req, res) {
     medidaController.buscarJanelas(req, res);
 });
