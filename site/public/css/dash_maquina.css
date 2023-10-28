@@ -9,7 +9,7 @@ body {
 }
 
 .container_principal{
-    height: 110vh;
+    height: 120vh;
     display: flex;
 }
 
@@ -25,16 +25,15 @@ body {
 
 .card_monitoramento {
     width: 90%;
-    height: 95vh;
+    height: 100%;
     background-color: rgba(36, 36, 36, 1);
-    margin-top: 10vh;
+    margin: 3rem;
     position: absolute;
-    top: 50%;
+    top: 58%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    margin-left: 3.5%;
     border-radius: 40px;
 }
 
@@ -96,7 +95,7 @@ body {
 }
 
 .area_meio {
-    height: 45%;
+    height: 50%;
     display: flex;
     flex-direction: row;
 }
@@ -105,7 +104,6 @@ body {
     width: 50%;
     display: flex;
     flex-direction: row;
-    
 }
 
 .painel {
@@ -113,12 +111,13 @@ body {
     margin-left: 70px;
     color: white;
     border-right: 1px solid #ccc;
+    height: 45vh;
 }
 
 .area_barra {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+    height: 14vh;
     flex-direction: column;
 }
 
@@ -141,10 +140,10 @@ body {
 }
 
 .area_meio_direita {
-    width: 65%;
+    width: 70%;
     display: flex;
     flex-direction: row;
-    margin: 20px;
+    margin: 1rem;
 }
 
 .kpi {
@@ -162,7 +161,7 @@ body {
 }
 
 .area_inferior {
-    height: 100%;
+    height: 50vh;
     display: flex;
     justify-content: space-around;
 }
