@@ -1,6 +1,22 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.cursor{
+    cursor: pointer;
+}
 body {
     margin: 0;
-    height: 100vh;
+}
+
+.container_principal{
+    height: 110vh;
+    display: flex;
+}
+
+.area_dash{
+    height: 100%;
+    width: 100%;
+    color: white;
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
             #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
             rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
@@ -8,9 +24,10 @@ body {
 }
 
 .card_monitoramento {
-    width: 90vw;
+    width: 90%;
     height: 95vh;
     background-color: rgba(36, 36, 36, 1);
+    margin-top: 10vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -18,23 +35,42 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 3.5%;
-    margin-right: 3.5%;
     border-radius: 40px;
 }
 
 .info {
-    width: 92%;
-    margin: auto;
-    height: 15%;
+    width: 90%;
     display: flex;
-    margin-top: 1%;
+    position: relative;
+    align-self: center;
+    margin: 1rem;
     background-color: #3C375C;
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04), 0px 2px 6px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.06), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: white;
-    border-radius: 28px;
+    border-radius: 1rem;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
+}
+
+.dash_superior{
+    width: 100%;
+    height: fit-content;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+.bem_vindo{
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+}
+.text_bemVindo1{
+    font-size: 4vh;
+    font-weight: bolder;
+}
+.text_bemVindo2{
+    font-size: 3vh;
 }
 
 .info h2 {
@@ -78,25 +114,30 @@ body {
     color: white;
     border-right: 1px solid #ccc;
 }
+
+.area_barra {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+}
+
 .painel input {
-    width: 50%;
+    width: 90%;
+    background-color:linear-gradient(90deg, #A36BFD 0%, #6B8AEB 103.21%) ;
 }
 .painel h2 {
-    margin: 10px;
-    text-align: left;
+    margin: 0.5rem;
+    /* text-align: left; */
     color: #FFF;
-    font-size: 20px;
-    font-style: normal;
+    font-size: 3vh;
     font-weight: 500;
-    line-height: normal;
 }
 
 .painel h3 {
     color: #FFF;
-    font-size: 16px;
-    font-style: normal;
+    font-size: 2vh;
     font-weight: 500;
-    line-height: normal;
 }
 
 .area_meio_direita {
