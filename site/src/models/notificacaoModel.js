@@ -1,11 +1,36 @@
 var database = require("../database/config")
 
-function enviarAlerta(idFuncionario) {
-    var instrucao = `UPDATE Funcionario SET notificacao = 'S' WHERE idfuncionario = ${idFuncionario}`;
+function enviarAlerta(idFuncionario, nomeFuncionario) {
+    var instrucao = `UPDATE Funcionario SET notificacao = '${nomeFuncionario}' WHERE idfuncionario = ${idFuncionario}`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function verificarAlerta(idFuncionario) {
+    var instrucao = `SELECT notificacao FROM Funcionario WHERE idFuncionario = ${idFuncionario}`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function retirarAlerta(idFuncionario) {
+    var instrucao = `UPDATE Funcionario SET notificacao = '' WHERE idfuncionario = ${idFuncionario}`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function verificaNotificacao(idEmpresa) {
+    var instrucao = `SELECT * FROM Notificacao WHERE FKEmpNot = ${idEmpresa}`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function retirarNotificacao(idDispositivo) {
+    var instrucao = `DELETE FROM Notificacao WHERE idDispositivo = ${idDispositivo}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 module.exports = {
-    enviarAlerta
+    enviarAlerta,
+    verificarAlerta,
+    retirarAlerta,
+    verificaNotificacao,
+    retirarNotificacao
 };

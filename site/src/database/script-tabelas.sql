@@ -22,9 +22,15 @@ CREATE TABLE IF NOT EXISTS Empresa(
     Responsavel_legal VARCHAR(45),
     CEP CHAR(9),
     numero INT,
-    complemento VARCHAR(45),
-    fkSede INT,
-    CONSTRAINT fk_Sede FOREIGN KEY (fkSede) REFERENCES Empresa(idempresa)
+    complemento VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS Notificacao(
+    idNotificacao INT PRIMARY KEY AUTO_INCREMENT,
+    idDispositivo CHAR(36) UNIQUE,
+    Funcionario_Solicitante VARCHAR(70),
+    fkEmpNot INT,
+    CONSTRAINT fkEmpNot FOREIGN KEY (fkEmpNot) REFERENCES Empresa(idempresa)
 );
 
 CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
