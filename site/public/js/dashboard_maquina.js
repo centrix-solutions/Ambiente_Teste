@@ -1,14 +1,9 @@
 var idEmpresa = Number(sessionStorage.getItem('Empresa'));
-var idMaquina = 1;
+var idMaquina = Number(sessionStorage.getItem('vetorIdComputador'));
 var vetoridComponentes = [];
 var vetorValor = [];
 
-window.onload = function () {
-    console.log(idEmpresa);
-    buscarComponentes(idMaquina, idEmpresa);
-    obterDadosGraficos();
-    buscarDadosMonitoramento(idMaquina, idEmpresa);
-};
+
 
 function buscarComponentes(idMaquina, idEmpresa) {
     fetch("/medidas/buscarComponentes", {
@@ -50,7 +45,7 @@ function obterDadosGraficos() {
 }
 
 function obterDadosGrafico(idMaquina, chartId) {
-
+    
     const labels = [];
     const data = [];
 
@@ -224,11 +219,12 @@ function obterDadosGraficoRAM(idMaquina, chartId) {
                 }
             })
             .then((novoRegistro) => {
-                const totalRAMGB = Math.round(vetorValor[2]/ 1024) 
+                
+                const totalRAMGB = vetorValor[2]
                 console.log(totalRAMGB)
                 const usoRAMGB = novoRegistro[0].ram; 
 
-                const usoRAMPercent = Math.round((usoRAMGB / totalRAMGB) * 100);
+                const usoRAMPercent = (usoRAMGB / totalRAMGB) * 100;
 
                 const momento = novoRegistro[0].momento_grafico;
                 if (momento !== labels[labels.length - 1]) {
@@ -285,8 +281,8 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    cpu.innerHTML = `${resposta[0].dado.toFixed(2)}%`
-                    barra_cpu.value = resposta[0].dado.toFixed(2)
+                    cpu.innerHTML = `${resposta[0].dado}%`
+                    barra_cpu.value = Number(resposta[0].dado).toFixed(2)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -312,8 +308,9 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 response.json().then(function (resposta) {
 
                     var ramAtual = resposta[0].dado
+                    console.log(ramAtual)
                     var ramTotal = vetorValor[2]
-                    ramTotal = ramTotal / 1024;
+                    console.log(ramTotal)
 
                     porcentagemUsoRam = Number((ramAtual / ramTotal) * 100).toFixed(2)
 
@@ -346,7 +343,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
 
                     var discoAtual = resposta[0].dado
                     var discoTotal = vetorValor[1]
-                    discoTotal = discoTotal / 1024;
+                    discoTotal = Number(discoTotal).toFixed(2);
 
                     console.log(discoAtual)
                     console.log(discoTotal)

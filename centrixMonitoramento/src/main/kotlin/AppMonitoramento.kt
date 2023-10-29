@@ -95,8 +95,8 @@ fun main() {
 
             val valores = listOf(
                 100.0, //cpu 1
-                looca.grupoDeDiscos.tamanhoTotal.toDouble() / (1024 * 1024), //disco 2
-                looca.memoria.total.toDouble() / (1024 * 1024), //ram 3
+                looca.grupoDeDiscos.tamanhoTotal.toDouble() / 1000000000, //disco 2
+                looca.memoria.total.toDouble() / 1000000000,//ram 3
                 looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toDouble(), //usb 4
                 0.0, // taxa_dowload 5
                 0.0, // taxa_upload 6
@@ -124,20 +124,22 @@ fun main() {
         val maquinaSpecs = Maquina()
 
         maquinaSpecs.SO = looca.sistema.sistemaOperacional
-        maquinaSpecs.DISCO = looca.grupoDeDiscos.tamanhoTotal.toDouble() / (1024 * 1024)
+        maquinaSpecs.DISCO = looca.grupoDeDiscos.tamanhoTotal.toDouble() / 1000000000
         maquinaSpecs.idCPU = looca.processador.id
-        maquinaSpecs.RAM = looca.memoria.total.toDouble() / (1024 * 1024)
+        maquinaSpecs.RAM = looca.memoria.total.toDouble() / 1000000000
         maquinaSpecs.CPU = looca.processador.nome
 
+        val ram = maquinaSpecs.RAM
+        val disco = maquinaSpecs.DISCO
         println(
             """
-        Especificações do seu computador:
-        ID: ${maquinaSpecs.idCPU}.
-        SO: ${maquinaSpecs.SO}.
-        CPU: ${maquinaSpecs.CPU}.
-        RAM: ${maquinaSpecs.RAM}GB.
-        DISCO: ${maquinaSpecs.DISCO}GB.
-    """.trimIndent()
+            Especificações do seu computador:
+            ID: ${maquinaSpecs.idCPU}.
+            SO: ${maquinaSpecs.SO}.
+            CPU: ${maquinaSpecs.CPU}.
+            RAM: %.2f GB.
+            DISCO: %.2f GB.
+            """.trimIndent().format(ram, disco)
         )
         val horaLogin = LocalDateTime.now()
 
