@@ -3,7 +3,7 @@ import psutil
 import time
 from mysql.connector import connect
 
-cnx = connect(user='root', password='#Gf53359131851', host='localhost', database='centrix')
+cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 speed_test = st.Speedtest()
 
 while(True):
