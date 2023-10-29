@@ -17,7 +17,7 @@
 
 <body onload="buscarAndares()">
     <div class="container_principal">
-        <div class="barra_lateral">0
+        <div class="barra_lateral">
             <a href="dashboard_main.html">
                 <div id="option1" class="barraLateral_option cursor primeiro">
                     <img src="../assets/imgs/casinhaCinza.png" alt="home">
@@ -128,7 +128,9 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Andar</h2>
-                        <select name="andares" class="select_andares" id="andares"></select>
+                        <select name="andares" class="select_andares" id="andares">
+                            <option value="andar-0">Sem andar</option>
+                        </select>
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
@@ -137,7 +139,7 @@
                         </select>
                     </div>
                     <div class="bloco_info">
-                        <h2>ID Computador</h2>
+                        <h2>ID</h2>
                         <h2 class="info_status idComputador" id="id_maquina"></h2>
                     </div>
                     <div class="bloco_info">
