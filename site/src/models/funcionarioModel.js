@@ -1,14 +1,14 @@
 var database = require("../database/config");
 
-function cadastrarFuncionario(nome, email, senha, fkEmpresa, nivelAcesso) {
-  var instrucaoSql1 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso) values 
-  ('${nome}', '${email}','${senha}', ${fkEmpresa}, ${nivelAcesso})`;
+function cadastrarFuncionario(nome, email, senha, fkEmpresa, nivelAcesso, fkAndar) {
+  var instrucaoSql1 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar) values 
+  ('${nome}', '${email}','${senha}', ${fkEmpresa}, ${nivelAcesso}, ${fkAndar})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql1);
   return database.executar(instrucaoSql1);
 }
 function buscarFuncionarios(idEmpresa) {
-  var instrucao = `SELECT Login.idLogin AS idLogin, Funcionario.idFuncionario as idFuncionario, Funcionario.nome AS nome, Funcionario.email AS email, fkNivelAcesso AS nivelAcesso, Login.Id_do_dispositivo AS idDispositivo, Login.dataHoraSaida AS atividade FROM funcionario JOIN Login ON Funcionario.idFuncionario = Login.idFuncionario WHERE idEmpresa = ${idEmpresa} ORDER BY idLogin DESC`;
+  var instrucao = `SELECT Login.idLogin AS idLogin, Funcionario.idFuncionario as idFuncionario, Funcionario.nome AS nome, Funcionario.email AS email, Funcionario.fkNivelAcesso AS nivelAcesso, Funcionario.fkAndar AS fkAndar, Login.Id_do_dispositivo AS idDispositivo,  Login.dataHoraEntrada AS dataHoraEntrada, Login.dataHoraSaida AS dataHoraSaida FROM funcionario LEFT JOIN Login ON Funcionario.idFuncionario = Login.idFuncionario WHERE Funcionario.fkEmpFunc = ${idEmpresa};`;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
 }

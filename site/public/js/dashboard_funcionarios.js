@@ -22,6 +22,7 @@ function resetarToken() {
 function cadastrarFuncionario() {
     var email_input = document.getElementById('email_input').value;
 
+
     if (email_input.indexOf("@") < 0) {
         spanEmail.innerHTML = "@ ausente, verifique o Email";
         spanEmail.style.color = "#690606";
@@ -34,6 +35,12 @@ function cadastrarFuncionario() {
         var senhaVar = token;
         var idEmpresaVar = idEmpresa;
         var nivelAcessoVar = acesso_input.value;
+        var fkAndarVar = andares.value;
+        fkAndarVar = Number(fkAndarVar.split('-')[1]);
+
+        if (fkAndarVar == 0) {
+            fkAndarVar = null;
+        }
 
         fetch("/funcionarios/cadastrarFuncionario", {
             method: "POST",
@@ -45,7 +52,8 @@ function cadastrarFuncionario() {
                 emailServer: emailVar,
                 senhaServer: senhaVar,
                 fkEmpresaServer: idEmpresaVar,
-                nivelAcessoServer: nivelAcessoVar
+                nivelAcessoServer: nivelAcessoVar,
+                fkAndarServer: fkAndarVar
             })
         })
         .then(function(response) {

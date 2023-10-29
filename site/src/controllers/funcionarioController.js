@@ -7,6 +7,7 @@ function cadastrarFuncionario(req, res) {
   var senha = req.body.senhaServer
   var fkEmpresa = req.body.fkEmpresaServer
   var nivelAcesso = req.body.nivelAcessoServer
+  var fkAndar = req.body.fkAndarServer
 
   if (nome == undefined) {
     res.status(400).send("Seu nome está undefined!");
@@ -19,7 +20,7 @@ function cadastrarFuncionario(req, res) {
   } else if (fkEmpresa == undefined) {
     res.status(400).send("Seu fkEmpresa está undefined!");
   } else {
-    funcionarioModel.cadastrarFuncionario(nome, email, senha, fkEmpresa, nivelAcesso)
+    funcionarioModel.cadastrarFuncionario(nome, email, senha, fkEmpresa, nivelAcesso, fkAndar)
       .then(
         function (resultado) {
           res.json(resultado);
@@ -94,7 +95,7 @@ function mudarAndar(req, res) {
   if (idFuncionario == undefined || andar == undefined) {
       res.status(400).send("idFuncionario ou andar está undefined!");
   } else {
-    funcionarioModel.mudarNivelAcesso(idFuncionario, andar)
+    funcionarioModel.mudarAndar(idFuncionario, andar)
           .then(
               function (resultado) {
                   res.json(resultado);
