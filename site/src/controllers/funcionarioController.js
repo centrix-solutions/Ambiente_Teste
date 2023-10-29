@@ -37,6 +37,83 @@ function cadastrarFuncionario(req, res) {
   }
 
 }
+function buscarFuncionarios(req, res) {
+
+  var idEmpresa = req.body.idEmpresaServer;
+
+  if (idEmpresa == undefined) {
+      res.status(400).send("idEmpresa está undefined!");
+  } else {
+    funcionarioModel.buscarFuncionarios(idEmpresa)
+          .then(
+              function (resultado) {
+                  res.json(resultado);
+              }
+          ).catch(
+              function (erro) {
+                  console.log(erro);
+                  console.log(
+                      "\nHouve um erro ao buscar funcionários Erro: ",
+                      erro.sqlMessage
+                  );
+                  res.status(500).json(erro.sqlMessage);
+              }
+          );
+  }
+}
+function mudarNivelAcesso(req, res) {
+
+  var idFuncionario = req.body.idFuncionarioServer;
+  var tipo = req.body.tipoServer;
+
+  if (idFuncionario == undefined || tipo == undefined) {
+      res.status(400).send("idFuncionario ou tipo está undefined!");
+  } else {
+    funcionarioModel.mudarNivelAcesso(idFuncionario, tipo)
+          .then(
+              function (resultado) {
+                  res.json(resultado);
+              }
+          ).catch(
+              function (erro) {
+                  console.log(erro);
+                  console.log(
+                      "\nHouve um erro ao buscar funcionários Erro: ",
+                      erro.sqlMessage
+                  );
+                  res.status(500).json(erro.sqlMessage);
+              }
+          );
+  }
+}
+function mudarAndar(req, res) {
+
+  var idFuncionario = req.body.idFuncionarioServer;
+  var andar = req.body.andarServer;
+
+  if (idFuncionario == undefined || andar == undefined) {
+      res.status(400).send("idFuncionario ou andar está undefined!");
+  } else {
+    funcionarioModel.mudarNivelAcesso(idFuncionario, andar)
+          .then(
+              function (resultado) {
+                  res.json(resultado);
+              }
+          ).catch(
+              function (erro) {
+                  console.log(erro);
+                  console.log(
+                      "\nHouve um erro ao buscar funcionários Erro: ",
+                      erro.sqlMessage
+                  );
+                  res.status(500).json(erro.sqlMessage);
+              }
+          );
+  }
+}
 module.exports = {
-  cadastrarFuncionario
+  cadastrarFuncionario,
+  buscarFuncionarios,
+  mudarNivelAcesso,
+  mudarAndar
 }

@@ -3,7 +3,7 @@ var notificacaoModel = require("../models/notificacaoModel");
 function enviarAlerta(req, res) {
 
     var idFuncionario = req.body.idFuncionarioServer;
-    var nomeFuncionario = req.body.idFuncionarioServer;
+    var nomeFuncionario = req.body.nomeFuncionarioServer;
 
     if (idFuncionario == undefined || nomeFuncionario == undefined) {
         res.status(400).send("idFuncionario ou nomeFuncionario está undefined!");
@@ -17,7 +17,7 @@ function enviarAlerta(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
+                        "\nHouve um erro ao enviar o alerta Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -41,7 +41,7 @@ function verificarAlerta(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
+                        "\nHouve um erro ao verificar o alerta Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -65,7 +65,7 @@ function retirarAlerta(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
+                        "\nHouve um erro ao retirar o alerta Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -79,7 +79,7 @@ function verificaNotificacao(req, res) {
     var idEmpresa = req.body.idEmpresaServer;
 
     if (idEmpresa == undefined) {
-        res.status(400).send("idFuncionarioo está undefined!");
+        res.status(400).send("idEmpresa está undefined!");
     } else {
         notificacaoModel.verificaNotificacao(idEmpresa)
             .then(
@@ -90,7 +90,7 @@ function verificaNotificacao(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
+                        "\nHouve um erro ao verificar as notificações Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -100,12 +100,12 @@ function verificaNotificacao(req, res) {
 }
 function retirarNotificacao(req, res) {
 
-    var idDispositivo = req.body.idDispositivoServer;
+    var idEmpresa = req.body.idEmpresaServer;
 
-    if (idDispositivo == undefined) {
-        res.status(400).send("idFuncionarioo está undefined!");
+    if (idEmpresa == undefined) {
+        res.status(400).send("idEmpresa está undefined!");
     } else {
-        notificacaoModel.retirarNotificacao(idDispositivo)
+        notificacaoModel.retirarNotificacao(idEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -114,7 +114,7 @@ function retirarNotificacao(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
+                        "\nHouve um erro ao retirar a notificação Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);

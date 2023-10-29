@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS Funcionario(
     nome VARCHAR(70),
     email VARCHAR(70),
     senha VARCHAR(45),
+    notificacao VARCHAR(70),
     fkEmpFunc INT,
     CONSTRAINT fk_EmpFunc FOREIGN KEY (fkEmpFunc) REFERENCES Empresa(idempresa),
     fkNivelAcesso INT,
@@ -147,7 +148,15 @@ VALUES
     ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B', 2),
     ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C', 3);
     
-insert into andar_de_trabalho values (1,10,10,10,'a',1);
+/*
+insert into Maquinas values
+	(null, "Windows", "abc", 0, 0, 1, null),
+    (null, "Linux", "def", 0, 0, 1, null),
+    (null, "MacOs", "xyz", 0, 0, 1, null),
+	(null, "Oracle", "sim", 0, 0, 1, null);
+    
+update maquinas set fkAndarDeTrabalho = 2 where idMaquina = 2;
+*/
     
 INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar)
 VALUES

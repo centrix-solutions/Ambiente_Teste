@@ -6,7 +6,7 @@ function enviarAlerta(idFuncionario, nomeFuncionario) {
     return database.executar(instrucao);
 }
 function verificarAlerta(idFuncionario) {
-    var instrucao = `SELECT notificacao FROM Funcionario WHERE idFuncionario = ${idFuncionario}`;
+    var instrucao = `SELECT notificacao FROM Funcionario WHERE idfuncionario = ${idFuncionario}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -21,8 +21,8 @@ function verificaNotificacao(idEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function retirarNotificacao(idDispositivo) {
-    var instrucao = `DELETE FROM Notificacao WHERE idDispositivo = ${idDispositivo}`;
+function retirarNotificacao(idEmpresa) {
+    var instrucao = `DELETE FROM Notificacao WHERE fkEmpNot = ${idEmpresa}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

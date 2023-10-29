@@ -1,6 +1,5 @@
-async function enviarAlerta() {
-    var idFuncionario = 1;
-    var nomeFuncionario = sessionStorage.nomeFuncionario;
+async function enviarAlerta(idFuncionario) {
+    var nomeFuncionario = sessionStorage.nome;
     try {
         var resposta = await fetch("/notificacao/enviarAlerta", {
             method: "POST",
@@ -22,7 +21,7 @@ async function enviarAlerta() {
     }
 }
 async function verificarAlerta(){
-    var idFuncionario = 1;
+    var idFuncionario = sessionStorage.id;
     try {
         var resposta = await fetch("/notificacao/verificarAlerta", {
             method: "POST",
@@ -35,9 +34,85 @@ async function verificarAlerta(){
         });
         if (resposta.ok) {
             var respostaJson = await resposta.json();
+            console.log('JSON Alerta: ', respostaJson);
+            var nomeNotificacao = respostaJson[0].notificacao;
+            var nomeFuncionario = sessionStorage.nome;
+            if (respostaJson[0].notificacao != '') {
+                alert(`Olá ${nomeFuncionario}, parece que você está trabalhando a muito tempo e o seu turno acabou, por favor encerre as atividades. \r\n Ass: ${nomeNotificacao}`);
+                retirarAlerta();
+            }
+        }
+    } catch (erro) {
+        console.log("Erro: ", erro);
+    }
+}
+async function retirarAlerta(){
+    var idFuncionario = sessionStorage.id;
+    try {
+        var resposta = await fetch("/notificacao/retirarAlerta", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idFuncionarioServer: idFuncionario
+            })
+        });
+        if (resposta.ok) {
+            var respostaJson = await resposta.json();
             console.log('JSON: ', respostaJson);
         }
     } catch (erro) {
         console.log("Erro: ", erro);
     }
 }
+async function verificaNotificacao(){
+    var idEmpresa = sessionStorage.Empresa;
+    try {
+        var resposta = await fetch("/notificacao/verificaNotificacao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa
+            })
+        });
+        if (resposta.ok) {
+            var respostaJson = await resposta.json();
+            console.log('JSON Notificação: ', respostaJson);
+            for (let i = 0; i < respostaJson.length; i++) {
+                var idDispositivo = respostaJson[i].idDispositivo
+                var funcionario = respostaJson[i].Funcionario_Solicitante
+                alert(`Novo computador cadastrado no sistema!\r\nidDispositivo: ${idDispositivo}\r\nFuncionário:${funcionario}`);
+            }
+            retirarNotificacao();//caso não de certo, trocar para deletar por idDispositvo e colocar isso no for ^!
+        }
+    } catch (erro) {
+        console.log("Erro: ", erro);
+    }
+}
+async function retirarNotificacao(){
+    var idEmpresa = sessionStorage.Empresa;
+    try {
+        var resposta = await fetch("/notificacao/retirarAlerta", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa
+            })
+        });
+        if (resposta.ok) {
+            var respostaJson = await resposta.json();
+            console.log('JSON: ', respostaJson);
+        }
+    } catch (erro) {
+        console.log("Erro: ", erro);
+    }
+}
+window.addEventListener('load', function() {
+    verificarAlerta();
+    verificaNotificacao();
+});
