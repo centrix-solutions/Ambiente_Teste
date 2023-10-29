@@ -108,12 +108,10 @@ body {
     text-overflow: ellipsis;
 }
 
-.andar{
-    width: 5vw;
-}
+
 
 .computador {
-    width: 5vw;
+    width: 8vw;
 }
 
 .idComputador {
@@ -128,6 +126,22 @@ body {
     width: 12vw;
 }
 
+.select_andares {
+
+    width: 8vw;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.49);
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    border: black solid 1px;
+}
+.select_andares:hover{
+    cursor: pointer;
+}
+
 .bloco_info button {
     display: flex;
     justify-content: center;
@@ -140,14 +154,17 @@ body {
     color: white;
     font-weight: bolder;
     border: black solid 1px;
-    margin-top: 2vh;
+    
 }
 
 .botao_deletar :active {
     box-shadow: 0 0 1rem #5A34A9;
 }
 
-.bloco_info button {
+.botao_deletar:hover{
+    cursor: pointer;
+}
+/* .bloco_info button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,7 +177,7 @@ body {
     font-weight: bolder;
     border: black solid 1px;
     margin-top: 2vh;
-}
+} */
 
 .botao_deletar :active {
     box-shadow: 0 0 1rem #5A34A9;
