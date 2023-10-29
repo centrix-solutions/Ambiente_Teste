@@ -8,29 +8,28 @@ function buscarComponentes(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 }
 
-function buscarUltimasMedidas(idMaquina, limite_linhas) {
+function buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas) {
 
     instrucaoSql = ''
-    idMaquina = 1
+    
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select top ${limite_linhas}
                         Dado_Capturado AS cpu, 
                         Hora_captura,
                         as momento_grafico
                     from Monitoramento
-                    where fkMaqCompMoni = ${idMaquina}
+                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
                     order by idMonitoramento desc`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         const limite_linhas = 7
-        const idMaquina = 1
         instrucaoSql = `select 
                         Dado_Capturado as cpu, 
                         Hora_captura
                         as momento_grafico
                     from  Monitoramento
-                    where fkMaqCompMoni = ${idMaquina}
+                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
                     order by idMonitoramento desc limit ${limite_linhas}`;
 
 
@@ -43,10 +42,43 @@ function buscarUltimasMedidas(idMaquina, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idMaquina) {
+function buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas) {
 
     instrucaoSql = ''
-    idMaquina = 1
+    
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}
+                        Dado_Capturado AS cpu, 
+                        Hora_captura,
+                        as momento_grafico
+                    from Monitoramento
+                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+                    order by idMonitoramento desc`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        const limite_linhas = 7
+        instrucaoSql = `select 
+                        Dado_Capturado as cpu, 
+                        Hora_captura
+                        as momento_grafico
+                    from  Monitoramento
+                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+                    order by idMonitoramento desc limit ${limite_linhas}`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa) {
+
+    instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT TOP 1
@@ -54,7 +86,7 @@ function buscarMedidasEmTempoReal(idMaquina) {
         Hora_captura AS momento_grafico,  
         fkMaqCompMoni
         FROM Monitoramento
-        WHERE fkMaqCompMoni = ${idMaquina}
+        where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
         ORDER BY idMonitoramento DESC;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -62,7 +94,7 @@ function buscarMedidasEmTempoReal(idMaquina) {
         Dado_Capturado AS cpu,
         Hora_captura as momento_grafico, 
         fkMaqCompMoni
-             from Monitoramento where fkMaqCompMoni = ${idMaquina}
+             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
                    order by idMonitoramento desc limit 1`;
 
     } else {
@@ -74,6 +106,35 @@ function buscarMedidasEmTempoReal(idMaquina) {
     return database.executar(instrucaoSql);
 }
 
+function buscarMedidasEmTempoRealRAM(idMaquina, idEmpresa) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT TOP 1
+        Dado_Capturado AS ram,
+        Hora_captura AS momento_grafico,  
+        fkMaqCompMoni
+        FROM Monitoramento
+        where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+        ORDER BY idMonitoramento DESC;`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select 
+        Dado_Capturado AS ram,
+        Hora_captura as momento_grafico, 
+        fkMaqCompMoni
+             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+                   order by idMonitoramento desc limit 1`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 function buscarCpu(fkMaquina, fkEmpresa) {
 
@@ -195,8 +256,10 @@ function buscarLogin(fkMaquina, fkEmpresa) {
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal,
+    buscarUltimasMedidasCPU,
+    buscarMedidasEmTempoRealCPU,
+    buscarUltimasMedidasRAM,
+    buscarMedidasEmTempoRealRAM,
     buscarComponentes,
     buscarCpu,
     buscarRam,

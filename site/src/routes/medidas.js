@@ -3,16 +3,24 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
-router.get("/ultimas/:idMaquina", function (req, res) {
-    medidaController.buscarUltimasMedidas(req, res);
-});
-
 router.post("/buscarComponentes", function (req, res) {
     medidaController.buscarComponentes(req, res);
 });
 
+router.get("/ultimas/:idMaquina", function (req, res) {
+    medidaController.buscarUltimasMedidasCPU(req, res);
+});
+
 router.get("/tempo-real/:idMaquina", function (req, res) {
-    medidaController.buscarMedidasEmTempoReal(req, res);
+    medidaController.buscarMedidasEmTempoRealCPU(req, res);
+});
+
+router.get("/ultimas-ram/:idMaquina", function (req, res) {
+    medidaController.buscarUltimasMedidasRAM(req, res);
+});
+
+router.get("/tempo-real-ram/:idMaquina", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealRAM(req, res);
 });
 
 router.post("/buscarCpu", function (req, res) {

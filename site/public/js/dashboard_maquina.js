@@ -1,20 +1,16 @@
-var idEmpresa = sessionStorage.getItem('Empresa')
-var vetoridComponentes = []
-var vetorValor = []
+var idEmpresa = Number(sessionStorage.getItem('Empresa'));
+var idMaquina = 1;
+var vetoridComponentes = [];
+var vetorValor = [];
 
 window.onload = function () {
-
-    idMaquina = 1
-    console.log(idEmpresa)
-    buscarComponentes(idMaquina, idEmpresa)
+    console.log(idEmpresa);
+    buscarComponentes(idMaquina, idEmpresa);
     obterDadosGraficos();
-    buscarDadosMonitoramento(idMaquina, idEmpresa)
-}
-function buscar(params) {
-    
-}
-function buscarComponentes(idMaquina, idEmpresa) {
+    buscarDadosMonitoramento(idMaquina, idEmpresa);
+};
 
+function buscarComponentes(idMaquina, idEmpresa) {
     fetch("/medidas/buscarComponentes", {
         method: "POST",
         headers: {
@@ -24,82 +20,57 @@ function buscarComponentes(idMaquina, idEmpresa) {
             idMaquinaServer: idMaquina,
             idEmpresaServer: idEmpresa
         })
-    }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                for (var i = 0; i < resposta.length; i++) {
-
-                    var registroId = resposta[i].idComponente
-                    var registroValor = resposta[i].valor
-
-                    vetoridComponentes.push(registroId);
-                    vetorValor.push(registroValor);
-                }
-                console.log(vetoridComponentes);
-                console.log(vetorValor);
-
-                sessionStorage.vetoridComponentes = vetoridComponentes;
-                sessionStorage.vetorValor = vetorValor;
-
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
     })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro na requisição.');
+            }
+        })
+        .then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            for (var i = 0; i < resposta.length; i++) {
+                var registroId = resposta[i].idComponente;
+                var registroValor = resposta[i].valor;
+                vetoridComponentes.push(registroId);
+                vetorValor.push(registroValor);
+            }
+            console.log(vetoridComponentes);
+            console.log(vetorValor);
+        })
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
 }
 
 function obterDadosGraficos() {
-    obterDadosGrafico(1, 'grafico_cpu');
-    obterDadosGrafico(2, 'grafico_ram');
+    obterDadosGrafico(idMaquina, 'grafico_cpu');
+    obterDadosGraficoRAM(idMaquina, 'grafico_ram');
 }
 
 function obterDadosGrafico(idMaquina, chartId) {
-    fetch(`/medidas/ultimas/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                plotarGrafico(resposta, chartId);
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    }).catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
 
-function plotarGrafico(resposta, chartId) {
     const labels = [];
-    const dados = {
-        labels: labels,
-        datasets: [{
-            label: 'Uso',
-            data: [],
-            fill: false,
-            borderColor: ['#845ED7'],
-            backgroundColor: ['#845ED7'],
-            tension: 0.1
-        }]
-    };
-
-    for (let i = 0; i < resposta.length; i++) {
-        const registro = resposta[i];
-        labels.push(registro.momento_grafico);
-        dados.datasets[0].data.push(registro.cpu);
-    }
+    const data = [];
 
     const config = {
         type: 'line',
-        data: dados,
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Uso',
+                data: data,
+                fill: false,
+                borderColor: '#845ED7',
+                backgroundColor: '#845ED7',
+                tension: 0.1
+            }]
+        },
         options: {
             plugins: {
                 legend: {
-                    display: false,
+                    display: false
                 }
             },
             scales: {
@@ -120,11 +91,8 @@ function plotarGrafico(resposta, chartId) {
                         lineWidth: 0.1,
                         borderDash: [1, 1]
                     },
-                    max: 100,
                     ticks: {
-                        callback: function (value) {
-                            return value + '%';
-                        },
+                        callback: (value) => value + '%',
                         color: 'white'
                     }
                 }
@@ -137,40 +105,168 @@ function plotarGrafico(resposta, chartId) {
         }
     };
 
-    const myChart = new Chart(
-        document.getElementById(chartId),
-        config
-    );
+    const myChart = new Chart(document.getElementById(chartId), config);
 
-    setTimeout(() => atualizarGrafico(1, dados, myChart, chartId), 4000);
-}
-
-function atualizarGrafico(idMaquina, dados, myChart, chartId) {
-    fetch(`/medidas/tempo-real/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (novoRegistro) {
-                if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                    console.log("Como não há dados novos para captura, o gráfico não atualizará.");
+    function atualizarGrafico() {
+        fetch(`/medidas/tempo-real/${idMaquina}`, { cache: 'no-store' })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
                 } else {
-                    dados.labels.shift();
-                    dados.labels.push(novoRegistro[0].momento_grafico);
-                    dados.datasets[0].data.shift();
-                    dados.datasets[0].data.push(novoRegistro[0].cpu);
+                    throw new Error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then((novoRegistro) => {
+                const momento = novoRegistro[0].momento_grafico;
+                if (momento !== labels[labels.length - 1]) {
+                    labels.shift();
+                    labels.push(momento);
+                    data.shift();
+                    data.push(novoRegistro[0].cpu);
                     myChart.update();
                 }
-                proximaAtualizacao = setTimeout(() => {
-                    atualizarGrafico(idMaquina, dados, myChart, chartId);
-                }, 4000);
+                setTimeout(atualizarGrafico, 4000);
+            })
+            .catch((error) => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                setTimeout(atualizarGrafico, 4000);
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-            proximaAtualizacao = setTimeout(() => {
-                atualizarGrafico(idMaquina, dados, myChart, chartId);
-            }, 4000);
+    }
+
+    fetch(`/medidas/ultimas/${idMaquina}`, { cache: 'no-store' })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro na requisição.');
+            }
+        })
+        .then((resposta) => {
+            resposta.reverse();
+            for (const registro of resposta) {
+                labels.push(registro.momento_grafico);
+                data.push(registro.cpu);
+            }
+            myChart.update();
+            setTimeout(atualizarGrafico, 4000);
+        })
+        .catch((error) => {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+        });
+
+}
+
+function obterDadosGraficoRAM(idMaquina, chartId) {
+
+    const labels = [];
+    const data = [];
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Uso',
+                data: data,
+                fill: false,
+                borderColor: '#845ED7',
+                backgroundColor: '#845ED7',
+                tension: 0.1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'white',
+                        lineWidth: 0.1,
+                        borderDash: [1, 1]
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'white',
+                        lineWidth: 0.1,
+                        borderDash: [1, 1]
+                    },
+                    ticks: {
+                        callback: (value) => value + '%',
+                        color: 'white'
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    left: 0
+                }
+            }
         }
-    }).catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+    };
+
+    const myChart = new Chart(document.getElementById(chartId), config);
+
+    function atualizarGraficoRAM() {
+        fetch(`/medidas/tempo-real-ram/${idMaquina}`, { cache: 'no-store' })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then((novoRegistro) => {
+                const totalRAMGB = Math.round(vetorValor[2]/ 1024) 
+                console.log(totalRAMGB)
+                const usoRAMGB = novoRegistro[0].ram; 
+
+                const usoRAMPercent = Math.round((usoRAMGB / totalRAMGB) * 100);
+
+                const momento = novoRegistro[0].momento_grafico;
+                if (momento !== labels[labels.length - 1]) {
+                    labels.shift();
+                    labels.push(momento);
+                    data.shift();
+                    data.push(usoRAMPercent); // Usar a porcentagem calculada
+                    myChart.update();
+                }
+                setTimeout(atualizarGraficoRAM, 4000);
+            })
+            .catch((error) => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                setTimeout(atualizarGraficoRAM, 4000);
+            });
+    }
+
+    fetch(`/medidas/ultimas-ram/${idMaquina}`, { cache: 'no-store' })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro na requisição.');
+            }
+        })
+        .then((resposta) => {
+            resposta.reverse();
+            for (const registro of resposta) {
+                labels.push(registro.momento_grafico);
+                data.push(registro.ram);
+            }
+            myChart.update();
+            setTimeout(atualizarGraficoRAM, 4000);
+        })
+        .catch((error) => {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+        });
+
 }
 
 function buscarDadosMonitoramento(idMaquina, idEmpresa) {

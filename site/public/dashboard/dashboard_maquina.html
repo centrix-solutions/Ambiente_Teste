@@ -126,7 +126,9 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Andar</h2>
-                        <h2 class="info_status" id="numero_andar"></h2>
+                        <select name="andares" class="select_andares" id="andares">
+                            <option value="andar-0">Sem Andar</option>
+                        </select>
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
@@ -191,9 +193,11 @@
                 </div>
                 <div class="area_inferior">
                     <div class="chart">
+                        <h1>CPU</h1>
                         <canvas id="grafico_cpu"></canvas>
                     </div>
                     <div class="chart">
+                        <h1>RAM</h1>
                         <canvas id="grafico_ram"></canvas>
                     </div>
                 </div>
