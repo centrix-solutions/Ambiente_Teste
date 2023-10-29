@@ -1,24 +1,25 @@
-var cnpjVar = ''
+var cnpjVar = '';
 
 function formatarCNPJ(cnpj_input) {
-    // Busca tudo oq não for número com a expressão /\D/g e remove com ''
-    cnpj = cnpj_input.value.replace(/\D/g, '');
+    // Busca tudo o que não for número com a expressão /\D/g e remove com ''
+    var cnpj = cnpj_input.value;
+    cnpj = cnpj.replace(/\D/g, '');
 
     if (cnpj.length >= 2) {
-        cnpj = cnpj.substring(0, 2) + '.' + cnpj.substring(2)
+        cnpj = cnpj.substring(0, 2) + '.' + cnpj.substring(2);
     }
     if (cnpj.length >= 6) {
-        cnpj = cnpj.substring(0, 6) + '.' + cnpj.substring(6)
+        cnpj = cnpj.substring(0, 6) + '.' + cnpj.substring(6);
     }
     if (cnpj.length >= 10) {
-        cnpj = cnpj.substring(0, 10) + '/' + cnpj.substring(10)
+        cnpj = cnpj.substring(0, 10) + '/' + cnpj.substring(10);
     }
     if (cnpj.length >= 15) {
-        cnpj = cnpj.substring(0, 15) + '-' + cnpj.substring(15)
+        cnpj = cnpj.substring(0, 15) + '-' + cnpj.substring(15);
     }
 
-
-    cnpjVar = cnpj_input.value
+    cnpjVar = cnpj_input.value; 
+    cnpj_input.value = cnpj;
 }
 
 function continuarEndereco() {
@@ -80,7 +81,6 @@ function continuarFuncionario() {
     document.getElementById('cadastroEmpresa').style.display = 'none'
     document.getElementById('cadastroEndereco').style.display = 'none'
     document.getElementById('cadastroFuncionario').style.display = ''
-    document.getElementById('imagemEsquerda').style.display = ''
 
 }
 function voltarEndereco() {
@@ -88,7 +88,6 @@ function voltarEndereco() {
     document.getElementById('cadastroEmpresa').style.display = 'none'
     document.getElementById('cadastroEndereco').style.display = ''
     document.getElementById('cadastroFuncionario').style.display = 'none'
-    document.getElementById('imagemEsquerda').style.display = ''
 
 }
 
@@ -101,21 +100,20 @@ function continuarResumo() {
     document.getElementById('cadastroEndereco').style.display = 'none'
     document.getElementById('cadastroFuncionario').style.display = 'none'
     document.getElementById('resumo').style.display = ''
-    document.getElementById('imagemEsquerda').style.display = 'none'
 
-    nomeFantasia_valor.innerHTML = nome_fantasia_input.value
-    CNPJ_valor.innerHTML = cnpj_input.value
+    nomeFantasia_valor.innerHTML = ` ${nome_fantasia_input.value}`
+    CNPJ_valor.innerHTML = ` ${cnpj_input.value}`
 
-    CEP_valor.innerHTML = cep_input.value
-    estado_valor.innerHTML = estado_input.value
-    cidade_valor.innerHTML = cidade_input.value
-    bairro_valor.innerHTML = bairro_input.value
-    rua_valor.innerHTML = rua_input.value
-    numero_valor.innerHTML = numero_input.value
-    complemento_valor.innerHTML = complemento_input.value
+    CEP_valor.innerHTML = ` ${cep_input.value}`
+    estado_valor.innerHTML = ` ${estado_input.value}`
+    cidade_valor.innerHTML = ` ${cidade_input.value}`
+    bairro_valor.innerHTML = ` ${bairro_input.value}` 
+    rua_valor.innerHTML = ` ${rua_input.value}`
+    numero_valor.innerHTML = ` ${numero_input.value}`
+    complemento_valor.innerHTML = ` ${complemento_input.value}`
 
-    nomeResponsavel_valor.innerHTML = funcionario_nome_imput.value
-    emailResponsavel_valor.innerHTML = funcionario_email_input.value
+    nomeResponsavel_valor.innerHTML = ` ${funcionario_nome_imput.value}` 
+    emailResponsavel_valor.innerHTML = ` ${funcionario_email_input.value}`
 
 
 }
@@ -127,7 +125,6 @@ function voltarFuncionario() {
     document.getElementById('cadastroEndereco').style.display = 'none'
     document.getElementById('cadastroFuncionario').style.display = ''
     document.getElementById('resumo').style.display = 'none'
-    document.getElementById('imagemEsquerda').style.display = ''
 
 }
 
