@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS centrix;
+DROP DATABASE IF EXISTS centrix;
 CREATE DATABASE IF NOT EXISTS centrix;
 USE centrix;
 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Empresa(
 
 CREATE TABLE IF NOT EXISTS Notificacao(
     idNotificacao INT PRIMARY KEY AUTO_INCREMENT,
-    idDispositivo CHAR(36) UNIQUE,
+    idDispositivo CHAR(16) UNIQUE,
     Funcionario_Solicitante VARCHAR(70),
     fkEmpNot INT,
     CONSTRAINT fkEmpNot FOREIGN KEY (fkEmpNot) REFERENCES Empresa(idempresa)
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS Login (
     idMaquina INT,
     idEmpresa INT,
     Nome VARCHAR(45),
-    Atividade VARCHAR(255),
+    Atividade VARCHAR(555),
     Id_do_dispositivo CHAR(16),
     dataHoraEntrada DATETIME,
     dataHoraSaida DATETIME,
@@ -141,13 +141,13 @@ CREATE TABLE IF NOT EXISTS Alertas (
     FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento)
 );
 
-INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento, fkSede)
+INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento)
 VALUES
-    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A', 1),
-    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B', 2),
-    ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C', 3);
+    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),
+    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
+    ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
     
-insert into andar_de_trabalho values (1,10,10,10,'a',1);
+insert into andar_de_trabalho values (1, 1,'a',1);
     
 INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar)
 VALUES
@@ -168,6 +168,7 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
 select * from Componentes_Monitorados;
 select * from funcionario;
 select * from monitoramento order by fkCompMoniExistentes;
+select * from andar_de_trabalho;
 select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
 select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento order by fkCompMoniExistentes;
 select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;

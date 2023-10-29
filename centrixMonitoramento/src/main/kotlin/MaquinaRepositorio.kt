@@ -19,7 +19,7 @@ class MaquinaRepositorio {
         return verificarMaquina == 1
     }
 
-    fun registrarMaquina(novaMaquina: Maquina) {
+    fun registrarMaquina(novaMaquina: Maquina, usuarioLogado: Usuario) {
         jdbcTemplate.update(
             """
         INSERT INTO Maquinas (Sistema_Operacional, Id_do_dispositivo, fkEmpMaq)
@@ -27,6 +27,15 @@ class MaquinaRepositorio {
         """.trimIndent(),
             novaMaquina.SO,
             novaMaquina.idCPU,
+            novaMaquina.fkEmpMaq
+        )
+        jdbcTemplate.update(
+            """
+                INSERT INTO Notificacao (idDispositivo, Funcionario_Solicitante, fkEmpNot)
+                VALUES (?, ?, ?)
+            """.trimIndent(),
+            novaMaquina.idCPU,
+            usuarioLogado.nome,
             novaMaquina.fkEmpMaq
         )
     }
