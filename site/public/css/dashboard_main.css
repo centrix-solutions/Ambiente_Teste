@@ -238,24 +238,50 @@ body{
 .div_crudAndar{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    padding: 1rem;
 }
 .div_cadastrarAndarInput{
     display: flex;
     flex-direction: column;
+    padding: 2vh;
+    margin: 1vh;
 }
+
 .input_cadastrarAndar{
     height: 40px;
     width: 140px;
     background-color: #FCFCFC75;
     border: none;
-    border-radius: 10px;
-    color: white;
+    border-radius: 1rem;
+    color: black;
 }
+
+.div_enviandoImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+}
+
+.input_enviandoImg {
+    display: flex;
+    flex-direction: column;
+    padding: 2vh;
+    margin: 1vh;
+    background-color: #FCFCFC75;
+    border: none;
+    border-radius: 1rem;
+    color: rgb(0, 0, 0);
+}
+
 .div_dropImg{
     height: 120px;
     width: 200px;
-    border-radius: 10px;
+    border-radius: 1rem;
     background-color: #FCFCFC75;
 }
 .div_btnCadastrarAndar{
