@@ -30,8 +30,8 @@ body {
 }
 
 .card_monitoramento {
-    width: 90%;
-    height: 115vh;
+    width: 91%;
+    height: 117vh;
     background-color: rgba(36, 36, 36, 1);
     margin: 3rem;
     position: absolute;
@@ -44,7 +44,7 @@ body {
 }
 
 .info {
-    width: 90%;
+    width: 98%;
     display: flex;
     position: relative;
     align-self: center;
@@ -105,6 +105,26 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.andar{
+    width: 5vw;
+}
+
+.computador {
+    width: 5vw;
+}
+
+.idComputador {
+    width: 12vw;
+}
+
+.atividade {
+    width: 11vw;
+}
+
+.login {
+    width: 12vw;
 }
 
 .bloco_info button {
