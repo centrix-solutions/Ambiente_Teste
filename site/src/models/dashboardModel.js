@@ -2,9 +2,9 @@ var database = require("../database/config");
 
 function buscarComputadores(idEmpresa, idAndar) {
     if (idAndar == null) {
-        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho IS NULL`;
+        var instrucao = `SELECT Maquinas.idMaquina, Maquinas.Sistema_Operacional, Maquinas.Id_do_dispositivo, Maquinas.posicaoX, Maquinas.posicaoY, Maquinas.fkEmpMaq, Maquinas.fkAndarDeTrabalho, Login.dataHoraEntrada, Login.dataHoraSaida, Login.Nome FROM Maquinas LEFT JOIN Login on Maquinas.idMaquina = Login.idMaquina WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho IS NULL;`;
     } else {
-        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
+        var instrucao = `SELECT Maquinas.idMaquina, Maquinas.Sistema_Operacional, Maquinas.Id_do_dispositivo, Maquinas.posicaoX, Maquinas.posicaoY, Maquinas.fkEmpMaq, Maquinas.fkAndarDeTrabalho, Login.dataHoraEntrada, Login.dataHoraSaida, Login.Nome FROM Maquinas LEFT JOIN Login on Maquinas.idMaquina = Login.idMaquina WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
     }
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -17,15 +17,6 @@ function salvarPosicaoComputadores(idComputador, x, y) {
 function cadastrarAndar(cadastro) {
     var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, foto_andar, fkEmpAndar) VALUES (${cadastro.numAndar}, "${cadastro.imagem}", ${cadastro.idEmpresa})`;
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-function buscarComputadores(idEmpresa, idAndar) {
-    if (idAndar == null) {
-        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho IS NULL`;
-    } else {
-        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = '${idEmpresa}' AND fkAndarDeTrabalho = ${idAndar}`;
-    }
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

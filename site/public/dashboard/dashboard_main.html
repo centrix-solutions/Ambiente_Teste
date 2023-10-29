@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/dashboard_main.css">
     <script src="../js/notificacao.js"></script>
+    <script src="../js/andar.js"></script>
 </head>
 
 <body onload="buscarComputadores(), buscarAndares()">
@@ -25,12 +26,7 @@
                         <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar" />
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div class="">
-=======
                 <div class="div_enviandoImg">
-                    <!-- MUDAR O CSS DAQ DPS -->
->>>>>>> 53f51a9cef12e6baaf5eafaac942e27a88c48f3a
                     <span>Foto da planta do andar</span>
                     <input class="input_enviandoImg" type="file" id="foto" name="foto"/>
                 </div>
@@ -307,22 +303,25 @@
                 var tr = document.createElement("tr");
                 var idThead = document.createElement("th");
                 var SOThead = document.createElement("th");
-                var thThead = document.createElement("th");
+                var FuncionarioThead = document.createElement("th");
                 var statusThead = document.createElement("th");
                 idThead.innerHTML = "Id";
                 SOThead.innerHTML = "SO";
-                thThead.innerHTML = "?";
+                FuncionarioThead.innerHTML = "Funcionário";
                 statusThead.innerHTML = "Status";
                 tr.appendChild(idThead);
                 tr.appendChild(SOThead);
-                tr.appendChild(thThead);
+                tr.appendChild(FuncionarioThead);
                 tr.appendChild(statusThead);
                 thead.appendChild(tr);
                 tableLista.appendChild(thead);
 
                 var andar = vetorPosicaoImagensAndar.indexOf(Number(idAndarVar));
-                carregarImagem(andar);
-
+                if (andar >= 0) {
+                    carregarImagem(andar);
+                } else {
+                    var div_mapa = document.getElementById("mapa_div");
+                }
                 for (let i = 0; i < respostaJson.length; i++) {
                     var tr = document.createElement("tr");
                     var tdId = document.createElement("td");
@@ -334,8 +333,13 @@
 
                     tdId.innerHTML = respostaJson[i].Id_do_dispositivo;
                     tdNome.innerHTML = respostaJson[i].Sistema_Operacional;
-                    tdData.innerHTML = "?";
-                    tdStatus.innerHTML = "Teste";
+                    var nome = respostaJson[i].Nome;
+                    if (nome == undefined) {
+                        nome = "Nenhum usuário";
+                    }
+                    tdData.innerHTML = nome;
+                    tdStatus.innerHTML = "ATIVO";
+                    if (respostaJson[i].dataHoraEntrada == null || respostaJson[i].dataHoraEntrada != null && respostaJson[i].dataHoraSaida != null) tdStatus.innerHTML = "INATIVO";
 
                     tr.className = "computadores_individual";
                     tr.appendChild(tdId);

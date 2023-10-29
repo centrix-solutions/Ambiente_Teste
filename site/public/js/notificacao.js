@@ -95,7 +95,7 @@ async function verificaNotificacao(){
 async function retirarNotificacao(){
     var idEmpresa = sessionStorage.Empresa;
     try {
-        var resposta = await fetch("/notificacao/retirarAlerta", {
+        var resposta = await fetch("/notificacao/retirarNotificacao", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

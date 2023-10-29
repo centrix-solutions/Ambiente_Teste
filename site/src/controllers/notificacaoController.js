@@ -73,7 +73,6 @@ function retirarAlerta(req, res) {
             );
     }
 }
-
 function verificaNotificacao(req, res) {
 
     var idEmpresa = req.body.idEmpresaServer;
