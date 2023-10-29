@@ -25,10 +25,14 @@
                         <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar" />
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="">
+=======
+                <div class="div_enviandoImg">
                     <!-- MUDAR O CSS DAQ DPS -->
+>>>>>>> 53f51a9cef12e6baaf5eafaac942e27a88c48f3a
                     <span>Foto da planta do andar</span>
-                    <input type="file" id="foto" name="foto" />
+                    <input class="input_enviandoImg" type="file" id="foto" name="foto"/>
                 </div>
             </div>
             <div class="div_btnCadastrarAndar">
@@ -280,7 +284,7 @@
 
         var idEmpresaVar = sessionStorage.Empresa;
         var idAndarVar = andares.value.split('-')[1];
-        if(idAndarVar == 0) idAndarVar = null;
+        if (idAndarVar == 0) idAndarVar = null;
         try {
             var resposta = await fetch("/dashboard/buscarComputadores", {
                 method: "POST",
@@ -487,10 +491,10 @@
             alert("Posições salvas!");
         }
     }
-    async function buscarAndares(){
+    async function buscarAndares() {
         vetorImagensAndar = [];
         vetorPosicaoImagensAndar = []
-        
+
         var idEmpresaVar = sessionStorage.Empresa;
         try {
             var resposta = await fetch("/dashboard/buscarAndares", {
@@ -527,33 +531,33 @@
         }
     }
     async function carregarImagem(idImagem) {
-    var div_mapa = document.getElementById("mapa_div");
+        var div_mapa = document.getElementById("mapa_div");
 
-    var larguraDaDiv = div_mapa.offsetWidth;
-    var alturaDaDiv = div_mapa.offsetHeight;
+        var larguraDaDiv = div_mapa.offsetWidth;
+        var alturaDaDiv = div_mapa.offsetHeight;
 
-    maxMapaHorizontal = larguraDaDiv;
-    maxMapaVertical = alturaDaDiv;
+        maxMapaHorizontal = larguraDaDiv;
+        maxMapaVertical = alturaDaDiv;
 
-    var imagem = vetorImagensAndar[idImagem];
-    var imageURL = `../assets/andares/${imagem}`;
+        var imagem = vetorImagensAndar[idImagem];
+        var imageURL = `../assets/andares/${imagem}`;
 
-    var img = new Image();
-    img.src = imageURL;
+        var img = new Image();
+        img.src = imageURL;
 
-    await new Promise((resolve) => {
-        img.onload = resolve;
-    });
+        await new Promise((resolve) => {
+            img.onload = resolve;
+        });
 
-    var larguraImagem = img.naturalWidth;
-    var alturaImagem = img.naturalHeight;
+        var larguraImagem = img.naturalWidth;
+        var alturaImagem = img.naturalHeight;
 
-    div_mapa.style.backgroundImage = `url(${imageURL})`;
+        div_mapa.style.backgroundImage = `url(${imageURL})`;
 
-    if (larguraImagem > larguraDaDiv || alturaImagem > alturaDaDiv) {
-        div_mapa.style.backgroundSize = "contain";
-    } else {
-        div_mapa.style.backgroundSize = "cover";
+        if (larguraImagem > larguraDaDiv || alturaImagem > alturaDaDiv) {
+            div_mapa.style.backgroundSize = "contain";
+        } else {
+            div_mapa.style.backgroundSize = "cover";
+        }
     }
-}
 </script>
