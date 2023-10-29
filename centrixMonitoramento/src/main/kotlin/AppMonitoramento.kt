@@ -90,7 +90,7 @@ fun main() {
             novaMaquina.idCPU = looca.processador.id
             novaMaquina.fkEmpMaq = usuarioLogado.fkEmpFunc
 
-            repositorioMaquina.registrarMaquina(novaMaquina)
+            repositorioMaquina.registrarMaquina(novaMaquina, usuarioLogado)
             val idMaquina: Int = repositorioComponentes.buscarIdMaqPorId(id)
 
             val valores = listOf(

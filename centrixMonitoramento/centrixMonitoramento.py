@@ -73,4 +73,4 @@ while(True):
     bd.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
     cnx.commit()
 
-    time.sleep(20)
+    time.sleep(2)
