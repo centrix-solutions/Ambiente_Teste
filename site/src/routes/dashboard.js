@@ -9,8 +9,8 @@ const upload = require('../../public/js/configUpload'); // ARQUIVO COM A CONFIGU
 router.get("", (req, res) => {
     res.render("dashboard_main")
 });
-router.post("/cadastrarFoto", upload.single('foto'), (req, res) => {
-    dashboardController.cadastrarFoto(req, res);
+router.post("/cadastrarAndar", upload.single('foto'), (req, res) => {
+    dashboardController.cadastrarAndar(req, res);
 })
 
 // FIM FOTO
@@ -18,9 +18,6 @@ router.post("/cadastrarFoto", upload.single('foto'), (req, res) => {
 
 router.post("/buscarComputadores", function (req, res) {
     dashboardController.buscarComputadores(req, res);
-})
-router.post("/cadastrarAndar", function (req, res) {
-    dashboardController.cadastrarAndar(req, res);
 })
 router.post("/salvarPosicaoComputadores", function (req, res) {
     dashboardController.salvarPosicaoComputadores(req, res);

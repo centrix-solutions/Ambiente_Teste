@@ -76,7 +76,7 @@ body{
 .div_mapa{
     height: 400px;
     width: 500px;
-    /* background-image: url("../assets/imgs/planta.png"); */
+    background-color: gray;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

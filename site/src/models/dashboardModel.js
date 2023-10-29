@@ -9,18 +9,13 @@ function buscarComputadores(idEmpresa, idAndar) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function cadastrarAndar(numeroAndar, larguraAndar, comprimentoAndar, imagem) {
-    var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, largura_andar, comprimento_andar, foto_andar) VALUES (${numeroAndar}, ${larguraAndar}, ${comprimentoAndar}, "${imagem}", ${idEmpresa})`;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
 function salvarPosicaoComputadores(idComputador, x, y) {
     var instrucao = `UPDATE Maquinas SET posicaoX = ${x}, posicaoY = ${y} WHERE idMaquina = ${idComputador};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function cadastrarFoto(cadastro) {
-    var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, largura_andar, comprimento_andar, foto_andar, fkEmpAndar) VALUES (${cadastro.numAndar}, ${cadastro.largAndar}, ${cadastro.compAndar}, "${cadastro.imagem}", ${cadastro.idEmpresa})`;
+function cadastrarAndar(cadastro) {
+    var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, foto_andar, fkEmpAndar) VALUES (${cadastro.numAndar}, "${cadastro.imagem}", ${cadastro.idEmpresa})`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -46,6 +41,5 @@ module.exports = {
     buscarComputadores,
     cadastrarAndar,
     salvarPosicaoComputadores,
-    cadastrarFoto,
     buscarAndares
 }

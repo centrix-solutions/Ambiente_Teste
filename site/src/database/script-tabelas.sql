@@ -30,8 +30,6 @@ CREATE TABLE IF NOT EXISTS Empresa(
 CREATE TABLE IF NOT EXISTS Andar_de_trabalho (
     idAndar_de_trabalho INT PRIMARY KEY AUTO_INCREMENT,
     num_andar INT,
-    largura_andar INT,
-    comprimento_andar INT,
     foto_andar VARCHAR(255),
     fkEmpAndar INT,
     CONSTRAINT fkEmpAndar FOREIGN KEY (fkEmpAndar) REFERENCES Empresa(idempresa)

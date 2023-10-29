@@ -27,37 +27,11 @@ function buscarComputadores(req, res) {
     }
 }
 function cadastrarAndar(req, res) {
-    // const imagem = req.file.filename;
-    var numeroAndar = req.body.numAndarServer;
-    var larguraAndar = req.body.largAndarServer;
-    var comprimentoAndar = req.body.compAndarServer;
-
-    if (numeroAndar == undefined || larguraAndar == undefined || comprimentoAndar == undefined) {
-        res.status(400).send("Algum campo está undefined!");
-    } else {
-    dashboardModel.cadastrarAndar(numeroAndar, larguraAndar, comprimentoAndar)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao cadastrar o andar Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
-}
-function cadastrarFoto(req, res) {
     const imagem = req.file.filename;
-    const {numAndar, largAndar, compAndar, idEmpresa} = req.body;
+    const {numAndar, idEmpresa} = req.body;
   
-    const cadastro = {numAndar, largAndar, compAndar, imagem, idEmpresa};
-    dashboardModel.cadastrarFoto(cadastro)
+    const cadastro = {numAndar, imagem, idEmpresa};
+    dashboardModel.cadastrarAndar(cadastro)
         .then(resultado => {
             res.status(201).send("Usuario criado com sucesso");
         }).catch(err => {
@@ -120,6 +94,5 @@ module.exports = {
     buscarComputadores,
     cadastrarAndar,
     salvarPosicaoComputadores,
-    cadastrarFoto,
     buscarAndares
 }

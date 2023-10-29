@@ -23,10 +23,7 @@ var mySqlConfig = {
     database: "centrix",
     user: "root",
     password: "38762",
-    // user: "root",
-    // password: "#Gf53359131851",
-    // user: "root",
-    // password: "38762"
+    
 };
 
 function executar(instrucao) {
