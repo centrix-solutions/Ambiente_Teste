@@ -11,7 +11,7 @@ body {
 }
 
 .container_principal {
-    height: 135vh;
+    height: 150vh;
     display: flex;
 }
 
@@ -31,13 +31,13 @@ body {
 
 .card_monitoramento {
     width: 91%;
-    height: 117vh;
+    height: 130vh;
     background-color: rgba(36, 36, 36, 1);
     margin: 3rem;
     position: absolute;
     top: 58%;
     left: 50%;
-    transform: translate(-50%, -42%);
+    transform: translate(-50%, -39%);
     display: flex;
     flex-direction: column;
     border-radius: 40px;
@@ -167,7 +167,7 @@ body {
 }
 
 .area_meio {
-    height: 50%;
+    height: 35%;
     display: flex;
     flex-direction: row;
 }
