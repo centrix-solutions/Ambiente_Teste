@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="../css/dash_funcionarios.css">
     <script src="../js/dashboard_funcionarios.js"></script>
     <script src="../js/notificacao.js"></script>
+    <script src="../js/andar.js"></script>
 </head>
 
-<body onload="buscarFuncionarios()">
+<body onload="buscarFuncionarios(), buscarAndares()">
     <div class="container_principal">
         <div class="barra_lateral">
             <a href="dashboard_main.html">
@@ -139,13 +140,16 @@
                             Nivel de Acesso
                         </p>
                         <select name="acesso" id="acesso_input" class="select_cadastro">
-                            <option value="1">Nível 1</option>
-                            <option value="2">Nível 2</option>
-                            <option value="3">Nível 3</option>
-                            <option value="4">Nível 4</option>
+                            <option value="1">Lílas</option>
+                            <option value="2">Magenta</option>
+                            <option value="3">Violeta</option>
+                            <option value="4">Púrpura</option>
                         </select>
+                        <p>
+                            Selecione o Andar que deseja monitorar
+                        </p>
+                        <select name="andares" class="select_andares" id="andares"></select>
                     </div>
-
                     <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
                         Cadastrar
                     </div>
@@ -222,7 +226,7 @@
                     divNivel.className = "div_botao1";
                     selectNivel.name = "acesso";
                     selectNivel.className = "select_acesso";
-                    selectNivel.id = `select_acesso-${i}`;
+                    selectNivel.id = `select_acesso-${idFuncionario}`;
                     option1.value = "nivel1";
                     option2.value = "nivel2";
                     option3.value = "nivel3";
@@ -246,13 +250,40 @@
                     else if (acessoUser == 4) selectNivel.value = "nivel4"
 
                     selectNivel.addEventListener("change", function() {
-                        var opcaoSelecionada = selectNivel.options[selectNivel.selectedIndex].text;
+                        var idselectNivel = this.id;
+                        idselectNivel = idselectNivel.split('-')[1];
+                        var select = document.getElementById(`select_acesso-${idselectNivel}`)
+                        var opcaoSelecionada = select.options[select.selectedIndex].text;
                         var tipo = 2;
                         if (opcaoSelecionada == "Lílas") tipo = 1;
                         else if (opcaoSelecionada == "Violeta") tipo = 3;
                         else if (opcaoSelecionada == "Púrpura") tipo = 4;
-                        mudarNivelAcesso(idFuncionario, tipo);
+                        mudarNivelAcesso(idselectNivel, tipo);
                     });
+
+                    var divAndar = document.createElement("div");
+                    var spanAndar = document.createElement("span");
+                    var selectAndar = document.createElement("select");
+                    spanAndar.innerHTML = "ANDAR";
+                    divAndar.className = "div_botao1";
+                    selectAndar.name = "andares";
+                    selectAndar.className = "select_andares";
+                    selectAndar.id = `andares-${idFuncionario}`;
+                    buscarAndares(idFuncionario);
+                    
+                    divAndar.appendChild(spanAndar);
+                    divAndar.appendChild(selectAndar);
+                    divFuncionario.appendChild(divAndar);
+                    
+                    selectAndar.addEventListener("change", function() {
+                        var idselectAndar = this.id;
+                        idselectAndar = idselectAndar.split('-')[1];
+                        var select = document.getElementById(`andares-${idselectAndar}`)
+                        var opcaoSelecionada = select.options[select.selectedIndex].value;
+                        opcaoSelecionada = opcaoSelecionada.split('-')[1][0];
+                        mudarAndar(idselectAndar, opcaoSelecionada);                        
+                    });
+
 
                     var divAlerta = document.createElement("div");
                     var spanAlerta = document.createElement("span");
@@ -261,8 +292,11 @@
                     buttonAlerta.className = "button_alerta";
                     spanAlerta.innerHTML = "ENVIAR ALERTA";
                     buttonAlerta.innerHTML = "ENVIAR";
+                    buttonAlerta.id = `button-${idFuncionario}`;
                     buttonAlerta.addEventListener('click', function () {
-                        enviarAlerta(idFuncionario);
+                        var idButtonAlerta = this.id;
+                        idButtonAlerta = idButtonAlerta.split('-')[1];
+                        enviarAlerta(idButtonAlerta);
                     });
                     divAlerta.appendChild(spanAlerta);
                     divAlerta.appendChild(buttonAlerta);
@@ -276,7 +310,7 @@
                     divAtividadeTexto.className = "div_atividade";
                     spanAtividade.innerHTML = "Atividade";
                     spanAtividadeTexto.innerHTML = "ATIVO";
-                    if (respostaJson[i].atividade != null) spanAtividadeTexto.innerHTML = "INATIVO";
+                    if (respostaJson[i].dataHoraEntrada == null || respostaJson[i].dataHoraEntrada != null && respostaJson[i].dataHoraSaida != null) spanAtividadeTexto.innerHTML = "INATIVO";
                     divAtividadeTexto.appendChild(spanAtividadeTexto);
                     divAtividade.appendChild(spanAtividade);
                     divAtividade.appendChild(divAtividadeTexto);
@@ -284,6 +318,18 @@
                     
                     divFuncionarios.appendChild(divFuncionario);
                 }
+                setTimeout(() => {
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var idFuncionario = respostaJson[i].idFuncionario;
+                        var selectAndar = document.getElementById(`andares-${idFuncionario}`);
+                        var andarUser = respostaJson[i].fkAndar;
+                        if (andarUser == null) {
+                            selectAndar.value = `andar-0`;
+                        } else {
+                            selectAndar.value = `andar-${andarUser}${idFuncionario}`;
+                        }
+                    }
+                }, 100);
             }
         } catch (erro) {
             console.log("Erro: ", erro);
@@ -299,6 +345,26 @@
                 body: JSON.stringify({
                     idFuncionarioServer: idFuncionario,
                     tipoServer: tipo,
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON: ', respostaJson);
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
+    async function mudarAndar(idFuncionario, andar){
+        try {
+            var resposta = await fetch("/funcionarios/mudarAndar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idFuncionarioServer: idFuncionario,
+                    andarServer: andar,
                 })
             });
             if (resposta.ok) {

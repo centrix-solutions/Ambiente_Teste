@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/dashboard_main.css">
     <script src="../js/notificacao.js"></script>
+    <script src="../js/andar.js"></script>
 </head>
 
 <body onload="buscarComputadores(), buscarAndares()">
@@ -25,10 +26,14 @@
                         <input class="input_cadastrarAndar" type="number" id="numeroAndar" name="numAndar" />
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="">
+=======
+                <div class="div_enviandoImg">
                     <!-- MUDAR O CSS DAQ DPS -->
+>>>>>>> 53f51a9cef12e6baaf5eafaac942e27a88c48f3a
                     <span>Foto da planta do andar</span>
-                    <input type="file" id="foto" name="foto" />
+                    <input class="input_enviandoImg" type="file" id="foto" name="foto"/>
                 </div>
             </div>
             <div class="div_btnCadastrarAndar">
@@ -485,45 +490,6 @@
         }
         if (resposta.ok) {
             alert("Posições salvas!");
-        }
-    }
-    async function buscarAndares(){
-        vetorImagensAndar = [];
-        vetorPosicaoImagensAndar = []
-        
-        var idEmpresaVar = sessionStorage.Empresa;
-        try {
-            var resposta = await fetch("/dashboard/buscarAndares", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    idEmpresaServer: idEmpresaVar,
-                })
-            });
-            if (resposta.ok) {
-                var respostaJson = await resposta.json();
-                console.log('JSON: ', respostaJson);
-                var select = document.getElementById('andares');
-                select.innerHTML = "";
-
-                var option = document.createElement('option');
-                option.innerHTML = "Sem Andar";
-                option.value = `andar-0`;
-                select.appendChild(option);
-
-                for (let i = 0; i < respostaJson.length; i++) {
-                    var option = document.createElement('option');
-                    option.innerHTML = respostaJson[i].num_andar;
-                    option.value = `andar-${respostaJson[i].idAndar_de_trabalho}`;
-                    select.appendChild(option);
-                    vetorImagensAndar.push(respostaJson[i].foto_andar);
-                    vetorPosicaoImagensAndar.push(respostaJson[i].idAndar_de_trabalho)
-                }
-            }
-        } catch (erro) {
-            console.log("Erro: ", erro);
         }
     }
     async function carregarImagem(idImagem) {

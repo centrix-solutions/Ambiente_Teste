@@ -12,9 +12,10 @@
     <script src="../js/dashboard_maquina.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/notificacao.js"></script>
+    <script src="../js/andar.js"></script>
 </head>
 
-<body>
+<body onload="buscarAndares()">
     <div class="container_principal">
         <div class="barra_lateral">0
             <a href="dashboard_main.html">
@@ -127,9 +128,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Andar</h2>
-                        <select name="andares" class="select_andares" id="andares">
-                            <option value="andar-0">Sem Andar</option>
-                        </select>
+                        <select name="andares" class="select_andares" id="andares"></select>
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
