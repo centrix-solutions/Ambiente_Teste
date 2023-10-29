@@ -6,8 +6,6 @@ var cors = require("cors");
 var path = require("path");
 var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3333 : 8080;
 
-var imagem = require("./src/routes/dashboard");
-
 var app = express();
 
 var indexRouter = require("./src/routes/index");
@@ -16,6 +14,7 @@ var funcionariosRouter = require("./src/routes/funcionarios");
 var empresasRouter = require("./src/routes/empresas");
 var medidasRouter = require("./src/routes/medidas");
 var dashboardRouter = require("./src/routes/dashboard");
+var notificacaoRouter = require("./src/routes/notificacao");
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true })); // tava false antes da foto
@@ -29,6 +28,7 @@ app.use("/empresas", empresasRouter);
 app.use("/funcionarios", funcionariosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/notificacao", notificacaoRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

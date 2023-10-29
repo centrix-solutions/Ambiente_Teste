@@ -56,7 +56,7 @@ function salvarPosicaoComputadores(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao cadastrar o andar Erro: ",
+                        "\nHouve um erro ao salvar a posição dos computadores Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);

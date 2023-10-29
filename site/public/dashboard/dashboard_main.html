@@ -442,7 +442,6 @@
                     break;
                 case 39:
                     if (horizontal < maxMapaHorizontal) {
-                        console.log("ok")
                         horizontal += 1;
                         vetorPosicaoComputador[posicaoComputador][0] = horizontal;
                         bola.style.left = horizontal + 'px';
@@ -532,6 +531,9 @@
     var larguraDaDiv = div_mapa.offsetWidth;
     var alturaDaDiv = div_mapa.offsetHeight;
 
+    maxMapaHorizontal = larguraDaDiv;
+    maxMapaVertical = alturaDaDiv;
+
     var imagem = vetorImagensAndar[idImagem];
     var imageURL = `../assets/andares/${imagem}`;
 
@@ -545,9 +547,6 @@
     var larguraImagem = img.naturalWidth;
     var alturaImagem = img.naturalHeight;
 
-    maxMapaHorizontal = larguraImagem;
-    maxMapaVertical = alturaImagem;
-
     div_mapa.style.backgroundImage = `url(${imageURL})`;
 
     if (larguraImagem > larguraDaDiv || alturaImagem > alturaDaDiv) {
@@ -556,5 +555,4 @@
         div_mapa.style.backgroundSize = "cover";
     }
 }
-
 </script>
