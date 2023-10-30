@@ -7,6 +7,10 @@ router.post("/buscarComponentes", function (req, res) {
     medidaController.buscarComponentes(req, res);
 });
 
+router.delete("/deletarComputador", function (req, res) {
+    medidaController.remover(req, res);
+})
+
 router.get("/ultimas/:idMaquina", function (req, res) {
     medidaController.buscarUltimasMedidasCPU(req, res);
 });

@@ -1,5 +1,13 @@
 var database = require("../database/config");
 
+function deletarComputador(IDMaquina) {
+
+    var instrucao = `DELETE FROM Maquinas WHERE idMaquina = ${IDMaquina};`
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function buscarComponentes(fkMaquina, fkEmpresa) {
 
     var instrucao = `SELECT valor, fkComponentesExistentes as idComponente FROM Componentes_Monitorados where fkEmpMaqComp = ${fkEmpresa} and fkMaquina = ${fkMaquina}`;
@@ -256,6 +264,7 @@ function buscarLogin(fkMaquina, fkEmpresa) {
 }
 
 module.exports = {
+    deletarComputador,
     buscarUltimasMedidasCPU,
     buscarMedidasEmTempoRealCPU,
     buscarUltimasMedidasRAM,

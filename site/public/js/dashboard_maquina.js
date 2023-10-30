@@ -1,11 +1,11 @@
 var idEmpresa = Number(sessionStorage.getItem('Empresa'));
-var idMaquina = Number(sessionStorage.getItem('vetorIdComputador'));
+var idMaquina = Number(sessionStorage.getItem('IdComputador'));
 var vetoridComponentes = [];
 var vetorValor = [];
 
 
 
-async function buscarComputador(idEmpresa, andares){
+async function buscarComputador(idEmpresa, andares) {
 
     var idEmpresaVar = idEmpresa
     var andarVar = andares.value
@@ -22,7 +22,7 @@ async function buscarComputador(idEmpresa, andares){
             })
         });
         if (resposta.ok) {
-            
+
             var respostaJson = await resposta.json();
             console.log('JSON: ', respostaJson);
             if (idFuncionario == undefined) {
@@ -51,6 +51,20 @@ async function buscarComputador(idEmpresa, andares){
         console.log("Erro: ", erro);
     }
 }
+
+function deletarComputador(idMaquina) {
+     var removerMaquina = idMaquina
+
+        fetch("/medidas/deletarComputador", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                removerMaquinaSever: removerMaquina,                                  
+            })
+        });
+}   
 
 function buscarComponentes(idMaquina, idEmpresa) {
     fetch("/medidas/buscarComponentes", {
@@ -92,7 +106,7 @@ function obterDadosGraficos() {
 }
 
 function obterDadosGrafico(idMaquina, chartId) {
-    
+
     const labels = [];
     const data = [];
 
@@ -266,10 +280,10 @@ function obterDadosGraficoRAM(idMaquina, chartId) {
                 }
             })
             .then((novoRegistro) => {
-                
+
                 const totalRAMGB = vetorValor[2]
                 console.log(totalRAMGB)
-                const usoRAMGB = novoRegistro[0].ram; 
+                const usoRAMGB = novoRegistro[0].ram;
 
                 const usoRAMPercent = (usoRAMGB / totalRAMGB) * 100;
 

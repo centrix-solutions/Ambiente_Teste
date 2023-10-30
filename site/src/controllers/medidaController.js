@@ -1,6 +1,30 @@
 var medidaModel = require("../models/medidaModel");
 
+function deletarComputador(req, res) {
 
+    var IDMaquina = req.body.removerMaquinaSever
+   
+    if (IDMaquina == undefined) {
+        res.status(400).send("Seu IDMaquina está undefined!");
+    } else {
+
+        medidaModel.deletarComputador(IDMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a adição! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
 
 function buscarComponentes(req, res) {
 
@@ -36,7 +60,7 @@ function buscarComponentes(req, res) {
 }
 function buscarUltimasMedidasCPU(req, res) {
 
-    const limite_linhas = 7;
+    const limite_linhas = 15;
 
     var idMaquina = req.params.idMaquina;
     
@@ -58,7 +82,7 @@ function buscarUltimasMedidasCPU(req, res) {
 
 function buscarUltimasMedidasRAM(req, res) {
 
-    const limite_linhas = 7;
+    const limite_linhas = 15;
 
     var idMaquina = req.params.idMaquina;
     
@@ -296,6 +320,7 @@ function buscarLogin(req, res) {
     });
 }
 module.exports = {
+    deletarComputador,
     buscarComponentes,
     buscarUltimasMedidasCPU,
     buscarMedidasEmTempoRealCPU,
