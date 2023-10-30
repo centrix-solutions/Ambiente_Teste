@@ -15,13 +15,18 @@ async function buscarAndares(idFuncionario){
         });
         if (resposta.ok) {
             var respostaJson = await resposta.json();
-            console.log('JSON: ', respostaJson);
+            console.log('JSON Andares: ', respostaJson);
+
             if (idFuncionario == undefined) {
                 var select = document.getElementById('andares');
             } else {
                 var select = document.getElementById(`andares-${idFuncionario}`);
             }
             select.innerHTML = "";
+
+            
+
+            // var idAndarDeTrabalho = respostaJson
 
             var option = document.createElement('option');
             option.innerHTML = "Sem Andar";
