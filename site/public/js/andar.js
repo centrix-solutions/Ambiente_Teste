@@ -27,7 +27,7 @@ async function buscarAndares(idFuncionario){
             for (let i = 0; i < respostaJson.length; i++) {
 
                 var idAndarDeTrabalho = respostaJson[i].idAndar_de_trabalho;
-                
+                //andar
 
                 if (i == 0) {
                     var option = document.createElement('option');
