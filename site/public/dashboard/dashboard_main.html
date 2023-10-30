@@ -107,7 +107,7 @@
                             <span class="text_legenda">
                                 Veja o monitoramento individual
                             </span>
-                            <button class="func_btn cursor" onclick="irMonitoramento(sessionStorage.idComputador)">
+                            <button class="func_btn cursor tdComputador" onclick="irMonitoramento(sessionStorage.idComputador)">
                                 Monitoramento
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="16" viewBox="0 0 28 16"
                                     fill="none">
@@ -173,8 +173,8 @@
             e.preventDefault();
         }
     });
-    const atual = document.getElementById('option1');
-    atual.style.backgroundColor = "blueviolet";
+    // const atual = document.getElementById('option1');
+    // atual.style.backgroundColor = "blueviolet";
     sessionStorage.idComputador = 0;
     var vetorIdComputador = [];
     var vetorPosicaoComputador = [];
@@ -252,6 +252,10 @@
                     if (respostaJson[i].dataHoraEntrada == null || respostaJson[i].dataHoraEntrada != null && respostaJson[i].dataHoraSaida != null) tdStatus.innerHTML = "INATIVO";
 
                     tr.className = "computadores_individual cursor";
+                    tdId.className = "tdComputador";
+                    tdNome.className = "tdComputador";
+                    tdData.className = "tdComputador";
+                    tdStatus.className = "tdComputador";
                     tr.appendChild(tdId);
                     tr.appendChild(tdNome);
                     tr.appendChild(tdData);
@@ -303,6 +307,7 @@
                         var computadorAtual = document.getElementById(idBola);
                         var descobreIdComputador = vetorIdComputador.indexOf(Number(idBola));
                         alert(`Você clicou no computador de id ${vetorIdDispositivo[descobreIdComputador]}`);
+                        console.log(computadorId)
                         if (computadorId == 0) {
                             computadorAtual.classList.add("azul");
                             sessionStorage.setItem('idComputador', idBola);
@@ -331,7 +336,7 @@
         }
     }
     document.addEventListener('click', function () {
-        if (!event.target.classList.contains('bola_posicao')) {
+        if (!event.target.classList.contains('bola_posicao') && !event.target.classList.contains('computadores_individual') && !event.target.classList.contains('tdComputador')) {
             var computadorId = sessionStorage.idComputador;
             var computadorAtual = document.getElementById(computadorId);
             computadorAtual.classList.remove("azul");

@@ -16,7 +16,8 @@
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)">
+<!-- <body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)"> -->
+<body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares)">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -39,9 +40,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Andar</h2>
-                        <select name="andares" class="select_andares" id="andares">
-                            <option value="andar-0">Sem andar</option>
-                        </select>
+                        <select name="andares" class="select_andares" id="andares"></select>
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
@@ -122,3 +121,12 @@
     </div>
 </body>
 </html>
+<script>
+    var selectAndar = document.getElementById("andares");
+    selectAndar.addEventListener("change", function () {
+        var idComputador = sessionStorage.idComputador;
+        var opcaoSelecionada = selectAndar.options[selectAndar.selectedIndex].value;
+        opcaoSelecionada = opcaoSelecionada.split('-')[1];
+        mudarAndar(idComputador, opcaoSelecionada);
+    });
+</script>

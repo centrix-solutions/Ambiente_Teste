@@ -578,6 +578,6 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
 }
 
 
-setInterval(function () {
-    buscarDadosMonitoramento(idMaquina, idEmpresa);
-}, 2000); 
+// setInterval(function () {
+//     buscarDadosMonitoramento(idMaquina, idEmpresa);
+// }, 2000); 
