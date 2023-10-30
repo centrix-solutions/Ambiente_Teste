@@ -4,19 +4,17 @@ import java.io.File
 
 object scriptPadraoPython {
 
-    var pythonProcess: Process? = null
+    var pythonProcesses: List<Process> = listOf()
 
-    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int): String {
+    fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int): Pair<String, String> {
 
-        val codigoPythonDefault = """
-        import speedtest as st
+        val codigoPythonDefaultHard = """
         import psutil
         import time
         from mysql.connector import connect
 
         cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
-        speed_test = st.Speedtest()
- 
+
         while(True):
 
             CPU = round(psutil.cpu_percent(), 2)
@@ -24,13 +22,7 @@ object scriptPadraoPython {
             RAM = round(psutil.virtual_memory().used / (1024**3), 3)
             
             DISK = round(psutil.disk_usage('/').used / (1024**3), 3)
-            
-            download = speed_test.download()
-            download_mbs = round(download / (10**6), 2)
-            
-            upload = speed_test.upload()
-            upload_mbs = round(upload / (10**6), 2)
-            
+
             bd = cnx.cursor()
 
             #CPU
@@ -60,8 +52,27 @@ object scriptPadraoPython {
                                 "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
             
             bd.execute(add_leitura_DISK, dados_DISK_PC)
+            cnx.commit()
+
+            time.sleep(${tempo})
+    """.trimIndent()
+
+        val codigoPythonDefaultRede = """
+        import speedtest as st
+        import time
+        from mysql.connector import connect
+
+        cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
+        speed_test = st.Speedtest()
+ 
+        while(True):
+            download = speed_test.download()
+            download_mbs = round(download / (10**6), 2)
             
+            upload = speed_test.upload()
+            upload_mbs = round(upload / (10**6), 2)
             
+            bd = cnx.cursor()
             
             #DOWNLOAD
             dados_DOWNLOAD_PC = [download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado]
@@ -84,22 +95,31 @@ object scriptPadraoPython {
             bd.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
             cnx.commit()
 
-            time.sleep($tempo)
+            time.sleep(20)
     """.trimIndent()
 
-        val nomeArquivoPyDefault = "centrixMonitoramento.py"
 
-        File(nomeArquivoPyDefault).writeText(codigoPythonDefault)
+        val nomeArquivoPyDefaultHard = "centrixMonitoramentoHardware.py"
+        File(nomeArquivoPyDefaultHard).writeText(codigoPythonDefaultHard)
+
         Thread.sleep(2 * 1000L)
 
-        return nomeArquivoPyDefault
+        val nomeArquivoPyDefaultRede = "centrixMonitoramentoRede.py"
+        File(nomeArquivoPyDefaultRede).writeText(codigoPythonDefaultRede)
+
+        return Pair(nomeArquivoPyDefaultHard, nomeArquivoPyDefaultRede)
+
     }
 
-    fun executarScript(arquivo: String) {
-        pythonProcess = Runtime.getRuntime().exec("py $arquivo")
+    fun executarScript(arquivo1: String, arquivo2: String) {
+        val pythonProcess1 = Runtime.getRuntime().exec("py $arquivo1")
+        val pythonProcess2 = Runtime.getRuntime().exec("py $arquivo2")
+        pythonProcesses = listOf(pythonProcess1, pythonProcess2)
     }
 
     fun pararScript() {
-        pythonProcess?.destroyForcibly()
+        for (process in pythonProcesses) {
+            process.destroyForcibly()
+        }
     }
 }

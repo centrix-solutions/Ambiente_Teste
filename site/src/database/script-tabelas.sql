@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS centrix;
+DROP DATABASE IF EXISTS centrix;
 CREATE DATABASE IF NOT EXISTS centrix;
 USE centrix;
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS ComponentesQuePrestamosServico(
 
 CREATE TABLE IF NOT EXISTS Componentes_Monitorados (
 	idComponente_monitorado INT PRIMARY KEY auto_increment,
-    valor Double,
+    valor DECIMAL(10,2),
     fkComponentesExistentes INT,
     CONSTRAINT fk_ComponentesExistentes foreign key (fkComponentesExistentes) references ComponentesQuePrestamosServico(idComponentes_Que_PrestamosServicos),
     fkMaquina INT,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS Monitoramento (
 	idMonitoramento INT primary key auto_increment,
     Data_captura DATE,
     Hora_captura TIME,
-    Dado_Capturado FLOAT,
+    Dado_Capturado DECIMAL(10,2),
     fkCompMonitorados INT,
     constraint fk_CompMonitorados foreign key (fkCompMonitorados) references Componentes_Monitorados(idComponente_monitorado),
     fkCompMoniExistentes INT,
@@ -142,11 +142,11 @@ CREATE TABLE IF NOT EXISTS Alertas (
     FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento)
 );
 
-INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento, fkSede)
+INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento)
 VALUES
-    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A', 1),
-    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B', 2),
-    ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C', 3);
+    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),
+    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
+    ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
     
 /*
 insert into Maquinas values
@@ -157,13 +157,12 @@ insert into Maquinas values
     
 update maquinas set fkAndarDeTrabalho = 2 where idMaquina = 2;
 */
-    
+    INSERT INTO Andar_de_trabalho VALUES 
+(1, 1, "a", 1);
 INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar)
 VALUES
-    ('Funcionário 1', 'funcionario1@email.com', 'senha1', 1, 1, 1),
-    ('Funcionário 2', 'funcionario2@email.com', 'senha2', 1, 2, 1),
-    ('Funcionário 3', 'funcionario3@email.com', 'senha3', 1, 3, 1);
-    
+    ('Funcionário 1', 'funcionario1@email.com', 'senha1', 1, 1, 1);
+  
 INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('CPU'),
     ('DISCO'),
@@ -173,12 +172,15 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Taxa Upload'),
     ('Janelas do Sistema'),
     ('Processos');
-
+    
+select * from Componentes_Monitorados;
 select * from Componentes_Monitorados;
 select * from funcionario;
 select * from monitoramento order by fkCompMoniExistentes;
+select * from empresa;
 select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
-select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento order by fkCompMoniExistentes;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento order by Hora_captura desc;
 select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
 select * from login;
 select * from maquinas;
+select * from notificacao;

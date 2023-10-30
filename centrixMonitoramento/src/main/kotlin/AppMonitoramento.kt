@@ -165,11 +165,12 @@ fun main() {
         println("")
         println("A cada quantos segundos quer obter os dados?")
         val tempo = sn.nextLine().toInt()
-        val arquivo = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
+        val (arquivo1, arquivo2) = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
 
         println("Iniciando o monitoramento....")
         var opcaoMonitoramento = true
-        scriptPadraoPython.executarScript(arquivo)
+
+        scriptPadraoPython.executarScript(arquivo1, arquivo2)
         val MonitoramentoThread = thread {
             while (opcaoMonitoramento) {
 
