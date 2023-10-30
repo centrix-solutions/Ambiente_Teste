@@ -39,11 +39,10 @@ function buscarUltimasMedidasCPU(req, res) {
     const limite_linhas = 7;
 
     var idMaquina = req.params.idMaquina;
-    var idEmpresa = 1
     
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasCPU(idMaquina, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
 
@@ -62,11 +61,10 @@ function buscarUltimasMedidasRAM(req, res) {
     const limite_linhas = 7;
 
     var idMaquina = req.params.idMaquina;
-    var idEmpresa = 1
     
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasRAM(idMaquina, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
 
@@ -84,11 +82,10 @@ function buscarMedidasEmTempoRealCPU(req, res) {
 
 
     var idMaquina = req.params.idMaquina;
-    var idEmpresa = 1
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoRealCPU(idMaquina).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -105,11 +102,10 @@ function buscarMedidasEmTempoRealRAM(req, res) {
 
 
     var idMaquina = req.params.idMaquina;
-    var idEmpresa = 1
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoRealRAM(idMaquina, idEmpresa).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoRealRAM(idMaquina).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

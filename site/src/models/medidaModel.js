@@ -8,7 +8,7 @@ function buscarComponentes(fkMaquina, fkEmpresa) {
     return database.executar(instrucao);
 }
 
-function buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas) {
+function buscarUltimasMedidasCPU(idMaquina, limite_linhas) {
 
     instrucaoSql = ''
     
@@ -18,7 +18,7 @@ function buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas) {
                         Hora_captura,
                         as momento_grafico
                     from Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
+                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
                     order by idMonitoramento desc`;
 
 
@@ -29,7 +29,7 @@ function buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas) {
                         Hora_captura
                         as momento_grafico
                     from  Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
+                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
                     order by idMonitoramento desc limit ${limite_linhas}`;
 
 
@@ -42,7 +42,7 @@ function buscarUltimasMedidasCPU(idMaquina, idEmpresa, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas) {
+function buscarUltimasMedidasRAM(idMaquina, limite_linhas) {
 
     instrucaoSql = ''
     
@@ -52,7 +52,7 @@ function buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas) {
                         Hora_captura,
                         as momento_grafico
                     from Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
                     order by idMonitoramento desc`;
 
 
@@ -63,7 +63,7 @@ function buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas) {
                         Hora_captura
                         as momento_grafico
                     from  Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
                     order by idMonitoramento desc limit ${limite_linhas}`;
 
 
@@ -76,7 +76,7 @@ function buscarUltimasMedidasRAM(idMaquina, idEmpresa, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa) {
+function buscarMedidasEmTempoRealCPU(idMaquina) {
 
     instrucaoSql = ''
 
@@ -86,7 +86,7 @@ function buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa) {
         Hora_captura AS momento_grafico,  
         fkMaqCompMoni
         FROM Monitoramento
-        where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
+        where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
         ORDER BY idMonitoramento DESC;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -94,7 +94,7 @@ function buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa) {
         Dado_Capturado AS cpu,
         Hora_captura as momento_grafico, 
         fkMaqCompMoni
-             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 1
+             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
                    order by idMonitoramento desc limit 1`;
 
     } else {
@@ -106,7 +106,7 @@ function buscarMedidasEmTempoRealCPU(idMaquina, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealRAM(idMaquina, idEmpresa) {
+function buscarMedidasEmTempoRealRAM(idMaquina) {
 
     instrucaoSql = ''
 
@@ -116,7 +116,7 @@ function buscarMedidasEmTempoRealRAM(idMaquina, idEmpresa) {
         Hora_captura AS momento_grafico,  
         fkMaqCompMoni
         FROM Monitoramento
-        where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+        where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
         ORDER BY idMonitoramento DESC;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -124,7 +124,7 @@ function buscarMedidasEmTempoRealRAM(idMaquina, idEmpresa) {
         Dado_Capturado AS ram,
         Hora_captura as momento_grafico, 
         fkMaqCompMoni
-             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkEmpMaqCompMoni = ${idEmpresa} and fkCompMoniExistentes = 3
+             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
                    order by idMonitoramento desc limit 1`;
 
     } else {

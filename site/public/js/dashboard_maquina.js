@@ -5,6 +5,53 @@ var vetorValor = [];
 
 
 
+async function buscarComputador(idEmpresa, andares){
+
+    var idEmpresaVar = idEmpresa
+    var andarVar = andares.value
+
+    try {
+        var resposta = await fetch("/dashboard/buscarComputadores", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresaVar,
+                andarServer: andarVar
+            })
+        });
+        if (resposta.ok) {
+            
+            var respostaJson = await resposta.json();
+            console.log('JSON: ', respostaJson);
+            if (idFuncionario == undefined) {
+                var select = document.getElementById('computadores');
+            } else {
+                var select = document.getElementById(`andares-${idFuncionario}`);
+            }
+            select.innerHTML = "";
+
+            var option = document.createElement('option');
+            option.innerHTML = "Sem Computador";
+            option.value = `computador-0`;
+            select.appendChild(option);
+
+            for (let i = 0; i < respostaJson.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = respostaJson[i].idComputador;
+                if (idFuncionario == undefined) {
+                    idFuncionario = '';
+                }
+                option.value = `andar-${respostaJson[i].idAndar_de_trabalho}${idFuncionario}`;
+                select.appendChild(option);
+            }
+        }
+    } catch (erro) {
+        console.log("Erro: ", erro);
+    }
+}
+
 function buscarComponentes(idMaquina, idEmpresa) {
     fetch("/medidas/buscarComponentes", {
         method: "POST",

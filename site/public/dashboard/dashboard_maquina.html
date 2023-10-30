@@ -16,7 +16,7 @@
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<body onload="buscarAndares(), listarLateral(), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)">
+<body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
-                        <select name="andares" class="select_andares" id="numero_maquina">
+                        <select name="computadores" class="select_andares" id="numero_maquina">
                             <option value="computador-0">Sem Computador</option>
                         </select>
                     </div>
@@ -121,5 +121,4 @@
     </div>
     </div>
 </body>
-
 </html>
