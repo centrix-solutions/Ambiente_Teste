@@ -167,10 +167,20 @@
                         sessionStorage.setItem("senha", json.senha);
                         sessionStorage.setItem("NivelAcesso", json.NivelAcesso);
                         sessionStorage.setItem("Empresa", json.Empresa);
+                        sessionStorage.setItem("fkAndar", json.fkAndar);
+
+                        var nivelAcesso = json.NivelAcesso;
+                        
+                        var windowLocation;
+                        if (nivelAcesso == 1) {
+                            windowLocation = "dashboard/dashboard_config.html";
+                        } else {
+                            windowLocation = "dashboard/dashboard_main.html";
+                        }
 
                         setTimeout(function () {
-                            window.location = "dashboard/dashboard_main.html";
-                        }, 1000); // apenas para exibir o loading
+                            window.location = windowLocation;
+                        }, 1000);
 
                     });
 
