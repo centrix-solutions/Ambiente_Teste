@@ -39,50 +39,115 @@
                         <p>
                             Nome
                         </p>
-                        <input type="text" class="input_cadastro" id="nome_input"/>
+                        <input type="text" class="input_cadastro" id="nome_input" />
                         <p>
                             Email
                         </p>
                         <span id="spanEmail"></span>
-                        <input type="text" class="input_cadastro" id="email_input"/>
+                        <input type="text" class="input_cadastro" id="email_input" />
                         <p>
                             Nivel de Acesso
                         </p>
-                        <select name="acesso" id="acesso_input" class="select_cadastro">
-                            <option value="1">Lílas</option>
-                            <option value="2">Magenta</option>
-                            <option value="3">Violeta</option>
-                            <option value="4">Púrpura</option>
-                        </select>
+                        <div class="containerAcesso">
+                            <select name="acesso" id="acesso_input" class="select_cadastro">
+                                <option value="1">Lílas</option>
+                                <option value="2">Magenta</option>
+                                <option value="3">Violeta</option>
+                                <option value="4">Púrpura</option>
+                            </select>
+                            <img src="../assets/icon/hint.png" alt="" id="showPopup">
+                        </div>
+                        <div id="popupContainer">
+                            <div id="popupContent">
+                                <span id="closePopup">X</span>
+                                <p class="popupCenter"> Nivel de Acesso </p><br>
+                                <div class="popupSeparacao">
+                                    <div class="popupParteUm">
+                                        <div id="lilas" onmouseover="aparecerTextoLilas()" onmouseout="resetLilas()">
+                                            Lílas</div>
+                                        <div id="magenta" onmouseover="aparecerTextoMagenta()"
+                                            onmouseout="resetMagenta()"> Magenta
+                                        </div>
+                                        <div id="violeta" onmouseover="aparecerTextoVioleta()"
+                                            onmouseout="resetVioleta()"> Violeta
+                                        </div>
+                                        <div id="purpura" onmouseover="aparecerTextoPurpura()"
+                                            onmouseout="resetPurpura()"> Púrpura
+                                        </div>
+                                    </div>
+                                    <div class="popupParteDois">
+                                        <div class="popupDica"> Passe o mouse por cima dos níveis de acesso</div>
+                                        <div id="lilasPermissao">
+                                            <li>Tela de Configurações - Visualização e Alteração;</li> <br>
+                                            <li>HelpDesk - Abertura de chamado;</li> <br>
+                                            <li>Download do Sistema - Visualizar e Baixar.</li>
+                                        </div>
+                                        <div id="magentaPermissao">
+                                            <li>Tela Inicial - Visualização;</li> <br>
+                                            <li>Tela Individual - Visualização Geral;</li> <br>
+                                            <li>Tela de Alertas e Rede - Visualização;</li> <br>
+                                            <li>Tela de Configurações - Visualização e Alteração;</li><br>
+                                            <li>Tela de Gráficos - Visualização;</li> <br>
+                                            <li>HelpDesk - Abertura de chamado;</li> <br>
+                                            <li>Download do Sistema - Visualizar e Baixar.</li>
+                                        </div>
+                                        <div id="violetaPermissao">
+                                            <li>Tela Inicial - Visualização e Alteração do lugar do computador;</li>
+                                            <br>
+                                            <li>Tela Individual - Visualização do seu andar; Tela de Alertas e Rede -
+                                                Visualização;</li> <br>
+                                            <li>Tela dos Funcionários - Visualização dos funcionários do seu andar;</li>
+                                            <br>
+                                            <li>Tela de Configurações - Visualização e Alteração;</li> <br>
+                                            <li>Tela de Gráficos - Visualização;</li> <br>
+                                            <li>HelpDesk - Abertura de chamado;</li> <br>
+                                            <li>Download do Sistema - Visualizar e Baixar.</li>
+                                        </div>
+                                        <div id="purpuraPermissao">
+                                            <li>Tela Inicial - Visualização e Cadastro de andar;</li> <br>
+                                            <li>Tela Individual - Visualização Geral;</li> <br>
+                                            <li>Tela de Alertas e Rede - Visualização;</li> <br>
+                                            <li>Tela dos Funcionários - Visualização, Cadastro e Edição dos
+                                                Funcionários;</li><br>
+                                            <li>Tela de Configurações - Visualização e Alteração; </li><br>
+                                            <li>Tela de Gráficos - Visualização;</li> <br>
+                                            <li>HelpDesk - Abertura de chamado;</li> <br>
+                                            <li>HelpDesk - Abertura de chamado;</li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <p>
                             Selecione o Andar que deseja monitorar
                         </p>
                         <select name="andares" class="select_andares" id="andares"></select>
-                    </div>
-                    <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
-                        Cadastrar
-                    </div>
-
-                    <div>
-                        <p>
-                            Token de Acesso
-                        </p>
-                        <div class="div_paiToken">
-                            <div class="div_token" id="divToken"></div>
+                        <div onclick="cadastrarFuncionario()" class="botao_cadastrar">
+                            Cadastrar
                         </div>
-                        <p>
-                            *Não perca este acesso, será necessário para o primeiro login e futura alteração da senha.
-                        </p>
-                    </div>
 
+                        <div>
+                            <p>
+                                Token de Acesso
+                            </p>
+                            <div class="div_paiToken">
+                                <div class="div_token" id="divToken"></div>
+                            </div>
+                            <p>
+                                *Não perca este acesso, será necessário para o primeiro login e futura alteração da
+                                senha.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
+
 </html>
 <script>
-    async function buscarFuncionarios(){
+    async function buscarFuncionarios() {
         var idEmpresa = sessionStorage.Empresa;
         try {
             var resposta = await fetch("/funcionarios/buscarFuncionarios", {
@@ -153,12 +218,12 @@
                     divNivel.appendChild(selectNivel);
                     divFuncionario.appendChild(divNivel);
 
-                    if(acessoUser == 1) selectNivel.value = "nivel1"
+                    if (acessoUser == 1) selectNivel.value = "nivel1"
                     else if (acessoUser == 2) selectNivel.value = "nivel2"
                     else if (acessoUser == 3) selectNivel.value = "nivel3"
                     else if (acessoUser == 4) selectNivel.value = "nivel4"
 
-                    selectNivel.addEventListener("change", function() {
+                    selectNivel.addEventListener("change", function () {
                         var idselectNivel = this.id;
                         idselectNivel = idselectNivel.split('-')[1];
                         var select = document.getElementById(`select_acesso-${idselectNivel}`)
@@ -179,18 +244,18 @@
                     selectAndar.className = "select_andares";
                     selectAndar.id = `andares-${idFuncionario}`;
                     buscarAndares(idFuncionario);
-                    
+
                     divAndar.appendChild(spanAndar);
                     divAndar.appendChild(selectAndar);
                     divFuncionario.appendChild(divAndar);
-                    
-                    selectAndar.addEventListener("change", function() {
+
+                    selectAndar.addEventListener("change", function () {
                         var idselectAndar = this.id;
                         idselectAndar = idselectAndar.split('-')[1];
                         var select = document.getElementById(`andares-${idselectAndar}`)
                         var opcaoSelecionada = select.options[select.selectedIndex].value;
                         opcaoSelecionada = opcaoSelecionada.split('-')[1][0];
-                        mudarAndar(idselectAndar, opcaoSelecionada);                        
+                        mudarAndar(idselectAndar, opcaoSelecionada);
                     });
 
 
@@ -210,7 +275,7 @@
                     divAlerta.appendChild(spanAlerta);
                     divAlerta.appendChild(buttonAlerta);
                     divFuncionario.appendChild(divAlerta);
-                    
+
                     var divAtividade = document.createElement("div");
                     var spanAtividade = document.createElement("span");
                     var divAtividadeTexto = document.createElement("div");
@@ -224,7 +289,7 @@
                     divAtividade.appendChild(spanAtividade);
                     divAtividade.appendChild(divAtividadeTexto);
                     divFuncionario.appendChild(divAtividade);
-                    
+
                     divFuncionarios.appendChild(divFuncionario);
                 }
                 setTimeout(() => {
@@ -244,7 +309,7 @@
             console.log("Erro: ", erro);
         }
     }
-    async function mudarNivelAcesso(idFuncionario, tipo){
+    async function mudarNivelAcesso(idFuncionario, tipo) {
         try {
             var resposta = await fetch("/funcionarios/mudarNivelAcesso", {
                 method: "POST",
@@ -264,7 +329,7 @@
             console.log("Erro: ", erro);
         }
     }
-    async function mudarAndar(idFuncionario, andar){
+    async function mudarAndar(idFuncionario, andar) {
         try {
             var resposta = await fetch("/funcionarios/mudarAndar", {
                 method: "POST",
@@ -286,4 +351,169 @@
     }
     const atual = document.getElementById('option4');
     atual.style.backgroundColor = "blueviolet";
+</script>
+
+<script>
+    const showPopupButton = document.getElementById("showPopup");
+    const popupContainer = document.getElementById("popupContainer");
+    const closePopupButton = document.getElementById("closePopup");
+
+    showPopupButton.addEventListener("click", function () {
+        popupContainer.style.display = "block";
+    });
+
+    closePopupButton.addEventListener("click", function () {
+        popupContainer.style.display = "none";
+    });
+
+</script>
+
+<script>
+
+    function aparecerTextoLilas() {
+        var lilasPermissao = document.getElementById("lilasPermissao");
+        lilasPermissao.innerHTML = "";
+
+        var ul = document.createElement("ul");
+        var li1 = document.createElement("li");
+        var li2 = document.createElement("li");
+        var li3 = document.createElement("li");
+        li1.textContent = "Tela de Configurações - Visualização e Alteração;";
+        li2.textContent = "HelpDesk - Abertura de chamado;";
+        li3.textContent = "Download do Sistema - Visualizar e Baixar.";
+
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+
+        lilasPermissao.appendChild(ul);
+        lilasPermissao.style.display = "block";
+    }
+
+    function aparecerTextoMagenta() {
+        var magentaPermissao = document.getElementById("magentaPermissao");
+        magentaPermissao.innerHTML = "";
+
+        var ul = document.createElement("ul");
+        var li1 = document.createElement("li");
+        var li2 = document.createElement("li");
+        var li3 = document.createElement("li");
+        var li4 = document.createElement("li");
+        var li5 = document.createElement("li");
+        var li6 = document.createElement("li");
+        var li7 = document.createElement("li");
+
+        li1.textContent = "Tela Inicial - Visualização;";
+        li2.textContent = "Tela Individual - Visualização Geral;";
+        li3.textContent = "Tela de Alertas e Rede - Visualização;";
+        li4.textContent = "Tela de Configurações - Visualização e Alteração;";
+        li5.textContent = "Tela de Gráficos - Visualização;";
+        li6.textContent = "HelpDesk - Abertura de chamado;";
+        li7.textContent = "Download do Sistema - Visualizar e Baixar.";
+
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        ul.appendChild(li4);
+        ul.appendChild(li5);
+        ul.appendChild(li6);
+        ul.appendChild(li7);
+
+        magentaPermissao.appendChild(ul);
+        magentaPermissao.style.display = "block";
+    }
+
+    function aparecerTextoVioleta() {
+        var violetaPermissao = document.getElementById("violetaPermissao");
+        violetaPermissao.innerHTML = "";
+
+        var ul = document.createElement("ul");
+        var li1 = document.createElement("li");
+        var li2 = document.createElement("li");
+        var li3 = document.createElement("li");
+        var li4 = document.createElement("li");
+        var li5 = document.createElement("li");
+        var li6 = document.createElement("li");
+        var li7 = document.createElement("li");
+        var li8 = document.createElement("li");
+
+        li1.textContent = "Tela Inicial - Visualização e Alteração do lugar do computador;";
+        li2.textContent = "Tela Individual - Visualização do seu andar; Tela de Alertas e Rede - Visualização;";
+        li3.textContent = "Tela dos Funcionários - Visualização dos funcionários do seu andar;";
+        li4.textContent = "Tela de Configurações - Visualização e Alteração;";
+        li5.textContent = "Tela de Gráficos - Visualização;";
+        li6.textContent = "HelpDesk - Abertura de chamado;";
+        li7.textContent = "Download do Sistema - Visualizar e Baixar.";
+
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        ul.appendChild(li4);
+        ul.appendChild(li5);
+        ul.appendChild(li6);
+        ul.appendChild(li7);
+
+        violetaPermissao.appendChild(ul);
+        violetaPermissao.style.display = "block";
+    }
+
+    function aparecerTextoPurpura() {
+        var purpuraPermissao = document.getElementById("purpuraPermissao");
+        purpuraPermissao.innerHTML = "";
+
+        var ul = document.createElement("ul");
+        var li1 = document.createElement("li");
+        var li2 = document.createElement("li");
+        var li3 = document.createElement("li");
+        var li4 = document.createElement("li");
+        var li5 = document.createElement("li");
+        var li6 = document.createElement("li");
+        var li7 = document.createElement("li");
+        var li8 = document.createElement("li");
+
+        li1.textContent = "Tela Inicial - Visualização e Cadastro de andar;";
+        li2.textContent = "Tela Individual - Visualização Geral;";
+        li3.textContent = "Tela de Alertas e Rede - Visualização;";
+        li4.textContent = "Tela dos Funcionários - Visualização, Cadastro e Edição dos Funcionários;";
+        li5.textContent = "Tela de Configurações - Visualização e Alteração;";
+        li6.textContent = "Tela de Gráficos - Visualização;";
+        li7.textContent = "HelpDesk - Abertura de chamado;";
+        li8.textContent = "Download do Sistema - Visualizar e Baixar.";
+
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        ul.appendChild(li4);
+        ul.appendChild(li5);
+        ul.appendChild(li6);
+        ul.appendChild(li7);
+
+        purpuraPermissao.appendChild(ul);
+        purpuraPermissao.style.display = "block";
+    }
+
+    function resetLilas() {
+        var lilasPermissao = document.getElementById("lilasPermissao");
+        lilasPermissao.style.display = "none";
+        lilasPermissao.innerHTML = "";
+    }
+
+    function resetMagenta() {
+        var magentaPermissao = document.getElementById("magentaPermissao");
+        magentaPermissao.style.display = "none";
+        magentaPermissao.innerHTML = "";
+    }
+
+    function resetVioleta() {
+        var violetaPermissao = document.getElementById("violetaPermissao");
+        violetaPermissao.style.display = "none";
+        violetaPermissao.innerHTML = "";
+    }
+
+    function resetPurpura() {
+        var purpuraPermissao = document.getElementById("purpuraPermissao");
+        purpuraPermissao.style.display = "none";
+        purpuraPermissao.innerHTML = "";
+    }
+
 </script>
