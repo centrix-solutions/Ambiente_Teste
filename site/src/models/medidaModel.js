@@ -1,5 +1,13 @@
 var database = require("../database/config");
 
+function mudarAndarMaquina(IDMaquina, IDAndar) {
+
+    var instrucao = `UPDATE FROM Maquinas set fkAndarDeTrabalho = ${IDAndar} where ${IDMaquina}`
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+
+}
+
 function deletarComputador(IDMaquina) {
 
     var instrucao = `DELETE FROM Maquinas WHERE idMaquina = ${IDMaquina};`
@@ -265,6 +273,7 @@ function buscarLogin(fkMaquina, fkEmpresa) {
 
 module.exports = {
     deletarComputador,
+    mudarAndarMaquina,
     buscarUltimasMedidasCPU,
     buscarMedidasEmTempoRealCPU,
     buscarUltimasMedidasRAM,
