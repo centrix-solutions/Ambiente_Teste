@@ -370,7 +370,6 @@
     document.onkeydown = function (e) {
         var id = sessionStorage.idComputador;
         if (id != 0 && e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
-            console.log("teste")
             const bola = document.getElementById(`${id}`);
             var posicaoComputador = vetorIdComputador.indexOf(Number(bola.id));
             var horizontal = vetorPosicaoComputador[posicaoComputador][0];

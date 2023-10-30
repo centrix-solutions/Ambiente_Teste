@@ -24,16 +24,17 @@ async function buscarAndares(idFuncionario){
             }
             select.innerHTML = "";
 
-            
-
-            // var idAndarDeTrabalho = respostaJson
-
-            var option = document.createElement('option');
-            option.innerHTML = "Sem Andar";
-            option.value = `andar-0`;
-            select.appendChild(option);
-
             for (let i = 0; i < respostaJson.length; i++) {
+
+                var idAndarDeTrabalho = respostaJson[i].idAndar_de_trabalho;
+                
+
+                if (i == 0) {
+                    var option = document.createElement('option');
+                    option.innerHTML = "Sem Andar";
+                    option.value = `andar-0`;
+                    select.appendChild(option);
+                }
                 var option = document.createElement('option');
                 option.innerHTML = respostaJson[i].num_andar;
                 if (idFuncionario == undefined) {
