@@ -172,7 +172,6 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Taxa Upload'),
     ('Janelas do Sistema'),
     ('Processos');
-    
 select * from Componentes_Monitorados;
 select * from Componentes_Monitorados;
 select * from funcionario;

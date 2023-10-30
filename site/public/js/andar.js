@@ -1,6 +1,6 @@
 async function buscarAndares(idFuncionario){
     vetorImagensAndar = [];
-    vetorPosicaoImagensAndar = []
+    vetorPosicaoImagensAndar = [];
     
     var idEmpresaVar = sessionStorage.Empresa;
     try {
