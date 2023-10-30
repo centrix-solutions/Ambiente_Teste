@@ -43,4 +43,4 @@ while(True):
     bd.execute(add_leitura_DISK, dados_DISK_PC)
     cnx.commit()
 
-    time.sleep(10)
+    time.sleep(5)
