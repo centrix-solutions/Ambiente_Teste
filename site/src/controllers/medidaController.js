@@ -31,7 +31,7 @@ function mudarAndarMaquina(req, res) {
 }
 
 function deletarComputador(req, res) {
-
+    
     var IDMaquina = req.body.removerMaquinaSever
    
     if (IDMaquina == undefined) {
@@ -90,7 +90,7 @@ function buscarComponentes(req, res) {
 }
 function buscarUltimasMedidasCPU(req, res) {
 
-    const limite_linhas = 15;
+    const limite_linhas = 14;
 
     var idMaquina = req.params.idMaquina;
     
@@ -112,7 +112,7 @@ function buscarUltimasMedidasCPU(req, res) {
 
 function buscarUltimasMedidasRAM(req, res) {
 
-    const limite_linhas = 15;
+    const limite_linhas = 14;
 
     var idMaquina = req.params.idMaquina;
     

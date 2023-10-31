@@ -1,5 +1,6 @@
 var idEmpresa = Number(sessionStorage.getItem('Empresa'));
-var idMaquina = Number(sessionStorage.getItem('IdComputador'));
+var idMaquina = Number(sessionStorage.getItem('idComputador'));
+
 var vetoridComponentes = [];
 var vetorValor = [];
 
@@ -53,8 +54,9 @@ async function buscarComputador(idEmpresa, andares) {
 }
 
 function deletarComputador(idMaquina) {
+    console.log(idMaquina)
      var removerMaquina = idMaquina
-
+    console.log(removerMaquina)
         fetch("/medidas/deletarComputador", {
             method: "DELETE",
             headers: {
@@ -64,6 +66,7 @@ function deletarComputador(idMaquina) {
                 removerMaquinaSever: removerMaquina,                                  
             })
         });
+        window.location = "site\public\dashboard\dashboard_main.html"
 }   
 
 function buscarComponentes(idMaquina, idEmpresa) {
@@ -292,7 +295,7 @@ function obterDadosGraficoRAM(idMaquina, chartId) {
                     labels.shift();
                     labels.push(momento);
                     data.shift();
-                    data.push(usoRAMPercent); // Usar a porcentagem calculada
+                    data.push(usoRAMPercent); 
                     myChart.update();
                 }
                 setTimeout(atualizarGraficoRAM, 4000);

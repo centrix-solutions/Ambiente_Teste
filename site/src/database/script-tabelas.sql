@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS Componentes_Monitorados (
     fkComponentesExistentes INT,
     CONSTRAINT fk_ComponentesExistentes foreign key (fkComponentesExistentes) references ComponentesQuePrestamosServico(idComponentes_Que_PrestamosServicos),
     fkMaquina INT,
-    CONSTRAINT fk_Maquina foreign key (fkMaquina) references Maquinas(idMaquina),
+    CONSTRAINT fk_Maquina foreign key (fkMaquina) references Maquinas(idMaquina) ON DELETE CASCADE,
     fkEmpMaqComp INT,
     constraint fk_EmpMaqComp foreign key (fkEmpMaqComp) references Maquinas(fkEmpMaq)
 );
@@ -89,11 +89,11 @@ CREATE TABLE IF NOT EXISTS Monitoramento (
     Hora_captura TIME,
     Dado_Capturado DECIMAL(10,2),
     fkCompMonitorados INT,
-    constraint fk_CompMonitorados foreign key (fkCompMonitorados) references Componentes_Monitorados(idComponente_monitorado),
+    constraint fk_CompMonitorados foreign key (fkCompMonitorados) references Componentes_Monitorados(idComponente_monitorado) ON DELETE CASCADE,
     fkCompMoniExistentes INT,
     constraint fk_CompMoniExistentes foreign key (fkCompMoniExistentes) references Componentes_Monitorados(fkComponentesExistentes),
     fkMaqCompMoni INT,
-    constraint fk_MaqCompMoni foreign key (fkMaqCompMoni) references Componentes_Monitorados(fkMaquina),
+    constraint fk_MaqCompMoni foreign key (fkMaqCompMoni) references Componentes_Monitorados(fkMaquina) ON DELETE CASCADE,
     fkEmpMaqCompMoni INT,
     constraint fk_EmpMaqCompMoni foreign key (fkEmpMaqCompMoni) references Componentes_Monitorados(fkEmpMaqComp)
 );
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS Login (
     dataHoraSaida DATETIME,
     PRIMARY KEY (idLogin, idFuncionario, idMaquina, idEmpresa),
     FOREIGN KEY (idFuncionario) REFERENCES Funcionario(idfuncionario),
-    FOREIGN KEY (idMaquina) REFERENCES Maquinas(idMaquina),
+    FOREIGN KEY (idMaquina) REFERENCES Maquinas(idMaquina) ON DELETE CASCADE,
     FOREIGN KEY (Id_do_dispositivo) REFERENCES Maquinas(Id_do_dispositivo),
     FOREIGN KEY (idEmpresa) REFERENCES Funcionario (fkEmpFunc)
 );
@@ -144,9 +144,9 @@ CREATE TABLE IF NOT EXISTS Alertas (
 
 INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento)
 VALUES
-    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),
-    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
-    ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
+   ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),
+('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
+     ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
     
 /*
 insert into Maquinas values
@@ -158,10 +158,10 @@ insert into Maquinas values
 update maquinas set fkAndarDeTrabalho = 2 where idMaquina = 2;
 */
     INSERT INTO Andar_de_trabalho VALUES 
-(1, 1, "a", 1);
+ (1, 1, "a", 1);
 INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar)
 VALUES
-    ('Funcionário 1', 'funcionario1@email.com', 'senha1', 1, 1, 1);
+    ('Funcionário 1', 'funcionario1@email.com', 'senha1', 1, 4, 1);
   
 INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('CPU'),
@@ -172,7 +172,7 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Taxa Upload'),
     ('Janelas do Sistema'),
     ('Processos');
-select * from Componentes_Monitorados;
+    
 select * from Componentes_Monitorados;
 select * from funcionario;
 select * from monitoramento order by fkCompMoniExistentes;

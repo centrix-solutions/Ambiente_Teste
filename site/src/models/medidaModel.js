@@ -9,7 +9,7 @@ function mudarAndarMaquina(IDMaquina, IDAndar) {
 }
 
 function deletarComputador(IDMaquina) {
-
+     
     var instrucao = `DELETE FROM Maquinas WHERE idMaquina = ${IDMaquina};`
 
     console.log("Executando a instrução SQL: \n" + instrucao);

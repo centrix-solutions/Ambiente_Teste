@@ -16,9 +16,8 @@
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<!-- <body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)"> -->
-<body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares)">
-    <div class="container_principal">
+<body onload="buscarAndares(), listarLateral(),  buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)">
+<div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
             <div class="dash_superior">
@@ -62,7 +61,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Deletar Máquina</h2>
-                        <button class="botao_deletar" onclick="deletarComputador()" id="deletarMaquina" >Deletar</button>
+                        <button class="botao_deletar" onclick="deletarComputador(idMaquina)" id="deletarMaquina" >Deletar</button>
                     </div>
                 </div>
                 <div class="area_meio">
