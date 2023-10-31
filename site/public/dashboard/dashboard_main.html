@@ -173,8 +173,10 @@
             e.preventDefault();
         }
     });
-    // const atual = document.getElementById('option1');
-    // atual.style.backgroundColor = "blueviolet";
+    setTimeout(() => {
+        const atual = document.getElementById('option1');
+        atual.style.backgroundColor = "blueviolet";
+    }, 10);
     sessionStorage.idComputador = 0;
     var vetorIdComputador = [];
     var vetorPosicaoComputador = [];
@@ -353,9 +355,6 @@
     window.onclick = function (event) {
         var modal = document.getElementById('cadastroAndar_div');
         if (event.target == modal) modal.style.display = 'none';
-    }
-    function irMonitoramento(id) {
-        if (id == 0) alert("Selecione um computador para monitorar"); else window.location = "dashboard_maquina.html";
     }
     function cadastrarAndar() {
         var idEmpresaVar = sessionStorage.Empresa;

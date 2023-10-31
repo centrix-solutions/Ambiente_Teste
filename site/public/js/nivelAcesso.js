@@ -25,7 +25,7 @@ function listarLateral() {
             `;
         } else if (listaLateral[i] == "Gráfico") {
             barraLateral.innerHTML += `
-                <a href="dashboard_maquina.html">
+                <a onclick = "irMonitoramento(sessionStorage.idComputador)">
                     <div id="option2" class="barraLateral_option cursor">
                         <img src="../assets/imgs/graphCinza.png" alt="Gráficos Individualmente"/>
                     </div>
@@ -96,4 +96,7 @@ function listarLateral() {
 }
 function limparSession() {
     sessionStorage.clear();
+}
+function irMonitoramento(id) {
+    if (id == 0) alert("Selecione um computador para monitorar"); else window.location = "dashboard_maquina.html";
 }

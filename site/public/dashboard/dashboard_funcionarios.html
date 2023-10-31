@@ -348,8 +348,10 @@
             console.log("Erro: ", erro);
         }
     }
-    const atual = document.getElementById('option4');
-    atual.style.backgroundColor = "blueviolet";
+    setTimeout(() => {
+        const atual = document.getElementById('option4');
+        atual.style.backgroundColor = "blueviolet";
+    }, 10);
 </script>
 
 <script>
