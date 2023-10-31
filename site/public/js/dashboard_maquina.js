@@ -3,55 +3,6 @@ var idMaquina = Number(sessionStorage.getItem('idComputador'));
 var vetoridComponentes = [];
 var vetorValor = [];
 
-
-
-async function buscarComputador(idEmpresa, andares) {
-
-    var idEmpresaVar = idEmpresa
-    var andarVar = andares.value
-
-    try {
-        var resposta = await fetch("/dashboard/buscarComputadores", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                idEmpresaServer: idEmpresaVar,
-                andarServer: andarVar
-            })
-        });
-        if (resposta.ok) {
-
-            var respostaJson = await resposta.json();
-            console.log('JSON: ', respostaJson);
-            if (idFuncionario == undefined) {
-                var select = document.getElementById('computadores');
-            } else {
-                var select = document.getElementById(`andares-${idFuncionario}`);
-            }
-            select.innerHTML = "";
-
-            var option = document.createElement('option');
-            option.innerHTML = "Sem Computador";
-            option.value = `computador-0`;
-            select.appendChild(option);
-
-            for (let i = 0; i < respostaJson.length; i++) {
-                var option = document.createElement('option');
-                option.innerHTML = respostaJson[i].idComputador;
-                if (idFuncionario == undefined) {
-                    idFuncionario = '';
-                }
-                option.value = `andar-${respostaJson[i].idAndar_de_trabalho}${idFuncionario}`;
-                select.appendChild(option);
-            }
-        }
-    } catch (erro) {
-        console.log("Erro: ", erro);
-    }
-}
-
 function deletarComputador(idMaquina) {
      var removerMaquina = idMaquina
 
@@ -565,7 +516,6 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
 
                     console.log(resposta[0])
                     nome_funcionario.innerHTML = resposta[0].NomeFuncionario
-                    numero_maquina.innerHTML = idMaquina
                     id_maquina.innerHTML = resposta[0].idComputador
                     atividade.innerHTML = resposta[0].Atividade
                     inicio_turno.innerHTML = resposta[0].HoraInicioTurno
@@ -592,6 +542,6 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
 }
 
 
-// setInterval(function () {
-//   buscarDadosMonitoramento(idMaquina, idEmpresa);
-// }, 2000); 
+setInterval(function () {
+  buscarDadosMonitoramento(idMaquina, idEmpresa);
+}, 2000); 

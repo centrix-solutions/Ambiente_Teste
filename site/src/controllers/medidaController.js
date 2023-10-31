@@ -30,6 +30,33 @@ function mudarAndarMaquina(req, res) {
     }
 }
 
+function buscarComputadores(req, res) {
+
+    var idEmpresa = req.body.idEmpresaServer
+    var idAndar = req.body.idAndarServer
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("Seu idEmpresa!")
+    } else {
+      
+      medidaModel.buscarComputadores(idEmpresa, idAndar)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o update! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function deletarComputador(req, res) {
 
     var IDMaquina = req.body.removerMaquinaSever
@@ -366,4 +393,5 @@ module.exports = {
     buscarJanelas,
     buscarProcessos,
     buscarLogin,
+    buscarComputadores
 }

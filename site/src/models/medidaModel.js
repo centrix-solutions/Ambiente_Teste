@@ -8,6 +8,18 @@ function mudarAndarMaquina(IDMaquina, IDAndar) {
 
 }
 
+function buscarComputadores(idEmpresa, idAndar) {
+
+    if(idAndar == 0){
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = ${idEmpresa} AND fkAndarDeTrabalho IS NULL;`
+    } else {
+        var instrucao = `SELECT * FROM Maquinas WHERE fkEmpMaq = ${idEmpresa} AND fkAndarDeTrabalho = ${idAndar};`
+    }
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+
+}
+
 function deletarComputador(IDMaquina) {
 
     var instrucao = `DELETE FROM Maquinas WHERE idMaquina = ${IDMaquina};`
@@ -287,6 +299,7 @@ module.exports = {
     buscarUpload,
     buscarJanelas,
     buscarProcessos,
-    buscarLogin
+    buscarLogin,
+    buscarComputadores
 }
 

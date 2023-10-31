@@ -7,6 +7,10 @@ router.post("/buscarComponentes", function (req, res) {
     medidaController.buscarComponentes(req, res);
 });
 
+router.post("/buscarComputadores", function (req, res) {
+    medidaController.buscarComputadores(req, res);
+});
+
 router.post("/mudarAndarMaquina", function (req, res) {
     medidaController.mudarAndarMaquina(req, res);
 });

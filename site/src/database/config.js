@@ -21,10 +21,10 @@ var sql = require('mssql');
 var mySqlConfig = {
     host: "localhost",
     database: "centrix",
-    // user: "aluno",
-    // password: "sptech",
-    user: "root",
-    password: "#Gf53359131851",
+    user: "aluno",
+    password: "sptech",
+    // user: "root",
+    // password: "#Gf53359131851",
 };
 
 function executar(instrucao) {

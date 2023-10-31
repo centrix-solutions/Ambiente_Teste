@@ -16,8 +16,7 @@
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<!-- <body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)"> -->
-<body onload="buscarAndares(), listarLateral()">
+<body onload="buscarAndares(), listarLateral(), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -44,9 +43,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Computador</h2>
-                        <select name="computadores" class="select_andares" id="numero_maquina">
-                            <option value="computador-0">Sem Computador</option>
-                        </select>
+                        <select name="computadores" class="select_andares" id="select_computadores"></select>
                     </div>
                     <div class="bloco_info">
                         <h2>ID</h2>
@@ -126,11 +123,26 @@
         var selectAndar = document.getElementById("andares");
         selectAndar.addEventListener("change", function () {
             var idComputador = sessionStorage.idComputador;
-            var opcaoSelecionada = selectAndar.options[selectAndar.selectedIndex].value;
-            opcaoSelecionada = opcaoSelecionada.split('-')[1];
-            mudarAndarMaquina(idComputador, opcaoSelecionada);
+            if (idComputador == 0 || idComputador == undefined) {
+                var idEmpresa = sessionStorage.Empresa;
+                var idAndar = (selectAndar.value).split('-')[1];
+                buscarComputadores(idEmpresa, idAndar);
+            } else {
+                var opcaoSelecionada = selectAndar.options[selectAndar.selectedIndex].value;
+                opcaoSelecionada = opcaoSelecionada.split('-')[1];
+                mudarAndarMaquina(idComputador, opcaoSelecionada);
+            }
         });
-        selectAndar.value = sessionStorage.idAndar;
+        if (sessionStorage.idAndar == '' || sessionStorage.idAndar == undefined) {
+            selectAndar.value = "andar-0";
+        } else {
+            selectAndar.value = sessionStorage.idAndar;
+        }
+        setTimeout(() => {
+            var idEmpresa = sessionStorage.Empresa;
+            var idAndar = (selectAndar.value).split('-')[1];
+            buscarComputadores(idEmpresa, idAndar);
+        }, 10);
     }, 1000);
 
     function mudarAndarMaquina(idComputador, andarSelecionado) {
@@ -148,5 +160,46 @@
     setTimeout(() => {
         const atual = document.getElementById('option2');
         atual.style.backgroundColor = "blueviolet";
-    }, 10);
+    }, 50);
+
+    async function buscarComputadores(idEmpresa, idAndar) {
+        try {
+            var resposta = await fetch("/medidas/buscarComputadores", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresa,
+                    idAndarServer: idAndar
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON BuscarComputadores SelecOption: ', respostaJson);
+                var selectComputadores = document.getElementById("select_computadores");
+                selectComputadores.innerHTML = '';
+                var option = document.createElement("option");
+                option.value = "computadores-0";
+                option.innerHTML = "Sem Computador";
+                selectComputadores.appendChild(option);
+                for (let i = 0; i < respostaJson.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = `computadores-${respostaJson[i].idMaquina}`;
+                    option.innerHTML = `${respostaJson[i].Id_do_dispositivo}`;
+                    selectComputadores.appendChild(option);
+
+                    
+                    selectComputadores.addEventListener("change", function () {
+                        var idComputador = selectComputadores.options[selectComputadores.selectedIndex].value;
+                        idComputador = idComputador.split('-')[1];
+                        sessionStorage.setItem('idComputador', idComputador);
+                    });
+                }
+                selectComputadores.value = `computadores-${sessionStorage.idComputador}`;
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
 </script>
