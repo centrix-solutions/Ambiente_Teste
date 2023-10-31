@@ -59,7 +59,7 @@
                     </div>
                     <div class="bloco_info">
                         <h2>Deletar Máquina</h2>
-                        <button class="botao_deletar" onclick="deletarComputador()" id="deletarMaquina" >Deletar</button>
+                        <button class="botao_deletar" onclick="deletarComputador(idMaquina)" id="deletarMaquina" >Deletar</button>
                     </div>
                 </div>
                 <div class="area_meio">
@@ -189,7 +189,6 @@
                     option.innerHTML = `${respostaJson[i].Id_do_dispositivo}`;
                     selectComputadores.appendChild(option);
 
-                    
                     selectComputadores.addEventListener("change", function () {
                         var idComputador = selectComputadores.options[selectComputadores.selectedIndex].value;
                         idComputador = idComputador.split('-')[1];

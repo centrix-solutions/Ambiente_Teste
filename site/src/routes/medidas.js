@@ -16,7 +16,7 @@ router.post("/mudarAndarMaquina", function (req, res) {
 });
 
 router.delete("/deletarComputador", function (req, res) {
-    medidaController.remover(req, res);
+    medidaController.deletarComputador(req, res);
 })
 
 router.get("/ultimas/:idMaquina", function (req, res) {

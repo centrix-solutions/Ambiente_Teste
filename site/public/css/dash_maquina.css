@@ -269,11 +269,12 @@ progress::-webkit-progress-value {
 }
 
 .chart {
-    width: 35vw;
+    width: 40vw;
 }
 
 #grafico_cpu,
 #grafico_ram {
     background-color: #000000;
-    border-radius: 20px;
+    border-radius: 10px;
+    
 }
