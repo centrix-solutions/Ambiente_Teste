@@ -92,6 +92,10 @@ async function verificaNotificacao(){
         console.log("Erro: ", erro);
     }
 }
+setInterval(() => {
+    verificarAlerta()
+    verificaNotificacao()
+}, 1000);
 async function retirarNotificacao(){
     var idEmpresa = sessionStorage.Empresa;
     try {

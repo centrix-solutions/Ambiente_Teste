@@ -24,7 +24,7 @@ var mySqlConfig = {
     // user: "aluno",
     // password: "sptech",
     user: "root",
-    password: "#Gf53359131851",
+    password: "38762",
 };
 
 function executar(instrucao) {

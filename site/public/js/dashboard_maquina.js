@@ -16,7 +16,7 @@ function deletarComputador(idMaquina) {
                 removerMaquinaSever: removerMaquina,                                  
             })
         });
-        window.location = "site\public\dashboard\dashboard_main.html"
+        window.location = "dashboard_main.html"
 }   
 
 function buscarComponentes(idMaquina, idEmpresa) {
