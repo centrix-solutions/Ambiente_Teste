@@ -296,6 +296,9 @@
                     tr.id = `tr-${respostaJson[i].idMaquina}`;
 
                     tableLista.appendChild(tr);
+                    var selectAndares = document.getElementById("andares");
+                    selectAndares = selectAndares.value;
+                    sessionStorage.setItem('idAndar', selectAndares);
                 }
                 setTimeout(() => {
                     for (let i = 0; i < respostaJson.length; i++) {
