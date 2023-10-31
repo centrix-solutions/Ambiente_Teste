@@ -46,7 +46,7 @@
                         <span id="spanEmail"></span>
                         <input type="text" class="input_cadastro" id="email_input" />
                         <p>
-                            Nivel de Acesso
+                            Nível de Acesso
                         </p>
                         <div class="containerAcesso">
                             <select name="acesso" id="acesso_input" class="select_cadastro">
@@ -60,7 +60,7 @@
                         <div id="popupContainer">
                             <div id="popupContent">
                                 <span id="closePopup">X</span>
-                                <p class="popupCenter"> Nivel de Acesso </p><br>
+                                <p class="popupCenter"> Nível de Acesso </p><br>
                                 <div class="popupSeparacao">
                                     <div class="popupParteUm">
                                         <div id="lilas" onmouseover="aparecerTextoLilas()" onmouseout="resetLilas()">
@@ -196,7 +196,7 @@
                     var option2 = document.createElement("option");
                     var option3 = document.createElement("option");
                     var option4 = document.createElement("option");
-                    spanNivel.innerHTML = "NÍVEL DE ACESSO";
+                    spanNivel.innerHTML = "Nível de Acesso";
                     divNivel.className = "div_botao1";
                     selectNivel.name = "acesso";
                     selectNivel.className = "select_acesso";
@@ -238,7 +238,7 @@
                     var divAndar = document.createElement("div");
                     var spanAndar = document.createElement("span");
                     var selectAndar = document.createElement("select");
-                    spanAndar.innerHTML = "ANDAR";
+                    spanAndar.innerHTML = "Andar";
                     divAndar.className = "div_botao1";
                     selectAndar.name = "andares";
                     selectAndar.className = "select_andares";
@@ -263,7 +263,7 @@
                     var buttonAlerta = document.createElement("button");
                     divAlerta.className = "div_botao1 div_botao2";
                     buttonAlerta.className = "button_alerta";
-                    spanAlerta.innerHTML = "ENVIAR ALERTA";
+                    spanAlerta.innerHTML = "Enviar Alerta";
                     buttonAlerta.innerHTML = "ENVIAR";
                     buttonAlerta.id = `button-${idFuncionario}`;
                     buttonAlerta.addEventListener('click', function () {
@@ -348,8 +348,10 @@
             console.log("Erro: ", erro);
         }
     }
-    const atual = document.getElementById('option4');
-    atual.style.backgroundColor = "blueviolet";
+    setTimeout(() => {
+        const atual = document.getElementById('option4');
+        atual.style.backgroundColor = "blueviolet";
+    }, 10);
 </script>
 
 <script>

@@ -183,3 +183,5 @@ select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniEx
 select * from login;
 select * from maquinas;
 select * from notificacao;
+
+Update funcionario set fkNivelAcesso = 4 where idFuncionario = 1;
