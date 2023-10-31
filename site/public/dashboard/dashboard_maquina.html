@@ -132,4 +132,17 @@
         });
         selectAndar.value = sessionStorage.idAndar;
     }, 100);
+
+    function mudarAndar(idComputador, andarSelecionado) {
+        fetch("/medidas/mudarAndarMaquina", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idComputadorServer: idComputador,
+                andarSelecionadoServer: andarSelecionado                                        
+            })
+        })
+    }
 </script>

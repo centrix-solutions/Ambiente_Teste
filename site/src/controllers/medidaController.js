@@ -1,5 +1,35 @@
 var medidaModel = require("../models/medidaModel");
 
+
+function mudarAndarMaquina(req, res) {
+
+    var IDMaquina = req.body.idComputadorServer
+    var IDAndar = req.body.andarSelecionadoServer
+
+    if (IDMaquina == undefined) {
+        res.status(400).send("Seu IDMaquina!")
+    } else if (IDAndar == undefined) {
+        res.status(400).send("Seu IDAndar está undefined!");
+      } else {
+      
+      medidaModel.mudarAndarMaquina(IDMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o update! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function deletarComputador(req, res) {
 
     var IDMaquina = req.body.removerMaquinaSever
@@ -322,6 +352,7 @@ function buscarLogin(req, res) {
 module.exports = {
     deletarComputador,
     buscarComponentes,
+    mudarAndarMaquina,
     buscarUltimasMedidasCPU,
     buscarMedidasEmTempoRealCPU,
     buscarUltimasMedidasRAM,
