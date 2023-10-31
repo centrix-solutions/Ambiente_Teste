@@ -17,7 +17,7 @@
 </head>
 
 <!-- <body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares), buscarComponentes(idMaquina, idEmpresa), obterDadosGraficos(), buscarDadosMonitoramento(idMaquina, idEmpresa)"> -->
-<body onload="buscarAndares(), listarLateral(), buscarComputadores(idEmpresa, andares)">
+<body onload="buscarAndares(), listarLateral()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -128,14 +128,14 @@
             var idComputador = sessionStorage.idComputador;
             var opcaoSelecionada = selectAndar.options[selectAndar.selectedIndex].value;
             opcaoSelecionada = opcaoSelecionada.split('-')[1];
-            mudarAndar(idComputador, opcaoSelecionada);
+            mudarAndarMaquina(idComputador, opcaoSelecionada);
         });
         selectAndar.value = sessionStorage.idAndar;
-    }, 100);
+    }, 1000);
 
-    function mudarAndar(idComputador, andarSelecionado) {
+    function mudarAndarMaquina(idComputador, andarSelecionado) {
         fetch("/medidas/mudarAndarMaquina", {
-            method: "DELETE",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },

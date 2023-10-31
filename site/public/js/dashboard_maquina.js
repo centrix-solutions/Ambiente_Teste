@@ -1,5 +1,5 @@
 var idEmpresa = Number(sessionStorage.getItem('Empresa'));
-var idMaquina = Number(sessionStorage.getItem('IdComputador'));
+var idMaquina = Number(sessionStorage.getItem('idComputador'));
 var vetoridComponentes = [];
 var vetorValor = [];
 
@@ -592,6 +592,6 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
 }
 
 
-setInterval(function () {
-  buscarDadosMonitoramento(idMaquina, idEmpresa);
-}, 2000); 
+// setInterval(function () {
+//   buscarDadosMonitoramento(idMaquina, idEmpresa);
+// }, 2000); 

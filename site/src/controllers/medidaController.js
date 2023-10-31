@@ -12,7 +12,7 @@ function mudarAndarMaquina(req, res) {
         res.status(400).send("Seu IDAndar está undefined!");
       } else {
       
-      medidaModel.mudarAndarMaquina(IDMaquina)
+      medidaModel.mudarAndarMaquina(IDMaquina, IDAndar)
             .then(
                 function (resultado) {
                     res.json(resultado);

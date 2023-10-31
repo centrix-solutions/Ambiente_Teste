@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function mudarAndarMaquina(IDMaquina, IDAndar) {
 
-    var instrucao = `UPDATE FROM Maquinas set fkAndarDeTrabalho = ${IDAndar} where ${IDMaquina}`
+    var instrucao = `UPDATE Maquinas set fkAndarDeTrabalho = ${IDAndar} where idMaquina = ${IDMaquina}`
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)
 
