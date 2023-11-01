@@ -14,7 +14,7 @@
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<body onload="buscarFuncionarios(), buscarAndares(), listarLateral()">
+<body onload="buscarFuncionarios(), buscarAndares(), listarLateral(), resetarToken()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <p>
-                            Selecione o Andar que deseja monitorar
+                            Selecione o andar que este funcionário pertence
                         </p>
                         <select name="andares" class="select_andares" id="andares"></select>
                         <div onclick="cadastrarFuncionario()" class="botao_cadastrar">

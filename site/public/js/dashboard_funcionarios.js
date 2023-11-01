@@ -1,8 +1,6 @@
 var idEmpresa = sessionStorage.getItem('Empresa');
 var token
 
-window.onload = resetarToken;
-
 function gerarToken() {
     const caracteres = '0123456789';
     let novoToken = '';

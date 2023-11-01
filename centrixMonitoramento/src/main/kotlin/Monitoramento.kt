@@ -181,7 +181,7 @@ class Monitoramento {
             val MonitoramentoThread = thread {
                 while (opcaoMonitoramento) {
 
-                    val atividade = looca.grupoDeJanelas.janelas[5].titulo
+                    val atividade = looca.grupoDeJanelas.janelas[3].titulo
                     repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
 
                     val dados: MutableList<Float> = mutableListOf(
