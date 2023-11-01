@@ -86,7 +86,7 @@ async function verificaNotificacao(){
                 var funcionario = respostaJson[i].Funcionario_Solicitante
                 alert(`Novo computador cadastrado no sistema!\r\nidDispositivo: ${idDispositivo}\r\nFuncionário:${funcionario}`);
             }
-            retirarNotificacao();//caso não de certo, trocar para deletar por idDispositvo e colocar isso no for ^!
+            retirarNotificacao();
         }
     } catch (erro) {
         console.log("Erro: ", erro);
@@ -94,8 +94,9 @@ async function verificaNotificacao(){
 }
 setInterval(() => {
     verificarAlerta()
-    verificaNotificacao()
+    // verificaNotificacao()
 }, 5000);
+
 async function retirarNotificacao(){
     var idEmpresa = sessionStorage.Empresa;
     try {
