@@ -38,8 +38,8 @@ async function verificarAlerta(){
             var nomeNotificacao = respostaJson[0].notificacao;
             var nomeFuncionario = sessionStorage.nome;
             if (respostaJson[0].notificacao != '' && respostaJson[0].notificacao != null) {
-                alert(`Olá ${nomeFuncionario}, parece que você está trabalhando a muito tempo e o seu turno acabou, por favor encerre as atividades. \r\n Ass: ${nomeNotificacao}`);
                 retirarAlerta();
+                alert(`Olá ${nomeFuncionario}, parece que você está trabalhando a muito tempo e o seu turno acabou, por favor encerre as atividades. \r\n Ass: ${nomeNotificacao}`);
             }
         }
     } catch (erro) {
@@ -92,10 +92,10 @@ async function verificaNotificacao(){
         console.log("Erro: ", erro);
     }
 }
-// setInterval(() => {
-//     verificarAlerta()
-//     verificaNotificacao()
-// }, 1000);
+setInterval(() => {
+    verificarAlerta()
+    verificaNotificacao()
+}, 5000);
 async function retirarNotificacao(){
     var idEmpresa = sessionStorage.Empresa;
     try {
