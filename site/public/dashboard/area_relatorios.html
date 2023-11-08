@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/icon/favicon.ico">
+    <title>Dashboard | Máquina</title>
+    <link rel="stylesheet" href="../css/barra_lateral.css">
+    <link rel="stylesheet" href="../css/relatorio.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard_maquina.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/notificacao.js"></script>
+    <script src="../js/andar.js"></script>
+    <script src="../js/nivelAcesso.js"></script>
+</head>
+
+<body onload="listarLateral()">
+    <div class="container_principal">
+        <div class="barra_lateral" id="lateral_barra">
+
+        </div>
+        <div class="area_dash">
+            <div class="dash_superior">
+                <div class="bem_vindo">
+                    <span class="text_bemVindo1">
+                        Criar Relatório
+                    </span>
+                    <span class="text_bemVindo2">
+                        Elabore documentos personalizados com as suas principais informações capturadas.
+                    </span>
+                </div>
+                <div class="bem_vindo_botoes">
+                    <button>Gerar Relatório</button>
+                    <button>Visualizar Histórico</button>
+                    <button>Gerar Dash</button>
+                </div>
+            </div>
+            <div class="card_monitoramento">
+                <div class="area_superior">
+                    <div class="area_superior_esquerda">
+                        <div class="texto_ajuda">
+                            <h2>Selecione no minimo 1 componente que voce deseja obter os dados</h2>
+                        </div>
+                        <div class="botoes_filtro">
+                            <button>Componentes</button>
+
+                            <button>Início</button> <!-- colocar icone calendario ou relogio -->
+                            <button>Fim</button>
+                        </div>
+                        <div class="filtros_maq">
+                            <div id="filtros_esquerda">
+                                <input type="checkbox" id="cpu">CPU
+                                <input type="checkbox" id="disco">DISCO
+                                <input type="checkbox" id="ram">RAM
+                                <input type="checkbox" id="usb">USB
+                            </div>
+
+                            <div id="filtros_direita">
+                                <input type="checkbox" id="taxa_dowload">Taxa Dowload
+                                <input type="checkbox" id="taxa_upload">Taxa Upload
+                                <input type="checkbox" id="janelas">Janelas
+                                <input type="checkbox" id="processos">Processos
+                            </div>
+                        </div>
+                        <!-- colocar icone computador -->
+                        <div class="selecionar_comp">
+                            <select id="computadores" name="computadores" multiple>
+                                <option value="id1">Comp1</option>
+                                <option value="id2">Comp2</option>
+                                <option value="id3">Comp3</option>
+                                <option value="id4">Comp4</option>
+                                <option value="id5">Comp5</option>
+                            </select>
+                            <input type="checkbox">Todos
+                            <button>Visualizar</button>
+                        </div>
+                        <div class="botoes_finais">
+                            <button>Gerar</button><!-- gera a previa do relatorio no lado direito da tela -->
+                            <button>Limpar</button><!-- reseta os filtros -->
+                            <button>Cancelar</button><!-- recarrega a pagina -->
+                        </div>
+                    </div>
+                    <div class="area_superior_direita">
+                        <h1>Visualização dos dados</h1>
+                        <select name="extensao" >
+                            <option value="pdf">PDF</option>
+                            <option value="pdf">CSV</option>
+                        </select>
+                        <button>Baixar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

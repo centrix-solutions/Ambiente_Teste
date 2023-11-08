@@ -1,0 +1,130 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+body {
+    margin: 0;
+}
+
+.container_principal {
+    height: 150vh;
+    display: flex;
+}
+
+.area_dash {
+    height: 100%;
+    width: 100%;
+    color: white;
+    background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
+            #8565C9 18.18%, rgba(180, 153, 238, 0.96) 27.27%, rgba(170, 143, 225, 0.63) 39.58%,
+            rgba(206, 185, 249, 0.93) 50%, rgba(151, 116, 222, 0.68) 57.29%, rgba(161, 122, 243, 0.85) 64.58%,
+            rgba(167, 131, 242, 0.90) 70.31%, rgba(139, 89, 245, 0.63) 81.82%, #5A34A9 90.91%, rgba(75, 55, 83, 0.99) 100%);
+}
+
+.segundo {
+    background-color: blueviolet;
+}
+
+.card_monitoramento {
+    width: 91%;
+    height: 90vh;
+    background-color: rgba(36, 36, 36, 1);
+    margin: 3rem;
+    position: absolute;
+    top: 41%;
+    left: 50%;
+    transform: translate(-50%, -39%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+
+.dash_superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.bem_vindo {
+   
+    flex: 1;
+}
+
+.bem_vindo_botoes {
+    display: flex;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.bem_vindo_botoes button {
+    margin-right: 10px;
+    width: 150px;
+    height: 40px;
+}
+
+.bem_vindo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.text_bemVindo1 {
+    font-size: 4vh;
+    font-weight: bolder;
+}
+
+.text_bemVindo2 {
+    font-size: 3vh;
+}
+
+
+.area_superior {
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.area_superior_esquerda {
+    flex: 1;
+}
+
+.area_superior_direita {
+    flex: 1;
+}
+
+.botoes_filtro {
+    display: flex;
+
+    justify-content: center;
+}
+.botoes_filtro button{
+    width: 150px;
+    height: 45px;
+    font-size: 15px;
+    margin: 10px;
+   
+}
+
+#filtros_esquerda {
+    float: left;
+    width: 50%;
+    /* Adicione margem ou padding para separação */
+}
+
+#filtros_direita {
+    float: left;
+    width: 50%;
+    /* Adicione margem ou padding para separação */
+}
+
+#filtros_esquerda input,
+#filtros_direita input {
+    display: block;
+    /* Exibe cada checkbox em uma nova linha */
+}
