@@ -2,7 +2,7 @@ import speedtest as st
 import time
 from mysql.connector import connect
 
-cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 speed_test = st.Speedtest()
 
 while(True):
@@ -15,7 +15,7 @@ while(True):
     bd = cnx.cursor()
     
     #DOWNLOAD
-    dados_DOWNLOAD_PC = [download_mbs, 4, 5, 1, 1]
+    dados_DOWNLOAD_PC = [download_mbs, 4, 5, 5, 1]
 
     add_leitura_DOWNLOAD = ("INSERT INTO Monitoramento"
                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
@@ -25,7 +25,7 @@ while(True):
     bd.execute(add_leitura_DOWNLOAD, dados_DOWNLOAD_PC)
     
     #UPLOAD
-    dados_UPLOAD_PC = [upload_mbs, 5, 6, 1, 1]
+    dados_UPLOAD_PC = [upload_mbs, 5, 6, 5, 1]
 
     add_leitura_UPLOAD = ("INSERT INTO Monitoramento"
                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"

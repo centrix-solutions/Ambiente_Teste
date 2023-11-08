@@ -158,7 +158,9 @@ class Monitoramento {
             componentes.forEach {
                 componentesExistentes.add(nomeComponentes[it - 1])
                 when (it) {
-                    4 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
+                    4 -> {
+                        fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
+                    }
                     7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
                     8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
                 }
@@ -172,7 +174,6 @@ class Monitoramento {
 
             val tempo = sn.nextLine().toInt()
             val (arquivo1, arquivo2) = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
-
             println("")
             println("Iniciando o monitoramento....")
             var opcaoMonitoramento = true

@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d2ee758-7beb-4ecd-a5a0-1a7d33d8c408" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Monitoramento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Monitoramento.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2XYcE0XiArZOakXIN0jDsVJFEd6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,9 +33,23 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/rafa_/Desktop/Ambiente_Teste/centrixMonitoramento"
+    "last_opened_file_path": "C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppMainKt" />
+      <module name="centrixMonitoramento" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.AppMainKt" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

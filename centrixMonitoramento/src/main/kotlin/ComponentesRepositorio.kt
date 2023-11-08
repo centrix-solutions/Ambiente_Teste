@@ -31,7 +31,7 @@ class ComponentesRepositorio {
 
     fun buscarComponetesMaq(idMaquina:Int): List<Int> {
         val componetes = jdbcTemplate.queryForList(
-            "SELECT fkComponentesExistentes FROM maquinas AS m JOIN componentes_monitorados AS c ON m.idMaquina = c.fkEmpMaqComp WHERE idMaquina = ?;",
+            "SELECT fkComponentesExistentes FROM maquinas AS m JOIN componentes_monitorados AS c ON m.idMaquina = c.FKMaquina WHERE idMaquina = ?;",
             arrayOf(idMaquina),
             Int::class.java
         )
