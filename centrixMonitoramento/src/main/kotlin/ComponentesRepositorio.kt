@@ -4,11 +4,12 @@ import org.springframework.jdbc.core.JdbcTemplate
 
 class ComponentesRepositorio {
     lateinit var jdbcTemplate: JdbcTemplate
+    lateinit var jdbcTemplateServer: JdbcTemplate
 
     fun iniciar() {
 
         jdbcTemplate = Conexao.jdbcTemplate!!
-
+        jdbcTemplateServer = Conexao.jdbcTemplateServer!!
     }
 
     fun buscarIdMaq(novaMaquina: Maquina): Int {
@@ -54,5 +55,12 @@ class ComponentesRepositorio {
         VALUES (?, ?, ?, ?)
         """.trimIndent(), valor, fkComponente, idMaq, novaMaquina.fkEmpMaq
         )
+        jdbcTemplateServer.update(
+            """
+        INSERT INTO Componentes_Monitorados (valor, fkComponentesExistentes, fkMaquina)
+        VALUES (?, ?, ?)
+        """.trimIndent(), valor, fkComponente, idMaq
+        )
+
     }
 }

@@ -6,11 +6,12 @@ import java.time.LocalDateTime
 class UsuarioRepositorio {
 
     lateinit var jdbcTemplate: JdbcTemplate
+    lateinit var jdbcTemplateServer: JdbcTemplate
 
     fun iniciar() {
 
         jdbcTemplate = Conexao.jdbcTemplate!!
-
+        jdbcTemplateServer = Conexao.jdbcTemplateServer!!
     }
 
     fun autenticarLogin(logarUsuarioEmail: String, logarUsuarioSenha: String): Boolean {

@@ -4,16 +4,22 @@ import java.time.LocalTime
 
 class MonitoramentoRepositorio {
     lateinit var jdbcTemplate: JdbcTemplate
+    lateinit var jdbcTemplateServer: JdbcTemplate
 
     fun iniciar() {
 
         jdbcTemplate = Conexao.jdbcTemplate!!
-
+        jdbcTemplateServer = Conexao.jdbcTemplateServer!!
     }
 
     fun registrarDados(
-        data: LocalDate, hora: LocalTime, dado: Float, fkcompMoni: Int, fkcompExis: Int,
-        idMaquinaDado: Int, idEmpresaDado: Int
+        data: LocalDate,
+        hora: LocalTime,
+        dado: Float,
+        fkcompMoni: Int,
+        fkcompExis: Int,
+        idMaquinaDado: Int,
+        idEmpresaDado: Int
     ) {
         jdbcTemplate.update(
             """
@@ -28,6 +34,12 @@ class MonitoramentoRepositorio {
             fkcompExis,
             idMaquinaDado,
             idEmpresaDado
+        )
+        jdbcTemplateServer.update(
+            """
+        INSERT INTO monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados)
+        VALUES ('$data', '$hora', $dado, $fkcompMoni)
+        """.trimIndent(),
         )
     }
 }

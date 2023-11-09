@@ -3,10 +3,12 @@ import org.springframework.jdbc.core.JdbcTemplate
 class MaquinaRepositorio {
 
     lateinit var jdbcTemplate: JdbcTemplate
+    lateinit var jdbcTemplateServer: JdbcTemplate
 
     fun iniciar() {
 
         jdbcTemplate = Conexao.jdbcTemplate!!
+        jdbcTemplateServer = Conexao.jdbcTemplateServer!!
 
     }
 
@@ -34,6 +36,25 @@ class MaquinaRepositorio {
                 INSERT INTO Notificacao (idDispositivo, Funcionario_Solicitante, fkEmpNot)
                 VALUES (?, ?, ?)
             """.trimIndent(),
+            novaMaquina.idCPU,
+            usuarioLogado.nome,
+            novaMaquina.fkEmpMaq
+        )
+        jdbcTemplateServer.update(
+            """
+        INSERT INTO Maquinas (Sistema_Operacional, Id_do_dispositivo, fkEmpMaq)
+        VALUES (?, ?, ?)
+        """.trimIndent(),
+            novaMaquina.SO,
+            novaMaquina.idCPU,
+            novaMaquina.fkEmpMaq
+        )
+
+        jdbcTemplateServer.update(
+            """
+        INSERT INTO Notificacao (idDispositivo, Funcionario_Solicitante, fkEmpNot)
+        VALUES (?, ?, ?)
+        """.trimIndent(),
             novaMaquina.idCPU,
             usuarioLogado.nome,
             novaMaquina.fkEmpMaq
