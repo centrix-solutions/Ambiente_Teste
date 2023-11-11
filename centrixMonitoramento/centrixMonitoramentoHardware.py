@@ -9,7 +9,7 @@ mysql_cnx = connect(user='root', password='38762', host='localhost', database='c
 
 sql_server_cnx = mysql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
 
-slack_token = 'xoxb-5806834878417-6181633164562-5fcgTBWWL4l75b34oWH7ETgL'
+slack_token = 'xoxb-5806834878417-6181633164562-0EX9fmOdmK2bMxTgymgx1Soq'
 slack_channel = '#notificação'
 slack_client = WebClient(token=slack_token)
 
