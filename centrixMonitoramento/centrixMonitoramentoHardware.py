@@ -1,11 +1,21 @@
 import psutil
 import time
-import mssql
+import mysql
 from mysql.connector import connect
+from slack_sdk import WebClient
+
 
 mysql_cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 
-sql_server_cnx = mssql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
+sql_server_cnx = mysql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
+
+slack_token = 'xoxb-5806834878417-6181633164562-5fcgTBWWL4l75b34oWH7ETgL'
+slack_channel = '#notificação'
+slack_client = WebClient(token=slack_token)
+
+limite_cpu = 30  # Métricas CPU, RAM e Disco
+limite_ram = 4
+limite_disco = 100
 
 while(True):
 
@@ -14,6 +24,19 @@ while(True):
     RAM = round(psutil.virtual_memory().used / (1024**3), 3)
     
     DISK = round(psutil.disk_usage('/').used / (1024**3), 3)
+
+    if CPU > limite_cpu:
+        message = f"Aviso: Uso de CPU acima do limite! ({CPU}%)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
+
+    if RAM > limite_ram:
+        message = f"Aviso: Uso de RAM acima do limite! ({RAM} GB)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
+
+    if DISK > limite_disco:
+        message = f"Aviso: Uso de Disco acima do limite! ({DISK} GB)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
+
 
     bdLocal_cursor = mysql_cnx.cursor()
     bdServer_cursor = sql_server_cnx.cursor()
