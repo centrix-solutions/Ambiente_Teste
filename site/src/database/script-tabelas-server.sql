@@ -1,9 +1,8 @@
 USE master;
 GO
 
-IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'centrix')
-    DROP DATABASE centrix;
-GO
+ DROP DATABASE centrix;
+
 
 CREATE DATABASE centrix;
 GO
@@ -91,7 +90,7 @@ CREATE TABLE Componentes_Monitorados (
     fkEmpMaqComp INT,
     CONSTRAINT fk_ComponentesExistentes FOREIGN KEY (fkComponentesExistentes) REFERENCES ComponentesQuePrestamosServico (idComponentes_Que_PrestamosServicos),
     CONSTRAINT fk_Maquina FOREIGN KEY (fkMaquina) REFERENCES Maquinas (idMaquina) ON DELETE CASCADE,
-    CONSTRAINT fk_EmpMaqComp FOREIGN KEY (fkEmpMaqComp) REFERENCES Maquinas (fkEmpMaq)
+    CONSTRAINT fk_EmpMaqComp FOREIGN KEY (fkEmpMaqComp) REFERENCES Empresa (idEmpresa)
 );
 
 
@@ -101,21 +100,22 @@ CREATE TABLE Monitoramento (
     Hora_captura TIME,
     Dado_Capturado DECIMAL(10,2),
     fkCompMonitorados INT,
-    CONSTRAINT fk_CompMonitorados FOREIGN KEY (fkCompMonitorados) REFERENCES Componentes_Monitorados (idComponente_monitorado) ON DELETE CASCADE,
+    CONSTRAINT fk_CompMonitorados FOREIGN KEY (fkCompMonitorados) REFERENCES Componentes_Monitorados (idComponente_monitorado) ON DELETE NO ACTION,
     fkCompMoniExistentes INT,
-    CONSTRAINT fk_CompMoniExistentes FOREIGN KEY (fkCompMoniExistentes) REFERENCES Componentes_Monitorados (fkComponentesExistentes),
+    CONSTRAINT fk_CompMoniExistentes FOREIGN KEY (fkCompMoniExistentes) REFERENCES ComponentesQuePrestamosServico (idComponentes_Que_PrestamosServicos) ON DELETE NO ACTION,
     fkMaqCompMoni INT,
-    CONSTRAINT fk_MaqCompMoni FOREIGN KEY (fkMaqCompMoni) REFERENCES Componentes_Monitorados (fkMaquina) ON DELETE CASCADE,
+    CONSTRAINT fk_MaqCompMoni FOREIGN KEY (fkMaqCompMoni) REFERENCES Maquinas (idMaquina) ON DELETE NO ACTION,
     fkEmpMaqCompMoni INT,
-    CONSTRAINT fk_EmpMaqCompMoni FOREIGN KEY (fkEmpMaqCompMoni) REFERENCES Componentes_Monitorados (fkEmpMaqComp)
+    CONSTRAINT fk_EmpMaqCompMoni FOREIGN KEY (fkEmpMaqCompMoni) REFERENCES Empresa (idEmpresa) ON DELETE NO ACTION
 );
+
 
 CREATE TABLE Login (
     idLogin INT IDENTITY(1,1),
     idFuncionario INT,
     idMaquina INT,
     idEmpresa INT,
-    Nome VARCHAR(45),
+    Email VARCHAR(45),
     Atividade VARCHAR(255),
     Id_do_dispositivo VARCHAR(16),
     dataHoraEntrada DATETIME,
@@ -124,7 +124,7 @@ CREATE TABLE Login (
     FOREIGN KEY (idFuncionario) REFERENCES Funcionario (idfuncionario),
     FOREIGN KEY (idMaquina) REFERENCES Maquinas (idMaquina) ON DELETE CASCADE,
     FOREIGN KEY (Id_do_dispositivo) REFERENCES Maquinas (Id_do_dispositivo),
-    FOREIGN KEY (idEmpresa) REFERENCES Funcionario (fkEmpFunc)
+    FOREIGN KEY (idEmpresa) REFERENCES Empresa (idEmpresa)
 );
 
 CREATE TABLE Tipo_Alerta_Parametros (
@@ -160,9 +160,9 @@ VALUES
 ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
      ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
 
-INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar)
+INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso)
 VALUES
-    ('Funcionário 1', 'funcionario1@email.com', 'senha1', 1, 4, 1);
+    ('Funcionário 1', 'a', 'b', 1, 4);
 
 INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('CPU'),

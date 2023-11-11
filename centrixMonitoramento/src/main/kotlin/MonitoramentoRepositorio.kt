@@ -37,9 +37,17 @@ class MonitoramentoRepositorio {
         )
         jdbcTemplateServer.update(
             """
-        INSERT INTO monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados)
-        VALUES ('$data', '$hora', $dado, $fkcompMoni)
+        INSERT INTO monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, 
+        fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """.trimIndent(),
+            data,
+            hora,
+            dado,
+            fkcompMoni,
+            fkcompExis,
+            idMaquinaDado,
+            idEmpresaDado
         )
     }
 }

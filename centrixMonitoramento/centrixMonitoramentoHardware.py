@@ -1,8 +1,11 @@
 import psutil
 import time
+import mssql
 from mysql.connector import connect
 
-cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+mysql_cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+
+sql_server_cnx = mssql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
 
 while(True):
 
@@ -12,35 +15,69 @@ while(True):
     
     DISK = round(psutil.disk_usage('/').used / (1024**3), 3)
 
-    bd = cnx.cursor()
+    bdLocal_cursor = mysql_cnx.cursor()
+    bdServer_cursor = sql_server_cnx.cursor()
+
+    #BD Local 
 
     #CPU
-    dados_CPU_PC = [CPU, 1, 1, 1, 1]
+    dados_CPU_PC = [CPU, 1, 1, 1]
 
     add_leitura_CPU = ("INSERT INTO Monitoramento"
                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                        "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
 
-    bd.execute(add_leitura_CPU, dados_CPU_PC)
+    bdLocal_cursor.execute(add_leitura_CPU, dados_CPU_PC)
     
     #RAM
-    dados_RAM_PC = [RAM, 2, 3, 1, 1]
+    dados_RAM_PC = [RAM, 2, 3, 1]
 
     add_leitura_RAM = ("INSERT INTO Monitoramento"
                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                        "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
     
 
-    bd.execute(add_leitura_RAM, dados_RAM_PC)
+    bdLocal_cursor.execute(add_leitura_RAM, dados_RAM_PC)
     
     #DISK
-    dados_DISK_PC = [DISK, 3, 2, 1, 1]
+    dados_DISK_PC = [DISK, 3, 2, 1]
 
     add_leitura_DISK = ("INSERT INTO Monitoramento"
                         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                         "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
     
-    bd.execute(add_leitura_DISK, dados_DISK_PC)
-    cnx.commit()
+    bdLocal_cursor.execute(add_leitura_DISK, dados_DISK_PC)
+    mysql_cnx.commit()
+    
+    #BD Server
+    
+    #CPU
+    dados_CPU_PC = [CPU, 1, 1, 1]
 
-    time.sleep(5)
+    add_leitura_CPU = ("INSERT INTO Monitoramento"
+                       "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                       "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
+
+    bdServer_cursor.execute(add_leitura_CPU, dados_CPU_PC)
+    
+    #RAM
+    dados_RAM_PC = [RAM, 2, 3, 1]
+
+    add_leitura_RAM = ("INSERT INTO Monitoramento"
+                       "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                       "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
+    
+
+    bdServer_cursor.execute(add_leitura_RAM, dados_RAM_PC)
+    
+    #DISK
+    dados_DISK_PC = [DISK, 3, 2, 1]
+
+    add_leitura_DISK = ("INSERT INTO Monitoramento"
+                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                        "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
+    
+    bdServer_cursor.execute(add_leitura_DISK, dados_DISK_PC)
+    bdServer_cursor.commit()
+
+    time.sleep(10)

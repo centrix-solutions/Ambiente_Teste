@@ -170,11 +170,8 @@ class Monitoramento {
 
             /* INICIO MONITORAMENTO */
             println("")
-            println("A cada quantos segundos quer obter os dados?")
-
-            val tempo = sn.nextLine().toInt()
+            val tempo = 10
             val (arquivo1, arquivo2) = scriptPadraoPython.criarScript(tempo, idMaquina, idEmpresa)
-            println("")
             println("Iniciando o monitoramento....")
             var opcaoMonitoramento = true
 
@@ -244,16 +241,16 @@ class Monitoramento {
                             scriptPadraoPython.pararScript()
 
                             val horaLogout = LocalDateTime.now()
-                            val datahj = LocalDateTime.now()
+                          //  val datahj = LocalDateTime.now()
 
-                            val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+                           // val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
 
-                            val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+                          //  val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
 
-                            if (diferencaEmDias!! > 7){
-                                repositorioUser.apagarLogs(usuarioLogado, idMaquina)
-                            }
-                            repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
+                          //  if (diferencaEmDias!! > 7){
+                         //       repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                        //    }
+                            repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogout)
                         }
 
                         2 -> {
@@ -262,18 +259,18 @@ class Monitoramento {
                             scriptPadraoPython.pararScript()
                             opcaoMonitoramento = false
 
-                            val datahj = LocalDateTime.now()
+                          //  val datahj = LocalDateTime.now()
                             val horaLogout = LocalDateTime.now()
 
-                            val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+                        //    val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
 
-                            val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+                        //    val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
 
-                            if (diferencaEmDias!! > 7){
-                                repositorioUser.apagarLogs(usuarioLogado, idMaquina)
-                            }
+                        //    if (diferencaEmDias!! > 7){
+                      //          repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                      //      }
 
-                            repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogin, horaLogout)
+                            repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogout)
 
                             exitProcess(0)
                         }

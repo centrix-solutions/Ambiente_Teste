@@ -15,7 +15,7 @@ class UsuarioRepositorio {
     }
 
     fun autenticarLogin(logarUsuarioEmail: String, logarUsuarioSenha: String): Boolean {
-        val consulta = jdbcTemplate.queryForObject(
+        val consulta = jdbcTemplateServer.queryForObject(
             "SELECT COUNT(*) AS count FROM Funcionario WHERE email = ? AND senha = ?",
             arrayOf(logarUsuarioEmail, logarUsuarioSenha),
             Int::class.java
@@ -25,7 +25,7 @@ class UsuarioRepositorio {
     }
 
     fun logarFuncionario(logarUsuarioEmail: String, logarUsuarioSenha: String): Usuario {
-        val funcionario = jdbcTemplate.queryForObject(
+        val funcionario = jdbcTemplateServer.queryForObject(
             "SELECT idFuncionario, nome, email, senha, fkEmpFunc, fkNivelAcesso FROM Funcionario WHERE email = ? AND senha = ?",
             arrayOf(logarUsuarioEmail, logarUsuarioSenha),
             BeanPropertyRowMapper(Usuario::class.java)
@@ -35,19 +35,28 @@ class UsuarioRepositorio {
     fun registrarLogin(usuarioLogado: Usuario, idMaq: Int, maquinaSpecs:Maquina, horaLogin: LocalDateTime) {
         jdbcTemplate.update(
             """
-        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Nome, Id_do_dispositivo, dataHoraEntrada)
+        INSERT INTO Login (Email, Id_do_dispositivo, dataHoraEntrada)
+        VALUES (?, ?, ?)
+        """.trimIndent(),
+            usuarioLogado.email,
+            maquinaSpecs.idCPU,
+            horaLogin
+        )
+        jdbcTemplateServer.update(
+            """
+        INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Email, Id_do_dispositivo, dataHoraEntrada)
         VALUES (?, ?, ?, ?, ?, ?)
         """.trimIndent(),
             usuarioLogado.idFuncionario,
             idMaq,
             usuarioLogado.fkEmpFunc,
-            usuarioLogado.nome,
+            usuarioLogado.email,
             maquinaSpecs.idCPU,
             horaLogin
         )
     }
     fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividade: String, horaLogin: LocalDateTime) {
-        jdbcTemplate.update(
+        jdbcTemplateServer.update(
             """
                 UPDATE Login
                 SET Atividade = '${atividade}'
@@ -57,8 +66,15 @@ class UsuarioRepositorio {
 
         )
     }
-    fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogin: LocalDateTime, horaLogout: LocalDateTime){
+    fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogout: LocalDateTime){
         jdbcTemplate.update(
+            """
+                UPDATE Login
+                SET dataHoraSaida = '${horaLogout}'
+                WHERE Email = ${usuarioLogado.email};
+            """.trimIndent()
+        )
+        jdbcTemplateServer.update(
             """
                 UPDATE Login
                 SET dataHoraSaida = '${horaLogout}'
@@ -67,25 +83,25 @@ class UsuarioRepositorio {
             """.trimIndent()
         )
     }
-    fun verificarLogin(usuarioLogado: Usuario, idMaquina: Int): LocalDateTime? {
-        val sql = """
-        SELECT MIN(dataHoraEntrada) AS dataMaisAntigaEntrada
-        FROM login
-        WHERE idFuncionario = ${usuarioLogado.idFuncionario} AND idMaquina = $idMaquina AND idEmpresa = ${usuarioLogado.fkEmpFunc};
-    """.trimIndent()
+   // fun verificarLogin(usuarioLogado: Usuario, idMaquina: Int): LocalDateTime? {
+    //    val sql = """
+   //     SELECT MIN(dataHoraEntrada) AS dataMaisAntigaEntrada
+   //     FROM login
+   //     WHERE idFuncionario = ${usuarioLogado.idFuncionario} AND idMaquina = $idMaquina AND idEmpresa = ${usuarioLogado.fkEmpFunc};
+   // """.trimIndent()
 
-        return jdbcTemplate.queryForObject(sql) { rs, _ ->
-            rs.getTimestamp("dataMaisAntigaEntrada")?.toLocalDateTime()
-        }
-    }
-    fun apagarLogs(usuarioLogado: Usuario, idMaquina: Int){
-        jdbcTemplate.update("""
-        DELETE FROM login
-        WHERE dataHoraEntrada <= NOW() and idFuncionario = ${usuarioLogado.idFuncionario} AND 
-        idMaquina = $idMaquina AND idEmpresa = ${usuarioLogado.fkEmpFunc}
-        ORDER BY dataHoraEntrada ASC
-        LIMIT 6;
-    """.trimIndent())
-    }
+    //    return jdbcTemplate.queryForObject(sql) { rs, _ ->
+    //        rs.getTimestamp("dataMaisAntigaEntrada")?.toLocalDateTime()
+   //     }
+  //  }
+  //  fun apagarLogs(usuarioLogado: Usuario, idMaquina: Int){
+   //    jdbcTemplate.update("""
+    //    DELETE FROM login
+   //     WHERE dataHoraEntrada <= NOW() and idFuncionario = ${usuarioLogado.idFuncionario} AND
+    //    idMaquina = $idMaquina AND idEmpresa = ${usuarioLogado.fkEmpFunc}
+    //    ORDER BY dataHoraEntrada ASC
+    //    LIMIT 6;
+   // """.trimIndent())
+   // }
 
 }
