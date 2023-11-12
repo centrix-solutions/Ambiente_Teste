@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function cadastrarEmpresa(Nome_fantasia, CNPJ, Responsavel_legal, cep, numero, complemento) {
-  var instrucaoSql1 = `insert into Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento) values 
+  var instrucaoSql1 = `INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento) VALUES 
   ('${Nome_fantasia}', '${CNPJ}','${Responsavel_legal}', '${cep}', ${numero}, '${complemento}')`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql1);
   return database.executar(instrucaoSql1);
@@ -15,7 +15,7 @@ function buscarFk(cnpj) {
 }
 
 function cadastrarFuncionario(nome, email, senha, fkEmpresa) {
-  var instrucaoSql3 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso) values 
+  var instrucaoSql3 = `INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso) VALUES 
   ('${nome}', '${email}','${senha}', ${fkEmpresa}, 4)`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql3);

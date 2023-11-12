@@ -30,7 +30,7 @@ function deletarComputador(IDMaquina) {
 
 function buscarComponentes(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT valor, fkComponentesExistentes as idComponente FROM Componentes_Monitorados where fkEmpMaqComp = ${fkEmpresa} and fkMaquina = ${fkMaquina}`;
+    var instrucao = `SELECT valor, fkComponentesExistentes AS idComponente FROM Componentes_Monitorados WHERE fkEmpMaqComp = ${fkEmpresa} AND fkMaquina = ${fkMaquina}`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -41,24 +41,24 @@ function buscarUltimasMedidasCPU(idMaquina, limite_linhas) {
     instrucaoSql = ''
     
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top ${limite_linhas}
+        instrucaoSql = `SELECT TOP ${limite_linhas}
                         Dado_Capturado AS cpu, 
                         Hora_captura,
-                        as momento_grafico
-                    from Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
-                    order by idMonitoramento desc`;
+                        AS momento_grafico
+                    FROM Monitoramento
+                    WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 1
+                    ORDER BY idMonitoramento DESC`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         const limite_linhas = 7
-        instrucaoSql = `select 
-                        Dado_Capturado as cpu, 
+        instrucaoSql = `SELECT 
+                        Dado_Capturado AS cpu, 
                         Hora_captura
-                        as momento_grafico
-                    from  Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
-                    order by idMonitoramento desc limit ${limite_linhas}`;
+                        AS momento_grafico
+                    FROM  Monitoramento
+                    WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 1
+                    ORDER BY idMonitoramento DESC LIMIT ${limite_linhas}`;
 
 
     } else {
@@ -75,24 +75,24 @@ function buscarUltimasMedidasRAM(idMaquina, limite_linhas) {
     instrucaoSql = ''
     
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top ${limite_linhas}
+        instrucaoSql = `SELECT TOP ${limite_linhas}
                         Dado_Capturado AS cpu, 
                         Hora_captura,
-                        as momento_grafico
-                    from Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
-                    order by idMonitoramento desc`;
+                        AS momento_grafico
+                    FROM Monitoramento
+                    WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 3
+                    ORDER BY idMonitoramento DESC`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         const limite_linhas = 7
-        instrucaoSql = `select 
-                        Dado_Capturado as cpu, 
+        instrucaoSql = `SELECT 
+                        Dado_Capturado AS cpu, 
                         Hora_captura
-                        as momento_grafico
-                    from  Monitoramento
-                    where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
-                    order by idMonitoramento desc limit ${limite_linhas}`;
+                        AS momento_grafico
+                    FROM Monitoramento
+                    WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 3
+                    ORDER BY idMonitoramento DESC LIMIT ${limite_linhas}`;
 
 
     } else {
@@ -114,16 +114,16 @@ function buscarMedidasEmTempoRealCPU(idMaquina) {
         Hora_captura AS momento_grafico,  
         fkMaqCompMoni
         FROM Monitoramento
-        where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
+        WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 1
         ORDER BY idMonitoramento DESC;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
+        instrucaoSql = `SELECT 
         Dado_Capturado AS cpu,
-        Hora_captura as momento_grafico, 
+        Hora_captura AS momento_grafico, 
         fkMaqCompMoni
-             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 1
-                   order by idMonitoramento desc limit 1`;
+            FROM Monitoramento WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 1
+                ORDER BY idMonitoramento DESC LIMIT 1`;
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -144,16 +144,16 @@ function buscarMedidasEmTempoRealRAM(idMaquina) {
         Hora_captura AS momento_grafico,  
         fkMaqCompMoni
         FROM Monitoramento
-        where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
+        WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 3
         ORDER BY idMonitoramento DESC;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
+        instrucaoSql = `SELECT 
         Dado_Capturado AS ram,
-        Hora_captura as momento_grafico, 
+        Hora_captura AS momento_grafico, 
         fkMaqCompMoni
-             from Monitoramento where fkMaqCompMoni = ${idMaquina} and fkCompMoniExistentes = 3
-                   order by idMonitoramento desc limit 1`;
+            FROM Monitoramento WHERE fkMaqCompMoni = ${idMaquina} AND fkCompMoniExistentes = 3
+               ORDER BY idMonitoramento DESC LIMIT 1`;
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -166,11 +166,22 @@ function buscarMedidasEmTempoRealRAM(idMaquina) {
 
 function buscarCpu(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 1 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 1 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 1 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -179,11 +190,22 @@ function buscarCpu(fkMaquina, fkEmpresa) {
 
 function buscarRam(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 3 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 3 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 3 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -192,11 +214,22 @@ function buscarRam(fkMaquina, fkEmpresa) {
 
 function buscarDisco(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 2 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 2 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 2 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -205,11 +238,22 @@ function buscarDisco(fkMaquina, fkEmpresa) {
 
 function buscarUsb(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 4 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 4 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 4 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -218,11 +262,22 @@ function buscarUsb(fkMaquina, fkEmpresa) {
 
 function buscarDownload(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 5 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 5 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 5 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -231,11 +286,22 @@ function buscarDownload(fkMaquina, fkEmpresa) {
 
 function buscarUpload(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 6 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 6 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 6 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -244,11 +310,22 @@ function buscarUpload(fkMaquina, fkEmpresa) {
 
 function buscarJanelas(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 7 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 7 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 7 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -257,11 +334,22 @@ function buscarJanelas(fkMaquina, fkEmpresa) {
 
 function buscarProcessos(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT Dado_Capturado as dado
-    FROM Monitoramento
-    WHERE fkCompMoniExistentes = 8 and fkMaqCompMoni = ${fkMaquina} and fkEmpMaqCompMoni = ${fkEmpresa}
-    ORDER BY Data_captura DESC, Hora_captura DESC
-    LIMIT 1`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 8 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT Dado_Capturado AS dado
+        FROM Monitoramento
+        WHERE fkCompMoniExistentes = 8 AND fkMaqCompMoni = ${fkMaquina} AND fkEmpMaqCompMoni = ${fkEmpresa}
+        ORDER BY Data_captura DESC, Hora_captura DESC
+        LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -270,14 +358,30 @@ function buscarProcessos(fkMaquina, fkEmpresa) {
 
 function buscarLogin(fkMaquina, fkEmpresa) {
 
-    var instrucao = `SELECT
-    Nome AS NomeFuncionario,
-    Atividade AS Atividade,
-    Id_do_dispositivo AS idComputador,
-    DATE_FORMAT(dataHoraEntrada, '%Y-%m-%d %H:%i:%s') AS HoraInicioTurno
-    FROM Login where idEmpresa = ${fkEmpresa} and idMaquina = ${fkMaquina}
-    ORDER BY dataHoraEntrada DESC
-	LIMIT 1;`;
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        var instrucao = `SELECT TOP 1
+        Nome AS NomeFuncionario,
+        Atividade AS Atividade,
+        Id_do_dispositivo AS idComputador,
+        CONVERT(VARCHAR, dataHoraEntrada, 120) AS HoraInicioTurno
+        FROM Login
+        WHERE idEmpresa = ${fkEmpresa} AND idMaquina = ${fkMaquina}
+        ORDER BY dataHoraEntrada DESC;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        var instrucao = `SELECT
+        Nome AS NomeFuncionario,
+        Atividade AS Atividade,
+        Id_do_dispositivo AS idComputador,
+        DATE_FORMAT(dataHoraEntrada, '%Y-%m-%d %H:%i:%s') AS HoraInicioTurno
+        FROM Login WHERE idEmpresa = ${fkEmpresa} AND idMaquina = ${fkMaquina}
+        ORDER BY dataHoraEntrada DESC
+        LIMIT 1;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 

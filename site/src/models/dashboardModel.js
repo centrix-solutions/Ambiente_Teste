@@ -15,14 +15,14 @@ function salvarPosicaoComputadores(idComputador, x, y) {
     return database.executar(instrucao);
 }
 function cadastrarAndar(cadastro) {
-    var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, foto_andar, fkEmpAndar) VALUES (${cadastro.numAndar}, "${cadastro.imagem}", ${cadastro.idEmpresa})`;
+    var instrucao = `INSERT INTO Andar_de_trabalho (num_andar, foto_andar, fkEmpAndar) VALUES (${cadastro.numAndar}, '${cadastro.imagem}', ${cadastro.idEmpresa})`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 function buscarAndares(idEmpresa) {
     
-    var instrucao = `select * from andar_de_trabalho where fkEmpAndar = ${idEmpresa};`;
+    var instrucao = `SELECT * FROM andar_de_trabalho WHERE fkEmpAndar = ${idEmpresa};`;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

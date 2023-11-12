@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function cadastrarFuncionario(nome, email, senha, fkEmpresa, nivelAcesso, fkAndar) {
-  var instrucaoSql1 = `insert into Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar) values 
+  var instrucaoSql1 = `INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso, fkAndar) VALUES 
   ('${nome}', '${email}','${senha}', ${fkEmpresa}, ${nivelAcesso}, ${fkAndar})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql1);
