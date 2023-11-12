@@ -1,5 +1,4 @@
-# Bem-vindo ao Repositório teste da Centrix Solutions
-
+<img src="github-header-image (1).png">
 ## Sobre Nós
 
 ## Funcionalidades Principais
