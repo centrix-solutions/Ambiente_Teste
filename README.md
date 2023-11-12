@@ -1,5 +1,4 @@
 <img src="github-header-image (1).png">
-## Sobre Nós
 
 ## Funcionalidades Principais
 
