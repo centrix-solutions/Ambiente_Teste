@@ -1,4 +1,4 @@
-<img src="github-header-image (1).png">
+<img src="header-centrix-solution.png">
 
 ## Funcionalidades Principais
 
