@@ -9,14 +9,11 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/relatorio.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/dashboard_maquina.js"></script>
     <script src="../js/sessao.js"></script>
-    <script src="../js/notificacao.js"></script>
-    <script src="../js/andar.js"></script>
     <script src="../js/nivelAcesso.js"></script>
 </head>
 
-<body onload="listarLateral()">
+<body onload="listarLateral(), buscarComputadoresRelatorio(idEmpresa)">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra">
 
@@ -41,53 +38,66 @@
                 <div class="area_superior">
                     <div class="area_superior_esquerda">
                         <div class="texto_ajuda">
+                            <!-- sempre que hooverar qualquer parte do site, mudar o texto de ajuda -->
                             <h2>Selecione no minimo 1 componente que voce deseja obter os dados</h2>
                         </div>
                         <div class="botoes_filtro">
-                            <button>Componentes</button>
-
-                            <button>Início</button> <!-- colocar icone calendario ou relogio -->
-                            <button>Fim</button>
+                            <button onclick="exibirComp()">Componentes</button>
+                            <button onclick="exibirInicio()">Início</button>
+                            <!-- colocar icone calendario ou relogio -->
+                            <button onclick="exibirFim()">Fim</button> <!-- Opção para trazer os alertas também -->
                         </div>
-                        <div class="filtros_maq">
+                        <div class="filtros_opçoes" id="idfiltros" style="display: block;">
                             <div id="filtros_esquerda">
-                                <input type="checkbox" id="cpu">CPU
-                                <input type="checkbox" id="disco">DISCO
-                                <input type="checkbox" id="ram">RAM
-                                <input type="checkbox" id="usb">USB
+                                <button onclick="selecionarTodosComponentes()">Selecionar Todos</button>
+                                <input type="checkbox" name="checkComp" id="cpu" value="1">CPU
+                                <input type="checkbox" name="checkComp" id="disco" value="2">DISCO
+                                <input type="checkbox" name="checkComp" id="ram" value="3">RAM
+                                <input type="checkbox" name="checkComp" id="usb" value="4">USB
                             </div>
-
                             <div id="filtros_direita">
-                                <input type="checkbox" id="taxa_dowload">Taxa Dowload
-                                <input type="checkbox" id="taxa_upload">Taxa Upload
-                                <input type="checkbox" id="janelas">Janelas
-                                <input type="checkbox" id="processos">Processos
+                                <input type="checkbox" name="checkComp" id="taxa_dowload" value=5>Taxa Dowload
+                                <input type="checkbox" name="checkComp" id="taxa_upload" value="6">Taxa Upload
+                                <input type="checkbox" name="checkComp" id="janelas" value="7">Janelas
+                                <input type="checkbox" name="checkComp" id="processos" value="8">Processos
                             </div>
+                            <button onclick="limpar()">Limpar</button>
+                            <button onclick="exibirInicio()">Continuar</button>
+                        </div>
+                        <div class="filtros_opçoes" id="idInicio" style="display: none;">
+                            <input type="datetime-local" id="input_inicio">
+                        </div>
+                        <div class="filtros_opçoes" id="idFim" style="display: none;">
+                            <input type="datetime-local" id="input_fim">
                         </div>
                         <!-- colocar icone computador -->
-                        <div class="selecionar_comp">
-                            <select id="computadores" name="computadores" multiple>
-                                <option value="id1">Comp1</option>
-                                <option value="id2">Comp2</option>
-                                <option value="id3">Comp3</option>
-                                <option value="id4">Comp4</option>
-                                <option value="id5">Comp5</option>
-                            </select>
-                            <input type="checkbox">Todos
-                            <button>Visualizar</button>
+                        <div class="container">
+                            <div class="select-btn">
+                                <span class="btn-text">Selecione 1 ou mais computadores</span>
+                                <button onclick="selecionarTodosMaquina()">Selecionar Todos</button>
+                                <button onclick="removerTodos()">Remover Todos</button>
+                            </div>
+
+                            <ul class="list-items" id="computadoresList">
+
+                            </ul>
+
                         </div>
                         <div class="botoes_finais">
-                            <button>Gerar</button><!-- gera a previa do relatorio no lado direito da tela -->
+                            <button
+                                onclick="criarPrevia()">Gerar</button><!-- gera a previa do relatorio no lado direito da tela -->
                             <button>Limpar</button><!-- reseta os filtros -->
                             <button>Cancelar</button><!-- recarrega a pagina -->
                         </div>
                     </div>
                     <div class="area_superior_direita">
                         <h1>Visualização dos dados</h1>
-                        <select name="extensao" >
+                        <input type="text" id="input_nome_arquivo">
+                        <select name="extensao">
                             <option value="pdf">PDF</option>
                             <option value="pdf">CSV</option>
                         </select>
+                        <div id="testando"></div>
                         <button>Baixar</button>
                     </div>
                 </div>
@@ -97,3 +107,186 @@
 </body>
 
 </html>
+<script>
+    var idEmpresa = sessionStorage.Empresa;
+
+    const selectBtn = document.querySelector(".select-btn");
+
+    selectBtn.addEventListener("click", () => {
+        selectBtn.classList.toggle("open");
+    });
+
+    async function buscarComputadoresRelatorio(idEmpresa) {
+        console.log(idEmpresa);
+        try {
+            var resposta = await fetch("/relatorios/buscarComputadoresRelatorio", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresa,
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON BuscarComputadores SelecOption: ', respostaJson);
+
+                var computadoresList = document.getElementById("computadoresList");
+                computadoresList.innerHTML = '';
+
+                for (let i = 0; i < respostaJson.length; i++) {
+                    var novoItem = document.createElement("li");
+                    novoItem.classList.add("item");
+
+                    var checkboxMaquina = document.createElement("input");
+                    checkboxMaquina.type = "checkbox";
+                    checkboxMaquina.name = "checkMaqui";
+
+                    checkboxMaquina.value = respostaJson[i].idMaquina;
+
+                    var itemText = document.createElement("span");
+                    itemText.classList.add("item-text");
+                    itemText.textContent = `ID: ${respostaJson[i].Id_do_dispositivo}`;
+
+                    novoItem.appendChild(checkboxMaquina);
+                    novoItem.appendChild(itemText);
+
+                    computadoresList.appendChild(novoItem);
+                }
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
+    function exibirComp() {
+        document.getElementById('idfiltros').style.display = 'block'
+        document.getElementById('idInicio').style.display = 'none'
+        document.getElementById('idFim').style.display = 'none'
+    }
+    function exibirInicio() {
+        document.getElementById('idfiltros').style.display = 'none'
+        document.getElementById('idInicio').style.display = 'block'
+        document.getElementById('idFim').style.display = 'none'
+    }
+    function exibirFim() {
+        document.getElementById('idfiltros').style.display = 'none'
+        document.getElementById('idInicio').style.display = 'none'
+        document.getElementById('idFim').style.display = 'block'
+    }
+    function selecionarTodosMaquina() {
+        var todosMaqui = document.querySelectorAll('input[name="checkMaqui"]');
+        todosMaqui.forEach(checkbox => {
+            checkbox.checked = true;
+        });
+    }
+    function selecionarTodosComponentes() {
+
+        var todosComponentes = document.querySelectorAll('input[name="checkComp"]');
+
+        todosComponentes.forEach(function (checkbox) {
+            checkbox.checked = true;
+        });
+    }
+    function removerTodos() {
+        var checkboxes = document.querySelectorAll('input[name="checkMaqui"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    }
+    function criarPrevia() {
+
+        var selecionadosComp = []
+        var selecionadosMaqui = []
+
+
+        var varDateTimeInicio = input_inicio.value
+        var varDateTimeFim = input_fim.value
+        var dataHoje = new Date()
+        var dataInicioVerificar = new Date(varDateTimeInicio)
+        var dataFimVerificar = new Date(varDateTimeFim)
+
+        var varDtInicio = varDateTimeInicio.split("T")[0]
+        var varHrInicio = varDateTimeInicio.split("T")[1]
+
+        var varDtFim = varDateTimeFim.split("T")[0]
+        var varHrFim = varDateTimeFim.split("T")[1]
+
+        //teste meo
+        console.log("Data de Início:", varDtInicio)
+        console.log("Hora de Início:", varHrInicio)
+        console.log("Data de Fim:", varDtFim)
+        console.log("Hora de Fim:", varHrFim)
+        console.log("Data de hoje:", dataHoje)
+
+        var componentesEscolhidos = document.querySelectorAll('input[name="checkComp"]:checked')
+        var maquinasEscolhidas = document.querySelectorAll('input[name="checkMaqui"]:checked')
+
+        componentesEscolhidos.forEach(checkbox => {
+            selecionadosComp.push(checkbox.value)
+        })
+
+        maquinasEscolhidas.forEach(checkbox => {
+            selecionadosMaqui.push(checkbox.value)
+        })
+
+        //teste meo
+        console.log("Maquinas Selecionadas:", selecionadosMaqui)
+        console.log("Componentes Selecionados:", selecionadosComp)
+
+        //criar duas funções para verificar se as datas de inicio e fim existem no bd 
+        if (selecionadosComp.length == 0) {
+            //colocar em vermelho no texto de ajuda que vc deve selecionar ao menos 1 componente
+            window.alert("você deve escolher ao menos 1 componente")
+        } else if (selecionadosMaqui.length == 1) {
+            window.alert("você deve escolher ao menos 1 computador")
+        } else if (varDateTimeInicio == "") {
+            window.alert("você deve escolher uma data de inicio")
+        } else if (dataInicioVerificar > dataHoje) {
+            window.alert("a data de inicio nao pode ser maior que o dia de hoje")
+        } else if (dataFimVerificar < dataInicioVerificar) {
+            window.alert("selecione uma data de fim maior que a data de inicio")
+        } else {
+            //pegar tbm o id do processador como nome da maquina pra colocar como primeiro campo da tabela, referenciado pelo idMaquina
+            var selectGeral = `
+        SELECT 
+            Data_captura AS Data, 
+            Hora_captura AS Hora, 
+            Dado_Capturado AS Dado, 
+            fkCompMoniExistentes AS Componente 
+        FROM 
+            Monitoramento 
+        WHERE 
+            fkEmpMaqCompMoni IN (${selecionadosMaqui}) AND 
+            fkCompMoniExistentes IN (${selecionadosComp}) AND 
+        (
+            Data_captura > '${varDtInicio}' OR 
+            (Data_captura = '${varDtInicio}' AND Hora_captura >= '${varHrInicio}')
+        ) AND 
+        (
+            Data_captura < '${varDtFim}' OR 
+            (Data_captura = '${varDtFim}' AND Hora_captura <= '${varHrFim}')
+        ) 
+        ORDER BY 
+        Data_Captura ASC;
+        `
+            console.log(selectGeral)
+            //fazer o fecth desse select com retorno em json e colocar o json na area de exibição
+            
+            //fazer 7 funções para trazer o sumary de cada componente (menos usb)
+            //usar um for para percorrer a lista e executar as funções dependendo dos componentes selecionados
+
+            //criar uma tabela no banco que armazene o nome do relatorio, caminho do arquivo, dtcriação e extensão
+            //buscar uma forma do  javascript chamar o kotlin passando os 
+            //parametros pra ele criar o python que cria o pdf e armazena no diretorio do site
+            //ver se da pra criar uns graficos e colocar no pdf com o python 
+            //tudo isso até quarta
+            //pagina com o historico de relatorios/csvs,
+            //pagina com a criação de graficos personalizada (acho que nao vai dar tempo mas)  
+            //terminar tudo até dia 26
+        }
+
+
+
+    }
+</script>

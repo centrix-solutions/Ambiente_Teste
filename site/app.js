@@ -13,6 +13,7 @@ var usuariosRouter = require("./src/routes/usuarios");
 var funcionariosRouter = require("./src/routes/funcionarios");
 var empresasRouter = require("./src/routes/empresas");
 var medidasRouter = require("./src/routes/medidas");
+var relatoriosRouter = require("./src/routes/relatorios");
 var dashboardRouter = require("./src/routes/dashboard");
 var notificacaoRouter = require("./src/routes/notificacao");
 
@@ -27,6 +28,7 @@ app.use("/usuarios", usuariosRouter);
 app.use("/empresas", empresasRouter);
 app.use("/funcionarios", funcionariosRouter);
 app.use("/medidas", medidasRouter);
+app.use("/relatorios", relatoriosRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/notificacao", notificacaoRouter);
 
