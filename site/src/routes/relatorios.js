@@ -7,4 +7,8 @@ router.post("/buscarComputadoresRelatorio", function (req, res) {
     relatorioController.buscarComputadoresRelatorio(req, res);
 });
 
+router.post("/buscarSelect", function (req, res) {
+    relatorioController.buscarSelect(req, res);
+});
+
 module.exports = router;

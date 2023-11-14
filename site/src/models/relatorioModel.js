@@ -11,6 +11,18 @@ function buscarComputadoresRelatorio(idEmpresa) {
 
 }
 
+function buscarSelect(select) {
+
+  
+    var instrucao = select
+
+
+console.log("Executando a instrução SQL: \n" + instrucao)
+return database.executar(instrucao)
+
+}
+
 module.exports = {
     buscarComputadoresRelatorio,
+    buscarSelect
 };

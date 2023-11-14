@@ -517,7 +517,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 response.json().then(function (resposta) {
 
                     console.log(resposta[0])
-                    nome_funcionario.innerHTML = resposta[0].NomeFuncionario
+                    nome_funcionario.innerHTML = resposta[0].Email
                     id_maquina.innerHTML = resposta[0].idComputador
                     atividade.innerHTML = resposta[0].Atividade
                     inicio_turno.innerHTML = resposta[0].HoraInicioTurno

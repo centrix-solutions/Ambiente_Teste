@@ -238,7 +238,7 @@
         if (selecionadosComp.length == 0) {
             //colocar em vermelho no texto de ajuda que vc deve selecionar ao menos 1 componente
             window.alert("você deve escolher ao menos 1 componente")
-        } else if (selecionadosMaqui.length == 1) {
+        } else if (selecionadosMaqui.length == 0) {
             window.alert("você deve escolher ao menos 1 computador")
         } else if (varDateTimeInicio == "") {
             window.alert("você deve escolher uma data de inicio")
@@ -271,6 +271,33 @@
         Data_Captura ASC;
         `
             console.log(selectGeral)
+
+            buscarSelect(selectGeral)
+            
+        function buscarSelect(selectGeral) {
+            fetch("/relatorios/buscarSelect", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                selectGeralServer: selectGeral
+            })
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+
+                    console.table(resposta)
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+        }
             //fazer o fecth desse select com retorno em json e colocar o json na area de exibição
             
             //fazer 7 funções para trazer o sumary de cada componente (menos usb)
