@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Alertas e Rede</title>
-    <link rel="stylesheet" href="../css/redeDash.css">
+    <link rel="stylesheet" href="../css/dash_rede.css">
     <link rel="stylesheet" href="../css/barra_lateral.css">
 </head>
 
@@ -166,7 +166,7 @@
                     <div class="graficos">
                         <div class="alertas_mes">
                             <span class="text_alertas">Alertas do último mês </span>
-                            <img src="../assets/imgs/Level.png" alt="">
+                            <canvas id="Stacked"></canvas>
                         </div>
                         <div class="alertas_andar">
                             <div class="titulo_select">
@@ -248,9 +248,9 @@
 <script src="../js/select_notifi.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var empresaFunc = sessionStorage.getItem('Empresa')
-    var atencao_porcento = 20
-    var perigo_porcento = 30
+    var empresaFunc = sessionStorage.getItem('Empresa');
+    var atencao_porcento = 20;
+    var perigo_porcento = 30;
 
     function obterdados() {
         buscarImportanciaMaquina(1, empresaFunc);
@@ -264,6 +264,8 @@
 
 
     // ChartJs
+
+    // MEIA LUA
 
     const data = {
         labels: ['Perigo', 'Atenção', 'Normal'],
@@ -340,6 +342,73 @@
         document.getElementById('meia_lua'),
         config
     );
+    // MEIA LUA
 
+    const labels2 = [
+    `Semana 01/10 - 07/10`, 
+    'Semana 01/10 - 07/10', 
+    'Semana 01/10 - 07/10', 
+    'Semana 01/10 - 07/10'
+    ]
+        
+    // STACKED
+    const data2 = {
+        labels: labels2,
+        datasets: [
+            {
+                label: 'Perigo',
+                data: [50, 40, 20, 30],
+                backgroundColor: [
+                    'rgb(96, 64, 155)'
+                ],
+                borderWidth: 1,
+                borderRadius: 10,
+                order: 2
+            },
+            {
+                label: 'Atenção',
+                data: [20, 60, 7, 20],
+                backgroundColor: [
+                    'rgb(159, 131, 221)'
+                ],
+                borderWidth: 1,
+                yAxisID: 'atencao',
+                borderRadius: 10,
+                order: 1,
+                barPercentage: 0.8
+            }
+        ]
+    };
+
+    // config2
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    beginAtZero: true,
+                    stacked: true,
+                },
+                atencao: {
+                    beginAtZero: true,
+                    position: 'right',
+                    type: 'linear',
+                    grid: {
+                        display: false
+                    }
+                }
+            }   
+        }
+    };
+
+    const ctx2 = new Chart(
+        document.getElementById('Stacked'),
+        config2
+    );
 
 </script>
