@@ -8,14 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/database/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/database/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/routes/relatorios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/routes/relatorios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/AppMain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/AppMain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AppMainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AppMainKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +20,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -38,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento",
+    "last_opened_file_path": "C:/Users/Aluno/Desktop/Arquivos Temporários/centrix/Ambiente_Teste/centrixMonitoramento",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0"
@@ -48,17 +51,6 @@
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />
       <module name="centrixMonitoramento" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

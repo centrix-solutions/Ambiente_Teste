@@ -8,6 +8,7 @@ function listarLateral() {
         listaLateral.push("Rede");
         if (nivelAcesso >= 3) {
             listaLateral.push("Funcionário");
+            listaLateral.push("Visão Geral");
         }
     }
     listaLateral.push("Configuração");
@@ -33,7 +34,7 @@ function listarLateral() {
             `;
         } else if (listaLateral[i] == "Rede") {
             barraLateral.innerHTML += `
-                <a href="dashboard_main.html">
+                <a href="dashboard_notifi_rede.html">
                     <div id="option3" class="barraLateral_option cursor">
                         <img src="../assets/imgs/medidasCinza.png" alt="Gráficos e Alertas"/>
                     </div>
@@ -47,10 +48,18 @@ function listarLateral() {
                     </div>
                 </a>
             `;
+        } else if (listaLateral[i] == "Visão Geral") {
+            barraLateral.innerHTML += `
+                <a href="dashboard_visoes.html">
+                    <div id="option5" class="barraLateral_option cursor">
+                        <img src="../assets/imgs/visaoGeral.png" alt="Funcionários"/>
+                    </div>
+                </a>
+            `;
         } else if (listaLateral[i] == "Configuração") {
             barraLateral.innerHTML += `
                 <a href="dashboard_config.html">
-                    <div id="option5" class="barraLateral_option cursor">
+                    <div id="option6" class="barraLateral_option cursor">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             class="option_icon">
                             <g clip-path="url(#clip0_4_2337)">
@@ -73,7 +82,7 @@ function listarLateral() {
         } else if (listaLateral[i] == "Help Desk") {
             barraLateral.innerHTML += `
                 <a href="https://centrix-solution.atlassian.net/servicedesk/customer/portal/1">
-                    <div id="option6" class="barraLateral_option cursor">
+                    <div id="option7" class="barraLateral_option cursor">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
                             stroke="#8c8c8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -86,7 +95,7 @@ function listarLateral() {
         } else if (listaLateral[i] == "Sair") {
             barraLateral.innerHTML += `
                 <a href="../login.html" onclick = "limparSession()">
-                    <div id="option7" class="barraLateral_option cursor">
+                    <div id="option8" class="barraLateral_option cursor">
                         <img src="../assets/imgs/logoutCinza.png" alt="Sair">
                     </div>
                 </a>

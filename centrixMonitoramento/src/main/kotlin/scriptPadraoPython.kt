@@ -14,10 +14,11 @@ object scriptPadraoPython {
         import mssql
         from mysql.connector import connect
         from slack_sdk import WebClient
+        import pymssql
 
         mysql_cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
 
-        sql_server_cnx = mssql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
+        sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
 
         slack_token = 'xoxb-5806834878417-6181633164562-0EX9fmOdmK2bMxTgymgx1Soq'
         slack_channel = '#notificação'
@@ -111,6 +112,7 @@ object scriptPadraoPython {
             
             bdServer_cursor.execute(add_leitura_DISK, dados_DISK_PC)
             bdServer_cursor.commit()
+        bdServer_cursor.close()
 
             time.sleep(10)
     """.trimIndent()
@@ -119,9 +121,12 @@ object scriptPadraoPython {
         import speedtest as st
         import time
         from mysql.connector import connect
+        import pymssql
 
         cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
         speed_test = st.Speedtest()
+        
+        sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
  
         while(True):
             download = speed_test.download()
@@ -131,6 +136,7 @@ object scriptPadraoPython {
             upload_mbs = round(upload / (10**6), 2)
             
             bd = cnx.cursor()
+            bdServer_cursor = sql_server_cnx.cursor()
             
             #DOWNLOAD
             dados_DOWNLOAD_PC = [download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado]
@@ -141,6 +147,7 @@ object scriptPadraoPython {
             
 
             bd.execute(add_leitura_DOWNLOAD, dados_DOWNLOAD_PC)
+            bdServer_cursor.execute(add_leitura_DOWNLOAD, dados_DOWNLOAD_PC)
             
             #UPLOAD
             dados_UPLOAD_PC = [upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado]
@@ -151,7 +158,11 @@ object scriptPadraoPython {
             
 
             bd.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
+            bdServer_cursor.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
+            
             cnx.commit()
+            bdServer_cursor.commit()
+        bdServer_cursor.close()
 
             time.sleep(20)
     """.trimIndent()
