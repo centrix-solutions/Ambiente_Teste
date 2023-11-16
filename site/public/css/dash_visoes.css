@@ -16,7 +16,7 @@ body {
 }
 
 .barra_lateral {
-    height: 121vh;
+    height: 133vh;
 }
 
 .area_dash {
@@ -53,12 +53,12 @@ body {
 
 /*DIV CENTRAL*/
 .div_central {
-    height: 108vh;
+    height: 120vh;
     display: flex;
     justify-content: space-around;
 }
 
-.div_conteudo{
+.div_conteudo {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -90,20 +90,19 @@ body {
     cursor: pointer;
 }
 
-.botao_visoes div:hover {
-    transform: scale(1.1);
-    border: 1rem solid #8565C9;
+.botao_visoes:hover {
+    box-shadow: 0 0 1rem #bf8cd3;
 }
 
-.botao_visoes div:active {
-    box-shadow: 0 0 1rem #360149;
+.botao_visoes:active {
+    /* border: #672c7e solid 2px; */
+    box-shadow: 0 0 1rem #4e3681;
 }
 
 .div_individual {
-    height: 75vh;
-    width: 80vw;
+    height: 90vh;
+    width: 85vw;
     background-color: #1E1E1E;
-    /* margin: 1rem; */
     border-radius: 1rem;
     padding: 1vh;
 }
