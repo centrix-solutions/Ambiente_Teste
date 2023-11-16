@@ -39,7 +39,7 @@ async function verificarAlerta(){
             var nomeFuncionario = sessionStorage.nome;
             if (respostaJson[0].notificacao != '' && respostaJson[0].notificacao != null) {
                 retirarAlerta();
-                alert(`Olá ${nomeFuncionario}, parece que você está trabalhando a muito tempo e o seu turno acabou, por favor encerre as atividades. \r\n Ass: ${nomeNotificacao}`);
+                alert(`Olá ${nomeFuncionario}, o seu turno acabou, por favor encerre as atividades. \r\n Ass: ${nomeNotificacao}`);
             }
         }
     } catch (erro) {
