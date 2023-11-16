@@ -1,12 +1,12 @@
 import psutil
 import time
-import mssql
 from mysql.connector import connect
 from slack_sdk import WebClient
+import pymssql
 
 mysql_cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 
-sql_server_cnx = mssql.connect(server= '44.197.21.59', user='sa', password='centrix', database='centrix')
+sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
 
 slack_token = 'xoxb-5806834878417-6181633164562-0EX9fmOdmK2bMxTgymgx1Soq'
 slack_channel = '#notificação'
@@ -100,5 +100,6 @@ while(True):
     
     bdServer_cursor.execute(add_leitura_DISK, dados_DISK_PC)
     bdServer_cursor.commit()
+bdServer_cursor.close()
 
     time.sleep(10)
