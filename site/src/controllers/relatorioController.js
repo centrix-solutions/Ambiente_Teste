@@ -7,8 +7,8 @@ function buscarComputadoresRelatorio(req, res) {
     if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa esta undefined")
     } else {
-      
-      relatorioModel.buscarComputadoresRelatorio(idEmpresa)
+
+        relatorioModel.buscarComputadoresRelatorio(idEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -33,8 +33,8 @@ function buscarSelect(req, res) {
     if (select == undefined) {
         res.status(400).send("Seu select esta undefined")
     } else {
-      
-      relatorioModel.buscarSelect(select)
+
+        relatorioModel.buscarSelect(select)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -49,10 +49,38 @@ function buscarSelect(req, res) {
                     res.status(500).json(erro.sqlMessage);
                 }
             );
-    } 
+    }
+}
+
+function verificarDatas(req, res) {
+
+    var selectData = req.body.veficarSelectServer
+
+    if (selectData == undefined) {
+        res.status(400).send("Seu selectData esta undefined")
+    } else {
+
+        relatorioModel.verificarDatas(selectData)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao buscar dados Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
 }
 
 module.exports = {
     buscarComputadoresRelatorio,
+    verificarDatas,
     buscarSelect
 }

@@ -360,7 +360,7 @@ function buscarLogin(fkMaquina, fkEmpresa) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         var instrucao = `SELECT TOP 1
-        Nome AS NomeFuncionario,
+        Email AS NomeFuncionario,
         Atividade AS Atividade,
         Id_do_dispositivo AS idComputador,
         CONVERT(VARCHAR, dataHoraEntrada, 120) AS HoraInicioTurno
@@ -370,7 +370,7 @@ function buscarLogin(fkMaquina, fkEmpresa) {
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         var instrucao = `SELECT
-        Nome AS NomeFuncionario,
+        Email AS NomeFuncionario,
         Atividade AS Atividade,
         Id_do_dispositivo AS idComputador,
         DATE_FORMAT(dataHoraEntrada, '%Y-%m-%d %H:%i:%s') AS HoraInicioTurno

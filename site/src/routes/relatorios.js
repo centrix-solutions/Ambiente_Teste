@@ -11,4 +11,8 @@ router.post("/buscarSelect", function (req, res) {
     relatorioController.buscarSelect(req, res);
 });
 
+router.post("/verificarDatas", function (req, res) {
+    relatorioController.verificarDatas(req, res);
+});
+
 module.exports = router;

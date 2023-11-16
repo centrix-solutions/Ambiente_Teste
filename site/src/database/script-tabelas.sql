@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS Login (
     idFuncionario INT,
     idMaquina INT,
     idEmpresa INT,
-    Nome VARCHAR(45),
+    Email VARCHAR(45),
     Atividade VARCHAR(255),
     Id_do_dispositivo CHAR(16),
     dataHoraEntrada DATETIME,

@@ -52,7 +52,7 @@ body {
 }
 
 .bem_vindo {
-   
+
     flex: 1;
 }
 
@@ -64,8 +64,11 @@ body {
 
 .bem_vindo_botoes button {
     margin-right: 10px;
-    width: 150px;
+    width: 160px;
     height: 40px;
+    background-color: #333;
+    color: white;
+    font-size: 17px;
 }
 
 .bem_vindo {
@@ -87,52 +90,98 @@ body {
 .area_superior {
     display: flex;
     width: 100%;
-    height: 50%;
+    height: 100%;
 }
 
 .area_superior_esquerda {
     flex: 1;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .area_superior_direita {
     flex: 1;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.texto_ajuda {
+    font-size: 15px;
+
 }
 
 .botoes_filtro {
     display: flex;
-
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.botoes_filtro button{
-    width: 150px;
+
+.botoes_filtro button {
+
+    width: 200px;
     height: 45px;
-    font-size: 15px;
-    margin: 10px;
-   
-}
-.filtros_opçoes{
-    background-color: burlywood;
-    width: 40vw;
-    height: 20vh;
-}
-#filtros_esquerda {
-    float: left;
-    width: 50%;
-    /* Adicione margem ou padding para separação */
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #333;
+    color: white;
+
 }
 
-#filtros_direita {
-    float: left;
-    width: 50%;
-    /* Adicione margem ou padding para separação */
+.filtros_opçoes {
+    height: 220px;
+    background-color: #333;
+    color: white;
+    font-size: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to top left, transparent, blueviolet, blueviolet, transparent) 1;
+
 }
 
-#filtros_esquerda input,
-#filtros_direita input {
-    display: block;
-    /* Exibe cada checkbox em uma nova linha */
+.filtros_componentes {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    
 }
-.select-btn{
+
+.lista {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.lista li {
+    width: calc(50% - 50px); /* 10px de margem entre os itens */
+    margin: auto;
+    box-sizing: border-box;
+}
+.lista button {
+    height: 25px;
+    font-size: 16px;
+    background-color: #333;
+    color: white
+}
+#limpar{
+    color: red;
+}
+#continuar{
+    color: rgb(0, 255, 0);
+}
+.lista input {
+    width: 21px;
+    height: 21px;
+    border: 2px solid #fff;
+}
+.select-btn {
+    margin-top: 15px;
     display: flex;
     height: 50px;
     align-items: center;
@@ -143,13 +192,14 @@ body {
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.select-btn .btn-text{
+
+.select-btn .btn-text {
     font-size: 17px;
     font-weight: 400;
     color: #333;
 }
 
-.list-items{
+.list-items {
     position: relative;
     margin-top: 15px;
     border-radius: 8px;
@@ -158,10 +208,12 @@ body {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     display: none;
 }
-.select-btn.open ~ .list-items{
+
+.select-btn.open~.list-items {
     display: block;
 }
-.list-items .item{
+
+.list-items .item {
     display: flex;
     align-items: center;
     list-style: none;
@@ -171,15 +223,18 @@ body {
     padding: 0 15px;
     border-radius: 8px;
 }
-.list-items .item:hover{
+
+.list-items .item:hover {
     background-color: #e7edfe;
 }
-.item .item-text{
+
+.item .item-text {
     font-size: 16px;
     font-weight: 400;
     color: #333;
 }
-.item .checkbox{
+
+.item .checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,16 +245,19 @@ body {
     border: 1.5px solid #c0c0c0;
     transition: all 0.3s ease-in-out;
 }
-.item.checked .checkbox{
+
+.item.checked .checkbox {
     background-color: #4070f4;
     border-color: #4070f4;
 }
-.checkbox .check-icon{
+
+.checkbox .check-icon {
     color: #fff;
     font-size: 11px;
     transform: scale(0);
     transition: all 0.2s ease-in-out;
 }
-.item.checked .check-icon{
+
+.item.checked .check-icon {
     transform: scale(1);
 }

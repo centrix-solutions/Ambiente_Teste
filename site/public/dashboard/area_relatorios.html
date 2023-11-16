@@ -48,21 +48,22 @@
                             <button onclick="exibirFim()">Fim</button> <!-- Opção para trazer os alertas também -->
                         </div>
                         <div class="filtros_opçoes" id="idfiltros" style="display: block;">
-                            <div id="filtros_esquerda">
-                                <button onclick="selecionarTodosComponentes()">Selecionar Todos</button>
-                                <input type="checkbox" name="checkComp" id="cpu" value="1">CPU
-                                <input type="checkbox" name="checkComp" id="disco" value="2">DISCO
-                                <input type="checkbox" name="checkComp" id="ram" value="3">RAM
-                                <input type="checkbox" name="checkComp" id="usb" value="4">USB
+                            <div class="filtros_componentes">
+                                <ul class="lista">
+                                    <li><button onclick="selecionarTodosComponentes()">Selecionar Todos</button></li>
+                                    <li><input type="checkbox" name="checkComp" id="cpu" value="1">CPU</li>
+                                    <li><input type="checkbox" name="checkComp" id="disco" value="2">DISCO</li>
+                                    <li><input type="checkbox" name="checkComp" id="ram" value="3">RAM</li>
+                                    <li><input type="checkbox" name="checkComp" id="usb" value="4">USB</li>
+                                    <li><input type="checkbox" name="checkComp" id="taxa_dowload" value="5">Taxa Dowload</li>
+                                    <li><input type="checkbox" name="checkComp" id="taxa_upload" value="6">Taxa Upload</li>
+                                    <li><input type="checkbox" name="checkComp" id="janelas" value="7">Janelas</li>
+                                    <li><input type="checkbox" name="checkComp" id="processos" value="8">Processos</li>
+                                    <li><button onclick="limpar()" id="limpar">Limpar</button>
+                                        <button onclick="exibirInicio()" id="continuar">Continuar</button>
+                                    </li>
+                                </ul>
                             </div>
-                            <div id="filtros_direita">
-                                <input type="checkbox" name="checkComp" id="taxa_dowload" value=5>Taxa Dowload
-                                <input type="checkbox" name="checkComp" id="taxa_upload" value="6">Taxa Upload
-                                <input type="checkbox" name="checkComp" id="janelas" value="7">Janelas
-                                <input type="checkbox" name="checkComp" id="processos" value="8">Processos
-                            </div>
-                            <button onclick="limpar()">Limpar</button>
-                            <button onclick="exibirInicio()">Continuar</button>
                         </div>
                         <div class="filtros_opçoes" id="idInicio" style="display: none;">
                             <input type="datetime-local" id="input_inicio">
@@ -99,6 +100,22 @@
                         </select>
                         <div id="testando"></div>
                         <button>Baixar</button>
+                        <div id="exibicao">
+                            <h2>Tabela de Monitoramento</h2>
+                            <table id="tabelaMonitoramento">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Hora</th>
+                                        <th>Dado</th>
+                                        <th>Componente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- O conteúdo da tabela será adicionado dinamicamente usando JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,6 +126,19 @@
 </html>
 <script>
     var idEmpresa = sessionStorage.Empresa;
+    var dados = []
+    var rotulo = {
+
+        1: "CPU",
+        2: "DISCO",
+        3: "RAM",
+        4: "USB",
+        5: "Taxa Dowload",
+        6: "Taxa Upload",
+        7: "Janelas",
+        8: "Processos"
+
+    }
 
     const selectBtn = document.querySelector(".select-btn");
 
@@ -188,6 +218,13 @@
             checkbox.checked = true;
         });
     }
+    function limpar(){
+        var todosComponentes = document.querySelectorAll('input[name="checkComp"]');
+
+        todosComponentes.forEach(function (checkbox) {
+            checkbox.checked = false;
+        });
+    }
     function removerTodos() {
         var checkboxes = document.querySelectorAll('input[name="checkMaqui"]');
         checkboxes.forEach(checkbox => {
@@ -242,11 +279,32 @@
             window.alert("você deve escolher ao menos 1 computador")
         } else if (varDateTimeInicio == "") {
             window.alert("você deve escolher uma data de inicio")
+        } else if (varDateTimeFim == "") {
+            window.alert("você deve escolher uma data de fim")
         } else if (dataInicioVerificar > dataHoje) {
             window.alert("a data de inicio nao pode ser maior que o dia de hoje")
         } else if (dataFimVerificar < dataInicioVerificar) {
             window.alert("selecione uma data de fim maior que a data de inicio")
         } else {
+
+            //arrumar isso 
+            var verificarSelect = `
+        SELECT COUNT(*) as count FROM 
+            Monitoramento 
+        WHERE 
+            fkEmpMaqCompMoni IN (${selecionadosMaqui}) AND 
+            fkCompMoniExistentes IN (${selecionadosComp}) AND 
+        (
+            Data_captura > '${varDtInicio}' OR 
+            (Data_captura = '${varDtInicio}' AND Hora_captura >= '${varHrInicio}')
+        ) AND 
+        (
+            Data_captura < '${varDtFim}' OR 
+            (Data_captura = '${varDtFim}' AND Hora_captura <= '${varHrFim}')
+        );
+        `
+            verificarDatas(verificarSelect)
+
             //pegar tbm o id do processador como nome da maquina pra colocar como primeiro campo da tabela, referenciado pelo idMaquina
             var selectGeral = `
         SELECT 
@@ -270,49 +328,100 @@
         ORDER BY 
         Data_Captura ASC;
         `
-            console.log(selectGeral)
 
             buscarSelect(selectGeral)
-            
-        function buscarSelect(selectGeral) {
-            fetch("/relatorios/buscarSelect", {
-            method: "POST",
-            headers: { 
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                selectGeralServer: selectGeral
-            })
-        }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
 
-                    console.table(resposta)
+            function buscarSelect(selectGeral) {
+                fetch("/relatorios/buscarSelect", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        selectGeralServer: selectGeral
+                    })
+                }).then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (resposta) {
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+                            dados = resposta
+                            formatarDados(dados)
+                            criarLinhasTabela(dados)
+
+                        });
+                    } else {
+                        console.error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                    .catch(function (error) {
+                        console.error(`Erro na obtenção dos dados: ${error.message}`);
+                    });
             }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados: ${error.message}`);
-            });
-        }
+            function verificarDatas(verificarSelect) {
+                fetch("/relatorios/verificarDatas", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        veficarSelectServer: verificarSelect
+                    })
+                }).then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (resposta) {
+
+                            console.log(`${resposta.value} Registro(s) foram encontrados`)
+
+                        });
+                    } else {
+                        console.error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                    .catch(function (error) {
+                        console.error(`Erro na obtenção dos dados: ${error.message}`);
+                    });
+            }
             //fazer o fecth desse select com retorno em json e colocar o json na area de exibição
-            
+
             //fazer 7 funções para trazer o sumary de cada componente (menos usb)
             //usar um for para percorrer a lista e executar as funções dependendo dos componentes selecionados
 
             //criar uma tabela no banco que armazene o nome do relatorio, caminho do arquivo, dtcriação e extensão
-            //buscar uma forma do  javascript chamar o kotlin passando os 
-            //parametros pra ele criar o python que cria o pdf e armazena no diretorio do site
-            //ver se da pra criar uns graficos e colocar no pdf com o python 
+            //ver se da pra criar uns graficos e colocar no pdf com o chartjs
             //tudo isso até quarta
             //pagina com o historico de relatorios/csvs,
             //pagina com a criação de graficos personalizada (acho que nao vai dar tempo mas)  
             //terminar tudo até dia 26
         }
+        function formatarDados(dados) {
 
+
+            for (var i = 0; i < dados.length; i++) {
+
+                dados[i].Data = dados[i].Data.split("T")[0]
+
+                dados[i].Hora = dados[i].Hora.split("T")[1]
+                dados[i].Hora = dados[i].Hora.slice(0, 8)
+
+                dados[i].Componente = rotulo[dados[i].Componente] || dados[i].Componente
+            }
+        }
+        function criarLinhasTabela(dados) {
+            var tabela = document.getElementById("tabelaMonitoramento").getElementsByTagName('tbody')[0];
+
+            for (var i = 0; i < dados.length; i++) {
+                var linha = tabela.insertRow(i);
+                var cellData = linha.insertCell(0);
+                var cellHora = linha.insertCell(1);
+                var cellDado = linha.insertCell(2);
+                var cellComponente = linha.insertCell(3);
+
+                cellData.innerHTML = dados[i].Data;
+                cellHora.innerHTML = dados[i].Hora;
+                cellDado.innerHTML = dados[i].Dado;
+                cellComponente.innerHTML = dados[i].Componente;
+            }
+        }
 
 
     }
