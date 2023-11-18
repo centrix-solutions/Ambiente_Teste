@@ -28,7 +28,6 @@ body {
 
 .dash_superior {
   width: 100%;
-  height: 100px;
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -51,8 +50,7 @@ body {
 .dash_perfil {
   display: flex;
   position: relative;
-  left: 20%;
-  justify-content: center;
+  left: 20rem;
 }
 
 .perfil_nome {
@@ -70,7 +68,7 @@ body {
 .perfil_imagem {
   height: 70px;
   width: 70px;
-  background-image: url("https://media.karousell.com/media/photos/products/2022/12/2/wts_chisato_nishikigi_cos_cosp_1669995238_840334c8.jpg");
+  background-image: url("../assets/imgs/supervisoraGeral.png");
   background-size: cover;
   border-radius: 100%;
   margin: 15px;

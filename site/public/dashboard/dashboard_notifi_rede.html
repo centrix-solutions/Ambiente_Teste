@@ -4,79 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/icon/favicon.ico">
     <title>Dashboard - Alertas e Rede</title>
     <link rel="stylesheet" href="../css/dash_rede.css">
     <link rel="stylesheet" href="../css/barra_lateral.css">
+    <script src="../js/andar.js"></script>
+    <script src="../js/nivelAcesso.js"></script>
+    <script src="../js/dash_rede_graph.js"></script>
 </head>
 
-<body onload="obterdados()">
+<body onload="buscarAndares(), listarLateral(), obterdados()">
     <div class="container_principal">
-        <div class="barra_lateral">
-            <div id="option1" class="barraLateral_option cursor primeiro">
-                <a href="dashboard_main.html">
-                    🏠</a>
-            </div>
-            <div id="option2" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24" fill="none">
-                    <g style="mix-blend-mode:darken">
-                        <rect width="26" height="23.0567" fill="#87888C" />
-                    </g>
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M1.85718 1.64679H3.25003V20.1745H24.1429V21.4097H1.85718V1.64679ZM22.4951 5.4919C22.566 5.5433 22.6247 5.60657 22.6679 5.67809C22.7112 5.74962 22.7381 5.82801 22.7471 5.90876C22.7562 5.98952 22.7472 6.07107 22.7207 6.14875C22.6942 6.22643 22.6507 6.29871 22.5926 6.36147L16.3248 13.155C16.2632 13.2216 16.1865 13.2761 16.0997 13.315C16.0129 13.3538 15.9179 13.3761 15.8208 13.3804C15.7238 13.3847 15.6267 13.3709 15.536 13.34C15.4453 13.309 15.3629 13.2616 15.2941 13.2007L11.6907 10.0052L6.59846 16.2145C6.48707 16.3401 6.3251 16.4225 6.1466 16.4445C5.9681 16.4664 5.78696 16.4261 5.64125 16.3321C5.49555 16.238 5.39661 16.0976 5.36524 15.9402C5.33387 15.7829 5.37251 15.6208 5.47303 15.4882L11.0445 8.69472C11.1036 8.62248 11.1797 8.56247 11.2675 8.51882C11.3553 8.47516 11.4527 8.44891 11.5531 8.44187C11.6534 8.43482 11.7543 8.44716 11.8488 8.47801C11.9432 8.50887 12.029 8.55752 12.1002 8.62061L15.7342 11.8444L21.5146 5.57836C21.5725 5.51555 21.6439 5.46349 21.7245 5.42515C21.8052 5.38681 21.8936 5.36294 21.9846 5.35491C22.0757 5.34688 22.1677 5.35484 22.2553 5.37835C22.3429 5.40186 22.4244 5.44044 22.4951 5.4919Z"
-                        fill="#87888C" stroke="#87888C" stroke-width="0.5" />
-                </svg>
-            </div>
-            <div id="option3" class="barraLateral_option cursor">
-                <a href="dashboard_notifi_rede.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 27 26" fill="none">
-                        <path
-                            d="M4.24275 11.4229V20.9467H8.87132V11.4229H4.24275ZM11.1856 4.28V20.9467H15.8142V4.28H11.1856ZM18.1285 13.8038V20.9467H22.757V13.8038H18.1285ZM22.757 23.3276H4.24275C3.60632 23.3276 3.0617 23.0947 2.60887 22.6288C2.15527 22.1621 1.92847 21.6014 1.92847 20.9467V11.4229C1.92847 10.7681 2.15527 10.2074 2.60887 9.74072C3.0617 9.27484 3.60632 9.04191 4.24275 9.04191H8.87132V4.28C8.87132 3.62524 9.09812 3.06452 9.55172 2.59786C10.0046 2.13198 10.5492 1.89905 11.1856 1.89905H15.8142C16.4506 1.89905 16.9956 2.13198 17.4492 2.59786C17.9021 3.06452 18.1285 3.62524 18.1285 4.28V11.4229H22.757C23.3935 11.4229 23.9385 11.6558 24.3921 12.1217C24.8449 12.5883 25.0713 13.149 25.0713 13.8038V20.9467C25.0713 21.6014 24.8449 22.1621 24.3921 22.6288C23.9385 23.0947 23.3935 23.3276 22.757 23.3276Z"
-                            fill="#8C8C8C" />
-                        <rect x="17" y="0.0566711" width="9" height="9" rx="4.5" fill="#FF0000" />
-                    </svg></a>
-            </div>
-            <div id="option4" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    class="option_icon">
-                    <path
-                        d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                        stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path
-                        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                        stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <line x1="20.5" y1="2" x2="20.5" y2="7" stroke="#8C8C8C" />
-                    <line x1="23.0046" y1="4.49998" x2="18.0048" y2="4.548" stroke="#8C8C8C" />
-                </svg>
-            </div>
-            <div id="option5" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    class="option_icon">
-                    <g clip-path="url(#clip0_4_2337)">
-                        <path
-                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
-                            stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M19.4 15C19.2669 15.3016 19.2272 15.6362 19.286 15.9606C19.3448 16.285 19.4995 16.5843 19.73 16.82L19.79 16.88C19.976 17.0657 20.1235 17.2863 20.2241 17.5291C20.3248 17.7719 20.3766 18.0322 20.3766 18.295C20.3766 18.5578 20.3248 18.8181 20.2241 19.0609C20.1235 19.3037 19.976 19.5243 19.79 19.71C19.6043 19.896 19.3837 20.0435 19.1409 20.1441C18.8981 20.2448 18.6378 20.2966 18.375 20.2966C18.1122 20.2966 17.8519 20.2448 17.6091 20.1441C17.3663 20.0435 17.1457 19.896 16.96 19.71L16.9 19.65C16.6643 19.4195 16.365 19.2648 16.0406 19.206C15.7162 19.1472 15.3816 19.1869 15.08 19.32C14.7842 19.4468 14.532 19.6572 14.3543 19.9255C14.1766 20.1938 14.0813 20.5082 14.08 20.83V21C14.08 21.5304 13.8693 22.0391 13.4942 22.4142C13.1191 22.7893 12.6104 23 12.08 23C11.5496 23 11.0409 22.7893 10.6658 22.4142C10.2907 22.0391 10.08 21.5304 10.08 21V20.91C10.0723 20.579 9.96512 20.258 9.77251 19.9887C9.5799 19.7194 9.31074 19.5143 9 19.4C8.69838 19.2669 8.36381 19.2272 8.03941 19.286C7.71502 19.3448 7.41568 19.4995 7.18 19.73L7.12 19.79C6.93425 19.976 6.71368 20.1235 6.47088 20.2241C6.22808 20.3248 5.96783 20.3766 5.705 20.3766C5.44217 20.3766 5.18192 20.3248 4.93912 20.2241C4.69632 20.1235 4.47575 19.976 4.29 19.79C4.10405 19.6043 3.95653 19.3837 3.85588 19.1409C3.75523 18.8981 3.70343 18.6378 3.70343 18.375C3.70343 18.1122 3.75523 17.8519 3.85588 17.6091C3.95653 17.3663 4.10405 17.1457 4.29 16.96L4.35 16.9C4.58054 16.6643 4.73519 16.365 4.794 16.0406C4.85282 15.7162 4.81312 15.3816 4.68 15.08C4.55324 14.7842 4.34276 14.532 4.07447 14.3543C3.80618 14.1766 3.49179 14.0813 3.17 14.08H3C2.46957 14.08 1.96086 13.8693 1.58579 13.4942C1.21071 13.1191 1 12.6104 1 12.08C1 11.5496 1.21071 11.0409 1.58579 10.6658C1.96086 10.2907 2.46957 10.08 3 10.08H3.09C3.42099 10.0723 3.742 9.96512 4.0113 9.77251C4.28059 9.5799 4.48572 9.31074 4.6 9C4.73312 8.69838 4.77282 8.36381 4.714 8.03941C4.65519 7.71502 4.50054 7.41568 4.27 7.18L4.21 7.12C4.02405 6.93425 3.87653 6.71368 3.77588 6.47088C3.67523 6.22808 3.62343 5.96783 3.62343 5.705C3.62343 5.44217 3.67523 5.18192 3.77588 4.93912C3.87653 4.69632 4.02405 4.47575 4.21 4.29C4.39575 4.10405 4.61632 3.95653 4.85912 3.85588C5.10192 3.75523 5.36217 3.70343 5.625 3.70343C5.88783 3.70343 6.14808 3.75523 6.39088 3.85588C6.63368 3.95653 6.85425 4.10405 7.04 4.29L7.1 4.35C7.33568 4.58054 7.63502 4.73519 7.95941 4.794C8.28381 4.85282 8.61838 4.81312 8.92 4.68H9C9.29577 4.55324 9.54802 4.34276 9.72569 4.07447C9.90337 3.80618 9.99872 3.49179 10 3.17V3C10 2.46957 10.2107 1.96086 10.5858 1.58579C10.9609 1.21071 11.4696 1 12 1C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V3.09C14.0013 3.41179 14.0966 3.72618 14.2743 3.99447C14.452 4.26276 14.7042 4.47324 15 4.6C15.3016 4.73312 15.6362 4.77282 15.9606 4.714C16.285 4.65519 16.5843 4.50054 16.82 4.27L16.88 4.21C17.0657 4.02405 17.2863 3.87653 17.5291 3.77588C17.7719 3.67523 18.0322 3.62343 18.295 3.62343C18.5578 3.62343 18.8181 3.67523 19.0609 3.77588C19.3037 3.87653 19.5243 4.02405 19.71 4.21C19.896 4.39575 20.0435 4.61632 20.1441 4.85912C20.2448 5.10192 20.2966 5.36217 20.2966 5.625C20.2966 5.88783 20.2448 6.14808 20.1441 6.39088C20.0435 6.63368 19.896 6.85425 19.71 7.04L19.65 7.1C19.4195 7.33568 19.2648 7.63502 19.206 7.95941C19.1472 8.28381 19.1869 8.61838 19.32 8.92V9C19.4468 9.29577 19.6572 9.54802 19.9255 9.72569C20.1938 9.90337 20.5082 9.99872 20.83 10H21C21.5304 10 22.0391 10.2107 22.4142 10.5858C22.7893 10.9609 23 11.4696 23 12C23 12.5304 22.7893 13.0391 22.4142 13.4142C22.0391 13.7893 21.5304 14 21 14H20.91C20.5882 14.0013 20.2738 14.0966 20.0055 14.2743C19.7372 14.452 19.5268 14.7042 19.4 15Z"
-                            stroke="#8C8C8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_4_2337">
-                            <rect width="24" height="24" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
-            </div>
-            <div id="option6" class="barraLateral_option cursor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-                    <g style="mix-blend-mode:darken">
-                        <rect y="0.113342" width="23" height="21" fill="#87888C" />
-                    </g>
-                    <path
-                        d="M13.4714 5.51464V3.65272C13.4714 3.37065 13.4148 3.09166 13.3052 2.83336C13.1957 2.57507 13.0355 2.3431 12.8348 2.15211C12.6342 1.96112 12.3974 1.81526 12.1395 1.72376C11.8815 1.63227 11.6081 1.59711 11.3363 1.62052L3.45062 2.29962C2.95782 2.34208 2.49843 2.57457 2.16357 2.951C1.82872 3.32742 1.64285 3.82027 1.64282 4.33182V16.8941C1.64285 17.4057 1.82872 17.8985 2.16357 18.275C2.49843 18.6514 2.95782 18.8839 3.45062 18.9263L11.3363 19.6065C11.6082 19.6299 11.8817 19.5947 12.1397 19.5031C12.3977 19.4116 12.6345 19.2656 12.8352 19.0745C13.0359 18.8834 13.196 18.6513 13.3055 18.3929C13.415 18.1345 13.4715 17.8554 13.4714 17.5732V15.7113M12.4857 10.613H21.3571H12.4857ZM21.3571 10.613L18.0717 6.5343L21.3571 10.613ZM21.3571 10.613L18.0717 14.6917L21.3571 10.613Z"
-                        stroke="#87888C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </div>
-        </div>
+        <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
             <div class="dash_superior">
                 <div class="titulo">
@@ -172,12 +111,7 @@
                             <div class="titulo_select">
                                 <span class="text_alertas">Últimos alertas do andar</span>
                                 <div class="custom_select" style="width:109px;">
-                                    <select name="andares" id="andares_input">
-                                        <option value="0"> Escolha: </option>
-                                        <option value="1"> 1 </option>
-                                        <option value="2"> 2 </option>
-                                        <option value="3"> 3 </option>
-                                    </select>
+                                    <select onchange="graficoMeiaLua()" name="andares" class="select_andares" id="andares"></select>
                                 </div>
                             </div>
                             <div>
@@ -244,110 +178,111 @@
 </body>
 
 </html>
-<script src="../js/notificacao.js"></script>
-<script src="../js/select_notifi.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    nomeFuncionario.innerHTML = sessionStorage.nome;
+    emailFuncionario.innerHTML = sessionStorage.email;
+
     var empresaFunc = sessionStorage.getItem('Empresa');
-    var atencao_porcento = 20;
-    var perigo_porcento = 30;
+
+    
 
     function obterdados() {
-        buscarImportanciaMaquina(1, empresaFunc);
-        buscarImportanciaMaquina(2, empresaFunc);
-        buscarImportanciaMaquina(3, empresaFunc);
+
+        // buscarImportanciaMaquina(1, empresaFunc);
+        // buscarImportanciaMaquina(2, empresaFunc);
+        // buscarImportanciaMaquina(3, empresaFunc);
 
         setTimeout(obterdados, 5000);
+    }
+
+    function graficoMeiaLua(){
+        var idAndarVar = Number(andares.value.split('-')[1]);
+        obterDadosGraficoMeiaLua(idAndarVar, 'meia_lua')
     }
 
     // ChartJs
 
     // MEIA LUA
 
-    const data = {
-        labels: ['Perigo', 'Atenção', 'Normal'],
-        datasets: [{
-            label: 'Últimos alertas do andar ',
-            data: [13, 11, 12],
-            backgroundColor: [
-                'rgba(255, 0, 0, 1)',
-                'rgba(255, 167, 34, 1)',
-                'rgba(39, 36, 62, 1)'
-            ],
-            // borderColor: [
-            //     'rgba(180, 180, 0, 1)',
-            //     'rgba(0, 180, 180, 1)',
-            //     'rgba(180, 0, 180, 1)'
-            // ],
-            // borderWidth: 1,
-            cutout: '80%',
-            circumference: 180,
-            rotation: 270
-        }]
-    };
+    // const data = {
+    //     labels: ['Perigo', 'Atenção', 'Normal'],
+    //     datasets: [{
+    //         label: 'Últimos alertas do andar ',
+    //         data: [0, 0, 0],
+    //         backgroundColor: [
+    //             'rgba(255, 0, 0, 1)',
+    //             'rgba(255, 167, 34, 1)',
+    //             'rgba(39, 36, 62, 1)'
+    //         ],
+    //         cutout: '80%',
+    //         circumference: 180,
+    //         rotation: 270
+    //     }]
+    // };
 
-    const doughnutLabel = {
-        id: 'doughnutLabel',
-        beforeDatasetsDraw(chart, args, pluginsOptions) {
+    // const doughnutLabel = {
+    //     id: 'doughnutLabel',
+    //     beforeDatasetsDraw(chart, args, pluginsOptions) {
 
-            // Definição de qual gráfico e qual Dataset
-            const { ctx, data } = chart;
+    //         // Definição de qual gráfico e qual Dataset
+    //         const { ctx, data } = chart;
 
-            // Configuração Coordenadas
-            ctx.save();
-            const xCoor = chart.getDatasetMeta(0).data[0].x;
-            const yCoor = chart.getDatasetMeta(0).data[0].y;
+    //         // Configuração Coordenadas
+    //         ctx.save();
+    //         const xCoor = chart.getDatasetMeta(0).data[0].x;
+    //         const yCoor = chart.getDatasetMeta(0).data[0].y;
 
-            // Configuração default Labels
-            ctx.font = 'bold 12px sans-serif';
-            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+    //         // Configuração default Labels
+    //         ctx.font = 'bold 12px sans-serif';
+    //         ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+    //         ctx.textAlign = 'center';
+    //         ctx.textBaseline = 'middle';
 
-            // Label - Título
-            const text = 'Classificação dos Alertas'
-            ctx.fillText(text, xCoor, yCoor - 50);
+    //         // Label - Título
+    //         const text = 'Classificação dos Alertas'
+    //         ctx.fillText(text, xCoor, yCoor - 50);
 
-            // Label Atenção - Amarelo
-            ctx.fillStyle = 'rgba(255, 255, 0, 1)';
-            const text2 = `Atenção: ${atencao_porcento}% `
-            ctx.fillText(text2, xCoor * 1.45, yCoor - 20);
+    //         // Label Atenção - Amarelo
+    //         ctx.fillStyle = 'rgba(255, 255, 0, 1)';
+    //         const text2 = `Atenção: ${0}% `
+    //         ctx.fillText(text2, xCoor * 1.45, yCoor - 20);
 
-            // Label Perigo - Vermelhos
-            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-            const text3 = `Perigo: ${perigo_porcento}%`
-            ctx.fillText(text3, xCoor / 1.5, yCoor - 20);
-        }
-    };
+    //         // Label Perigo - Vermelhos
+    //         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    //         const text3 = `Perigo: ${0}%`
+    //         ctx.fillText(text3, xCoor / 1.5, yCoor - 20);
+    //     }
+    // };
 
-    // config
-    const config = {
-        type: 'doughnut',
-        data,
-        options: {
-            aspectRatio: 2,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        },
-        plugins: [doughnutLabel]
-    };
+    // // config
+    // const config = {
+    //     type: 'doughnut',
+    //     data,
+    //     options: {
+    //         aspectRatio: 2,
+    //         plugins: {
+    //             legend: {
+    //                 display: false
+    //             }
+    //         }
+    //     },
+    //     plugins: [doughnutLabel]
+    // };
 
-    const ctx = new Chart(
-        document.getElementById('meia_lua'),
-        config
-    );
+    // const ctx = new Chart(
+    //     document.getElementById('meia_lua'),
+    //     config
+    // );
     // MEIA LUA
 
     const labels2 = [
-    `Semana 01/10 - 07/10`, 
-    'Semana 01/10 - 07/10', 
-    'Semana 01/10 - 07/10', 
-    'Semana 01/10 - 07/10'
+        ` 01/11 - 07/11`,
+        ' 08/11 - 14/11',
+        ' 15/11 - 21/11',
+        ' 22/11 - 30/11'
     ]
-        
+
     // STACKED
     const data2 = {
         labels: labels2,
@@ -399,7 +334,7 @@
                         display: false
                     }
                 }
-            }   
+            }
         }
     };
 

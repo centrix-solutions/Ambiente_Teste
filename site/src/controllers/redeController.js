@@ -39,8 +39,66 @@ function contarMaquinasEmpresa(req, res){
     });
 }
 
+function recuperarUltimosAlertasAndarPerigo(req, res){
+    var fkAndarDeTrabalho = req.params.fkAndarDeTrabalho;
+
+    console.log("Recuperando Alertas mais recentes...")
+
+    redeModel.recuperarUltimosAlertasAndarPerigo(fkAndarDeTrabalho).then(function(resultado){
+
+        if(resultado >= "0"){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function(erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar pelos Alertas ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function recuperarUltimosAlertasAndarAtencao(req, res){
+    var fkAndarDeTrabalho = req.params.fkAndarDeTrabalho;
+
+    console.log("Recuperando Alertas mais recentes...")
+
+    redeModel.recuperarUltimosAlertasAndarAtencao(fkAndarDeTrabalho).then(function(resultado){
+
+        if(resultado >= "0"){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function(erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar pelos Alertas ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function recuperarTotalMaquinas(req, res){
+    var fkAndarDeTrabalho = req.params.fkAndarDeTrabalho;
+
+    redeModel.recuperarTotalMaquinas(fkAndarDeTrabalho).then(function(resultado){
+
+        if(resultado >"0"){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function(erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar pelo Total ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 module.exports = {
     buscarImportanciaMaquina,
     contarMaquinasEmpresa,
+    recuperarUltimosAlertasAndarPerigo,
+    recuperarUltimosAlertasAndarAtencao,
+    recuperarTotalMaquinas,
 }
