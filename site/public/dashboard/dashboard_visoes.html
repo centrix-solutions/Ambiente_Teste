@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="../css/dash_visoes.css">
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <script src="../js/nivelAcesso.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard_indi_Paola.js" ></script>
 </head>
 
-<body>
+<body onload="listarLateral()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -25,25 +27,76 @@
             <div class="div_central">
                 <div class="div_conteudo">
                     <div class="menu_visoes">
-                        <div class="botao_visoes" onclick="aa()">
-                            Paola
+                        <div class="botao_visoes" onclick="carregarPaola()">
+                            Dados Gerais
                         </div>
-                        <div class="botao_visoes">
+                        <div class="botao_visoes" onclick="carregarRafael()">
                             Rafael
                         </div>
-                        <div class="botao_visoes">
+                        <div class="botao_visoes" onclick="carregarRuan()">
                             Ruan
                         </div>
-                        <div class="botao_visoes">
+                        <div class="botao_visoes" onclick="carregarAle()">
                             Ale
                         </div>
-                        <div class="botao_visoes">
+                        <div class="botao_visoes" onclick="carregarEdson()">
                             Edson
                         </div>
                     </div>
-                    <div class="div_individual"></div>
+                    <div class="div_individual" id="div_individual"></div>
                 </div>
             </div>
         </div>
 </body>
 </html>
+
+<script>
+
+function carregarPaola(){
+
+    div_individual.innerHTML = `
+    <div class="conteudoPaola">
+                            <div class="kpisPaola">
+                                <div class="kpiPaola"></div>
+                                <div class="kpiPaola"></div>
+                                <div class="kpiPaola"></div>
+                                <div class="kpiPaola"></div>
+                                <div class="kpiPaola"></div>
+                            </div>
+                            <div class="inferiorPaola">
+                                <div class="tituloPaola">
+                                    Tenha uma visão geral do uso da CPU e RAM a partir de gráficos
+                                </div>
+                                <div class="graficosPaola">
+                                    <div class="chartPaola">
+                                        <h1>CPU</h1>
+                                        <canvas id="graficoCpu"></canvas>
+                                    </div>
+                                    <div class="chartPaola">
+                                        <h1>RAM</h1>
+                                        <canvas id="graficoRam"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    `
+
+}
+
+function carregarRafael() {
+    div_individual.innerHTML = ``
+}
+
+function carregarRuan() {
+    div_individual.innerHTML = ``
+}
+
+function carregarAle() {
+    div_individual.innerHTML = ``
+}
+
+function carregarEdson() {
+    div_individual.innerHTML = ``
+}
+
+</script>
