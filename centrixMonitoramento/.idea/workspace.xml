@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbf3b442-2ce7-4924-b455-e3840e606888" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/UsuarioRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/UsuarioRepositorio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UsuarioRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UsuarioRepositorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/css/relatorio.css" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/css/relatorio.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/database/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/database/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/routes/relatorios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/routes/relatorios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/6.0.6/spring-jdbc-6.0.6.jar!/org/springframework/jdbc/support/SQLStateSQLExceptionTranslator.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -33,17 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rafa_/Desktop/Ambiente_Teste/centrixMonitoramento&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />

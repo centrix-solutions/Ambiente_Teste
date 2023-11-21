@@ -4,12 +4,11 @@ import org.springframework.jdbc.core.JdbcTemplate
 object Conexao {
 
     //substitua aqui
-    var bancoUser = "aluno"
-    var bancoSenha = "sptech"
+    var bancoUser = "root"
+    var bancoSenha = "38762"
 
     var bancoUserServer = "sa"
     var bancoSenhaServer = "centrix"
-    //var bancoSenha = "38762"
 
     var jdbcTemplate: JdbcTemplate? = null
 

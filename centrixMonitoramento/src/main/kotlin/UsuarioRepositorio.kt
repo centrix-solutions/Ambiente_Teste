@@ -2,6 +2,7 @@
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import org.springframework.jdbc.core.JdbcTemplate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class UsuarioRepositorio {
 
@@ -66,21 +67,23 @@ class UsuarioRepositorio {
 
         )
     }
-    fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogout: LocalDateTime){
+    fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogout: LocalDateTime) {
         jdbcTemplate.update(
             """
-                UPDATE Login
-                SET dataHoraSaida = '${horaLogout}'
-                WHERE Email = ${usuarioLogado.email};
-            """.trimIndent()
+            UPDATE Login
+            SET dataHoraSaida = '${horaLogout.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}'
+            WHERE Email = '${usuarioLogado.email}';
+        """.trimIndent()
         )
+
         jdbcTemplateServer.update(
             """
-                UPDATE Login
-                SET dataHoraSaida = '${horaLogout}'
-                WHERE idFuncionario = ${usuarioLogado.idFuncionario}
-                and idMaquina = ${idMaquina} and idEmpresa = ${usuarioLogado.fkEmpFunc}
-            """.trimIndent()
+            UPDATE Login
+            SET dataHoraSaida = '${horaLogout.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}'
+            WHERE idFuncionario = ${usuarioLogado.idFuncionario}
+            AND idMaquina = $idMaquina
+            AND idEmpresa = ${usuarioLogado.fkEmpFunc};
+        """.trimIndent()
         )
     }
    // fun verificarLogin(usuarioLogado: Usuario, idMaquina: Int): LocalDateTime? {

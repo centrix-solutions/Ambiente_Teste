@@ -44,19 +44,20 @@
                         <div class="botoes_filtro">
                             <button onclick="exibirComp()">Componentes</button>
                             <button onclick="exibirInicio()">Início</button>
-                            <!-- colocar icone calendario ou relogio -->
-                            <button onclick="exibirFim()">Fim</button> <!-- Opção para trazer os alertas também -->
+                            <button onclick="exibirFim()">Fim</button> 
                         </div>
                         <div class="filtros_opçoes" id="idfiltros" style="display: block;">
                             <div class="filtros_componentes">
                                 <ul class="lista">
-                                    <li><button onclick="selecionarTodosComponentes()">Selecionar Todos</button></li>
+                                    <li><button onclick="selecionarTodosComponentes()" style="color: rgb(0, 255, 0);">Selecionar Todos</button></li>
                                     <li><input type="checkbox" name="checkComp" id="cpu" value="1">CPU</li>
                                     <li><input type="checkbox" name="checkComp" id="disco" value="2">DISCO</li>
                                     <li><input type="checkbox" name="checkComp" id="ram" value="3">RAM</li>
                                     <li><input type="checkbox" name="checkComp" id="usb" value="4">USB</li>
-                                    <li><input type="checkbox" name="checkComp" id="taxa_dowload" value="5">Taxa Dowload</li>
-                                    <li><input type="checkbox" name="checkComp" id="taxa_upload" value="6">Taxa Upload</li>
+                                    <li><input type="checkbox" name="checkComp" id="taxa_dowload" value="5">Taxa Dowload
+                                    </li>
+                                    <li><input type="checkbox" name="checkComp" id="taxa_upload" value="6">Taxa Upload
+                                    </li>
                                     <li><input type="checkbox" name="checkComp" id="janelas" value="7">Janelas</li>
                                     <li><input type="checkbox" name="checkComp" id="processos" value="8">Processos</li>
                                     <li><button onclick="limpar()" id="limpar">Limpar</button>
@@ -72,49 +73,57 @@
                             <input type="datetime-local" id="input_fim">
                         </div>
                         <!-- colocar icone computador -->
-                        <div class="container">
-                            <div class="select-btn">
-                                <span class="btn-text">Selecione 1 ou mais computadores</span>
-                                <button onclick="selecionarTodosMaquina()">Selecionar Todos</button>
-                                <button onclick="removerTodos()">Remover Todos</button>
+                        <div class="container_divisor">
+                            <div class="container_maq">
+                                <div class="select-btn">
+                                    <span class="btn-text">Selecione o(s) computador(es)</span>
+                                    <button onclick="selecionarTodosMaquina()" style="color: rgb(0, 255, 0);">Selecionar
+                                        Todos</button>
+                                    <button onclick="removerTodos()" style="color: red;">Remover Todos</button>
+                                </div>
+
+                                <ul class="list-items" id="computadoresList">
+
+                                </ul>
                             </div>
-
-                            <ul class="list-items" id="computadoresList">
-
-                            </ul>
-
-                        </div>
-                        <div class="botoes_finais">
-                            <button
-                                onclick="criarPrevia()">Gerar</button><!-- gera a previa do relatorio no lado direito da tela -->
-                            <button>Limpar</button><!-- reseta os filtros -->
-                            <button>Cancelar</button><!-- recarrega a pagina -->
+                            <div class="botoes_finais">
+                                <button onclick="criarPrevia()" style="color: rgb(0, 255, 0);">Gerar Prévia</button>
+                                <button style="color: yellow;">Limpar</button><!-- reseta os filtros -->
+                                <button style="color: red;">Cancelar</button><!-- recarrega a pagina -->
+                            </div>
                         </div>
                     </div>
                     <div class="area_superior_direita">
-                        <h1>Visualização dos dados</h1>
-                        <input type="text" id="input_nome_arquivo">
-                        <select name="extensao">
-                            <option value="pdf">PDF</option>
-                            <option value="pdf">CSV</option>
-                        </select>
-                        <div id="testando"></div>
-                        <button>Baixar</button>
+                        <h2 class="titulo_direita">Visualização dos dados</h2>
+                        <div class="input">
+                            <span class="titulo_input">Insira o nome e a extensão do seu documento:</span>
+                        </div>
+                        <div class="documento">
+                            <input type="text" id="input_nome_arquivo">
+                            <select class="select_extensao" name="extensao">
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <button class="baixar_botao">Baixar</button>
+                        </div>
                         <div id="exibicao">
                             <h2>Tabela de Monitoramento</h2>
-                            <table id="tabelaMonitoramento">
-                                <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Hora</th>
-                                        <th>Dado</th>
-                                        <th>Componente</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- O conteúdo da tabela será adicionado dinamicamente usando JavaScript -->
-                                </tbody>
-                            </table>
+                            <div id="tabelaContainer">
+                                <table id="tabelaMonitoramento">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Data</th>
+                                            <th>Hora</th>
+                                            <th>Dado</th>
+                                            <th>Componente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,7 +186,7 @@
 
                     var itemText = document.createElement("span");
                     itemText.classList.add("item-text");
-                    itemText.textContent = `ID: ${respostaJson[i].Id_do_dispositivo}`;
+                    itemText.textContent = `ID: ${respostaJson[i].Id_do_dispositivo} || SO: ${respostaJson[i].Sistema_Operacional} || Andar: ${respostaJson[i].fkAndarDeTrabalho}`;
 
                     novoItem.appendChild(checkboxMaquina);
                     novoItem.appendChild(itemText);
@@ -218,7 +227,7 @@
             checkbox.checked = true;
         });
     }
-    function limpar(){
+    function limpar() {
         var todosComponentes = document.querySelectorAll('input[name="checkComp"]');
 
         todosComponentes.forEach(function (checkbox) {
@@ -307,13 +316,16 @@
 
             //pegar tbm o id do processador como nome da maquina pra colocar como primeiro campo da tabela, referenciado pelo idMaquina
             var selectGeral = `
-        SELECT 
-            Data_captura AS Data, 
-            Hora_captura AS Hora, 
-            Dado_Capturado AS Dado, 
-            fkCompMoniExistentes AS Componente 
+        SELECT
+            maq.Id_do_dispositivo AS Maquina,
+            moni.Data_captura AS Data, 
+            moni.Hora_captura AS Hora, 
+            moni.Dado_Capturado AS Dado, 
+            moni.fkCompMoniExistentes AS Componente 
         FROM 
-            Monitoramento 
+            Monitoramento moni
+        JOIN
+            Maquinas maq ON moni.fkMaqCompMoni = maq.idMaquina
         WHERE 
             fkEmpMaqCompMoni IN (${selecionadosMaqui}) AND 
             fkCompMoniExistentes IN (${selecionadosComp}) AND 
@@ -326,7 +338,8 @@
             (Data_captura = '${varDtFim}' AND Hora_captura <= '${varHrFim}')
         ) 
         ORDER BY 
-        Data_Captura ASC;
+        maq.Id_do_dispositivo ASC,
+        moni.Data_Captura ASC;
         `
 
             buscarSelect(selectGeral)
@@ -381,10 +394,8 @@
                         console.error(`Erro na obtenção dos dados: ${error.message}`);
                     });
             }
-            //fazer o fecth desse select com retorno em json e colocar o json na area de exibição
 
             //fazer 7 funções para trazer o sumary de cada componente (menos usb)
-            //usar um for para percorrer a lista e executar as funções dependendo dos componentes selecionados
 
             //criar uma tabela no banco que armazene o nome do relatorio, caminho do arquivo, dtcriação e extensão
             //ver se da pra criar uns graficos e colocar no pdf com o chartjs
@@ -407,19 +418,21 @@
             }
         }
         function criarLinhasTabela(dados) {
-            var tabela = document.getElementById("tabelaMonitoramento").getElementsByTagName('tbody')[0];
+            var tabela = document.getElementById("tabelaMonitoramento").getElementsByTagName('tbody')[0]
 
             for (var i = 0; i < dados.length; i++) {
-                var linha = tabela.insertRow(i);
-                var cellData = linha.insertCell(0);
-                var cellHora = linha.insertCell(1);
-                var cellDado = linha.insertCell(2);
-                var cellComponente = linha.insertCell(3);
+                var linha = tabela.insertRow(i)
+                var cellID = linha.insertCell(0)
+                var cellData = linha.insertCell(1)
+                var cellHora = linha.insertCell(2)
+                var cellDado = linha.insertCell(3)
+                var cellComponente = linha.insertCell(4);
 
-                cellData.innerHTML = dados[i].Data;
-                cellHora.innerHTML = dados[i].Hora;
-                cellDado.innerHTML = dados[i].Dado;
-                cellComponente.innerHTML = dados[i].Componente;
+                cellID.innerHTML = dados[i].Maquina
+                cellData.innerHTML = dados[i].Data
+                cellHora.innerHTML = dados[i].Hora
+                cellDado.innerHTML = dados[i].Dado
+                cellComponente.innerHTML = dados[i].Componente
             }
         }
 
