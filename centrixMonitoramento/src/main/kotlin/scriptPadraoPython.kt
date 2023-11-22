@@ -9,15 +9,30 @@ object scriptPadraoPython {
     fun criarScript(tempo: Int, idMaquinaDado: Int, idEmpresaDado: Int): Pair<String, String> {
 
         val codigoPythonDefaultHard = """
-            import psutil
-            import time
-            import pymssql
-            from mysql.connector import connect
-            from datetime import datetime
+        import psutil
+        import time
+        import mssql
+        from mysql.connector import connect
+        from slack_sdk import WebClient
+        import pymssql
 
             mysql_cnx = connect(user='$bancoUser', password='$bancoSenha', host='localhost', database='centrix')
 
-            sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix')
+        sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
+
+        slack_token = 'xoxb-5806834878417-6181633164562-0EX9fmOdmK2bMxTgymgx1Soq'
+        slack_channel = '#notificação'
+        slack_client = WebClient(token=slack_token)
+
+        limite_cpu = 30  # Métricas CPU, RAM e Disco
+        limite_ram = 4
+        limite_disco = 100
+
+        while(True):
+
+            CPU = round(psutil.cpu_percent(), 2)
+
+            RAM = round(psutil.virtual_memory().used / (1024**3), 3)
             
             ""${'"'}
             slack_token = 'xoxb-5806834878417-6181633164562-0EX9fmOdmK2bMxTgymgx1Soq'
@@ -60,11 +75,13 @@ object scriptPadraoPython {
                 # CPU
                 #dados_CPU_PC = [CPU, 1, 1, $idMaquinaDado]
 
-                add_leitura_CPU = (
-                    "INSERT INTO Monitoramento"
-                    "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                    "VALUES (%s, %s, %s, %s, %s, %s, %s)"
-                )
+            add_leitura_DISK = ("INSERT INTO Monitoramento"
+                                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                                "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
+            
+            bdServer_cursor.execute(add_leitura_DISK, dados_DISK_PC)
+            bdServer_cursor.commit()
+        bdServer_cursor.close()
 
                 bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, 1, $idMaquinaDado, $idEmpresaDado))
 
@@ -119,7 +136,6 @@ object scriptPadraoPython {
         import time
         from mysql.connector import connect
         import pymssql
-        from datetime import datetime
 
         cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
         speed_test = st.Speedtest()
@@ -148,8 +164,8 @@ object scriptPadraoPython {
                                "VALUES (%s, %s, %s, %s, %s, %s, %s)")
             
 
-            bd.execute(add_leitura_DOWNLOAD, (data_atual, hora_atual, download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado))
-            bdServer_cursor.execute(add_leitura_DOWNLOAD, (str(data_atual), str(hora_atual), download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado))
+            bd.execute(add_leitura_DOWNLOAD, dados_DOWNLOAD_PC)
+            bdServer_cursor.execute(add_leitura_DOWNLOAD, dados_DOWNLOAD_PC)
             
             #UPLOAD
             dados_UPLOAD_PC = [upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado]
@@ -159,7 +175,12 @@ object scriptPadraoPython {
                                "VALUES (%s, %s, %s, %s, %s, %s, %s)")
             
 
-            bd.execute(add_leitura_UPLOAD, (data_atual, hora_atual, upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado))
+            bd.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
+            bdServer_cursor.execute(add_leitura_UPLOAD, dados_UPLOAD_PC)
+            
+            cnx.commit()
+            bdServer_cursor.commit()
+        bdServer_cursor.close()
 
             bdServer_cursor.execute(add_leitura_UPLOAD, (str(data_atual), str(hora_atual), upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado))
 

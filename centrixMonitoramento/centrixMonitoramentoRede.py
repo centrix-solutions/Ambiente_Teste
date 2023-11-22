@@ -51,4 +51,4 @@ while(True):
     sql_server_cnx.commit()
     bdServer_cursor.close()
 
-time.sleep(20)
+    time.sleep(20)

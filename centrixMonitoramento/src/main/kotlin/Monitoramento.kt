@@ -27,10 +27,10 @@ class Monitoramento {
         var idEmpresa: Int = 0
 
         /* INICIO LOGIN */
-        while (true){
+        while (true) {
             while (true) {
                 println(
-                            " ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
+                    " ██████╗███████╗███╗   ██╗████████╗██████╗ ██╗██╗  ██╗                   \n" +
                             "██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██║╚██╗██╔╝                   \n" +
                             "██║     █████╗  ██╔██╗ ██║   ██║   ██████╔╝██║ ╚███╔╝                    \n" +
                             "██║     ██╔══╝  ██║╚██╗██║   ██║   ██╔══██╗██║ ██╔██╗                    \n" +
@@ -161,6 +161,7 @@ class Monitoramento {
                     4 -> {
                         fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
                     }
+
                     7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
                     8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
                 }
@@ -198,16 +199,25 @@ class Monitoramento {
                         val usb: Float = looca.dispositivosUsbGrupo.totalDispositvosUsbConectados.toFloat()
                         dados.add(usb)
                         fkcomponentesExistentes.add(4)
+                        if (usb > 10) {
+                            Notificacao().notificarUSB(usb)
+                        }
                     }
                     if (componentesExistentes.contains("Janelas do Sistema")) {
                         val janelas: Float = looca.grupoDeJanelas.totalJanelas.toFloat()
                         dados.add(janelas)
                         fkcomponentesExistentes.add(7)
+                        if (janelas > 10) {
+                            Notificacao().notificarJanelas(janelas)
+                        }
                     }
                     if (componentesExistentes.contains("Processos")) {
                         val processos: Float = looca.grupoDeProcessos.totalProcessos.toFloat()
                         dados.add(processos)
                         fkcomponentesExistentes.add(8)
+                        if (processos > 10) {
+                            Notificacao().notificarProcessos(processos)
+                        }
                     }
                     for (i in dados.indices) {
                         val zonaFusoHorario = ZoneId.of("America/Sao_Paulo")
@@ -216,7 +226,15 @@ class Monitoramento {
                         val dado = dados[i]
                         val fkcompMoni = fkcomponentesMonitorados[i]
                         val fkcompExis = fkcomponentesExistentes[i]
-                        repositorioMonitoramento.registrarDados(data, hora, dado, fkcompMoni, fkcompExis, idMaquina, idEmpresa)
+                        repositorioMonitoramento.registrarDados(
+                            data,
+                            hora,
+                            dado,
+                            fkcompMoni,
+                            fkcompExis,
+                            idMaquina,
+                            idEmpresa
+                        )
                     }
                     Thread.sleep(tempo * 1000L)
                 }
@@ -241,15 +259,15 @@ class Monitoramento {
                             scriptPadraoPython.pararScript()
 
                             val horaLogout = LocalDateTime.now()
-                          //  val datahj = LocalDateTime.now()
+                            //  val datahj = LocalDateTime.now()
 
-                           // val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+                            // val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
 
-                          //  val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+                            //  val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
 
-                          //  if (diferencaEmDias!! > 7){
-                         //       repositorioUser.apagarLogs(usuarioLogado, idMaquina)
-                        //    }
+                            //  if (diferencaEmDias!! > 7){
+                            //       repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                            //    }
                             repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogout)
                         }
 
@@ -259,16 +277,16 @@ class Monitoramento {
                             scriptPadraoPython.pararScript()
                             opcaoMonitoramento = false
 
-                          //  val datahj = LocalDateTime.now()
+                            //  val datahj = LocalDateTime.now()
                             val horaLogout = LocalDateTime.now()
 
-                        //    val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
+                            //    val verificarData = repositorioUser.verificarLogin(usuarioLogado, idMaquina)
 
-                        //    val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
+                            //    val diferencaEmDias = verificarData?.toLocalDate()?.until(datahj.toLocalDate())?.days
 
-                        //    if (diferencaEmDias!! > 7){
-                      //          repositorioUser.apagarLogs(usuarioLogado, idMaquina)
-                      //      }
+                            //    if (diferencaEmDias!! > 7){
+                            //          repositorioUser.apagarLogs(usuarioLogado, idMaquina)
+                            //      }
 
                             repositorioUser.registrarSaida(usuarioLogado, idMaquina, horaLogout)
 
