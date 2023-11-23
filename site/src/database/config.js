@@ -20,11 +20,11 @@ var mySqlConfig = {
     host: "localhost",
     database: "centrix",
     // user: "aluno",
-    //  password: "sptech",
-    //user: "root",
-    // password: "38762",
+     // password: "sptech",
     user: "root",
-    password: "TomboySupremacy2!"
+     password: "38762",
+   // user: "root",
+    //password: "TomboySupremacy2!"
 };
 
 

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/relatorio.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/nivelAcesso.js"></script>
 </head>
@@ -31,7 +33,6 @@
                 <div class="bem_vindo_botoes">
                     <button>Gerar Relatório</button>
                     <button>Visualizar Histórico</button>
-                    <button>Gerar Dash</button>
                 </div>
             </div>
             <div class="card_monitoramento">
@@ -44,12 +45,13 @@
                         <div class="botoes_filtro">
                             <button onclick="exibirComp()">Componentes</button>
                             <button onclick="exibirInicio()">Início</button>
-                            <button onclick="exibirFim()">Fim</button> 
+                            <button onclick="exibirFim()">Fim</button>
                         </div>
                         <div class="filtros_opçoes" id="idfiltros" style="display: block;">
                             <div class="filtros_componentes">
                                 <ul class="lista">
-                                    <li><button onclick="selecionarTodosComponentes()" style="color: rgb(0, 255, 0);">Selecionar Todos</button></li>
+                                    <li><button onclick="selecionarTodosComponentes()"
+                                            style="color: rgb(0, 255, 0);">Selecionar Todos</button></li>
                                     <li><input type="checkbox" name="checkComp" id="cpu" value="1">CPU</li>
                                     <li><input type="checkbox" name="checkComp" id="disco" value="2">DISCO</li>
                                     <li><input type="checkbox" name="checkComp" id="ram" value="3">RAM</li>
@@ -100,11 +102,11 @@
                         </div>
                         <div class="documento">
                             <input type="text" id="input_nome_arquivo">
-                            <select class="select_extensao" name="extensao">
+                            <select class="select_extensao" name="extensao" id="select_ext">
                                 <option value="pdf">PDF</option>
                                 <option value="csv">CSV</option>
                             </select>
-                            <button class="baixar_botao">Baixar</button>
+                            <button class="baixar_botao" onclick="criarRelatorio()">Criar</button>
                         </div>
                         <div id="exibicao">
                             <h2>Tabela de Monitoramento</h2>
@@ -134,6 +136,8 @@
 
 </html>
 <script>
+
+
     var idEmpresa = sessionStorage.Empresa;
     var dados = []
     var rotulo = {
@@ -314,7 +318,6 @@
         `
             verificarDatas(verificarSelect)
 
-            //pegar tbm o id do processador como nome da maquina pra colocar como primeiro campo da tabela, referenciado pelo idMaquina
             var selectGeral = `
         SELECT
             maq.Id_do_dispositivo AS Maquina,
@@ -426,7 +429,7 @@
                 var cellData = linha.insertCell(1)
                 var cellHora = linha.insertCell(2)
                 var cellDado = linha.insertCell(3)
-                var cellComponente = linha.insertCell(4);
+                var cellComponente = linha.insertCell(4)
 
                 cellID.innerHTML = dados[i].Maquina
                 cellData.innerHTML = dados[i].Data
@@ -436,6 +439,77 @@
             }
         }
 
+
+    }
+
+    function criarRelatorio(dataHoje, varDtInicio, varDtFim, dados, nomeArquivo) {
+
+        var selectExtensao = document.getElementById('select_ext')
+        var extensaoSelecionada = selectExtensao.value
+        var nomeArquivo = document.getElementById('input_nome_arquivo').value;
+
+        if (extensaoSelecionada === "pdf") {
+            criarPDF(dataHoje, varDtInicio, varDtFim, dados, nomeArquivo)
+            function criarPDF(dataHoje, varDtInicio, varDtFim, dados, nomeArquivo) {
+
+                var docDefinition = {
+
+                    header: {
+                        text: 'CENTRIX SOLUTIONS',
+                        style: 'cabecalho',
+                    },
+
+                    content: [
+                        { text: `Data de criação: ${dataHoje}`, style: 'subtitulo' },
+                        { text: 'Criador:  ', style: 'subtitulo' },
+                        { text: `Dados coletados de ${varDtInicio} até ${varDtFim}`, style: 'subtitulo' },
+                        {
+                            style: 'tabela',
+                            table: {
+                                headerRows: 1,
+                                widths: [50, 100, 100, 100, 100], 
+                                body: [
+                                    ['Maquina', 'Data', 'Hora', 'Dado', 'Componente'], 
+                                ],
+                            },
+                        },
+                    ],
+
+                    styles: {
+                        cabecalho: {
+                            fontSize: 20,
+                            color: 'white',
+                            background: 'purple',
+                        },
+                        subtitulo: {
+                            fontSize: 14,
+                            margin: [0, 5]
+                        },
+                        tabela: {
+                            margin: [0, 10],
+                            lineColor: 'darkpurple'
+                        },
+                    },
+                };
+
+                docDefinition.content.unshift({ text: `Nome do Arquivo: ${nomeArquivo}`, style: 'subtitulo' })
+
+                for (var i = 0; i < dados.length; i++) {
+                    docDefinition.content[3].table.body.push([
+                        dados[i].Maquina,
+                        dados[i].Data,
+                        dados[i].Hora,
+                        dados[i].Dado,
+                        dados[i].Componente,
+                    ]);
+                }
+                pdfMake.createPdf(docDefinition).open()
+            }
+        }
+
+        if (extensaoSelecionada === "csv") {
+            //criar logica para gerar o csv
+        }
 
     }
 </script>

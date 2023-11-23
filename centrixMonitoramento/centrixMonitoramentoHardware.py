@@ -19,7 +19,7 @@ limite_ram = 4
 limite_disco = 100
 
 while True:
-
+    
     data_e_hora_atuais = datetime.now()
     data_atual = data_e_hora_atuais.date()
     hora_atual = data_e_hora_atuais.time()
@@ -29,54 +29,45 @@ while True:
     DISK = round(psutil.disk_usage('/').used / (1024**3), 3)
 
     """
-        if CPU > limite_cpu:
-            message = f"Aviso: Uso de CPU acima do limite! ({CPU}%)"
-            slack_client.chat_postMessage(channel=slack_channel, text=message)
+    if CPU > limite_cpu:
+        message = f"Aviso: Uso de CPU acima do limite! ({CPU}%)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
 
-        if RAM > limite_ram:
-            message = f"Aviso: Uso de RAM acima do limite! ({RAM} GB)"
-            slack_client.chat_postMessage(channel=slack_channel, text=message)
+    if RAM > limite_ram:
+        message = f"Aviso: Uso de RAM acima do limite! ({RAM} GB)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
 
-        if DISK > limite_disco:
-            message = f"Aviso: Uso de Disco acima do limite! ({DISK} GB)"
-            slack_client.chat_postMessage(channel=slack_channel, text=message)
+    if DISK > limite_disco:
+        message = f"Aviso: Uso de Disco acima do limite! ({DISK} GB)"
+        slack_client.chat_postMessage(channel=slack_channel, text=message)
     """
 
     bdLocal_cursor = mysql_cnx.cursor()
 
     # BD Local
-
+    
     # CPU
-    #dados_CPU_PC = [CPU, 1, 1, 1]
-
     add_leitura_CPU = (
         "INSERT INTO Monitoramento"
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-
     bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, 1, 1, 1))
 
     # RAM
-    #dados_RAM_PC = [RAM, 2, 3, 1]
-
     add_leitura_RAM = (
         "INSERT INTO Monitoramento"
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-
     bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 2, 3, 1, 1))
 
     # DISK
-    #dados_DISK_PC = [DISK, 3, 2, 1]
-
     add_leitura_DISK = (
         "INSERT INTO Monitoramento"
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-
     bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 3, 2, 1, 1))
     bdLocal_cursor.close()
 
@@ -85,7 +76,7 @@ while True:
     bdServer_cursor = sql_server_cnx.cursor()
 
     # BD Server
-
+    
     # CPU
     bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, 1, 1, 1))
 
@@ -94,62 +85,9 @@ while True:
 
     # DISK
     bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 3, 2, 1, 1))
-
+    
     bdServer_cursor.close()
 
-
-    bdLocal_cursor.execute(add_leitura_CPU, dados_CPU_PC)
-    
-    #RAM
-    dados_RAM_PC = [RAM, 2, 3, 1]
-
-    add_leitura_RAM = ("INSERT INTO Monitoramento"
-                       "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                       "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
-    
-
-    bdLocal_cursor.execute(add_leitura_RAM, dados_RAM_PC)
-    
-    #DISK
-    dados_DISK_PC = [DISK, 3, 2, 1]
-
-    add_leitura_DISK = ("INSERT INTO Monitoramento"
-                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                        "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
-    
-    bdLocal_cursor.execute(add_leitura_DISK, dados_DISK_PC)
-    mysql_cnx.commit()
-    
-    #BD Server
-    
-    #CPU
-    dados_CPU_PC = [CPU, 1, 1, 1]
-
-    add_leitura_CPU = ("INSERT INTO Monitoramento"
-                       "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                       "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
-
-    bdServer_cursor.execute(add_leitura_CPU, dados_CPU_PC)
-    
-    #RAM
-    dados_RAM_PC = [RAM, 2, 3, 1]
-
-    add_leitura_RAM = ("INSERT INTO Monitoramento"
-                       "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                       "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
-    
-
-    bdServer_cursor.execute(add_leitura_RAM, dados_RAM_PC)
-    
-    #DISK
-    dados_DISK_PC = [DISK, 3, 2, 1]
-
-    add_leitura_DISK = ("INSERT INTO Monitoramento"
-                        "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                        "VALUES (CURRENT_DATE, CURRENT_TIME, %s, %s, %s, %s, %s)")
-    
-    bdServer_cursor.execute(add_leitura_DISK, dados_DISK_PC)
-    bdServer_cursor.commit()
-    bdServer_cursor.close()
+    sql_server_cnx.commit()
 
     time.sleep(10)
