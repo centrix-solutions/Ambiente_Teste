@@ -119,6 +119,8 @@ function obterDadosGrafico(idMaquina, chartId) {
     function atualizarGrafico() {
         fetch(`/medidas/tempo-real/${idMaquina}`, { cache: 'no-store' })
             .then((response) => {
+                console.log("aaaa")
+                console.log(response)
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -143,7 +145,9 @@ function obterDadosGrafico(idMaquina, chartId) {
     }
 
     fetch(`/medidas/ultimas/${idMaquina}`, { cache: 'no-store' })
-        .then((response) => {
+        .then((response) => { 
+            console.log("aaaa")
+                console.log(response)
             if (response.ok) {
                 return response.json();
             } else {
@@ -151,6 +155,7 @@ function obterDadosGrafico(idMaquina, chartId) {
             }
         })
         .then((resposta) => {
+            
             resposta.reverse();
             for (const registro of resposta) {
                 labels.push(registro.momento_grafico);
@@ -439,8 +444,10 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
-
+                    
+                    
                     upload.innerHTML = ` ${resposta[0].dado}mb/s`
+                    
 
                 });
             } else {
@@ -532,15 +539,15 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
             });
     }
 
-    buscarCpu(idMaquina, idEmpresa)
-    buscarRam(idMaquina, idEmpresa)
-    buscarDisco(idMaquina, idEmpresa)
-    buscarUsb(idMaquina, idEmpresa)
-    buscarDownload(idMaquina, idEmpresa)
-    buscarUpload(idMaquina, idEmpresa)
-    buscarLogin(idMaquina, idEmpresa)
-    buscarJanelas(idMaquina, idEmpresa)
-    buscarProcessos(idMaquina, idEmpresa)
+    // buscarCpu(idMaquina, idEmpresa)
+    // buscarRam(idMaquina, idEmpresa)
+    // buscarDisco(idMaquina, idEmpresa)
+    // buscarUsb(idMaquina, idEmpresa)
+    // buscarDownload(idMaquina, idEmpresa)
+    // buscarUpload(idMaquina, idEmpresa)
+    // buscarLogin(idMaquina, idEmpresa)
+    // buscarJanelas(idMaquina, idEmpresa)
+    // buscarProcessos(idMaquina, idEmpresa)
 }
 
 
