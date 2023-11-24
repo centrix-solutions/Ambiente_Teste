@@ -9,11 +9,7 @@
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AppNotificacaoKt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/js/dashboard_maquina.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/src/models/medidaModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/models/medidaModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +19,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -38,14 +27,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />

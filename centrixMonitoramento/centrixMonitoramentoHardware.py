@@ -4,7 +4,7 @@ import pymssql
 from mysql.connector import connect
 from datetime import datetime
 
-mysql_cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
+mysql_cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 
 sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix')
 

@@ -16,16 +16,16 @@ var sqlServerConfig = {
 }
 
 // CONEXÃO DO MYSQL WORKBENCH
-var mySqlConfig = {
-    host: "localhost",
-    database: "centrix",
-    // user: "aluno",
-     // password: "sptech",
-    user: "root",
-     password: "38762",
-   // user: "root",
-    //password: "TomboySupremacy2!"
-};
+// var mySqlConfig = {
+//     host: "localhost",
+//     database: "centrix",
+//     user: "aluno",
+//      password: "sptech",
+//     user: "root",
+//     password: "38762",
+//    user: "root",
+//     password: "TomboySupremacy2!"
+// };
 
 
 function executar(instrucao) {
