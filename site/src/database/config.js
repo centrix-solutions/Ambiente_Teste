@@ -16,6 +16,7 @@ var sqlServerConfig = {
 }
 
 // CONEXÃO DO MYSQL WORKBENCH
+<<<<<<< HEAD
 var mySqlConfig = {
     host: "localhost",
     database: "centrix",
@@ -28,6 +29,18 @@ var mySqlConfig = {
     user: "root",
     password: "#Gf53359131851",
 };
+=======
+// var mySqlConfig = {
+//     host: "localhost",
+//     database: "centrix",
+//     user: "aluno",
+//      password: "sptech",
+//     user: "root",
+//     password: "38762",
+//    user: "root",
+//     password: "TomboySupremacy2!"
+// };
+>>>>>>> 6ebbd9c4e02228a1baf094a736d727d5e68ff454
 
 
 function executar(instrucao) {
