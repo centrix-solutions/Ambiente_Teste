@@ -11,6 +11,7 @@
     <script src="../js/nivelAcesso.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/dashboard_indi_Paola.js" ></script>
+    
 </head>
 
 <body onload="listarLateral()">
@@ -43,19 +44,9 @@
                             Edson
                         </div>
                     </div>
-                    <div class="div_individual" id="div_individual"></div>
-                </div>
-            </div>
-        </div>
-</body>
-</html>
+                    <div class="div_individual" id="div_individual">
 
-<script>
-
-function carregarPaola(){
-
-    div_individual.innerHTML = `
-    <div class="conteudoPaola">
+                        <div class="conteudoPaola" id="conteudoPaola">
                             <div class="kpisPaola">
                                 <div class="kpiPaola"></div>
                                 <div class="kpiPaola"></div>
@@ -68,35 +59,93 @@ function carregarPaola(){
                                     Tenha uma visão geral do uso da CPU e RAM a partir de gráficos
                                 </div>
                                 <div class="graficosPaola">
+                                    
                                     <div class="chartPaola">
                                         <h1>CPU</h1>
-                                        <canvas id="graficoCpu"></canvas>
+                                        <!-- <canvas id="graficoCpu"></canvas> -->
+                                        <canvas id="myChart"></canvas>
                                     </div>
                                     <div class="chartPaola">
                                         <h1>RAM</h1>
-                                        <canvas id="graficoRam"></canvas>
+                                        <!-- <canvas id="graficoRam"></canvas> -->
+                                        <canvas id="myChart2"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    `
 
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+
+ 
+
+<script>
+
+const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+function carregarPaola(){
+
+    conteudoPaola.innerHTML = ``
 }
 
-function carregarRafael() {
-    div_individual.innerHTML = ``
-}
+// function carregarRafael() {
+//     div_individual.innerHTML = ``
+// }
 
-function carregarRuan() {
-    div_individual.innerHTML = ``
-}
+// function carregarRuan() {
+//     div_individual.innerHTML = ``
+// }
 
-function carregarAle() {
-    div_individual.innerHTML = ``
-}
+// function carregarAle() {
+//     div_individual.innerHTML = ``
+// }
 
-function carregarEdson() {
-    div_individual.innerHTML = ``
-}
+// function carregarEdson() {
+//     div_individual.innerHTML = ``
+// }
 
 </script>

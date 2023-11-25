@@ -109,9 +109,10 @@ body {
 
 /* Individual Paola */
 
-.conteudoPaola{
+#conteudoPaola{
     height: 100%;
     width: 100%;
+    display: inline;
     /* background-color: aliceblue; */
     /* display: flex; */
 }
