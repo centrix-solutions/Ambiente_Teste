@@ -1,5 +1,5 @@
+// DADOS NECESSÁRIOS PARA A BARRA-EMPILHADA
 let ctx2 = 0;
-let dadosDataStacked = [];
 let dadosPerigoStacked = [];
 let dadosAtencaoStacked = [];
 
@@ -8,7 +8,7 @@ function obterDadosGraficoStacked(canvaId) {
     if (ctx2 !== 0) {
         ctx2.destroy();
     }
-    
+
     const labels2 = [
         ` 01/11 - 07/11`,
         ' 08/11 - 14/11',
@@ -72,7 +72,7 @@ function obterDadosGraficoStacked(canvaId) {
         document.getElementById(`${canvaId}`),
         config2
     );
-  
+
     atualizarGraficoStacked();
 
     // BANCO RECUPERAÇÃO
@@ -115,11 +115,11 @@ function obterDadosGraficoStacked(canvaId) {
             .then((resposta) => {
                 var i = 0
                 for (const registro of resposta) {
-                    if (dadosPerigoStacked.length < 4 && registro.AlertasPerigo !=  dadosPerigoStacked[i] ) {
+                    if (dadosPerigoStacked.length < 4 && registro.AlertasPerigo != dadosPerigoStacked[i]) {
                         dadosPerigoStacked.push(registro.AlertasPerigo);
                         ctx2.update();
                     }
-                    if (dadosAtencaoStacked.length < 4 && registro.AlertasAtencao !=  dadosAtencaoStacked[i] ) {
+                    if (dadosAtencaoStacked.length < 4 && registro.AlertasAtencao != dadosAtencaoStacked[i]) {
                         dadosAtencaoStacked.push(registro.AlertasAtencao);
                         ctx2.update();
                     }
@@ -132,6 +132,7 @@ function obterDadosGraficoStacked(canvaId) {
     }
 }
 
+// DADOS NECESSÁRIOS PARA A MEIA-LUA
 var dados = [];
 let ctx = 0;
 
@@ -141,45 +142,122 @@ function obterDadosGraficoMeiaLua(fkAndarDeTrabalho, canvaId) {
         dados = []
     }
 
-    if (fkAndarDeTrabalho > 0) {
-        const data = {
-            labels: ['Perigo', 'Atenção', 'Normal'],
-            datasets: [{
-                label: 'Últimos alertas do andar ',
-                data: dados,
-                backgroundColor: [
-                    'rgba(255, 0, 0, 1)',
-                    'rgba(255, 167, 34, 1)',
-                    'rgba(39, 36, 62, 1)'
-                ],
-                cutout: '80%',
-                circumference: 180,
-                rotation: 270
-            }]
-        };
+    const data = {
+        labels: ['Perigo', 'Atenção', 'Normal'],
+        datasets: [{
+            label: 'Últimos alertas do andar ',
+            data: dados,
+            backgroundColor: [
+                'rgba(255, 0, 0, 1)',
+                'rgba(255, 167, 34, 1)',
+                'rgba(39, 36, 62, 1)'
+            ],
+            cutout: '80%',
+            circumference: 180,
+            rotation: 270
+        }]
+    };
 
-        // config
-        const config = {
-            type: 'doughnut',
-            data,
-            options: {
-                aspectRatio: 2,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+    // config
+    const config = {
+        type: 'doughnut',
+        data,
+        options: {
+            aspectRatio: 2,
+            plugins: {
+                legend: {
+                    display: false
                 }
             }
-        };
-
-        if (ctx !== 0) {
-            ctx.destroy();
         }
+    };
 
-        ctx = new Chart(
-            document.getElementById(`${canvaId}`),
-            config
-        );
+    if (ctx !== 0) {
+        ctx.destroy();
+    }
 
+    ctx = new Chart(
+        document.getElementById(`${canvaId}`),
+        config
+    );
+
+    if (fkAndarDeTrabalho > 0) {
+        atualizarGraficoMeiaLua()
+    }
+    
+    // BANCO RECUPERAÇÃO
+    function atualizarGraficoMeiaLua() {
+        fetch(`/rede/alertaAndarMeiaLua/${fkAndarDeTrabalho}`, {
+                cache: 'no-store'
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then(novoRegistro => {
+                if (dados.AlertasPerigo !== novoRegistro.AlertasPerigo) {
+                    dados.AlertasPerigo = novoRegistro.AlertasPerigo;
+                    ctx.data.datasets[0].data[0] = novoRegistro.AlertasPerigo;
+                }
+                if (dados.AlertasAtencao !== novoRegistro.AlertasAtencao) {
+                    dados.AlertasAtencao = novoRegistro.AlertasAtencao;
+                    ctx.data.datasets[0].data[1] = novoRegistro.AlertasAtencao;
+                }
+                if(dados.TotalMaquinas !== novoRegistro.TotalMaquinas){
+                    dados.TotalMaquinas = novoRegistro.TotalMaquinas;
+                    ctx.data.datasets[0].data[2] = novoRegistro.TotalMaquinas;
+                }
+                setTimeout(atualizarGraficoMeiaLua, 20000);
+            })
+            .catch(error => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                setTimeout(atualizarGraficoMeiaLua, 20000);
+            });
+
+        fetch(`/rede/alertaAndarMeiaLua/${fkAndarDeTrabalho}`, {
+                cache: 'no-store'
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro na requisição.');
+                }
+            })
+            .then((resposta) => {
+                var i = 0
+                if (resposta[0].AlertasPerigo == 0 || resposta[0].AlertasPerigo == NaN) {
+                    dados.push(0);
+                    i++
+                } else if (dados.length < 3 && resposta[0].AlertasPerigo != dados[i]) {
+                    dados.push(resposta[0].AlertasPerigo);
+                    i++
+                }
+                if (resposta[0].AlertasAtencao == 0 || resposta[0].AlertasAtencao == NaN) {
+                    dados.push(0);
+                    i++
+                } else if (dados.length < 3 && resposta[0].AlertasAtencao != dados[i]) {
+                    dados.push(resposta[0].AlertasAtencao);
+                    i++
+                }
+                if (resposta[0].TotalMaquinas == 0 || resposta[0].TotalMaquinas == NaN){
+                    dados.push(0);
+                    i++ 
+                }else if (dados.length < 3 && resposta[0].TotalMaquinas != dados[i]){
+                    if (dados[0] == undefined || dados[1] == undefined){
+                        atualizarGraficoMeiaLua();
+                    }
+                    var subAlerta = Number(resposta[0].TotalMaquinas) - (Number(dados[0]) + Number(dados[1]))
+                    dados.push(subAlerta);
+                    i++
+                }
+                ctx.update();
+            })
+            .catch((error) => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+            });
     }
 }
