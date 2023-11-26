@@ -1,8 +1,141 @@
-// AQUI VOU RECUPERAR PARA O GRÁFICO MEIA-LUA
+let ctx2 = 0;
+let dadosDataStacked = [];
+let dadosPerigoStacked = [];
+let dadosAtencaoStacked = [];
 
-var dados = []
+// AQUI VOU RECUPERAR PARA O GRÁFICO BARRA-EMPILHADA
+function obterDadosGraficoStacked(canvaId) {
+    if (ctx2 !== 0) {
+        ctx2.destroy();
+    }
+    
+    const labels2 = [
+        ` 01/11 - 07/11`,
+        ' 08/11 - 14/11',
+        ' 15/11 - 21/11',
+        ' 22/11 - 30/11'
+    ]
+
+    const data2 = {
+        labels: labels2,
+        datasets: [{
+                label: 'Perigo',
+                data: dadosPerigoStacked,
+                backgroundColor: [
+                    'rgb(96, 64, 155)'
+                ],
+                borderWidth: 1,
+                borderRadius: 10,
+                order: 2
+            },
+            {
+                label: 'Atenção',
+                data: dadosAtencaoStacked,
+                backgroundColor: [
+                    'rgb(159, 131, 221)'
+                ],
+                borderWidth: 1,
+                yAxisID: 'atencao',
+                borderRadius: 10,
+                order: 1,
+                barPercentage: 0.8
+            }
+        ]
+    };
+
+    // config2
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    beginAtZero: true,
+                    stacked: true,
+                },
+                atencao: {
+                    beginAtZero: true,
+                    position: 'right',
+                    type: 'linear',
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+    ctx2 = new Chart(
+        document.getElementById(`${canvaId}`),
+        config2
+    );
+  
+    atualizarGraficoStacked();
+
+    // BANCO RECUPERAÇÃO
+    function atualizarGraficoStacked() {
+        fetch(`/rede/alertaMes`, {
+                cache: 'no-store'
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then(novoRegistro => {
+                if (dadosPerigoStacked.AlertasPerigo !== novoRegistro.AlertasPerigo) {
+                    dadosPerigoStacked.AlertasPerigo = novoRegistro.AlertasPerigo;
+                    ctx2.data.datasets[0].data[0] = novoRegistro.AlertasPerigo;
+                } else if (dadosAtencaoStacked.AlertasAtencao !== novoRegistro.AlertasAtencao) {
+                    dadosAtencaoStacked.AlertasAtencao = novoRegistro.AlertasAtencao;
+                    ctx2.data.datasets[0].data[0] = novoRegistro.AlertasAtencao;
+                }
+                setTimeout(atualizarGraficoStacked, 4000);
+            })
+            .catch(error => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                setTimeout(atualizarGraficoStacked, 4000);
+            });
+
+        fetch(`/rede/alertaMes`, {
+                cache: 'no-store'
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro na requisição.');
+                }
+            })
+            .then((resposta) => {
+                var i = 0
+                for (const registro of resposta) {
+                    if (dadosPerigoStacked.length < 4 && registro.AlertasPerigo !=  dadosPerigoStacked[i] ) {
+                        dadosPerigoStacked.push(registro.AlertasPerigo);
+                        ctx2.update();
+                    }
+                    if (dadosAtencaoStacked.length < 4 && registro.AlertasAtencao !=  dadosAtencaoStacked[i] ) {
+                        dadosAtencaoStacked.push(registro.AlertasAtencao);
+                        ctx2.update();
+                    }
+                    i++
+                }
+            })
+            .catch((error) => {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+            });
+    }
+}
+
+var dados = [];
 let ctx = 0;
 
+// AQUI VOU RECUPERAR PARA O GRÁFICO MEIA-LUA
 function obterDadosGraficoMeiaLua(fkAndarDeTrabalho, canvaId) {
     if (dados.length > 0) {
         dados = []
@@ -48,157 +181,5 @@ function obterDadosGraficoMeiaLua(fkAndarDeTrabalho, canvaId) {
             config
         );
 
-
-
-        // BANCO RECUPERAÇÃO
-        function atualizarGraficoMeiaLua() {
-
-            fetch(`/rede/alertaPerigo/${fkAndarDeTrabalho}`, {
-                    cache: 'no-store'
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    if (dados.perigo !== novoRegistro.TotalAlertasTipo) {
-                        dados.perigo = novoRegistro.TotalAlertasTipo;
-                        ctx.data.datasets[0].data[0] = novoRegistro.TotalAlertasTipo;
-                       
-                    }
-                    setTimeout(atualizarGraficoMeiaLua, 4000);
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-                    setTimeout(atualizarGraficoMeiaLua, 4000);
-                });
-
-
-            // TIPO ATENÇÃO
-            fetch(`/rede/alertaAtencao/${fkAndarDeTrabalho}`, {
-                    cache: 'no-store'
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    if (dados.atencao !== novoRegistro.TotalAlertasTipo) {
-                        dados.atencao = novoRegistro.TotalAlertasTipo;
-                        ctx.data.datasets[0].data[0] = novoRegistro.TotalAlertasTipo;
-                    
-                    }
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-                    setTimeout(atualizarGraficoMeiaLua, 4000);
-                });
-
-            fetch(`/rede/total/${fkAndarDeTrabalho}`)
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    if (dados.total !== novoRegistro.Monitoradas) {
-                        dados.total = novoRegistro.Monitoradas;
-                        ctx.data.datasets[0].data[0] = novoRegistro.Monitoradas;
-                        
-                    }
-                    setTimeout(atualizarGraficoMeiaLua, 4000);
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-                    setTimeout(atualizarGraficoMeiaLua, 4000);
-                });
-        }
-
-        fetch(`/rede/alertaPerigo/${fkAndarDeTrabalho}`, {
-                cache: 'no-store'
-            })
-            .then((response) => {
-                console.log(response)
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erro na requisição.');
-                }
-            })
-            .then((resposta) => {
-                resposta.reverse();
-                for (const registro of resposta) {
-                    dados.push(registro.TotalAlertasTipo);
-                }
-               
-            })
-            .catch((error) => {
-                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-            });
-
-        // TIPO ATENÇÃO
-        fetch(`/rede/alertaAtencao/${fkAndarDeTrabalho}`, {
-                cache: 'no-store'
-            })
-            .then((response) => {
-                console.log(response)
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erro na requisição.');
-                }
-            })
-            .then((resposta) => {
-                resposta.reverse();
-                for (const registro of resposta) {
-                    if (resposta == 0) {
-                        dados.push(0)
-                    } else {
-                        dados.push(registro.TotalAlertasTipo);
-                    }
-                }
-              
-            })
-            .catch((error) => {
-                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-            });
-
-        fetch(`/rede/total/${fkAndarDeTrabalho}`, {
-                cache: 'no-store'
-            })
-            .then((response) => {
-                console.log(response)
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erro na requisição.');
-                }
-            })
-            .then((resposta) => {
-                for (const registro of resposta) {
-                    var subAlerta = (registro.Monitoradas - (dados[0] + dados[1]))
-                    resposta.reverse();
-                    if (subAlerta == 0) {
-                        dados.push(0)
-                        ctx.update();
-                    } else {
-                        dados.push(subAlerta);
-                        ctx.update();
-                    }
-                }
-                
-            })
-            .catch((error) => {
-                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-            });
-        console.log(dados)
     }
 }

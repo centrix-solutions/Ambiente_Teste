@@ -23,4 +23,12 @@ router.get("/total/:fkAndarDeTrabalho", function (req, res){
     redeController.recuperarTotalMaquinas(req, res);
 });
 
+router.get("/total/:fkAndarDeTrabalho", function (req, res){
+    redeController.recuperarTotalMaquinas(req, res);
+});
+
+router.get("/alertaMes", function (res, res){
+    redeController.alertasDoMes(res, res);
+});
+
 module.exports = router;
