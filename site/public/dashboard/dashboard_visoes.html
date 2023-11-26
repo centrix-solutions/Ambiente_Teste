@@ -2,150 +2,177 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Engenheiro de NOC</title>
-    <link rel="icon" href="../assets/icon/favicon.ico">
-    <link rel="stylesheet" href="../css/dash_visoes.css">
-    <link rel="stylesheet" href="../css/barra_lateral.css">
-    <script src="../js/nivelAcesso.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/dashboard_indi_Paola.js" ></script>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Engenheiro de NOC</title>
+  <link rel="icon" href="../assets/icon/favicon.ico">
+  <link rel="stylesheet" href="../css/dash_visoes.css">
+  <link rel="stylesheet" href="../css/barra_lateral.css">
+  <script src="../js/nivelAcesso.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/dashboard_indi_Paola.js"></script>
+
 </head>
 
 <body onload="listarLateral()">
-    <div class="container_principal">
-        <div class="barra_lateral" id="lateral_barra"></div>
-        <div class="area_dash">
-            <div class="dash_superior">
-                <div class="bem_vindo">
-                    <span class="text_bemVindo1">
-                        Veja visões diferentes para os dados
-                    </span>
-                </div>
-            </div>
-            <div class="div_central">
-                <div class="div_conteudo">
-                    <div class="menu_visoes">
-                        <div class="botao_visoes" onclick="carregarPaola()">
-                            Dados Gerais
-                        </div>
-                        <div class="botao_visoes" onclick="carregarRafael()">
-                            Rafael
-                        </div>
-                        <div class="botao_visoes" onclick="carregarRuan()">
-                            Ruan
-                        </div>
-                        <div class="botao_visoes" onclick="carregarAle()">
-                            Ale
-                        </div>
-                        <div class="botao_visoes" onclick="carregarEdson()">
-                            Edson
-                        </div>
-                    </div>
-                    <div class="div_individual" id="div_individual">
-
-                        <div class="conteudoPaola" id="conteudoPaola">
-                            <div class="kpisPaola">
-                                <div class="kpiPaola"></div>
-                                <div class="kpiPaola"></div>
-                                <div class="kpiPaola"></div>
-                                <div class="kpiPaola"></div>
-                                <div class="kpiPaola"></div>
-                            </div>
-                            <div class="inferiorPaola">
-                                <div class="tituloPaola">
-                                    Tenha uma visão geral do uso da CPU e RAM a partir de gráficos
-                                </div>
-                                <div class="graficosPaola">
-                                    
-                                    <div class="chartPaola">
-                                        <h1>CPU</h1>
-                                        <!-- <canvas id="graficoCpu"></canvas> -->
-                                        <canvas id="myChart"></canvas>
-                                    </div>
-                                    <div class="chartPaola">
-                                        <h1>RAM</h1>
-                                        <!-- <canvas id="graficoRam"></canvas> -->
-                                        <canvas id="myChart2"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+  <div class="container_principal">
+    <div class="barra_lateral" id="lateral_barra"></div>
+    <div class="area_dash">
+      <div class="dash_superior">
+        <div class="bem_vindo">
+          <span class="text_bemVindo1">
+            Veja visões diferentes para os dados
+          </span>
         </div>
-</body>
-</html>
+      </div>
+      <div class="div_central">
+        <div class="div_conteudo">
+          <div class="menu_visoes">
+            <div class="botao_visoes" onclick="carregarPaola()">
+              Dados Gerais
+            </div>
+            <div class="botao_visoes" onclick="carregarRafael()">
+              Rafael
+            </div>
+            <div class="botao_visoes" onclick="carregarRuan()">
+              Ruan
+            </div>
+            <div class="botao_visoes" onclick="carregarAle()">
+              Ale
+            </div>
+            <div class="botao_visoes" onclick="carregarEdson()">
+              Edson
+            </div>
+          </div>
+          <div class="div_individual" id="div_individual">
 
- 
+            <div class="conteudoPaola" id="conteudoPaola">
+              <div class="kpisPaola">
+                <div class="kpiPaola"></div>
+                <div class="kpiPaola"></div>
+                <div class="kpiPaola"></div>
+                <div class="kpiPaola"></div>
+                <div class="kpiPaola"></div>
+              </div>
+              <div class="inferiorPaola">
+                <div class="tituloPaola">
+                  Tenha uma visão geral do uso da CPU e RAM a partir de gráficos
+                </div>
+                <div class="graficosPaola">
+
+                  <div class="chartPaola">
+                    <h1>CPU</h1>
+                    <!-- <canvas id="graficoCpu"></canvas> -->
+                    <canvas id="myChart"></canvas>
+                  </div>
+                  <div class="chartPaola">
+                    <h1>RAM</h1>
+                    <!-- <canvas id="graficoRam"></canvas> -->
+                    <canvas id="myChart2"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="conteudoRafael" id="conteudoRafael"></div>
+            <div class="conteudoRuan" id="conteudoRuan"></div>
+            <div class="conteudoAle" id="conteudoAle"></div>
+            <div class="conteudoEdson" id="conteudoEdson"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
 
 <script>
 
-const ctx = document.getElementById('myChart');
+  function carregarPaola() {
+    conteudoPaola.style.display = 'inline'
+    conteudoRafael.style.display = 'none'
+    conteudoRuan.style.display = 'none'
+    conteudoAle.style.display = 'none'
+    conteudoEdson.style.display = 'none'
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
+    });
 
-  const ctx2 = document.getElementById('myChart2');
+    const ctx2 = document.getElementById('myChart2');
 
-  new Chart(ctx2, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
+    });
 
-function carregarPaola(){
+  }
 
-    conteudoPaola.innerHTML = ``
-}
+  function carregarRafael() {
+    conteudoRafael.style.display = 'inline'
+    conteudoPaola.style.display = 'none'
+    conteudoRuan.style.display = 'none'
+    conteudoAle.style.display = 'none'
+    conteudoEdson.style.display = 'none'
 
-// function carregarRafael() {
-//     div_individual.innerHTML = ``
-// }
 
-// function carregarRuan() {
-//     div_individual.innerHTML = ``
-// }
+  }
 
-// function carregarAle() {
-//     div_individual.innerHTML = ``
-// }
+  function carregarRuan() {
+    conteudoRuan.style.display = 'inline'
+    conteudoPaola.style.display = 'none'
+    conteudoRafael.style.display = 'none'
+    conteudoAle.style.display = 'none'
+    conteudoEdson.style.display = 'none'
+  }
 
-// function carregarEdson() {
-//     div_individual.innerHTML = ``
-// }
+  function carregarAle() {
+    conteudoAle.style.display = 'inline'
+    conteudoPaola.style.display = 'none'
+    conteudoRafael.style.display = 'none'
+    conteudoRuan.style.display = 'none'
+    conteudoEdson.style.display = 'none'
+  }
+
+  function carregarEdson() {
+    conteudoEdson.style.display = 'inline'
+    conteudoPaola.style.display = 'none'
+    conteudoRafael.style.display = 'none'
+    conteudoRuan.style.display = 'none'
+    conteudoAle.style.display = 'none'
+
+  }
 
 </script>

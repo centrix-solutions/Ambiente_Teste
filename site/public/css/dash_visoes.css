@@ -112,7 +112,7 @@ body {
 #conteudoPaola{
     height: 100%;
     width: 100%;
-    display: inline;
+    display: none;
     /* background-color: aliceblue; */
     /* display: flex; */
 }
@@ -176,4 +176,33 @@ body {
     background-color: #000000;
     border-radius: 10px;
     
+}
+
+/* Individual Rafa */
+.conteudoRafael {
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+/* Individual Ruan*/
+.conteudoRuan {
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+/* Individual Ale */
+.conteudoAle {
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+/* Individual Edson */
+
+.conteudoEdson {
+    display: none;
+    height: 100%;
+    width: 100%;
 }
