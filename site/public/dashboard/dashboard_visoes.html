@@ -48,11 +48,35 @@
 
             <div class="conteudoPaola" id="conteudoPaola">
               <div class="kpisPaola">
-                <div class="kpiPaola"></div>
-                <div class="kpiPaola"></div>
-                <div class="kpiPaola"></div>
-                <div class="kpiPaola"></div>
-                <div class="kpiPaola"></div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Desempenho da CPU
+                  </div>
+                  <!-- <div class="tooltip" data-hint="Este é o meu tooltip">
+                    <p>Passe o mouse para obter informações</p>
+                  </div> -->
+
+                </div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Desempenho da RAM
+                  </div>
+                </div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Total de Máquinas
+                  </div>
+                </div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Ainda não sei
+                  </div>
+                </div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Ainda não sei²
+                  </div>
+                </div>
               </div>
               <div class="inferiorPaola">
                 <div class="tituloPaola">
@@ -62,13 +86,11 @@
 
                   <div class="chartPaola">
                     <h1>CPU</h1>
-                    <!-- <canvas id="graficoCpu"></canvas> -->
-                    <canvas id="myChart"></canvas>
+                    <canvas id="graficoCpuPaola"></canvas>
                   </div>
                   <div class="chartPaola">
                     <h1>RAM</h1>
-                    <!-- <canvas id="graficoRam"></canvas> -->
-                    <canvas id="myChart2"></canvas>
+                    <canvas id="graficoRamPaola"></canvas>
                   </div>
                 </div>
               </div>
@@ -96,7 +118,65 @@
     conteudoAle.style.display = 'none'
     conteudoEdson.style.display = 'none'
 
-    const ctx = document.getElementById('myChart');
+    // fazendo a a rota do gráfico
+
+    var idEmpresa = Number(sessionStorage.getItem('Empresa'));
+
+    function obterDadosGrafico() {
+      fetch(`/dashPaola/grafico/`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (resposta) {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              plotarDadosGrafico(resposta);
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+
+    function plotarDadosGrafico(resposta) {
+    var data = [];
+    // var labels = [];
+    var cores = ["#d83198", "#3b9d17c2", "#d83198c0", "#3b9d17"];
+
+    for (var i = 0; i < resposta.length; i++) {
+      data.push(resposta[i].mediaCPU);
+      // labels.push(resposta[i].receita);
+    }
+
+    console.log("data ", data )
+    console.log("labels ", labels)
+
+    const ctx = document.getElementById("graficoCpuPaola");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: data,
+        datasets: [{
+            data,
+            backgroundColor: cores,
+            borderWidth: 1
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+    const ctx = document.getElementById('graficoCpuPaola');
 
     new Chart(ctx, {
       type: 'line',
@@ -117,7 +197,7 @@
       }
     });
 
-    const ctx2 = document.getElementById('myChart2');
+    const ctx2 = document.getElementById('graficoRamPaola');
 
     new Chart(ctx2, {
       type: 'line',
