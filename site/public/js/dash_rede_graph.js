@@ -250,6 +250,7 @@ function obterDadosGraficoMeiaLua(fkAndarDeTrabalho, canvaId) {
                     if (dados[0] == undefined || dados[1] == undefined){
                         atualizarGraficoMeiaLua();
                     }
+                    sessionStorage.setItem('TotalMaquinasAndar', resposta[0].TotalMaquinas)
                     var subAlerta = Number(resposta[0].TotalMaquinas) - (Number(dados[0]) + Number(dados[1]))
                     dados.push(subAlerta);
                     i++

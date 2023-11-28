@@ -11,11 +11,10 @@
     <script src="../js/andar.js"></script>
     <script src="../js/nivelAcesso.js"></script>
     <script src="../js/dash_rede_graph.js"></script>
+    <script src="../js/notificacao_rede.js"></script>
 </head>
 
-<!-- obterdados(), -->
-
-<body onload="buscarAndares(), listarLateral(), graficoStacked()">
+<body onload="buscarAndares(), listarLateral(), graficoStacked(), obterdados()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -49,58 +48,9 @@
                     </div>
                     <div class="scroll_alertas">
                         <!-- JAVASCRIPT ALERTA -->
-                        <!-- <div class="cards-container">
-                            <div id="card_1">
-                            </div>
-                            <div id="card_2">
-                            </div>
-                        </div> -->
+                        <div id="cards_container" class="cards-container">
+                        </div>
                         <!-- JAVASCRIPT ALERTA -->
-                        <div class="card">
-                            <div class="container_card">
-                                <div class="div_bola">
-                                    <div class="bola critico"> </div>
-                                </div>
-                                <p>Computador com o Id: <span>1</span></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="card">
-                            <div class="container_card">
-                                <div class="div_bola">
-                                    <div class="bola cuidado"> </div>
-                                </div>
-                                <p>Computador com o Id: <span>2</span></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="card">
-                            <div class="container_card">
-                                <div class="div_bola">
-                                    <div class="bola critico"> </div>
-                                </div>
-                                <p>Computador com o Id: <span>3</span></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="card">
-                            <div class="container_card">
-                                <div class="div_bola">
-                                    <div class="bola cuidado"></div>
-                                </div>
-                                <p>Computador com o Id: <span>4</span></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="card">
-                            <div class="container_card">
-                                <div class="div_bola">
-                                    <div class="bola critico"></div>
-                                </div>
-                                <p>Computador com o Id: <span>5</span></p>
-                            </div>
-                        </div>
-                        <br>
                     </div>
                 </div>
                 <div class="graficos_kpi">
@@ -188,15 +138,6 @@
 
     var empresaFunc = sessionStorage.getItem('Empresa');
 
-    function obterdados() {
-
-        // buscarImportanciaMaquina(1, empresaFunc);
-        // buscarImportanciaMaquina(2, empresaFunc);
-        // buscarImportanciaMaquina(3, empresaFunc);
-
-        setTimeout(obterdados, 5000);
-    }
-
     // Stacked
     function graficoStacked() {
         obterDadosGraficoStacked('Stacked')
@@ -206,5 +147,14 @@
     function graficoMeiaLua() {
         var idAndarVar = Number(andares.value.split('-')[1]);
         obterDadosGraficoMeiaLua(idAndarVar, 'meia_lua')
+    }
+
+    // Notificações
+    function obterdados() {
+        var TotalMaquinasAndar = sessionStorage.getItem('TotalMaquinasAndar')
+        for (i = 0;i < TotalMaquinasAndar;i++ ){
+            buscarImportanciaMaquina(`${Number(i)}`, empresaFunc);
+        }
+        setTimeout(obterdados, 20000);
     }
 </script>
