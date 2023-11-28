@@ -95,11 +95,11 @@ function obterDadosGraficoStacked(canvaId) {
                     dadosAtencaoStacked.AlertasAtencao = novoRegistro.AlertasAtencao;
                     ctx2.data.datasets[0].data[0] = novoRegistro.AlertasAtencao;
                 }
-                setTimeout(atualizarGraficoStacked, 4000);
+                setTimeout(atualizarGraficoStacked, 2000);
             })
             .catch(error => {
                 console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-                setTimeout(atualizarGraficoStacked, 4000);
+                setTimeout(atualizarGraficoStacked, 2000);
             });
 
         fetch(`/rede/alertaMes`, {

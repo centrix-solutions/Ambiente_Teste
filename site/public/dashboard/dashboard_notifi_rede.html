@@ -14,7 +14,7 @@
     <script src="../js/notificacao_rede.js"></script>
 </head>
 
-<body onload="buscarAndares(), listarLateral(), graficoStacked(), obterdados()">
+<body onload="buscarAndares(), listarLateral(), graficoStacked()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -137,6 +137,7 @@
     emailFuncionario.innerHTML = sessionStorage.email;
 
     var empresaFunc = sessionStorage.getItem('Empresa');
+    var cards_container = document.getElementById('cards_container')
 
     // Stacked
     function graficoStacked() {
@@ -147,14 +148,21 @@
     function graficoMeiaLua() {
         var idAndarVar = Number(andares.value.split('-')[1]);
         obterDadosGraficoMeiaLua(idAndarVar, 'meia_lua')
+        limparNotificacaoAndar();
+        obterdados();
     }
 
     // Notificações
+    function limparNotificacaoAndar(){
+        cards_container.innerText = " ";
+    }
+
     function obterdados() {
         var TotalMaquinasAndar = sessionStorage.getItem('TotalMaquinasAndar')
         for (i = 0;i < TotalMaquinasAndar;i++ ){
             buscarImportanciaMaquina(`${Number(i)}`, empresaFunc);
         }
-        setTimeout(obterdados, 20000);
     }
+
+  
 </script>

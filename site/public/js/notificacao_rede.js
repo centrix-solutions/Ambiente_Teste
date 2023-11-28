@@ -7,12 +7,11 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
                 fetch(`/rede/importancia/${idMaquina}`)
                     .then(resposta => resposta.json()) // Transforma em um Json, melhor formato?
                     .then(resposta => {
-                        const i = totalMaquinas;
                         var idMaquinaAnterior = 0
                         // AQUI O ID É 1
                         separar();
                         async function separar() {
-                            for (; i > notificacoes.length;) {
+                            for (i = totalMaquinas; i > notificacoes.length;) {
                                 if (idMaquina != idMaquinaAnterior) {
                                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
@@ -22,7 +21,7 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
                                     if (notificacoes.length < totalMaquinas) {
                                         notificacoes.push({
                                             idMaquina,
-                                            importancia: resposta.Importancia
+                                            importancia: resposta[0].Importancia
                                         });
                                     } else if (novaImportancia !== importanciaAnterior) {
                                         // A importância mudou, execute o bloco de código aqui
@@ -32,10 +31,9 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
                                         importanciaAnterior = novaImportancia;
                                         notificacoes.push({
                                             idMaquina,
-                                            importancia: resposta.Importancia
+                                            importancia: resposta[0].Importancia
                                         });
                                     }
-                                    console.log(novaImportancia)
 
                                     notificar(novaImportancia, idMaquina)
                                     idMaquinaAnterior = idMaquina
@@ -57,7 +55,6 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
 
         var importancia = novaImportancia;
         var grauDeAviso = "";
-
 
         var listar = {
             Perigo: {
