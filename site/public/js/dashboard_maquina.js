@@ -119,7 +119,7 @@ function obterDadosGrafico(idMaquina, chartId) {
     function atualizarGrafico() {
         fetch(`/medidas/tempo-real/${idMaquina}`, { cache: 'no-store' })
             .then((response) => {
-                
+
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -158,7 +158,7 @@ function obterDadosGrafico(idMaquina, chartId) {
             resposta.reverse();
             for (const registro of resposta) {
                 const momentoFormatado = new Date(registro.momento_grafico).toISOString().slice(11, 19);
-                
+
                 labels.push(momentoFormatado);
                 data.push(registro.cpu);
             }
@@ -245,7 +245,7 @@ function obterDadosGraficoRAM(idMaquina, chartId) {
                 const usoRAMGB = novoRegistro[0].ram;
 
                 const usoRAMPercent = (usoRAMGB / totalRAMGB) * 100;
-                
+
                 const momento = new Date(novoRegistro[0].momento_grafico).toISOString().slice(11, 19);
                 if (momento !== labels[labels.length - 1]) {
                     labels.shift();
