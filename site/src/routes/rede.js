@@ -3,12 +3,12 @@ var router = express.Router();
 
 var redeController = require("../controllers/redeController");
 
-router.get("/importancia/:idMaquina",  function (req, res) {
+router.get("/importancia/:fkAndarDeTrabalho",  function (req, res) {
     redeController.buscarImportanciaMaquina(req, res);
 });
 
-router.get("/maqEmp/:idEmpresa", function (req, res){
-    redeController.contarMaquinasEmpresa(req, res);
+router.get("/maqEmp/:fkAndarDeTrabalho", function (req, res){
+    redeController.contarMaquinasAndar(req, res);
 });
 
 router.get("/alertaAndarMeiaLua/:fkAndarDeTrabalho", function (req, res){

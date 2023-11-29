@@ -2,11 +2,11 @@ var redeModel = require("../models/redeModel");
 
 
 function buscarImportanciaMaquina(req, res){
-    var idMaquina = req.params.idMaquina;
+    var fkAndarDeTrabalho = req.params.fkAndarDeTrabalho;
 
     console.log("Recuperando o id da máquina")
 
-    redeModel.buscarImportanciaMaquina(idMaquina).then(function(resultado) {
+    redeModel.buscarImportanciaMaquina(fkAndarDeTrabalho).then(function(resultado) {
         if (resultado != String){
             res.status(200).json(resultado);
             console.log(resultado);
@@ -20,15 +20,15 @@ function buscarImportanciaMaquina(req, res){
     });
 }
 
-function contarMaquinasEmpresa(req, res){
-    var idEmpresa = req.params.idEmpresa;
+function contarMaquinasAndar(req, res){
+    var fkAndarDeTrabalho = req.params.fkAndarDeTrabalho;
 
     console.log("Recuperando o id da empresa") 
 
-    redeModel.contarMaquinasEmpresa(idEmpresa).then(function(resultado) {
+    redeModel.contarMaquinasAndar(fkAndarDeTrabalho).then(function(resultado) {
 
         if (resultado > "0"){
-            res.status(200).json(resultado[0].totalMaq);
+            res.status(200).json(resultado[0].TotalAlertasAndar);
         }else {
             res.status(204).send("Nenhum resultado encontrado!")
         }
@@ -76,7 +76,7 @@ function alertasDoMes(res,res){
 
 module.exports = {
     buscarImportanciaMaquina,
-    contarMaquinasEmpresa,
+    contarMaquinasAndar,
     alertasAndarMeiaLua,
     alertasDoMes,
 }

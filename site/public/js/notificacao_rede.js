@@ -1,27 +1,30 @@
 var notificacoes = [];
 
-function buscarImportanciaMaquina(idMaquina, idEmpresa) {
-    buscarTotalMaquinasEmpresa(idEmpresa)
-        .then(totalMaquinas => {
+function buscarImportanciaMaquina(fkAndarDeTrabalho) {
+    contarMaquinasAndar(fkAndarDeTrabalho)
+        .then(totalMaquinasAndar => {
             return new Promise((resolve) => {
-                fetch(`/rede/importancia/${idMaquina}`)
+                fetch(`/rede/importancia/${fkAndarDeTrabalho}`)
                     .then(resposta => resposta.json()) // Transforma em um Json, melhor formato?
                     .then(resposta => {
+                        console.log(resposta)
                         var idMaquinaAnterior = 0
                         // AQUI O ID É 1
+                        notificacoes = [];
                         separar();
                         async function separar() {
-                            for (i = totalMaquinas; i > notificacoes.length;) {
-                                if (idMaquina != idMaquinaAnterior) {
+                            for (i = totalMaquinasAndar; i > notificacoes.length;) {
+                                if (resposta.idMaquina != idMaquinaAnterior) {
                                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                                    var importanciaAnterior = resposta[0].Importancia;
-                                    var novaImportancia = resposta[0].Importancia;
+                                    var importanciaAnterior = resposta[notificacoes.length].Importancia;
+                                    var novaImportancia = resposta[notificacoes.length].Importancia;
+                                    var idMaquina = resposta[notificacoes.length].idMaquina
 
-                                    if (notificacoes.length < totalMaquinas) {
+                                    if (notificacoes.length < totalMaquinasAndar) {
                                         notificacoes.push({
-                                            idMaquina,
-                                            importancia: resposta[0].Importancia
+                                            idMaquina: idMaquina,
+                                            importancia: resposta[notificacoes.length].Importancia
                                         });
                                     } else if (novaImportancia !== importanciaAnterior) {
                                         // A importância mudou, execute o bloco de código aqui
@@ -30,8 +33,8 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
                                         // Atualize a importância anterior com a nova importância
                                         importanciaAnterior = novaImportancia;
                                         notificacoes.push({
-                                            idMaquina,
-                                            importancia: resposta[0].Importancia
+                                            idMaquina: idMaquina,
+                                            importancia: resposta[notificacoes.length].Importancia
                                         });
                                     }
 
@@ -52,6 +55,7 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
         });
 
     function notificar(novaImportancia, idMaquina) {
+        console.log(novaImportancia)
 
         var importancia = novaImportancia;
         var grauDeAviso = "";
@@ -59,7 +63,7 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
         var listar = {
             Perigo: {
                 classe: 'cor-importancia critico',
-                grau: 'critico' 
+                grau: 'critico'
             },
             Atenção: {
                 classe: 'cor-importancia cuidado',
@@ -128,9 +132,9 @@ function buscarImportanciaMaquina(idMaquina, idEmpresa) {
     }
 
     // PARA PODER RECUPERAR O COUNT DAS MAQUINAS
-    async function buscarTotalMaquinasEmpresa(idEmpresa) {
+    async function contarMaquinasAndar(fkAndarDeTrabalho) {
         return new Promise((resolve, reject) => {
-            fetch(`/rede/maqEmp/${idEmpresa}`)
+            fetch(`/rede/maqEmp/${fkAndarDeTrabalho}`)
                 .then(resposta => resposta.text())
                 .then(resposta => {
                     resolve(resposta)

@@ -63,7 +63,7 @@
                             <div class="titulo_select">
                                 <span class="text_alertas">Últimos alertas do andar</span>
                                 <div class="custom_select" style="width:109px;">
-                                    <select onchange="graficoMeiaLua()" name="andares" class="select_andares"
+                                    <select onchange="graficoMeiaLua(),limparNotificacaoAndar(),obterdados()" name="andares" class="select_andares"
                                         id="andares"></select>
                                 </div>
                             </div>
@@ -135,8 +135,7 @@
 <script>
     nomeFuncionario.innerHTML = sessionStorage.nome;
     emailFuncionario.innerHTML = sessionStorage.email;
-
-    var empresaFunc = sessionStorage.getItem('Empresa');
+    
     var cards_container = document.getElementById('cards_container')
 
     // Stacked
@@ -148,8 +147,6 @@
     function graficoMeiaLua() {
         var idAndarVar = Number(andares.value.split('-')[1]);
         obterDadosGraficoMeiaLua(idAndarVar, 'meia_lua')
-        limparNotificacaoAndar();
-        obterdados();
     }
 
     // Notificações
@@ -158,11 +155,7 @@
     }
 
     function obterdados() {
-        var TotalMaquinasAndar = sessionStorage.getItem('TotalMaquinasAndar')
-        for (i = 0;i < TotalMaquinasAndar;i++ ){
-            buscarImportanciaMaquina(`${Number(i)}`, empresaFunc);
-        }
+        var idAndarVar = Number(andares.value.split('-')[1]);
+        buscarImportanciaMaquina(idAndarVar);
     }
-
-  
 </script>
