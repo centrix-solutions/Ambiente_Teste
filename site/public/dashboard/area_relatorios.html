@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/relatorio.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/nivelAcesso.js"></script>
 </head>
@@ -334,10 +334,10 @@
             maq.Id_do_dispositivo AS Maquina,
             moni.fkCompMoniExistentes AS Componente,
             COUNT(*) AS total_registros,
-            ROUND(MIN(moni.Dado_Capturado), 4) AS min,
-            ROUND(MAX(moni.Dado_Capturado), 4) AS max,
-            ROUND(AVG(moni.Dado_Capturado), 4) AS media,
-            ROUND(STDEV(moni.Dado_Capturado), 4) AS desvio
+            ROUND(MIN(moni.Dado_Capturado), 2) AS min,
+            ROUND(MAX(moni.Dado_Capturado), 2) AS max,
+            ROUND(AVG(moni.Dado_Capturado), 2) AS media,
+            ROUND(STDEV(moni.Dado_Capturado), 2) AS desvio
         FROM 
             Monitoramento moni
         JOIN
@@ -521,8 +521,16 @@
         }
 
         function gerarPDF(dados, dadosSummary) {
-            console.log(dados);
-            console.log(dadosSummary);
+
+            varDateTimeInicio = input_inicio.value;
+            varDateTimeFim = input_fim.value;
+            dataHoje = new Date();
+            dataInicioVerificar = new Date(varDateTimeInicio);
+            dataFimVerificar = new Date(varDateTimeFim);
+            var formatDataHj = dataHoje.toLocaleDateString('pt-BR') 
+            varDtInicio = dataInicioVerificar.toLocaleDateString('pt-BR');
+            varDtFim = dataFimVerificar.toLocaleDateString('pt-BR');
+
 
             var docDefinition = {
                 header: {
@@ -530,16 +538,16 @@
                     style: 'cabecalho',
                 },
                 content: [
-                    { text: `Data de criação: ${dataHoje}`, style: 'subtitulo' },
+                    { text: `Data de criação: ${formatDataHj}`, style: 'subtitulo' },
                     { text: `Criador: ${sessionStorage.nome}`, style: 'subtitulo' },
                     { text: `Dados coletados de ${varDtInicio} até ${varDtFim}`, style: 'subtitulo' },
                     {
                         style: 'tabela',
                         table: {
                             headerRows: 1,
-                            widths: [120, 70, 70, 70, 100],
+                            widths: [120, 55, 45, 45, 45, 45, 80],
                             body: [
-                                ['Nova Coluna1', 'Nova Coluna2', 'Nova Coluna3', 'Nova Coluna4', 'Nova Coluna5']
+                                ['Máquina', 'Qtd Registros', 'Min', 'Max', 'Média', 'Desvio Padrão', 'Componente']
                             ],
                         },
                     },
@@ -548,17 +556,17 @@
                         style: 'tabela',
                         table: {
                             headerRows: 1,
-                            widths: [120, 70, 70, 70, 100],
+                            widths: [120, 75, 75, 75, 108],
                             body: [
-                                ['Maquina', 'Data', 'Hora', 'Dado', 'Componente'],
+                                ['Máquina', 'Data', 'Hora', 'Dado', 'Componente'],
                             ],
                         },
                     },
                 ],
                 styles: {
                     cabecalho: {
-                        fontSize: 20,
-                        color: 'white',
+                        fontSize: 30,
+                        color: 'black',
                         background: 'purple',
                     },
                     subtitulo: {
@@ -566,27 +574,30 @@
                         margin: [0, 5]
                     },
                     tabela: {
-                        margin: [0, 10],
+                        margin: [0, 20],
                         fontSize: 12,
-                        lineColor: 'darkpurple',
                         alignment: 'center',
-
                     },
                     tableCell: {
+                        lineColor: 'darkpurple',
                         alignment: 'center',
                     },
                 },
             };
 
             //verificar se ta chegando os dados summary e verificar se o nome daqui tem que ser igual o de cima 
-            for (var i = 0; i < dados.length && i < dadosSummary.length; i++) {
+            for (var i = 0; i < dadosSummary.length; i++) {
                 docDefinition.content[3].table.body.push([
                     { text: dadosSummary[i].Maquina, style: 'tableCell' },
-                    { text: dadosSummary[i].Componente, style: 'tableCell' },
                     { text: dadosSummary[i].total_registros, style: 'tableCell' },
                     { text: dadosSummary[i].min, style: 'tableCell' },
                     { text: dadosSummary[i].max, style: 'tableCell' },
+                    { text: dadosSummary[i].media, style: 'tableCell' },
+                    { text: dadosSummary[i].desvio, style: 'tableCell' },
+                    { text: dadosSummary[i].Componente, style: 'tableCell' },
                 ]);
+            }
+            for (var i = 0; i < dados.length; i++) {
                 docDefinition.content[4].table.body.push([
                     { text: dados[i].Maquina, style: 'tableCell' },
                     { text: dados[i].Data, style: 'tableCell' },
@@ -597,7 +608,9 @@
             }
 
             docDefinition.content.unshift({ text: `${nomeArquivo}`, style: 'subtitulo' });
+            var pdfDoc = pdfMake.createPdf(docDefinition);
             pdfMake.createPdf(docDefinition).open();
+            pdfDoc.download(`${nomeArquivo}`);
         }
     }
 
