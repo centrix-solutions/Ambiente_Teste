@@ -262,3 +262,44 @@ function obterDadosGraficoMeiaLua(fkAndarDeTrabalho, canvaId) {
             });
     }
 }
+
+function buscarKPIAtencao(){
+    fetch(`/rede/kpiAtencao`, {
+        cache: 'no-store'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erro na requisição.');
+        }
+    })  .then((resposta) => {
+        if (resposta[0] == undefined){
+            resposta[0] = 0
+            sessionStorage.setItem('KPIAtenção', resposta[0])
+        }else{
+            sessionStorage.setItem('KPIAtenção', resposta[0].IdAtencao)
+        }
+    })
+}
+
+function buscarKPIPerigo(){ 
+    fetch(`/rede/kpiPerigo`, {
+        cache: 'no-store'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erro na requisição.');
+        }
+    })  .then((resposta) => {
+        if (resposta[0] == undefined){
+            resposta[0] = 0
+            sessionStorage.setItem('KPIPerigo', resposta[0])
+        }else{
+            sessionStorage.setItem('KPIPerigo', resposta[0].IdPerigo)
+        }
+        console.log(resposta)
+    })
+}

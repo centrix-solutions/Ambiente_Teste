@@ -14,7 +14,7 @@
     <script src="../js/notificacao_rede.js"></script>
 </head>
 
-<body onload="buscarAndares(), listarLateral(), graficoStacked()">
+<body onload="buscarAndares(), listarLateral(), graficoStacked(), obterKpis()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -76,11 +76,11 @@
                     <div class="kpis_computador">
                         <div class="kpi_card">
                             <span>Computador com mais alertas de atenção na última semana</span><br>
-                            <span class="cuidado_text">$Computador 001</span>
+                            <span class="cuidado_text" id="kpiAtencao">$Computador 001</span>
                         </div>
                         <div class="kpi_card">
                             <span>Computador com mais alertas de perigo na última semana</span><br>
-                            <span class="critico_text">$Computador 001</span>
+                            <span class="critico_text" id="kpiPerigo">$Computador 001</span>
                         </div>
                     </div>
                 </div>
@@ -135,6 +135,8 @@
 <script>
     nomeFuncionario.innerHTML = sessionStorage.nome;
     emailFuncionario.innerHTML = sessionStorage.email;
+    kpiAtencao.innerHTML = ((sessionStorage.KPIAtenção == 0) ? 'Nenhum Computador em Atenção na última Semana' : ` Computador com Id: ${sessionStorage.KPIAtenção}` ); 
+    kpiPerigo.innerHTML = ((sessionStorage.KPIPerigo == 0) ? 'Nenhum Computador em Perigo na última Semana' :` Computador com Id: ${sessionStorage.KPIPerigo}` ); 
     
     var cards_container = document.getElementById('cards_container')
 
@@ -157,5 +159,11 @@
     function obterdados() {
         var idAndarVar = Number(andares.value.split('-')[1]);
         buscarImportanciaMaquina(idAndarVar);
+    }
+
+    // KPI
+    function obterKpis(){
+        buscarKPIAtencao();
+        buscarKPIPerigo();
     }
 </script>

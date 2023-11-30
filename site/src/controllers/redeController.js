@@ -60,8 +60,36 @@ function alertasAndarMeiaLua(req, res){
 
 function alertasDoMes(res,res){
     redeModel.alertasDoMes().then(function(resultado){
-        console.log(resultado)
 
+        if(resultado != Number){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function(erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar pelo Total ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function kpiAtencao(res,res){
+    redeModel.kpiAtencao().then(function(resultado){
+
+        if(resultado != Number){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function(erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar pelo Total ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function kpiPerigo(res,res){
+    redeModel.kpiPerigo().then(function(resultado){
         if(resultado != Number){
             res.status(200).json(resultado);
         }else{
@@ -79,4 +107,6 @@ module.exports = {
     contarMaquinasAndar,
     alertasAndarMeiaLua,
     alertasDoMes,
+    kpiAtencao,
+    kpiPerigo,
 }

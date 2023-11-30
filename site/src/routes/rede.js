@@ -19,4 +19,13 @@ router.get("/alertaMes", function (res, res){
     redeController.alertasDoMes(res, res);
 });
 
+router.get("/kpiAtencao", function (res, res){
+    redeController.kpiAtencao(res,res);
+});
+
+router.get("/kpiPerigo", function (res, res){
+    redeController.kpiPerigo(res,res);
+});
+
+
 module.exports = router;

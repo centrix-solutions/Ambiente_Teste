@@ -10,7 +10,6 @@ function buscarImportanciaMaquina(fkAndarDeTrabalho){
     JOIN Maquinas AS Maq ON CM.fkMaquina = Maq.idMaquina
     WHERE Maq.fkAndarDeTrabalho = ${fkAndarDeTrabalho} AND TA.Importancia IS NOT NULL
     GROUP BY TA.Importancia,Maq.idMaquina`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -22,7 +21,6 @@ function contarMaquinasAndar(fkAndarDeTrabalho){
     JOIN Componentes_Monitorados AS CM ON CM.idComponente_Monitorado = M.fkCompMonitorados
     JOIN Maquinas AS Maq2 ON CM.fkMaquina = Maq2.idMaquina
     WHERE Maq2.fkAndarDeTrabalho = ${fkAndarDeTrabalho}`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -41,7 +39,6 @@ JOIN Monitoramento ON alertas.FKMonitoramento = Monitoramento.idMonitoramento
 JOIN Componentes_Monitorados ON Monitoramento.FKCompMonitorados = Componentes_Monitorados.idComponente_monitorado
 JOIN Maquinas ON Componentes_Monitorados.fkMaquina = Maquinas.idMaquina
 WHERE Maquinas.fkAndarDeTrabalho = ${fkAndarDeTrabalho}`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -63,14 +60,42 @@ LEFT JOIN Alertas ON Alertas.FKMonitoramento = Monitoramento.idMonitoramento
 WHERE YEAR(Monitoramento.Data_Captura) = YEAR(CURDATE()) 
     AND MONTH(Monitoramento.Data_Captura) = MONTH(CURDATE())
 GROUP BY Intervalo_Dias`;
-console.log("Executando instrução SQL:\n" + instrucaoSql);
 return database.executar(instrucaoSql)
 }
 
+function kpiAtencao(){
+    instrucaoSql = `SELECT Maq.idMaquina AS IdAtencao, COUNT(A.idAlertas) AS TotalAlertasAtencao
+    FROM Alertas AS A
+    JOIN Monitoramento AS M ON A.fkMonitoramento = M.idMonitoramento
+    JOIN Componentes_Monitorados AS CM ON CM.idComponente_Monitorado = M.fkCompMonitorados
+    JOIN Maquinas AS Maq ON CM.fkMaquina = Maq.idMaquina
+    WHERE A.FKTipo_Alerta = 2
+      AND M.Data_captura >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+    GROUP BY Maq.idMaquina
+    ORDER BY IdAtencao DESC
+    LIMIT 1`;
+    return database.executar(instrucaoSql)
+}
+
+function kpiPerigo(){
+    instrucaoSql = `SELECT Maq.idMaquina AS IdPerigo, COUNT(A.idAlertas) AS TotalAlertasPerigo
+    FROM Alertas AS A
+    JOIN Monitoramento AS M ON A.fkMonitoramento = M.idMonitoramento
+    JOIN Componentes_Monitorados AS CM ON CM.idComponente_Monitorado = M.fkCompMonitorados
+    JOIN Maquinas AS Maq ON CM.fkMaquina = Maq.idMaquina
+    WHERE A.FKTipo_Alerta = 1
+      AND M.Data_captura >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+    GROUP BY Maq.idMaquina
+    ORDER BY IdPerigo DESC
+    LIMIT 1`;
+    return database.executar(instrucaoSql)
+}
 
 module.exports = {
    buscarImportanciaMaquina,
    contarMaquinasAndar,
    alertasAndarMeiaLua,
    alertasDoMes,
+   kpiAtencao,
+   kpiPerigo,
 }
