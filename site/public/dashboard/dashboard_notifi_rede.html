@@ -94,8 +94,10 @@
                 </div>
                 <div class="kpis_rede">
                     <div class="kpi_card_rede">
-                        <span>Latência</span><br>
-                        <span>Status: <span class="seguro_text">Seguro</span></span>
+                        <span>Taxa Download</span><br>
+                        <input type="number" id="input_download" oninput="atualizarRede()"/>
+                        <span>Taxa Upload</span><br>
+                        <input type="number" id="input_upload" oninput="atualizarRede()"/>
                     </div>
                     <div class="kpi_card_dowload">
                         <div class="icon_dowload">
@@ -165,5 +167,29 @@
     function obterKpis(){
         buscarKPIAtencao();
         buscarKPIPerigo();
+    }
+    async function atualizarRede(){
+        var idEmpresaVar = sessionStorage.Empresa;
+        var idAndarVar = sessionStorage.Empresa;
+        var downloadVar = Number(input_download.value);
+        var uploadVar = Number(input_upload.value);
+        try {
+            var resposta = await fetch("/rede/atualizarRede", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idComputadorServer: idComputador,
+                    idAndarServer: idAndarVar
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON: ', respostaJson);
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
     }
 </script>

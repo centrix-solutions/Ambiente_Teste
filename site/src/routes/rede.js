@@ -27,5 +27,8 @@ router.get("/kpiPerigo", function (res, res){
     redeController.kpiPerigo(res,res);
 });
 
+router.post("/atualizarRede", function (req, res) {
+    redeController.atualizarRede(req, res);
+})
 
 module.exports = router;

@@ -91,6 +91,14 @@ function kpiPerigo(){
     return database.executar(instrucaoSql)
 }
 
+function atualizarRede(idEmpresa, idAndar) {
+    
+    var instrucao = `UPDATE SET`;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
    buscarImportanciaMaquina,
    contarMaquinasAndar,
@@ -98,4 +106,5 @@ module.exports = {
    alertasDoMes,
    kpiAtencao,
    kpiPerigo,
+   atualizarRede
 }

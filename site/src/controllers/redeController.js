@@ -102,6 +102,33 @@ function kpiPerigo(res,res){
     });
 }
 
+function atualizarRede(req, res) {
+
+    var idEmpresa = req.body.idEmpresaServer;
+    var idAndar = req.body.idAndarServer;
+
+    console.log(`Recuperando o idEmpresa`);
+    if (idEmpresa == undefined) {
+        res.status(400).send("Id da Empresa está undefined!");
+    } else {
+        redeModel.atualizarRede(idEmpresa, idAndar)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao buscar a fkempresa Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     buscarImportanciaMaquina,
     contarMaquinasAndar,
@@ -109,4 +136,5 @@ module.exports = {
     alertasDoMes,
     kpiAtencao,
     kpiPerigo,
+    atualizarRede
 }
