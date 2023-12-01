@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/relatorio.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.1.70/build/vfs_fonts.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/nivelAcesso.js"></script>
 </head>
@@ -521,101 +521,116 @@
         }
 
         function gerarPDF(dados, dadosSummary) {
+            varDateTimeInicio = input_inicio.value
+            varDateTimeFim = input_fim.value
+            dataHoje = new Date()
+            dataInicioVerificar = new Date(varDateTimeInicio)
+            dataFimVerificar = new Date(varDateTimeFim)
+            var formatDataHj = dataHoje.toLocaleDateString('pt-BR')
+            varDtInicio = dataInicioVerificar.toLocaleDateString('pt-BR')
+            varDtFim = dataFimVerificar.toLocaleDateString('pt-BR')
 
-            varDateTimeInicio = input_inicio.value;
-            varDateTimeFim = input_fim.value;
-            dataHoje = new Date();
-            dataInicioVerificar = new Date(varDateTimeInicio);
-            dataFimVerificar = new Date(varDateTimeFim);
-            var formatDataHj = dataHoje.toLocaleDateString('pt-BR') 
-            varDtInicio = dataInicioVerificar.toLocaleDateString('pt-BR');
-            varDtFim = dataFimVerificar.toLocaleDateString('pt-BR');
+            // Função para converter imagem em base64
+            function imageToBase64(imgUrl, callback) {
+                var img = new Image()
 
+                img.onload = function () {
+                    var canvas = document.createElement('canvas')
+                    canvas.width = img.width;
+                    canvas.height = img.height;
 
-            var docDefinition = {
-                header: {
-                    text: 'CENTRIX SOLUTIONS',
-                    style: 'cabecalho',
-                },
-                content: [
-                    { text: `Data de criação: ${formatDataHj}`, style: 'subtitulo' },
-                    { text: `Criador: ${sessionStorage.nome}`, style: 'subtitulo' },
-                    { text: `Dados coletados de ${varDtInicio} até ${varDtFim}`, style: 'subtitulo' },
-                    {
-                        style: 'tabela',
-                        table: {
-                            headerRows: 1,
-                            widths: [120, 55, 45, 45, 45, 45, 80],
-                            body: [
-                                ['Máquina', 'Qtd Registros', 'Min', 'Max', 'Média', 'Desvio Padrão', 'Componente']
-                            ],
-                        },
-                    },
+                    var context = canvas.getContext('2d')
+                    context.drawImage(img, 0, 0, img.width, img.height)
 
-                    {
-                        style: 'tabela',
-                        table: {
-                            headerRows: 1,
-                            widths: [120, 75, 75, 75, 108],
-                            body: [
-                                ['Máquina', 'Data', 'Hora', 'Dado', 'Componente'],
-                            ],
-                        },
-                    },
-                ],
-                styles: {
-                    cabecalho: {
-                        fontSize: 30,
-                        color: 'black',
-                        background: 'purple',
-                    },
-                    subtitulo: {
-                        fontSize: 14,
-                        margin: [0, 5]
-                    },
-                    tabela: {
-                        margin: [0, 20],
-                        fontSize: 12,
-                        alignment: 'center',
-                    },
-                    tableCell: {
-                        lineColor: 'darkpurple',
-                        alignment: 'center',
-                    },
-                },
-            };
+                    var base64 = canvas.toDataURL('image/jpeg')
 
-            //verificar se ta chegando os dados summary e verificar se o nome daqui tem que ser igual o de cima 
-            for (var i = 0; i < dadosSummary.length; i++) {
-                docDefinition.content[3].table.body.push([
-                    { text: dadosSummary[i].Maquina, style: 'tableCell' },
-                    { text: dadosSummary[i].total_registros, style: 'tableCell' },
-                    { text: dadosSummary[i].min, style: 'tableCell' },
-                    { text: dadosSummary[i].max, style: 'tableCell' },
-                    { text: dadosSummary[i].media, style: 'tableCell' },
-                    { text: dadosSummary[i].desvio, style: 'tableCell' },
-                    { text: dadosSummary[i].Componente, style: 'tableCell' },
-                ]);
+                    if (typeof callback === 'function') {
+                        callback(base64)
+                    }
+                }
+
+                img.crossOrigin = 'Anonymous';
+                img.src = imgUrl;
             }
-            for (var i = 0; i < dados.length; i++) {
-                docDefinition.content[4].table.body.push([
-                    { text: dados[i].Maquina, style: 'tableCell' },
-                    { text: dados[i].Data, style: 'tableCell' },
-                    { text: dados[i].Hora, style: 'tableCell' },
-                    { text: dados[i].Dado, style: 'tableCell' },
-                    { text: dados[i].Componente, style: 'tableCell' },
-                ]);
-            }
+            //tentar colocar um fundo preto antes da imagem no pdf 
+            //aumentar o tamanho dos titulos dos graficos
+            var imageUrl = 'https://raw.githubusercontent.com/Centrix-Solutions-Grupo-07/Ambiente_Teste/2db18d618bee85d2e1cae1d6185b4d98a290deab/site/public/assets/imgs/CentrixLogoRelatorio.jpg'
+            imageToBase64(imageUrl, function (base64) {
+                var docDefinition = {
+                    content: [
+                        { image: base64, width: 600, alignment: 'center', margin: [0, 0, 0, 10] },
+                        { text: `${nomeArquivo}`, style: 'subtitulo' },
+                        { text: `Data de criação: ${formatDataHj}`, style: 'subtitulo' },
+                        { text: `Criador: ${sessionStorage.nome}`, style: 'subtitulo' },
+                        { text: `Dados coletados de ${varDtInicio} até ${varDtFim}`, style: 'subtitulo' },
+                        { text: 'Sumário dos dados', style: 'subtitulo' },
+                        {
+                            style: 'tabela',
+                            table: {
+                                headerRows: 1,
+                                widths: [120, 55, 45, 45, 45, 45, 80],
+                                body: [
+                                    ['Máquina', 'Qtd Registros', 'Min', 'Max', 'Média', 'Desvio Padrão', 'Componente']
+                                ],
+                            },
+                        },
+                        { text: 'Todos os dados coletados', style: 'subtitulo' },
+                        {
+                            style: 'tabela',
+                            table: {
+                                headerRows: 1,
+                                widths: [120, 75, 75, 75, 108],
+                                body: [
+                                    ['Máquina', 'Data', 'Hora', 'Dado', 'Componente'],
+                                ],
+                            },
+                        },
+                    ],
+                    styles: {
+                        subtitulo: {
+                            fontSize: 14,
+                            margin: [0, 5]
+                        },
+                        tabela: {
+                            margin: [0, 20],
+                            fontSize: 12,
+                            alignment: 'center',
+                        },
+                        tableCell: {
+                            lineColor: 'darkpurple',
+                            alignment: 'center',
+                        },
+                        pageMargins: [0, 0, 0, 0],
+                    },
+                };
 
-            docDefinition.content.unshift({ text: `${nomeArquivo}`, style: 'subtitulo' });
-            var pdfDoc = pdfMake.createPdf(docDefinition);
-            pdfMake.createPdf(docDefinition).open();
-            pdfDoc.download(`${nomeArquivo}`);
+                for (var i = 0; i < dadosSummary.length; i++) {
+                    docDefinition.content[6].table.body.push([
+                        { text: dadosSummary[i].Maquina, style: 'tableCell' },
+                        { text: dadosSummary[i].total_registros, style: 'tableCell' },
+                        { text: dadosSummary[i].min, style: 'tableCell' },
+                        { text: dadosSummary[i].max, style: 'tableCell' },
+                        { text: dadosSummary[i].media, style: 'tableCell' },
+                        { text: dadosSummary[i].desvio, style: 'tableCell' },
+                        { text: dadosSummary[i].Componente, style: 'tableCell' },
+                    ]);
+                }
+
+                for (var i = 0; i < dados.length; i++) {
+                    docDefinition.content[8].table.body.push([
+                        { text: dados[i].Maquina, style: 'tableCell' },
+                        { text: dados[i].Data, style: 'tableCell' },
+                        { text: dados[i].Hora, style: 'tableCell' },
+                        { text: dados[i].Dado, style: 'tableCell' },
+                        { text: dados[i].Componente, style: 'tableCell' },
+                    ]);
+                }
+                var pdfDoc = pdfMake.createPdf(docDefinition);
+                pdfMake.createPdf(docDefinition).open();
+                pdfDoc.download(`${nomeArquivo}`);
+            });
         }
     }
-
-
-
 
 
 </script>

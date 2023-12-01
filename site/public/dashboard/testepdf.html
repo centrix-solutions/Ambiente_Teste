@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTE PARA CONSTRUIR OS GRAFICOS DO PDF</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        //TESTE PARA CONSTRUIR OS GRAFICOS DE REDE DO PDF MEO 
+        var data = {
+            labels: ['AAAAAAAAA', 'BBBBBB', 'UUUUUU', 'YYYYYYYY', 'GGGGGG'],
+            datasets: [{
+                label: 'Vendas Mensais',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                data: [10, 20, 15, 25, 30],
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+
+
+        function obterDadosGrafico(idMaquina, chartId) {
+
+            const labels = [];
+            const data = [];
+
+            const config = {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Uso',
+                        data: data,
+                        fill: false,
+                        borderColor: '#845ED7',
+                        backgroundColor: '#845ED7',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'white',
+                                lineWidth: 0.1,
+                                borderDash: [1, 1]
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'white',
+                                lineWidth: 0.1,
+                                borderDash: [1, 1]
+                            },
+                            ticks: {
+                                callback: (value) => value + '%',
+                                color: 'white'
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 0
+                        }
+                    }
+                }
+            };
+
+            const myChart = new Chart(document.getElementById(chartId), config);
+
+            fetch(`/medidas/ultimas/${idMaquina}`, { cache: 'no-store' })
+                .then((response) => {
+                    console.log("aaaa")
+                    console.log(response)
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Erro na requisição.');
+                    }
+                })
+                .then((resposta) => {
+
+                    resposta.reverse();
+                    for (const registro of resposta) {
+                        const momentoFormatado = new Date(registro.momento_grafico).toISOString().slice(11, 19);
+
+                        labels.push(momentoFormatado);
+                        data.push(registro.cpu);
+                    }
+                    myChart.update();
+                    setTimeout(atualizarGrafico, 4000);
+                })
+                .catch((error) => {
+                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                });
+
+        }
+    </script>
+</body>
+
+</html>
