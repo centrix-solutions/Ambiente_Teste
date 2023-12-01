@@ -4,10 +4,10 @@ from mysql.connector import connect
 import pymssql
 from datetime import datetime
 
-cnx = connect(user='root', password='38762', host='localhost', database='centrix')
+cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
 speed_test = st.Speedtest()
 
-sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
+sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix')
 
 while(True):
     download = speed_test.download()

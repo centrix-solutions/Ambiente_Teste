@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,32 @@
 
     <script>
         //TESTE PARA CONSTRUIR OS GRAFICOS DE REDE DO PDF MEO 
+
+//         SELECT top 20
+//     m_cpu.dadoCapturado AS dadoCpu,
+//     m_memoria.dadoCapturado AS dadoMemoria,
+//     m_cpu.dtHora AS dtHora
+// FROM
+//     (SELECT * FROM monitoramento WHERE fkComponente = 1) AS m_cpu
+// JOIN
+//     (SELECT * FROM monitoramento WHERE fkComponente = 2) AS m_memoria
+
+        var selectRede =
+        `SELECT TOP 20 
+            Dado_Capturado AS DadoUpload,
+            Dado_Capturado AS DadoDownload
+            fkCompMoniExistentes AS Componente,
+            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        FROM 
+            Monitoramento
+        WHERE
+            fkCompMoniExistentes IN (5, 6)
+            AND fkEmpMaqCompMoni = 1
+            ORDER BY
+        Data_captura DESC,
+        Hora_captura ASC;
+        `
+
         var data = {
             labels: ['AAAAAAAAA', 'BBBBBB', 'UUUUUU', 'YYYYYYYY', 'GGGGGG'],
             datasets: [{
@@ -99,23 +126,21 @@
 
             const myChart = new Chart(document.getElementById(chartId), config);
 
-            fetch(`/medidas/ultimas/${idMaquina}`, { cache: 'no-store' })
-                .then((response) => {
-                    console.log("aaaa")
-                    console.log(response)
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Erro na requisição.');
-                    }
+            fetch("/relatorios/buscarSelectRede", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    selectRedeServer: varSelectRede
                 })
+            })
                 .then((resposta) => {
-
                     resposta.reverse();
                     for (const registro of resposta) {
-                        const momentoFormatado = new Date(registro.momento_grafico).toISOString().slice(11, 19);
+                        // const momentoFormatado = new Date(registro.DataHorao).toISOString().slice(11, 19);
 
-                        labels.push(momentoFormatado);
+                        labels.push(registro.data);
                         data.push(registro.cpu);
                     }
                     myChart.update();

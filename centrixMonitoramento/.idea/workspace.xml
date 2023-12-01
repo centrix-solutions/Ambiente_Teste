@@ -6,19 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/1168439718e1f1475c7906dc4c763316342d837d4795d2eca21117743f156fa18fcbb2e074f8c17b003a19a984d2d799397d357b9a39508ca93162efec0c7e1c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/11d4646513b06c0c2739276891d0d011a91190575b9ae1e791a2bd8e0c9d6d97b034927461e01bb4141ee876bb5199904d317e488d49612924a24054b107ac65.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/18271308f515fcb2a7e3a8979fc931258db99deb6f4e3c617c6a0c529b2512e6178432eb74e20873c5ae585ed9bc984ef4c2c3eec67a442a7b9dc460e4c08b3e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/23139de1706fe61b9876ec8c1956626ca4814ba335d9a7317c4d9f2d1e088e0d265e6c9b22ec0043fb9c6becb45660b89bf4802c999b0862cac2482e18136cf2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/2adc3e8a6026c5bf39486ef4ad1e8042a5f0428dd9bda02e8dcd17c3d07e822f20aea68fea50b95efa7c49784107ae3d9006c140aac939ab3021db67a6b16540.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/60358456260f407fba61683f62c7fc982f8e610c2bf67981bc7a67a0bfb62f0678ecf1fb2cc252f31e1f2964c77369d9a43c63ff234dc4051da503394c1e4dc5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/6860e42c2ecaaea658e058e114fb95a63e6b0d7a12336e659543aa97fb3f6cc0d9c36f2ab5bf59252e1295ecc775e1ffde7381c9cef21cc6d2fcd8d422396143.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/6f2f909496edcb1106065772c1027d78591dd3d14c3f66a68ddf9a21fa897be842c31b51f21a73cded7be51e565347acdf3e681b14e385ef9d2611b76a795752.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/85d415f8f87cbf5d1cf1809563eac47a5fa9f56e51ba956e2b80f807498ae9248a393d584288e7a32229801d21bfef3e93ce07bfce40f5f8afac139f587133ff.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/cc88e6d63850a3fe5e6767f61b003b7af4ca77f2c4ef8e7135d049d8bf267d32be9f92c72f40ad523a9d5ef4bf7984a2d6cc6b828b62f6be4cfa898b8127a6a8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/d63b073a455e415b34619d82de492b988c91323d8c6eada87da19ab7c5914ad642b14bb934de3b6e57515d425a76c3852df700ae482fd7f78fe34f3026799ac3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/assets/andares/feb9b8fb4545db1a3133076d56acd6f2f4bdc7c4a956c8e84e74dcc6ca65c887c2087666e7bb6322d8b92e089d5bf2d1bd683e035e2d88cc33ba9ee9fdc49492.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +19,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
