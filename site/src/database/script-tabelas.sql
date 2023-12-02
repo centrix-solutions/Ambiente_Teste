@@ -142,22 +142,34 @@ CREATE TABLE IF NOT EXISTS Alertas (
     FOREIGN KEY (FKMonitoramento) REFERENCES Monitoramento(idMonitoramento)
 );
 
+CREATE TABLE IF NOT EXISTS Processo(
+	idProcesso INT primary key auto_increment,
+    idProcessoMaquina INT unique,
+    PID INT,
+    titulo VARCHAR(255),
+    fkCompMonitorados INT,
+    fkCompMoniExistentes INT,
+    fkMaqCompMoni INT,
+    fkEmpMaqCompMoni INT
+);
+
 INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento)
 VALUES
    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),
-    ('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
+('Empresa B', '98.765.432/1098-76', 'Responsável B', '54321-876', 456, 'Complemento B'),
      ('Empresa C', '56.789.012/3456-78', 'Responsável C', '98765-432', 789, 'Complemento C');
     
-
+/*
 insert into Maquinas values
 	(null, "Windows", "abc", 0, 0, 1, null),
     (null, "Linux", "def", 0, 0, 1, null),
     (null, "MacOs", "xyz", 0, 0, 1, null),
 	(null, "Oracle", "sim", 0, 0, 1, null);
+*/
 
 INSERT INTO Funcionario (nome, email, senha, fkEmpFunc, fkNivelAcesso)
 VALUES
-    ('Funcionário 1', 'a@email', 'a', 1, 4);
+    ('Funcionário 1', 'a', 'b', 1, 4);
   
 INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('CPU'),
@@ -168,3 +180,14 @@ INSERT INTO ComponentesQuePrestamosServico (nome) VALUES
     ('Taxa Upload'),
     ('Janelas do Sistema'),
     ('Processos');
+    
+select * from Componentes_Monitorados;
+select * from funcionario;
+select * from monitoramento order by fkCompMoniExistentes;
+select * from empresa;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento order by Hora_captura desc;
+select idMonitoramento, Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes from monitoramento;
+select * from login;
+select * from maquinas;
+select * from notificacao;

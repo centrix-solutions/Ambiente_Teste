@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Engenheiro de NOC</title>
+    <link rel="icon" href="../assets/icon/favicon.ico">
+    <link rel="stylesheet" href="../css/dash_visoes.css">
+    <link rel="stylesheet" href="../css/barra_lateral.css">
+    <script src="../js/nivelAcesso.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard_indi_Paola.js" ></script>
+
+    <link rel="stylesheet" href="../css/dash_processos.css">
+    <script src="../js/dashboard_processos.js"></script>
+
+    <!-- Adicione isso ao head do seu HTML -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- Adicione isso ao head do seu HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-GLhlTQ8iK16HMI9z0i7WHPsGJ8a9PeHdH2g+iEzPn1qOG2Emv8OrCgqE2KZfEbah" crossorigin="anonymous">
+
+</head>
+
+<body onload="listarLateral()">
+    <div class="container_principal">
+        <div class="barra_lateral" id="lateral_barra"></div>
+        <div class="area_dash">
+            <div class="dash_superior">
+                <div class="bem_vindo">
+                    <span class="text_bemVindo1">
+                        Veja visões diferentes para os dados
+                    </span>
+                </div>
+            </div>
+            <div class="div_central">
+                <div class="div_conteudo">
+                    <div class="menu_visoes">
+                        <div class="botao_visoes" onclick="carregarPaola()">
+                            Dados Gerais
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRafael()">
+                            Rafael
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRuan()">
+                            Ruan
+                        </div>
+                        <div class="botao_visoes" onclick="carregarAle()">
+                            Ale
+                        </div>
+                        <div class="botao_visoes" onclick="carregarEdson()">
+                            Edson
+                        </div>
+                    </div>
+                    <div class="div_individual" id="div_individual">
+                        <div class="div-esquerda">
+                            <div>
+                                <input type="text" class="" id="inputPesquisa" oninput="listarComputadores()"/>
+                                <button onclick="gerarRelatorio()">Gerar relatório</button>
+                            </div>
+                            <div id="listaComputadores">
+                                <div class="computador">
+                                    <div class="cabecalho" onclick="toggleInfo()">
+                                        <span>Computador</span>
+                                        <span>Pessoa</span>
+                                        <span id="seta">&#9660;</span>
+                                    </div>
+                                    <div class="conteudo" id="conteudoInfo">
+                                        <input type="checkbox" name="checkComputador" class="" id=""/>
+                                        <label for="checkComputador">Processo</label>
+                                        <div class="div-btn-deletar">
+                                            <button class="btn-deletar" onclick="deletarProcessos()">Deletar Processos</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div-direita">
+                            <div>
+                                <div>
+                                    <span class="branco ">Processos Diferentes</span>
+                                </div>
+                                <div class="computador">
+                                    <div class="cabecalho" onclick="toggleInfo()">
+                                        <span>Computador</span>
+                                        <span id="seta">&#9660;</span>
+                                    </div>
+                                    <div class="conteudo" id="conteudoInfo">
+                                        <div>
+                                            <span>Pessoa</span>
+                                            <span>Processo</span>
+                                        </div>
+                                        <div>
+                                            <span>Copiar id do computador</span>
+                                            <i class="material-icons">content_copy</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
