@@ -34,7 +34,7 @@ class UsuarioRepositorio {
         return funcionario
     }
     fun registrarLogin(usuarioLogado: Usuario, idMaq: Int, maquinaSpecs:Maquina, horaLogin: LocalDateTime) {
-        jdbcTemplate.update(
+        /*jdbcTemplate.update(
             """
         INSERT INTO Login (Email, Id_do_dispositivo, dataHoraEntrada)
         VALUES (?, ?, ?)
@@ -42,7 +42,7 @@ class UsuarioRepositorio {
             usuarioLogado.email,
             maquinaSpecs.idCPU,
             horaLogin
-        )
+        )*/
         jdbcTemplateServer.update(
             """
         INSERT INTO Login (idFuncionario, idMaquina, idEmpresa, Email, Id_do_dispositivo, dataHoraEntrada)
@@ -68,14 +68,14 @@ class UsuarioRepositorio {
         )
     }
     fun registrarSaida(usuarioLogado: Usuario, idMaquina: Int, horaLogout: LocalDateTime) {
-        jdbcTemplate.update(
+        /*jdbcTemplate.update(
             """
             UPDATE Login
             SET dataHoraSaida = '${horaLogout.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}'
             WHERE Email = '${usuarioLogado.email}';
         """.trimIndent()
         )
-
+*/
         jdbcTemplateServer.update(
             """
             UPDATE Login

@@ -108,7 +108,7 @@
                         <div class="text_dowload">
                             <br>
                             <span>Dowload</span><br>
-                            <span>Status:<span id="status_download"> Alta Utilização</span></span><br>
+                            <span>Status: <span id="status_download"></span></span><br>
                             <span id="span_download"></span>
                             <br>
                         </div>
@@ -121,7 +121,7 @@
                         <div class="text_dowload">
                             <br>
                             <span>Upload</span><br>
-                            <span>Status:<span id="status_download"> Seguro</span></span><br>
+                            <span>Status: <span id="status_download"></span></span><br>
                             <span id="span_upload"></span>
                         </div>
                     </div>
@@ -274,10 +274,13 @@
                     }
                     if(media <= 25){
                         status.className = "seguro_text";
+                        status.innerHTML = "Seguro"
                     } else if (media >= 75) {
                         status.className = "critico_text";
+                        status.innerHTML = "Crítico"
                     } else {
                         status.className = "cuidado_text";
+                        status.innerHTML = "Alerta"
                     }
                 });
                 span_download.innerHTML = `Usado: ${respostaJson[0].media}MB`;
