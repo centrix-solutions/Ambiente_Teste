@@ -101,8 +101,8 @@ object scriptPadraoPython {
 
             sql_server_cnx.commit()
 
-            time.sleep(10)
-
+            time.sleep(20)
+            
     """.trimIndent()
 
         val codigoPythonDefaultRede = """
@@ -159,7 +159,7 @@ object scriptPadraoPython {
                 sql_server_cnx.commit()
                 bdServer_cursor.close()
 
-            time.sleep(20)
+                time.sleep(20)
 
     """.trimIndent()
 

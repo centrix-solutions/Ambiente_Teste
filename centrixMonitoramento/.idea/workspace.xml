@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AppMainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AppMainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/AppMainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/AppMainKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/src/database/script-tabelas-server.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/database/script-tabelas-server.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

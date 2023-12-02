@@ -15,7 +15,7 @@
 
     <script>
         window.onload = function () {
-            obterDadosRede();
+            obterDadosRede()
         }
 
         function obterDadosRede() {
@@ -41,25 +41,29 @@
                     const momentoFormatado = []
 
                     for (let i = 0; i < dados.length; i++) {
-                        const momento = new Date(dados[i].DataHora);
-                        const momentoFormatadoAtual = momento.toISOString().slice(1, 19);
-                        momentoFormatado.push(momentoFormatadoAtual);
 
                         if (dados[i].Componente == 5) {
-                            vetorDowload.push(dados[i].Dado);
+                            vetorDowload.push(dados[i].Dado)
                         }
                         if (dados[i].Componente == 6) {
-                            vetorUpload.push(dados[i].Dado);
+                            vetorUpload.push(dados[i].Dado)
                         }
                     }
 
-                    console.table(momentoFormatado);
-                    console.table(vetorDowload);
-                    console.table(vetorUpload);
+                    for (let i = 0; i < dados.length/2; i++) {
+                        const momento = new Date(dados[i].DataHora)
+                        const momentoFormatadoAtual = momento.toISOString().slice(1, 19)
+                        momentoFormatado.push(momentoFormatadoAtual)
 
-                    labels.push(...momentoFormatado);
-                    data[0].push(...vetorDowload);
-                    data[1].push(...vetorUpload);
+                    }
+
+                    console.table(momentoFormatado)
+                    console.table(vetorDowload)
+                    console.table(vetorUpload)
+
+                    labels.push(...momentoFormatado)
+                    data[0].push(...vetorDowload)
+                    data[1].push(...vetorUpload)
 
                     const config = {
                         type: 'line',
@@ -91,7 +95,7 @@
                                 x: {
                                     grid: {
                                         color: 'blue',
-                                        lineWidth: 0.1,
+                                        lineWidth: 0.4,
                                         borderDash: [1, 1]
                                     },
                                     ticks: {
@@ -102,7 +106,7 @@
                                     beginAtZero: true,
                                     grid: {
                                         color: 'black',
-                                        lineWidth: 0.1,
+                                        lineWidth: 0.4,
                                         borderDash: [1, 1]
                                     },
                                     ticks: {
@@ -113,21 +117,21 @@
                             },
                             layout: {
                                 padding: {
-                                    left: 0
+                                    left: 1
                                 }
                             }
                         }
                     };
 
-                    const myChart = new Chart(document.getElementById('myChart'), config);
+                    const myChart = new Chart(document.getElementById('myChart'), config)
                 })
                 .catch((error) => {
-                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`)
                 });
         }
 
         var selectRede =
-            `SELECT TOP 30 
+            `SELECT TOP 40 
             Dado_Capturado AS Dado,
             fkCompMoniExistentes AS Componente,
             CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
@@ -138,7 +142,7 @@
             fkEmpMaqCompMoni = 1
         ORDER BY
             Data_captura DESC,
-            Hora_captura ASC;`;
+            Hora_captura ASC;`
 
         // var selectRede =
         //     `SELECT TOP 20

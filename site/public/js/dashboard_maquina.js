@@ -549,13 +549,15 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
-    /*
+    
     function atualizarCorBarra() {
-        var barraCpu = document.getElementById('barra_cpu');
-        var barraRam = document.getElementById('barra_ram');
-        var barraDisco = document.getElementById('barra_disco');
+
+        var barraCpu = document.getElementById('barra_cpu')
+        var barraRam = document.getElementById('barra_ram')
+        var barraDisco = document.getElementById('barra_disco')
+
         for (let i = 0; i < 3; i++) {
-            // var barra = "";
+            var barra = ""
             switch (i) {
                 case 0:
                     barra = barraCpu;
@@ -567,16 +569,17 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                     barra = barraDisco;
                     break;
             }
-            var valor = barra.value;
+            var valor = barra.value
+            console.log(barra.id)
             if (valor <= 25) {
-                barra.style.webkitProgressValue = 'linear-gradient(90deg, #00FF00 0%, #00FF00 103.21%)';
+                barra.setAttribute('name', 'verde')
             } else if (valor >= 75) {
-                barra.style.webkitProgressValue = 'linear-gradient(90deg, #FF0000 0%, #FF0000 103.21%)';
+                barra.setAttribute('name', 'vermelho')
             } else {
-                barra.style.webkitProgressValue = 'linear-gradient(90deg, #FFA500 0%, #FFA500 103.21%)';
+                barra.setAttribute('name', 'laranja')
             }
         }        
-    }*/
+    }
 
     buscarCpu(idMaquina, idEmpresa)
     buscarRam(idMaquina, idEmpresa)
