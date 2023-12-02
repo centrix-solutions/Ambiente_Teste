@@ -9,122 +9,19 @@
 </head>
 
 <body>
-    <div style="width: 80%; margin: auto;">
+    <div style="width: 50%; margin: auto;">
         <canvas id="myChart"></canvas>
     </div>
 
     <script>
-        //TESTE PARA CONSTRUIR OS GRAFICOS DE REDE DO PDF MEO 
+        window.onload = function () {
+            obterDadosRede();
+        }
 
-//         SELECT top 20
-//     m_cpu.dadoCapturado AS dadoCpu,
-//     m_memoria.dadoCapturado AS dadoMemoria,
-//     m_cpu.dtHora AS dtHora
-// FROM
-//     (SELECT * FROM monitoramento WHERE fkComponente = 1) AS m_cpu
-// JOIN
-//     (SELECT * FROM monitoramento WHERE fkComponente = 2) AS m_memoria
+        function obterDadosRede() {
 
-        var selectRede =
-        `SELECT TOP 20 
-            Dado_Capturado AS DadoUpload,
-            Dado_Capturado AS DadoDownload
-            fkCompMoniExistentes AS Componente,
-            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
-        FROM 
-            Monitoramento
-        WHERE
-            fkCompMoniExistentes IN (5, 6)
-            AND fkEmpMaqCompMoni = 1
-            ORDER BY
-        Data_captura DESC,
-        Hora_captura ASC;
-        `
-
-        var data = {
-            labels: ['AAAAAAAAA', 'BBBBBB', 'UUUUUU', 'YYYYYYYY', 'GGGGGG'],
-            datasets: [{
-                label: 'Vendas Mensais',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                data: [10, 20, 15, 25, 30],
-            }]
-        };
-
-        var options = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-
-
-        function obterDadosGrafico(idMaquina, chartId) {
-
-            const labels = [];
-            const data = [];
-
-            const config = {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Uso',
-                        data: data,
-                        fill: false,
-                        borderColor: '#845ED7',
-                        backgroundColor: '#845ED7',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                color: 'white',
-                                lineWidth: 0.1,
-                                borderDash: [1, 1]
-                            },
-                            ticks: {
-                                color: 'white'
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'white',
-                                lineWidth: 0.1,
-                                borderDash: [1, 1]
-                            },
-                            ticks: {
-                                callback: (value) => value + '%',
-                                color: 'white'
-                            }
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            left: 0
-                        }
-                    }
-                }
-            };
-
-            const myChart = new Chart(document.getElementById(chartId), config);
+            const labels = []
+            const data = [[], []]
 
             fetch("/relatorios/buscarSelectRede", {
                 method: "POST",
@@ -132,25 +29,139 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    selectRedeServer: varSelectRede
+                    selectRedeServer: selectRede
                 })
             })
-                .then((resposta) => {
-                    resposta.reverse();
-                    for (const registro of resposta) {
-                        // const momentoFormatado = new Date(registro.DataHorao).toISOString().slice(11, 19);
+                .then((resposta) => resposta.json())
+                .then((dados) => {
+                    dados.reverse()
 
-                        labels.push(registro.data);
-                        data.push(registro.cpu);
+                    const vetorDowload = []
+                    const vetorUpload = []
+                    const momentoFormatado = []
+
+                    for (let i = 0; i < dados.length; i++) {
+                        const momento = new Date(dados[i].DataHora);
+                        const momentoFormatadoAtual = momento.toISOString().slice(1, 19);
+                        momentoFormatado.push(momentoFormatadoAtual);
+
+                        if (dados[i].Componente == 5) {
+                            vetorDowload.push(dados[i].Dado);
+                        }
+                        if (dados[i].Componente == 6) {
+                            vetorUpload.push(dados[i].Dado);
+                        }
                     }
-                    myChart.update();
-                    setTimeout(atualizarGrafico, 4000);
+
+                    console.table(momentoFormatado);
+                    console.table(vetorDowload);
+                    console.table(vetorUpload);
+
+                    labels.push(...momentoFormatado);
+                    data[0].push(...vetorDowload);
+                    data[1].push(...vetorUpload);
+
+                    const config = {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Download',
+                                data: data[0],
+                                fill: false,
+                                borderColor: '#845ED7',
+                                backgroundColor: '#845ED7',
+                                tension: 0.1
+                            }, {
+                                label: 'Upload',
+                                data: data[1],
+                                fill: false,
+                                borderColor: '#45A7A4',
+                                backgroundColor: '#45A7A4',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        color: 'blue',
+                                        lineWidth: 0.1,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        color: 'green'
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'black',
+                                        lineWidth: 0.1,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        callback: (value) => value + ' Mb/s',
+                                        color: 'red'
+                                    }
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0
+                                }
+                            }
+                        }
+                    };
+
+                    const myChart = new Chart(document.getElementById('myChart'), config);
                 })
                 .catch((error) => {
                     console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
                 });
-
         }
+
+        var selectRede =
+            `SELECT TOP 30 
+            Dado_Capturado AS Dado,
+            fkCompMoniExistentes AS Componente,
+            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        FROM 
+            Monitoramento
+        WHERE
+            fkCompMoniExistentes IN (5, 6) AND 
+            fkEmpMaqCompMoni = 1
+        ORDER BY
+            Data_captura DESC,
+            Hora_captura ASC;`;
+
+        // var selectRede =
+        //     `SELECT TOP 20
+        //     Dado_Capturado AS Dado,
+        //     fkCompMoniExistentes AS Componente,
+        //     CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        // FROM
+        //     Monitoramento
+        // WHERE
+        //     fkCompMoniExistentes IN (5, 6) AND
+        //     fkEmpMaqCompMoni = 1 AND
+        //     (
+        //     Data_captura > '${varDtInicio}' OR
+        //     (Data_captura = '${varDtInicio}' AND Hora_captura >= '${varHrInicio}')
+        //     ) AND
+        //     (
+        //     Data_captura < '${varDtFim}' OR
+        //     (Data_captura = '${varDtFim}' AND Hora_captura <= '${varHrFim}')
+        //     )
+        // ORDER BY
+        //     Data_captura DESC,
+        //     Hora_captura ASC;
+        // `
     </script>
 </body>
 

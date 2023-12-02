@@ -11,6 +11,10 @@ router.post("/buscarSelect", function (req, res) {
     relatorioController.buscarSelect(req, res);
 });
 
+router.post("/buscarSelectRede", function (req, res) {
+    relatorioController.buscarSelectRede(req, res);
+});
+
 router.post("/buscarSelectSummary", function (req, res) {
     relatorioController.buscarSelectSummary(req, res);
 });

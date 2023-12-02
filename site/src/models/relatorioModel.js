@@ -29,6 +29,14 @@ function buscarSelectSummary(select) {
 
 }
 
+function buscarSelectRede(select) {
+
+    var instrucao = select
+
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+
+}
 function verificarDatas(selectData) {
 
     var instrucao = selectData
@@ -41,6 +49,7 @@ function verificarDatas(selectData) {
 module.exports = {
     buscarComputadoresRelatorio,
     buscarSelectSummary,
+    buscarSelectRede,
     verificarDatas,
     buscarSelect
     
