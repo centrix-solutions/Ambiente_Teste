@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AppMainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AppMainKt.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/area_relatorios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/AppMainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/AppMainKt.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +21,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -43,9 +38,16 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Aluno/Desktop/Arquivos Temporários/Ambiente_Teste/centrixMonitoramento&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Kotlin.AppMainKt">
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />
+      <module name="centrixMonitoramento" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="centrixMonitoramento" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -54,6 +56,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.AppMainKt" />
+        <item itemvalue="Kotlin.Main" />
       </list>
     </recent_temporary>
   </component>

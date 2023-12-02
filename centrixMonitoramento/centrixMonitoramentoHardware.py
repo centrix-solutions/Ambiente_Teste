@@ -4,7 +4,7 @@ import pymssql
 from mysql.connector import connect
 from datetime import datetime
 
-mysql_cnx = connect(user='aluno', password='sptech', host='localhost', database='centrix')
+mysql_cnx = connect(user='root', password='38762', host='localhost', database='centrix')
 
 sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix')
 
@@ -52,7 +52,7 @@ while True:
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-    bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, 1, 1, 1))
+    bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, 1, 2, 2))
 
     # RAM
     add_leitura_RAM = (
@@ -60,7 +60,7 @@ while True:
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-    bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 2, 3, 1, 1))
+    bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 2, 3, 2, 2))
 
     # DISK
     add_leitura_DISK = (
@@ -68,7 +68,7 @@ while True:
         "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
     )
-    bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 3, 2, 1, 1))
+    bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 3, 2, 2, 2))
     bdLocal_cursor.close()
 
     mysql_cnx.commit()
@@ -78,13 +78,13 @@ while True:
     # BD Server
     
     # CPU
-    bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, 1, 1, 1))
+    bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, 1, 2, 2))
 
     # RAM
-    bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 2, 3, 1, 1))
+    bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 2, 3, 2, 2))
 
     # DISK
-    bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 3, 2, 1, 1))
+    bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 3, 2, 2, 2))
     
     bdServer_cursor.close()
 
