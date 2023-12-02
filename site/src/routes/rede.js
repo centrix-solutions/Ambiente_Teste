@@ -27,8 +27,20 @@ router.get("/kpiPerigo", function (res, res){
     redeController.kpiPerigo(res,res);
 });
 
+router.post("/buscarComputadoresPorAndar", function (req, res) {
+    redeController.buscarComputadoresPorAndar(req, res);
+})
+
 router.post("/atualizarRede", function (req, res) {
     redeController.atualizarRede(req, res);
+})
+
+router.post("/buscarMaxDownUp", function (req, res) {
+    redeController.buscarMaxDownUp(req, res);
+})
+
+router.post("/buscarDadoDownUp", function (req, res) {
+    redeController.buscarDadoDownUp(req, res);
 })
 
 module.exports = router;

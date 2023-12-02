@@ -535,7 +535,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 response.json().then(function (resposta) {
 
                     console.log(resposta[0])
-                    nome_funcionario.innerHTML = resposta[0].Email
+                    nome_funcionario.innerHTML = resposta[0].NomeFuncionario
                     id_maquina.innerHTML = resposta[0].idComputador
                     atividade.innerHTML = resposta[0].Atividade
                     inicio_turno.innerHTML = resposta[0].HoraInicioTurno
@@ -549,6 +549,34 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
+    /*
+    function atualizarCorBarra() {
+        var barraCpu = document.getElementById('barra_cpu');
+        var barraRam = document.getElementById('barra_ram');
+        var barraDisco = document.getElementById('barra_disco');
+        for (let i = 0; i < 3; i++) {
+            // var barra = "";
+            switch (i) {
+                case 0:
+                    barra = barraCpu;
+                    break;
+                case 1:
+                    barra = barraRam;
+                    break;
+                case 2:
+                    barra = barraDisco;
+                    break;
+            }
+            var valor = barra.value;
+            if (valor <= 25) {
+                barra.style.webkitProgressValue = 'linear-gradient(90deg, #00FF00 0%, #00FF00 103.21%)';
+            } else if (valor >= 75) {
+                barra.style.webkitProgressValue = 'linear-gradient(90deg, #FF0000 0%, #FF0000 103.21%)';
+            } else {
+                barra.style.webkitProgressValue = 'linear-gradient(90deg, #FFA500 0%, #FFA500 103.21%)';
+            }
+        }        
+    }*/
 
     buscarCpu(idMaquina, idEmpresa)
     buscarRam(idMaquina, idEmpresa)
@@ -559,6 +587,7 @@ function buscarDadosMonitoramento(idMaquina, idEmpresa) {
     buscarLogin(idMaquina, idEmpresa)
     buscarJanelas(idMaquina, idEmpresa)
     buscarProcessos(idMaquina, idEmpresa)
+    atualizarCorBarra()
 }
 
 

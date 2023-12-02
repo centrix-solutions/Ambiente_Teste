@@ -14,7 +14,8 @@
     <script src="../js/notificacao_rede.js"></script>
 </head>
 
-<body onload="buscarAndares(), listarLateral(), graficoStacked(), obterKpis()">
+<!-- <body onload="buscarAndares(), listarLateral(), graficoStacked(), obterKpis()"> -->
+<body onload="buscarAndares(), listarLateral()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -107,8 +108,8 @@
                         <div class="text_dowload">
                             <br>
                             <span>Dowload</span><br>
-                            <span>Status:<span class="critico_text"> Alta Utilização</span></span><br>
-                            <span>Usado: $100MB</span>
+                            <span>Status:<span id="status_download"> Alta Utilização</span></span><br>
+                            <span id="span_download"></span>
                             <br>
                         </div>
                     </div>
@@ -120,8 +121,8 @@
                         <div class="text_dowload">
                             <br>
                             <span>Upload</span><br>
-                            <span>Status:<span class="seguro_text"> Seguro</span></span><br>
-                            <span>Usado: $10MB</span>
+                            <span>Status:<span id="status_download"> Seguro</span></span><br>
+                            <span id="span_upload"></span>
                         </div>
                     </div>
                 </div>
@@ -168,11 +169,38 @@
         buscarKPIAtencao();
         buscarKPIPerigo();
     }
+    var vetorComputadores = [];
+    async function buscarComputadoresPorAndar() {
+        var idAndarVar = (andares.value).split('-')[1];
+        if(idAndarVar == 0 || idAndarVar == undefined){
+            idAndarVar = null
+        }
+        try {
+            var resposta = await fetch("/rede/buscarComputadoresPorAndar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idAndarServer: idAndarVar
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON VETOR COMPUTADORES: ', respostaJson);
+                respostaJson.forEach(i => {
+                    vetorComputadores.push(i.idMaquina);
+                });
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
     async function atualizarRede(){
         var idEmpresaVar = sessionStorage.Empresa;
-        var idAndarVar = sessionStorage.Empresa;
         var downloadVar = Number(input_download.value);
         var uploadVar = Number(input_upload.value);
+        var arrayComputadores = vetorComputadores
         try {
             var resposta = await fetch("/rede/atualizarRede", {
                 method: "POST",
@@ -180,16 +208,86 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    idComputadorServer: idComputador,
+                    idEmpresaServer: idEmpresaVar,
+                    downloadServer: downloadVar,
+                    uploadServer: uploadVar,
+                    vetorComputadorServer: arrayComputadores
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON ATUALIZAR REDE: ', respostaJson);
+            }
+        } catch (erro) {
+            console.log("Erro atualizarRede: ", erro);
+        }
+    }
+    async function buscarMaxDownUp(){
+        var idAndarVar = (andares.value).split('-')[1];
+        if(idAndarVar == 0 || idAndarVar == undefined){
+            idAndarVar = null
+        }
+        try {
+            var resposta = await fetch("/rede/buscarMaxDownUp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
                     idAndarServer: idAndarVar
                 })
             });
             if (resposta.ok) {
                 var respostaJson = await resposta.json();
-                console.log('JSON: ', respostaJson);
+                console.log('JSON BUSCAR MAX DOWN UP: ', respostaJson);
+                input_download.value = respostaJson[0].valor;
+                input_upload.value = respostaJson[1].valor;
             }
         } catch (erro) {
             console.log("Erro: ", erro);
         }
     }
+    async function buscarDadoDownUp() {
+        var idEmpresaVar = sessionStorage.Empresa;
+        var arrayComputadores = vetorComputadores
+        try {
+            var resposta = await fetch("/rede/buscarDadoDownUp", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idEmpresaServer: idEmpresaVar,
+                    vetorComputadorServer: arrayComputadores
+                })
+            });
+            if (resposta.ok) {
+                var respostaJson = await resposta.json();
+                console.log('JSON BUSCAR DADO DOWN UP: ', respostaJson);
+                respostaJson.forEach(i => {
+                    var media = i.media;
+                    var status = "";
+                    if (respostaJson.Componente == 5) {
+                        status = document.getElementById("status_download");
+                    } else {
+                        status = document.getElementById("status_upload");
+                    }
+                    if(media <= 25){
+                        status.className = "seguro_text";
+                    } else if (media >= 75) {
+                        status.className = "critico_text";
+                    } else {
+                        status.className = "cuidado_text";
+                    }
+                });
+                span_download.innerHTML = `Usado: ${respostaJson[0].media}MB`;
+                span_upload.innerHTML = `Usado: ${respostaJson[1].media}MB`;
+            }
+        } catch (erro) {
+            console.log("Erro: ", erro);
+        }
+    }
+    buscarComputadoresPorAndar()
+    buscarMaxDownUp()
+    // buscarDadoDownUp()
 </script>

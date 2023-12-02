@@ -164,13 +164,16 @@
     }, 50);
 
     async function buscarComputadores(idEmpresa, idAndar) {
+        if(idAndar == 0){
+            idAndar = null
+        }
         try {
             var resposta = await fetch("/dashboard/buscarComputadores", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
+                body: JSON.stringify({  
                     idEmpresaServer: idEmpresa,
                     idAndarServer: idAndar
                 })

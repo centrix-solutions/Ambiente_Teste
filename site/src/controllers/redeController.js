@@ -102,31 +102,88 @@ function kpiPerigo(res,res){
     });
 }
 
+function buscarComputadoresPorAndar(req, res) {
+
+    var idAndar = req.body.idAndarServer;
+    redeModel.buscarComputadoresPorAndar(idAndar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar a fkempresa Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function atualizarRede(req, res) {
 
     var idEmpresa = req.body.idEmpresaServer;
-    var idAndar = req.body.idAndarServer;
+    var download = req.body.downloadServer;
+    var upload = req.body.uploadServer;
+    var vetorComputadores = req.body.vetorComputadorServer;
+    redeModel.atualizarRede(idEmpresa, download, upload, vetorComputadores)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar a fkempresa Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
-    console.log(`Recuperando o idEmpresa`);
-    if (idEmpresa == undefined) {
-        res.status(400).send("Id da Empresa está undefined!");
-    } else {
-        redeModel.atualizarRede(idEmpresa, idAndar)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao buscar a fkempresa Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
+function buscarMaxDownUp(req, res) {
+
+    var idAndar = req.body.idAndarServer;
+    redeModel.buscarMaxDownUp(idAndar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar a fkempresa Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function buscarDadoDownUp(req, res) {
+
+    var idEmpresa = req.body.idEmpresaServer;
+    var vetorComputadores = req.body.vetorComputadorServer;
+    redeModel.atualizarRede(idEmpresa, vetorComputadores)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar a fkempresa Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
 
 module.exports = {
@@ -136,5 +193,8 @@ module.exports = {
     alertasDoMes,
     kpiAtencao,
     kpiPerigo,
-    atualizarRede
+    buscarComputadoresPorAndar,
+    atualizarRede,
+    buscarMaxDownUp,
+    buscarDadoDownUp
 }

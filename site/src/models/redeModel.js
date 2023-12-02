@@ -91,10 +91,47 @@ function kpiPerigo(){
     return database.executar(instrucaoSql)
 }
 
-function atualizarRede(idEmpresa, idAndar) {
-    
-    var instrucao = `UPDATE SET`;
-    
+function buscarComputadoresPorAndar(idAndar) {
+    if (idAndar == null) {
+        var instrucao = `SELECT idMaquina FROM Maquinas WHERE fkAndarDeTrabalho IS NULL;`;
+    } else {
+        var instrucao = `SELECT idMaquina FROM Maquinas WHERE fkAndarDeTrabalho = ${idAndar};`;
+    }
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function atualizarRede(idEmpresa, download, upload, vetorComputadores) {
+    var instrucao1 = `UPDATE Componentes_Monitorados SET valor = ${download} WHERE fkComponentesExistentes = ${5} AND fkEmpMaqComp = ${idEmpresa} AND fkMaquina IN (${vetorComputadores});`;
+    var instrucao2 = `UPDATE Componentes_Monitorados SET valor = ${upload} WHERE fkComponentesExistentes = ${6} AND fkEmpMaqComp = ${idEmpresa} AND fkMaquina IN (${vetorComputadores});`;
+    // console.log("Executando a instrução SQL: \n" + instrucao);
+    database.executar(instrucao1);
+    return database.executar(instrucao2);
+}
+function buscarMaxDownUp(idAndar) {
+    if (idAndar == null) {
+        var instrucao = `SELECT valor FROM Componentes_Monitorados JOIN Maquinas ON fkMaquina = idMaquina WHERE fkAndarDeTrabalho IS NULL AND fkComponentesExistentes IN (5,6);`;
+    } else {
+        var instrucao = `SELECT valor FROM Componentes_Monitorados JOIN Maquinas ON fkMaquina = idMaquina WHERE fkAndarDeTrabalho = ${idAndar} AND fkComponentesExistentes IN (5,6);`;
+    }
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function buscarDadoDownUp(idEmpresa, vetorComputadores) {
+    var instrucao = `SELECT
+    maq.Id_do_dispositivo AS Maquina,
+    moni.fkCompMoniExistentes AS Componente,
+    ROUND(AVG(moni.Dado_Capturado), 2) AS media
+    FROM 
+        Monitoramento moni
+    JOIN
+        Maquinas maq ON moni.fkMaqCompMoni = maq.idMaquina
+    WHERE 
+        fkEmpMaqCompMoni IN (${idEmpresa}) AND
+        fkCompMoniExistentes IN (5, 6) AND
+        fkMaquina IN (${vetorComputadores})
+    GROUP BY 
+    maq.Id_do_dispositivo,
+    moni.fkCompMoniExistentes;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -106,5 +143,8 @@ module.exports = {
    alertasDoMes,
    kpiAtencao,
    kpiPerigo,
-   atualizarRede
+   buscarComputadoresPorAndar,
+   atualizarRede,
+   buscarMaxDownUp,
+   buscarDadoDownUp
 }
