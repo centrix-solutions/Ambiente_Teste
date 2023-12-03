@@ -1,9 +1,21 @@
 .branco{
     color: white;
 }
+.div-esquerda{
+    width: 70%;
+}
+.div-direita{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.lista-computadores{
+    width: 100%;
+}
 .computador {
     border: 1px solid #ccc;
-    width: 300px;
+    width: 80%;
     overflow: hidden;
 }
 .cabecalho {
@@ -30,13 +42,4 @@
 }
 .btn-deletar{
     cursor: pointer;
-}
-.div-esquerda{
-    width: 70%;
-}
-.div-direita{
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

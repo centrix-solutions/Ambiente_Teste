@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/UsuarioRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/UsuarioRepositorio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/css/dash_processos.css" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/css/dash_processos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/processos.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/processos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/js/dashboard_processos.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/js/dashboard_processos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/src/database/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/database/config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +40,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/alexa/Desktop/last week/Ambiente_Teste/centrixMonitoramento"
+    "last_opened_file_path": "C:/Users/alexa/IdeaProjects/testeLooca"
   }
 }]]></component>
   <component name="RunManager" selected="Kotlin.AppMainKt">

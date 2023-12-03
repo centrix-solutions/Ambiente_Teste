@@ -23,16 +23,5 @@ CREATE TABLE IF NOT EXISTS Login (
     dataHoraSaida DATETIME
 );
 
-CREATE TABLE IF NOT EXISTS Processo(
-	idProcesso INT primary key auto_increment,
-    idProcessoMaquina INT unique,
-    PID INT,
-    titulo VARCHAR(255),
-    fkCompMonitorados INT,
-    fkCompMoniExistentes INT,
-    fkMaqCompMoni INT,
-    fkEmpMaqCompMoni INT
-);
-
 select * from Login;
 select * from monitoramento;
