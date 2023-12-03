@@ -144,6 +144,20 @@
             Data_captura DESC,
             Hora_captura ASC;`
 
+            var selectLatencia =
+            `SELECT TOP 40 
+            Dado_Capturado AS Dado,
+            fkCompMoniExistentes AS Componente,
+            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        FROM 
+            Monitoramento
+        WHERE
+            fkCompMoniExistentes = 9 AND 
+            fkEmpMaqCompMoni = 1
+        ORDER BY
+            Data_captura DESC,
+            Hora_captura ASC;`
+
         // var selectRede =
         //     `SELECT TOP 20
         //     Dado_Capturado AS Dado,

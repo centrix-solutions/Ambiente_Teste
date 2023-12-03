@@ -16,35 +16,32 @@ class MonitoramentoRepositorio {
         data: LocalDate,
         hora: LocalTime,
         dado: Float,
-        fkcompMoni: Int,
         fkcompExis: Int,
         idMaquinaDado: Int,
         idEmpresaDado: Int
     ) {
         jdbcTemplate.update(
             """
-        INSERT INTO Monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, 
+        INSERT INTO Monitoramento (Data_captura, Hora_captura, Dado_Capturado, 
         fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
         """.trimIndent(),
             data,
             hora,
             dado,
-            fkcompMoni,
             fkcompExis,
             idMaquinaDado,
             idEmpresaDado
         )
         jdbcTemplateServer.update(
             """
-        INSERT INTO monitoramento (Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, 
+        INSERT INTO monitoramento (Data_captura, Hora_captura, Dado_Capturado,
         fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
         """.trimIndent(),
             data,
             hora,
             dado,
-            fkcompMoni,
             fkcompExis,
             idMaquinaDado,
             idEmpresaDado

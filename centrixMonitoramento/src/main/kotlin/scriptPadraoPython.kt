@@ -60,26 +60,26 @@ object scriptPadraoPython {
             # CPU
             add_leitura_CPU = (
                 "INSERT INTO Monitoramento"
-                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, 1, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, $idMaquinaDado, $idMaquinaDado))
 
             # RAM
             add_leitura_RAM = (
                 "INSERT INTO Monitoramento"
-                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 2, 3, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 3, $idMaquinaDado, $idMaquinaDado))
 
             # DISK
             add_leitura_DISK = (
                 "INSERT INTO Monitoramento"
-                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 3, 2, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 2, $idMaquinaDado, $idMaquinaDado))
             bdLocal_cursor.close()
 
             mysql_cnx.commit()
@@ -89,13 +89,13 @@ object scriptPadraoPython {
             # BD Server
             
             # CPU
-            bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, 1, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, $idMaquinaDado, $idMaquinaDado))
 
             # RAM
-            bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 2, 3, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 3, $idMaquinaDado, $idMaquinaDado))
 
             # DISK
-            bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 3, 2, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 2, $idMaquinaDado, $idMaquinaDado))
             
             bdServer_cursor.close()
 
@@ -132,27 +132,27 @@ object scriptPadraoPython {
                 bdServer_cursor = sql_server_cnx.cursor()
                 
                 #DOWNLOAD
-                dados_DOWNLOAD_PC = [download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado]
+                dados_DOWNLOAD_PC = [download_mbs, 5, $idMaquinaDado, $idEmpresaDado]
 
                 add_leitura_DOWNLOAD = ("INSERT INTO Monitoramento"
-                                   "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                                   "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+                                   "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                                   "VALUES (%s, %s, %s, %s, %s, %s)")
                 
 
-                bd.execute(add_leitura_DOWNLOAD, (data_atual, hora_atual, download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado))
-                bdServer_cursor.execute(add_leitura_DOWNLOAD, (str(data_atual), str(hora_atual), download_mbs, 4, 5, $idMaquinaDado, $idEmpresaDado))
+                bd.execute(add_leitura_DOWNLOAD, (data_atual, hora_atual, download_mbs, 5, $idMaquinaDado, $idEmpresaDado))
+                bdServer_cursor.execute(add_leitura_DOWNLOAD, (str(data_atual), str(hora_atual), download_mbs, 5, $idMaquinaDado, $idEmpresaDado))
                 
                 #UPLOAD
                 dados_UPLOAD_PC = [upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado]
 
                 add_leitura_UPLOAD = ("INSERT INTO Monitoramento"
-                                   "(Data_captura, Hora_captura, Dado_Capturado, fkCompMonitorados, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
-                                   "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+                                   "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
+                                   "VALUES (%s, %s, %s, %s, %s, %s)")
                 
 
-                bd.execute(add_leitura_UPLOAD, (data_atual, hora_atual, upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado))
+                bd.execute(add_leitura_UPLOAD, (data_atual, hora_atual, upload_mbs, 6, $idMaquinaDado, $idEmpresaDado))
 
-                bdServer_cursor.execute(add_leitura_UPLOAD, (str(data_atual), str(hora_atual), upload_mbs, 5, 6, $idMaquinaDado, $idEmpresaDado))
+                bdServer_cursor.execute(add_leitura_UPLOAD, (str(data_atual), str(hora_atual), upload_mbs, 6, $idMaquinaDado, $idEmpresaDado))
 
                 
                 cnx.commit()

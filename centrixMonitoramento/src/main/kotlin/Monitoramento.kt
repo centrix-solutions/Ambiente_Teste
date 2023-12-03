@@ -230,7 +230,6 @@ class Monitoramento {
                             data,
                             hora,
                             dado,
-                            fkcompMoni,
                             fkcompExis,
                             idMaquina,
                             idEmpresa
