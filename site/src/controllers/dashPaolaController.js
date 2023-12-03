@@ -19,9 +19,7 @@ function buscarUltimasMedidasCpu(req, res) {
     });
 }
 
-function buscarMedidasEmTempoRealCpu(req, res) {
-
-    
+function buscarMedidasEmTempoRealCpu(req, res) {    
     var idEmpresa =  req.params.idEmpresa;
 
     console.log(`Recuperando medidas em tempo real`);
