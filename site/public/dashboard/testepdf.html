@@ -6,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TESTE PARA CONSTRUIR OS GRAFICOS DO PDF</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
 </head>
 
 <body>
-    <div style="width: 50%; margin: auto;">
-        <canvas id="myChart"></canvas>
+    <div style="width: 40%; margin: auto;">
+        <canvas id="myChart" style="visibility: hidden;"></canvas>
+        <button onclick="salvarImagem('myChart', 'chart_image_redes.png')">Salvar Gráfico Redes</button>
     </div>
-
+    <div style="width: 40%; margin: auto;">
+        <canvas id="myChart2" style="visibility: hidden;"></canvas>
+        <button onclick="salvarImagem('myChart2', 'chart_image_latencia.png')">Salvar Gráfico Latência</button>
+        <button onclick="gerarPDF()">Gerar PDF</button>
+    </div>
     <script>
         window.onload = function () {
             obterDadosRede()
+            obterDadosLatencia()
         }
 
         function obterDadosRede() {
@@ -34,34 +42,38 @@
             })
                 .then((resposta) => resposta.json())
                 .then((dados) => {
-                    dados.reverse()
 
-                    const vetorDowload = []
-                    const vetorUpload = []
-                    const momentoFormatado = []
+
+                    const vetorDowload = [];
+                    const vetorUpload = [];
+                    const momentoFormatado = new Set();
 
                     for (let i = 0; i < dados.length; i++) {
+                        if (dados[i].Componente === 5) {
+                            vetorDowload.push(dados[i].Dado);
+                        }
+                        if (dados[i].Componente === 6) {
+                            vetorUpload.push(dados[i].Dado);
+                        }
 
-                        if (dados[i].Componente == 5) {
-                            vetorDowload.push(dados[i].Dado)
-                        }
-                        if (dados[i].Componente == 6) {
-                            vetorUpload.push(dados[i].Dado)
-                        }
+                        const momento = new Date(dados[i].DataHora);
+                        const momentoFormatadoAtual = momento.toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+
+                        momentoFormatado.add(momentoFormatadoAtual);
                     }
 
-                    for (let i = 0; i < dados.length/2; i++) {
-                        const momento = new Date(dados[i].DataHora)
-                        const momentoFormatadoAtual = momento.toISOString().slice(1, 19)
-                        momentoFormatado.push(momentoFormatadoAtual)
 
-                    }
+                    const excluindoRepetidas = Array.from(momentoFormatado);
 
-                    console.table(momentoFormatado)
-                    console.table(vetorDowload)
-                    console.table(vetorUpload)
 
-                    labels.push(...momentoFormatado)
+                    labels.push(...excluindoRepetidas)
                     data[0].push(...vetorDowload)
                     data[1].push(...vetorUpload)
 
@@ -73,9 +85,9 @@
                                 label: 'Download',
                                 data: data[0],
                                 fill: false,
-                                borderColor: '#845ED7',
-                                backgroundColor: '#845ED7',
-                                tension: 0.1
+                                tension: 0.1,
+                                borderColor: 'lime',
+                                backgroundColor: 'lime',
                             }, {
                                 label: 'Upload',
                                 data: data[1],
@@ -94,12 +106,12 @@
                             scales: {
                                 x: {
                                     grid: {
-                                        color: 'blue',
+                                        color: 'black',
                                         lineWidth: 0.4,
                                         borderDash: [1, 1]
                                     },
                                     ticks: {
-                                        color: 'green'
+                                        color: 'black'
                                     }
                                 },
                                 y: {
@@ -130,6 +142,159 @@
                 });
         }
 
+        function obterDadosLatencia() {
+
+            const labels = []
+            const data = []
+
+            fetch("/relatorios/buscarSelectLatencia", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    selectLatenciaServer: selectLatencia
+                })
+            })
+                .then((resposta) => resposta.json())
+                .then((dados) => {
+
+
+                    const vetorLatencia = []
+                    const momentoFormatado = []
+
+                    for (let i = 0; i < dados.length; i++) {
+
+                        vetorLatencia.push(dados[i].Dado)
+
+                    }
+
+                    for (let i = 0; i < dados.length; i++) {
+                        const momento = new Date(dados[i].DataHora)
+
+                        const momentoFormatadoAtual = momento.toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+                        momentoFormatado.push(momentoFormatadoAtual)
+
+                    }
+
+
+                    labels.push(...momentoFormatado)
+                    data.push(vetorLatencia)
+
+                    const config = {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Latência',
+                                data: data[0],
+                                fill: false,
+                                borderColor: '#845ED7',
+                                backgroundColor: '#845ED7',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        color: 'black',
+                                        lineWidth: 0.5,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        color: 'black'
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'black',
+                                        lineWidth: 0.5,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        callback: (value) => value + ' ms',
+                                        color: 'red'
+                                    }
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 1
+                                }
+                            }
+                        }
+                    };
+
+                    const myChart = new Chart(document.getElementById('myChart2'), config)
+                })
+                .catch((error) => {
+                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`)
+                });
+        }
+
+        function convertCanvasToImage(canvas) {
+            const dataURL = canvas.toDataURL('image/png');
+            return dataURL;
+        }
+
+        function salvarImagem(chartId, fileName) {
+            const canvas = document.getElementById(chartId);
+            const chartImageBase64 = convertCanvasToImage(canvas);
+
+            const link = document.createElement('a');
+            link.href = chartImageBase64;
+            link.download = fileName;
+            link.click();
+        }
+
+        function gerarPDF() {
+            const docDefinition = {
+                content: [
+                    { text: 'Gráfico Redes', style: 'header' },
+                    { image: convertCanvasToImage(document.getElementById('myChart')), width: 500 },
+                    { text: 'Gráfico Latência', style: 'header' },
+                    { image: convertCanvasToImage(document.getElementById('myChart2')), width: 500 },
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10]
+                    }
+                }
+            };
+
+            pdfMake.createPdf(docDefinition).download('relatorio.pdf');
+        }
+
+        var selectLatencia =
+            `SELECT TOP 20
+            Dado_Capturado AS Dado,
+            fkCompMoniExistentes AS Componente,
+            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        FROM 
+            Monitoramento
+        WHERE
+            fkCompMoniExistentes = 9 AND 
+            fkEmpMaqCompMoni = 1
+        ORDER BY
+            Data_captura ASC,
+            Hora_captura ASC;`
+
         var selectRede =
             `SELECT TOP 40 
             Dado_Capturado AS Dado,
@@ -141,21 +306,7 @@
             fkCompMoniExistentes IN (5, 6) AND 
             fkEmpMaqCompMoni = 1
         ORDER BY
-            Data_captura DESC,
-            Hora_captura ASC;`
-
-            var selectLatencia =
-            `SELECT TOP 40 
-            Dado_Capturado AS Dado,
-            fkCompMoniExistentes AS Componente,
-            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
-        FROM 
-            Monitoramento
-        WHERE
-            fkCompMoniExistentes = 9 AND 
-            fkEmpMaqCompMoni = 1
-        ORDER BY
-            Data_captura DESC,
+            Data_captura ASC,
             Hora_captura ASC;`
 
         // var selectRede =
