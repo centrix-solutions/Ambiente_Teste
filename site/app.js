@@ -17,6 +17,7 @@ var relatoriosRouter = require("./src/routes/relatorios");
 var dashboardRouter = require("./src/routes/dashboard");
 var notificacaoRouter = require("./src/routes/notificacao");
 var redeRouter = require("./src/routes/rede");
+var processosRouter = require("./src/routes/processos");
 var dashPaola = require("./src/routes/dashPaola");
 
 app.use(express.json({ limit: '50mb' }));
@@ -34,6 +35,7 @@ app.use("/relatorios", relatoriosRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/notificacao", notificacaoRouter);
 app.use("/rede", redeRouter);
+app.use("/processos", processosRouter);
 app.use("/dashPaola", dashPaola);
 
 app.listen(PORTA, function () {

@@ -11,7 +11,10 @@ function toggleInfo() {
 }
 async function listarProcessos() {
     var idEmpresa = sessionStorage.Empresa;
-    var idAndar = 1;
+    var idAndar = null;
+    chkFiltro.checked = false;
+    var filtro = chkFiltro.checked;
+    if (idAndar == 0 || idAndar == undefined) idAndar = null;
     try {
         var resposta = await fetch("/processos/listarProcessos", {
             method: "POST",
@@ -20,7 +23,8 @@ async function listarProcessos() {
             },
             body: JSON.stringify({
                 idEmpresaServer: idEmpresa,
-                idAndarServer: idAndar
+                idAndarServer: idAndar,
+                filtroServer: filtro
             })
         });
         if (resposta.ok) {
@@ -31,3 +35,7 @@ async function listarProcessos() {
         console.log("Erro Processos: ", erro);
     }
 }
+
+setInterval(() => {
+    listarProcessos();
+}, 5000);
