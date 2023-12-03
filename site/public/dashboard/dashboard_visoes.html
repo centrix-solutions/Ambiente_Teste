@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="listarLateral()">
+<body>
   <div class="container_principal">
     <div class="barra_lateral" id="lateral_barra"></div>
     <div class="area_dash">
@@ -47,34 +47,48 @@
           <div class="div_individual" id="div_individual">
 
             <div class="conteudoPaola" id="conteudoPaola">
+              <div class="tituloPaola">
+                Entenda o desempenho médio da CPU e RAM
+              </div>
               <div class="kpisPaola">
                 <div class="kpiPaola">
                   <div class="tituloPaolaKpi">
                     Desempenho da CPU
+                  </div><br>
+                  <div id="desempenhoCpuPaola">
+                    X%
                   </div>
-                  <!-- <div class="tooltip" data-hint="Este é o meu tooltip">
-                    <p>Passe o mouse para obter informações</p>
-                  </div> -->
-
                 </div>
                 <div class="kpiPaola">
                   <div class="tituloPaolaKpi">
                     Desempenho da RAM
+                  </div>
+                  <div id="desempenhoRamPaola">
+                    X%
                   </div>
                 </div>
                 <div class="kpiPaola">
                   <div class="tituloPaolaKpi">
                     Total de Máquinas
                   </div>
-                </div>
-                <div class="kpiPaola">
-                  <div class="tituloPaolaKpi">
-                    Ainda não sei
+                  <div id="totalMaquinaPaola">
+                    X%
                   </div>
                 </div>
                 <div class="kpiPaola">
                   <div class="tituloPaolaKpi">
-                    Ainda não sei²
+                    Maior valor da CPU
+                  </div>
+                  <div id="maxCpuPaola">
+                    X%
+                  </div>
+                </div>
+                <div class="kpiPaola">
+                  <div class="tituloPaolaKpi">
+                    Maior valor da RAM
+                  </div>
+                  <div id="maxRamPaola">
+                    X%
                   </div>
                 </div>
               </div>
@@ -111,23 +125,142 @@
 
 <script>
 
+window.onload = async function () {
+    await listarLateral();
+  };
+
   function carregarPaola() {
+    try {
+      var idEmpresa = sessionStorage.Empresa;
+      // Gráfico CPU
+      obterDadosGraficoCPU(idEmpresa);
+      atualizarGraficoMediaCPU(idEmpresa);
+      // Gráfico RAM
+      obterDadosGraficoRAM(idEmpresa);
+      atualizarGraficoMediaRAM(idEmpresa);
+      // KPIs
+      obterDadosDesempenhoMedia(idEmpresa);
+      atualizarGraficoDesempenhoMedia(idEmpresa);
+    } catch (error) {
+      console.error("Erro no carregamento da página: " + error.message);
+    }
+
     conteudoPaola.style.display = 'inline'
     conteudoRafael.style.display = 'none'
     conteudoRuan.style.display = 'none'
     conteudoAle.style.display = 'none'
     conteudoEdson.style.display = 'none'
 
-    // fazendo a a rota do gráfico
+    // fazendo a a rota do kpi
 
-    var idEmpresa = Number(sessionStorage.getItem('Empresa'));
+    var KpiCpuPaola = document.getElementById("desempenhoCpuPaola");
+    var KpiRamPaola = document.getElementById("desempenhoRamPaola");
+    var KpiTotalPaola = document.getElementById("totalMaquinaPaola");
+    var KpiMaxCpuPaola = document.getElementById("maxCpuPaola");
+    var KpiMaxRamPaola = document.getElementById("maxRamPaola");
 
-    function obterDadosGrafico() {
-      fetch(`/dashPaola/grafico/`, { cache: "no-store" })
+
+    function obterDadosDesempenhoMedia() {
+
+      valoresKpiDesempenho = [KpiCpuPaola, KpiRamPaola]
+      valorTotal = [KpiTotalPaola]
+      valoresKpiMax = [KpiMaxCpuPaola, KpiMaxRamPaola]
+
+      console.log("Desempenho")
+
+      fetch(`/dashPaola/ultimasDesempenhoMedia/`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos das kpis: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGraficoDesempenhoMedia(resposta, idEmpresa);
+
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function plotarGraficoDesempenhoMedia(resposta) {
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        if (registro.tipo === "CPU") {
+          valoresKpiDesempenho[0].innerHTML = (registro.usoMedio) + "%";
+          valoresKpiMax[0].innerHTML = (registro.usoMax) + "%";
+        }
+        if (registro.tipo === "RAM") {
+          valoresKpiDesempenho[1].innerHTML = (registro.usoMedio) + "%";
+          valoresKpiMax[1].innerHTML = (registro.usoMax) + "%";
+        }
+        if (registro.tipo === "TotalMaquinas") {
+          valorTotal[0].innerHTML = (registro.totalMaquinas);
+        }
+      }
+
+      setTimeout(() => atualizarGraficoDesempenhoMedia(idEmpresa), 2000);
+    }
+
+    function atualizarGraficoDesempenhoMedia() {
+
+      fetch(`/dashPaola/tempoRealDesempenhoMedia/`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            valoresKpiDesempenho = [KpiCpuPaola, KpiRamPaola]
+            valoresKpiMax = [KpiMaxCpuPaola, KpiMaxRamPaola]
+            valorTotal = [KpiTotalPaola]
+
+            for (i = 0; i < novoRegistro.length; i++) {
+              var dados = novoRegistro[i];
+              if (dados.tipo === "CPU") {
+                valoresKpiDesempenho[0].innerHTML = (registro.usoMedio) + "%";
+                valoresKpiMax[0].innerHTML = (registro.usoMax) + "%";
+              }
+              if (dados.tipo === "RAM") {
+                valoresKpiDesempenho[1].innerHTML = (registro.usoMedio) + "%";
+                valoresKpiMax[1].innerHTML = (registro.usoMax) + "%";
+              }
+              if (dados.tipo === "TotalMaquinas") {
+                valorTotal[0].innerHTML = (registro.totalMaquinas);
+              }
+            }
+
+            proximaAtualizacaoDesempenho = setTimeout(() => atualizarGraficoDesempenhoMedia(idEmpresa), 5000);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacaoDesempenho = setTimeout(() => atualizarGraficoDesempenhoMedia(idEmpresa), 2000);
+        }
+      })
+        .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function limparDesempenhoMedia() {
+      for (i = 0; i <= valores.length; i++) {
+        valoresKpiDesempenho[i].innerHTML = "";
+        valoresKpiMax[i].innerHTML = "";
+        valorTotal[i].innerHTML = "";
+      }
+    }
+
+    // Gráfico CPU
+    function obterDadosGraficoCPU(idEmpresa) {
+      console.log("____________________________ idEmpresa", idEmpresa)
+      fetch(`/dashPaola/graficoCPU/${idEmpresa}`, { cache: "no-store" })
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (resposta) {
               console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              resposta.reverse();
+
               plotarDadosGrafico(resposta);
             });
           } else {
@@ -141,82 +274,233 @@
         });
     }
 
-    function plotarDadosGrafico(resposta) {
-    var data = [];
-    // var labels = [];
-    var cores = ["#d83198", "#3b9d17c2", "#d83198c0", "#3b9d17"];
+    function plotarDadosGrafico(resposta, idEmpresa) {
 
-    for (var i = 0; i < resposta.length; i++) {
-      data.push(resposta[i].mediaCPU);
-      // labels.push(resposta[i].receita);
+      console.log('iniciando plotagem do gráfico...')
+
+      let labels = [];
+
+      let dados = {
+        labels: labels,
+        datasets: [{
+          label: 'Média de uso da RAM',
+          data: [],
+          backgroundColor: [],
+          borderColor: ['#393d42'],
+          tension: 0.3,
+          fill: false,
+          pointRadius: 6
+        }]
+      };
+
+      console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+      console.log(resposta)
+
+      for (var i = resposta.length - 1; i >= 0; i--) {
+        var registro = resposta[i]
+        dados.datasets[0].data.push(registro.mediaCPU);
+        labels.push(registro.horaCaptura);
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+      }
+
+      // Criando estrutura para plotar gráfico - config
+      const config = {
+        type: 'line',
+        data: dados,
+        fill: false,
+      }
+
+      // Adicionando gráfico criado em div na tela
+      let chartMediaCPU = new Chart(
+        document.getElementById(`graficoCpuPaola`),
+        config
+      );
+
+      setTimeout(() => atualizarGraficoMediaCPU(idEmpresa, dados, chartMediaCPU), 2000);
     }
 
-    console.log("data ", data )
-    console.log("labels ", labels)
+    function atualizarGraficoMediaCPU(idEmpresa, dados, chartMediaCPU) {
+      fetch(`/dashPaola/graficoAtualizarCPU/${idEmpresa}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
 
-    const ctx = document.getElementById("graficoCpuPaola");
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: data,
-        datasets: [{
-            data,
-            backgroundColor: cores,
-            borderWidth: 1
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
+
+            // let avisoCaptura = document.getElementById(`avisoCaptura${disco}`)
+            // avisoCaptura.innerHTML = ""
+
+            if (novoRegistro[0].horaCaptura == dados.datasets[0].horaCaptura) {
+              console.log("---------------------------------------------------------------")
+              console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+              // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+              console.log("Horário do novo dado capturado:")
+              console.log(novoRegistro[0].horaCaptura)
+              console.log("Horário do último dado capturado:")
+              console.log(dados.labels[dados.labels.length - 1])
+              console.log("---------------------------------------------------------------")
+            } else {
+              // tirando e colocando valores no gráfico
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].horaCaptura);
+
+              dados.datasets[0].data.shift();
+              dados.datasets[0].data.push(novoRegistro[0].mediaCPU); // incluir uma nova medida de umidade
+
+              // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+              // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+              chartMediaCPU.update();
+            }
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            // proximaAtualizacao = setTimeout(() => atualizarGrafico(disco, dados, myChart), 2000);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          // proximaAtualizacao = setTimeout(() => atualizarGrafico(disco, dados, myChart), 2000);
         }
-      }
-    });
-  }
+      })
+        .catch(function
+          (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
 
-    const ctx = document.getElementById('graficoCpuPaola');
+    }
 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+    // Gráfico RAM
+    function obterDadosGraficoRAM(idEmpresa) {
+      fetch(`/dashPaola/graficoRAM/${idEmpresa}`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (resposta) {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+              resposta.reverse();
+
+              plotarDadosGraficoRAM(resposta);
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+
+    function plotarDadosGraficoRAM(resposta, idEmpresa) {
+
+      console.log('iniciando plotagem do gráfico...')
+
+      let labels = [];
+
+      let dados = {
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2],
-          borderWidth: 1
+          label: 'Média de uso da RAM',
+          data: [],
+          backgroundColor: [],
+          borderColor: ['#393d42'],
+          tension: 0.3,
+          fill: false,
+          pointRadius: 6
         }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
+      };
 
-    const ctx2 = document.getElementById('graficoRamPaola');
+      console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+      console.log(resposta)
 
-    new Chart(ctx2, {
-      type: 'line',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
+      for (var i = resposta.length - 1; i >= 0; i--) {
+        var registro = resposta[i]
+        dados.datasets[0].data.push(registro.mediaRAM);
+        labels.push(registro.horaCaptura);
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
       }
-    });
+
+      // Criando estrutura para plotar gráfico - config
+      const config = {
+        type: 'line',
+        data: dados,
+        fill: false,
+      }
+
+      // Adicionando gráfico criado em div na tela
+      let chartMediaRAM = new Chart(
+        document.getElementById(`graficoRamPaola`),
+        config
+      );
+
+      setTimeout(() => atualizarGraficoMediaRAM(idEmpresa, dados, chartMediaRAM), 2000);
+    }
+
+    function atualizarGraficoMediaRAM(idEmpresa, dados, chartMediaRAM) {
+      fetch(`/dashPaola/graficoAtualizarRAM/${idEmpresa}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (novoRegistro) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
+
+            // let avisoCaptura = document.getElementById(`avisoCaptura${disco}`)
+            // avisoCaptura.innerHTML = ""
+
+            if (novoRegistro[0].horaCaptura == dados.datasets[0].horaCaptura) {
+              console.log("---------------------------------------------------------------")
+              console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+              // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+              console.log("Horário do novo dado capturado:")
+              console.log(novoRegistro[0].horaCaptura)
+              console.log("Horário do último dado capturado:")
+              console.log(dados.labels[dados.labels.length - 1])
+              console.log("---------------------------------------------------------------")
+            } else {
+              // tirando e colocando valores no gráfico
+              dados.labels.shift(); // apagar o primeiro
+              dados.labels.push(novoRegistro[0].horaCaptura);
+
+              dados.datasets[0].data.shift();
+              dados.datasets[0].data.push(novoRegistro[0].mediaRAM); // incluir uma nova medida de umidade
+
+              // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+              // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+              chartMediaRAM.update();
+            }
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            // proximaAtualizacao = setTimeout(() => atualizarGrafico(disco, dados, myChart), 2000);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          // proximaAtualizacao = setTimeout(() => atualizarGrafico(disco, dados, myChart), 2000);
+        }
+      })
+        .catch(function
+          (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+    }
 
   }
 
