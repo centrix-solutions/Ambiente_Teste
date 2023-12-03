@@ -180,8 +180,11 @@ class Monitoramento {
             val MonitoramentoThread = thread {
                 while (opcaoMonitoramento) {
 
+                
                     val atividade = looca.grupoDeJanelas.janelas[3].titulo
-                    repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividade, horaLogin)
+                    val atividadeCaracter = atividade.replace(Regex("[^a-zA-Z0-9 ]"), "")
+                    val atividadeFormatada = atividadeCaracter.take(30)
+                    repositorioUser.atualizarAtividade(usuarioLogado, idMaquina, atividadeFormatada, horaLogin)
 
                     val dados: MutableList<Float> = mutableListOf(
                         //looca.processador.uso.toFloat(),

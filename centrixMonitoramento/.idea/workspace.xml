@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoHardware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centrixMonitoramentoRede.py" beforeDir="false" afterPath="$PROJECT_DIR$/centrixMonitoramentoRede.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Conexao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Monitoramento.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Monitoramento.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/MonitoramentoRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/MonitoramentoRepositorio.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/scriptPadraoPython.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MenuThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MenuThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Monitoramento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Monitoramento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MonitoramentoRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MonitoramentoRepositorio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scriptPadraoPython.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/testepdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/controllers/relatorioController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/src/models/relatorioModel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,14 +25,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexa/Desktop/last week/Ambiente_Teste/centrixMonitoramento&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/rafa_/Desktop/Projeto_Individual_Rafael/kotlin_individual_Rafa"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Kotlin.AppMainKt">
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />

@@ -83,7 +83,7 @@ function buscarSelectRede(req, res) {
     var select = req.body.selectRedeServer
 
     if (select == undefined) {
-        res.status(400).send("Seu select summary esta undefined")
+        res.status(400).send("Seu select rede esta undefined")
     } else {
 
         relatorioModel.buscarSelectRede(select)
@@ -103,6 +103,33 @@ function buscarSelectRede(req, res) {
             );
     }
 }
+
+function buscarSelectLatencia(req, res) {
+
+    var select = req.body.selectLatenciaServer
+
+    if (select == undefined) {
+        res.status(400).send("Seu select latencia esta undefined")
+    } else {
+        
+        relatorioModel.buscarSelectLatencia(select)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao buscar dados Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function verificarDatas(req, res) {
 
     var selectData = req.body.veficarSelectServer
@@ -132,6 +159,7 @@ function verificarDatas(req, res) {
 
 module.exports = {
     buscarComputadoresRelatorio,
+    buscarSelectLatencia,
     buscarSelectSummary,
     buscarSelectRede,
     verificarDatas,

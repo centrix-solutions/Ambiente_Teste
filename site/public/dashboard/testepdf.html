@@ -12,10 +12,13 @@
     <div style="width: 50%; margin: auto;">
         <canvas id="myChart"></canvas>
     </div>
-
+    <div style="width: 50%; margin: auto;">
+        <canvas id="myChart2"></canvas>
+    </div>
     <script>
         window.onload = function () {
             obterDadosRede()
+            obterDadosLatencia()
         }
 
         function obterDadosRede() {
@@ -50,9 +53,18 @@
                         }
                     }
 
-                    for (let i = 0; i < dados.length/2; i++) {
+                    for (let i = 0; i < dados.length / 2; i++) {
+                        
                         const momento = new Date(dados[i].DataHora)
-                        const momentoFormatadoAtual = momento.toISOString().slice(1, 19)
+
+                        const momentoFormatadoAtual = momento.toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
                         momentoFormatado.push(momentoFormatadoAtual)
 
                     }
@@ -130,6 +142,125 @@
                 });
         }
 
+        function obterDadosLatencia() {
+
+            const labels = []
+            const data = []
+
+            fetch("/relatorios/buscarSelectLatencia", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    selectLatenciaServer: selectLatencia
+                })
+            })
+                .then((resposta) => resposta.json())
+                .then((dados) => {
+                    dados.reverse()
+
+                    const vetorLatencia = []
+                    const momentoFormatado = []
+
+                    for (let i = 0; i < dados.length; i++) {
+
+                        vetorLatencia.push(dados[i].Dado)
+
+                    }
+
+                    for (let i = 0; i < dados.length / 2; i++) {
+                        const momento = new Date(dados[i].DataHora)
+
+                        const momentoFormatadoAtual = momento.toLocaleDateString('pt-BR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+                        momentoFormatado.push(momentoFormatadoAtual)
+
+                    }
+
+
+                    labels.push(...momentoFormatado)
+                    data.push(vetorLatencia)
+
+                    const config = {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Latencia',
+                                data: data[0],
+                                fill: false,
+                                borderColor: '#845ED7',
+                                backgroundColor: '#845ED7',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        color: 'blue',
+                                        lineWidth: 0.4,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        color: 'green'
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'black',
+                                        lineWidth: 0.4,
+                                        borderDash: [1, 1]
+                                    },
+                                    ticks: {
+                                        callback: (value) => value + ' Mb/s',
+                                        color: 'red'
+                                    }
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 1
+                                }
+                            }
+                        }
+                    };
+
+                    const myChart = new Chart(document.getElementById('myChart2'), config)
+                })
+                .catch((error) => {
+                    console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`)
+                });
+        }
+
+
+        var selectLatencia =
+            `SELECT TOP 20
+            Dado_Capturado AS Dado,
+            fkCompMoniExistentes AS Componente,
+            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
+        FROM 
+            Monitoramento
+        WHERE
+            fkCompMoniExistentes = 9 AND 
+            fkEmpMaqCompMoni = 1
+        ORDER BY
+            Data_captura DESC,
+            Hora_captura ASC;`
+
         var selectRede =
             `SELECT TOP 40 
             Dado_Capturado AS Dado,
@@ -143,21 +274,6 @@
         ORDER BY
             Data_captura DESC,
             Hora_captura ASC;`
-
-            var selectLatencia =
-            `SELECT TOP 40 
-            Dado_Capturado AS Dado,
-            fkCompMoniExistentes AS Componente,
-            CONCAT(Data_captura, ' ', Hora_captura) AS DataHora
-        FROM 
-            Monitoramento
-        WHERE
-            fkCompMoniExistentes = 9 AND 
-            fkEmpMaqCompMoni = 1
-        ORDER BY
-            Data_captura DESC,
-            Hora_captura ASC;`
-
         // var selectRede =
         //     `SELECT TOP 20
         //     Dado_Capturado AS Dado,

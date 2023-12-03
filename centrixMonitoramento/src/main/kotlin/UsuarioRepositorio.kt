@@ -56,11 +56,11 @@ class UsuarioRepositorio {
             horaLogin
         )
     }
-    fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividade: String, horaLogin: LocalDateTime) {
+    fun atualizarAtividade(usuarioLogado: Usuario, idMaq: Int, atividadeFormatada: String, horaLogin: LocalDateTime) {
         jdbcTemplateServer.update(
             """
                 UPDATE Login
-                SET Atividade = '${atividade}'
+                SET Atividade = '${atividadeFormatada}'
                 WHERE idFuncionario = ${usuarioLogado.idFuncionario} and idMaquina = ${idMaq} 
                 and idEmpresa = ${usuarioLogado.fkEmpFunc};
         """.trimIndent(),

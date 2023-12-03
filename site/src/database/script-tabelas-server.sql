@@ -184,3 +184,18 @@ CREATE TABLE metricas_tempo_real (
     fkMaquina INT,
     FOREIGN KEY (fkMaquina) REFERENCES Maquinas(idMaquina)
 );
+
+CREATE TABLE Processo(
+    idProcesso INT IDENTITY(1,1) PRIMARY KEY,
+    idProcessoMaquina INT unique,
+    PID INT,
+    titulo VARCHAR(255),
+    fkCompMonitoradosProc INT,
+    CONSTRAINT fkCompMonitoradosProc FOREIGN KEY (fkCompMonitoradosProc) REFERENCES Componentes_Monitorados (idComponente_monitorado),
+    fkCompExistentesProc INT,
+    CONSTRAINT fkCompExistentesProc FOREIGN KEY (fkCompExistentesProc) REFERENCES ComponentesQuePrestamosServico (idComponentes_Que_PrestamosServicos),
+    fkMaqProc INT,
+    CONSTRAINT fkMaqProc FOREIGN KEY (fkMaqProc) REFERENCES Maquinas (idMaquina),
+    fkEmpProc INT,
+    CONSTRAINT fkEmpProc FOREIGN KEY (fkEmpProc) REFERENCES Empresa (idEmpresa)
+);
