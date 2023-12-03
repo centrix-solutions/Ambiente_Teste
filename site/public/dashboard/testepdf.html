@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <div style="width: 50%; margin: auto;">
+    <div style="width: 40%; margin: auto;">
         <canvas id="myChart"></canvas>
     </div>
-    <div style="width: 50%; margin: auto;">
+    <div style="width: 40%; margin: auto;">
         <canvas id="myChart2"></canvas>
     </div>
     <script>
@@ -37,26 +37,21 @@
             })
                 .then((resposta) => resposta.json())
                 .then((dados) => {
-                    
 
-                    const vetorDowload = []
-                    const vetorUpload = []
-                    const momentoFormatado = []
+
+                    const vetorDowload = [];
+                    const vetorUpload = [];
+                    const momentoFormatado = new Set();
 
                     for (let i = 0; i < dados.length; i++) {
-
-                        if (dados[i].Componente == 5) {
-                            vetorDowload.push(dados[i].Dado)
+                        if (dados[i].Componente === 5) {
+                            vetorDowload.push(dados[i].Dado);
                         }
-                        if (dados[i].Componente == 6) {
-                            vetorUpload.push(dados[i].Dado)
+                        if (dados[i].Componente === 6) {
+                            vetorUpload.push(dados[i].Dado);
                         }
-                    }
 
-                    for (let i = 0; i <  Math.floor(dados.length / 2); i++) {
-                        
-                        const momento = new Date(dados[i].DataHora)
-
+                        const momento = new Date(dados[i].DataHora);
                         const momentoFormatadoAtual = momento.toLocaleDateString('pt-BR', {
                             day: '2-digit',
                             month: '2-digit',
@@ -65,15 +60,15 @@
                             minute: '2-digit',
                             second: '2-digit'
                         });
-                        momentoFormatado.push(momentoFormatadoAtual)
 
+                        momentoFormatado.add(momentoFormatadoAtual);
                     }
 
-                    console.table(momentoFormatado)
-                    console.table(vetorDowload)
-                    console.table(vetorUpload)
+    
+                    const excluindoRepetidas = Array.from(momentoFormatado);
 
-                    labels.push(...momentoFormatado)
+
+                    labels.push(...excluindoRepetidas)
                     data[0].push(...vetorDowload)
                     data[1].push(...vetorUpload)
 
@@ -158,7 +153,7 @@
             })
                 .then((resposta) => resposta.json())
                 .then((dados) => {
-                    
+
 
                     const vetorLatencia = []
                     const momentoFormatado = []
@@ -193,7 +188,7 @@
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'Latencia',
+                                label: 'Latência',
                                 data: data[0],
                                 fill: false,
                                 borderColor: '#845ED7',
