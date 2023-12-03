@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/icon/favicon.ico">
-    <title>Dashboard | Máquina</title>
+    <title>Dashboard | Relatórios</title>
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <link rel="stylesheet" href="../css/relatorio.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,7 +16,7 @@
 </head>
 
 <body onload="listarLateral(), buscarComputadoresRelatorio(idEmpresa)">
-    
+
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra">
 
@@ -36,8 +36,8 @@
                 <div class="area_superior">
                     <div class="area_superior_esquerda">
                         <div class="texto_ajuda">
-                            <!-- sempre que hooverar qualquer parte do site, mudar o texto de ajuda -->
-                            <h2>Selecione no minimo 1 componente que voce deseja obter os dados</h2>
+                            <h2 id="textoAjuda">Selecione pelo menos um componente para o qual você deseja obter os
+                                dados</h2>
                         </div>
                         <div class="botoes_filtro">
                             <button onclick="exibirComp()">Componentes</button>
@@ -105,7 +105,7 @@
                                 <option value="pdf">PDF</option>
                                 <option value="csv">CSV</option>
                             </select>
-                            
+
                             <button class="baixar_botao" onclick="criarRelatorio()">Criar</button>
                         </div>
                         <div id="exibicao">
@@ -126,21 +126,21 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="grafico" style="width: 70%; margin: 1000px">
                 <canvas id="myChart"></canvas>
             </div>
-            <div class="grafico"style="width: 70%; margin: 1000px">
+            <div class="grafico" style="width: 70%; margin: 1000px">
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
@@ -223,16 +223,19 @@
         document.getElementById('idfiltros').style.display = 'block'
         document.getElementById('idInicio').style.display = 'none'
         document.getElementById('idFim').style.display = 'none'
+        textoAjuda.innerHTML = "Selecione pelo menos um componente para o qual você deseja obter os dados"
     }
     function exibirInicio() {
         document.getElementById('idfiltros').style.display = 'none'
         document.getElementById('idInicio').style.display = 'block'
         document.getElementById('idFim').style.display = 'none'
+        textoAjuda.innerHTML = "Escolha uma data e hora de início e fim válidas"
     }
     function exibirFim() {
         document.getElementById('idfiltros').style.display = 'none'
         document.getElementById('idInicio').style.display = 'none'
         document.getElementById('idFim').style.display = 'block'
+        textoAjuda.innerHTML = "Escolha uma data e hora de início e fim válidas"
     }
     function selecionarTodosMaquina() {
         var todosMaqui = document.querySelectorAll('input[name="checkMaqui"]')
@@ -273,7 +276,7 @@
         location.reload()
     }
     function criarPrevia() {
-        
+
         var selecionadosComp = []
         var selecionadosMaqui = []
 
@@ -301,7 +304,7 @@
         maquinasEscolhidas.forEach(checkbox => {
             selecionadosMaqui.push(checkbox.value)
         })
-        
+
         //criar duas funções para verificar se as datas de inicio e fim existem no bd 
         if (selecionadosComp.length == 0) {
             //colocar em vermelho no texto de ajuda que vc deve selecionar ao menos 1 componente
@@ -337,7 +340,7 @@
             (Data_captura = '${varDtFim}' AND Hora_captura <= '${varHrFim}')
             )
         ORDER BY
-            Data_captura DESC,
+            Data_captura ASC,
             Hora_captura ASC
         `
             selectLatencia =
@@ -420,7 +423,7 @@
             buscarSelect(selectGeral)
             obterDadosRede(selectRede)
             obterDadosLatencia(selectLatencia)
-            
+
             function buscarSelect(selectGeral) {
                 console.log(selectGeral)
                 fetch("/relatorios/buscarSelect", {
@@ -429,7 +432,7 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                    
+
                         selectGeralServer: selectGeral
                     })
                 }).then(function (response) {
@@ -496,9 +499,77 @@
         if (extensaoSelecionada === "pdf") {
             criarPDF(dataHoje, varDtInicio, varDtFim, nomeArquivo, selectGeral, varSelectSummary)
         }
+        if (extensaoSelecionada === "csv") {
+            criarCSV(dataHoje, varDtInicio, varDtFim, nomeArquivo, selectGeral)
+        }
+    }
+
+    function criarCSV(dataHoje, varDtInicio, varDtFim, nomeArquivo, selectGeral) {
+        buscarSelectCSV()
+            .then(dados => {
+                console.log("Dados obtidos:", dados);
+                formatarDadosCSV(dados);
+
+                gerarCSV(dados, nomeArquivo);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar e formatar dados:", error.message);
+            });
+
+        function buscarSelectCSV() {
+            return new Promise(function (resolve, reject) {
+                fetch("/relatorios/buscarSelect", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        selectGeralServer: selectGeral
+                    })
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            console.error("Nenhum dado encontrado ou erro na API");
+                            reject(new Error("Erro ao buscar dados para select2"));
+                        }
+                    })
+                    .then(function (resposta) {
+                        resolve(resposta);
+                    })
+                    .catch(function (error) {
+                        console.error(`Erro na obtenção dos dados: ${error.message}`);
+                        reject(error);
+                    });
+            });
+        }
+
+        function formatarDadosCSV(dados) {
+            for (var i = 0; i < dados.length; i++) {
+                dados[i].Data = dados[i].Data.split("T")[0];
+                dados[i].Hora = dados[i].Hora.split("T")[1];
+                dados[i].Hora = dados[i].Hora.slice(0, 8);
+                dados[i].Componente = rotulo[dados[i].Componente] || dados[i].Componente;
+            }
+        }
+
+        function gerarCSV(dados, nomeArquivo) {
+            const csvContent = "data:text/csv;charset=utf-8," +
+                dados.map(row => Object.values(row).join(",")).join("\n")
+
+            const encodedUri = encodeURI(csvContent)
+            const link = document.createElement("a")
+            link.setAttribute("href", encodedUri)
+            link.setAttribute("download", `${nomeArquivo}.csv`)
+            document.body.appendChild(link)
+            link.click();
+            document.body.removeChild(link)
+        }
     }
 
     function criarPDF(dataHoje, varDtInicio, varDtFim, nomeArquivo, selectGeral, varSelectSummary) {
+
         console.log(selectGeral)
         console.log(varSelectSummary)
 
