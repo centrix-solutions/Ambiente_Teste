@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TESTE PARA CONSTRUIR OS GRAFICOS DO PDF</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
 </head>
 
 <body>
     <div style="width: 40%; margin: auto;">
-        <canvas id="myChart"></canvas>
+        <canvas id="myChart" style="visibility: hidden;"></canvas>
+        <button onclick="salvarImagem('myChart', 'chart_image_redes.png')">Salvar Gráfico Redes</button>
     </div>
     <div style="width: 40%; margin: auto;">
-        <canvas id="myChart2"></canvas>
+        <canvas id="myChart2" style="visibility: hidden;"></canvas>
+        <button onclick="salvarImagem('myChart2', 'chart_image_latencia.png')">Salvar Gráfico Latência</button>
+        <button onclick="gerarPDF()">Gerar PDF</button>
     </div>
     <script>
         window.onload = function () {
@@ -64,7 +69,7 @@
                         momentoFormatado.add(momentoFormatadoAtual);
                     }
 
-    
+
                     const excluindoRepetidas = Array.from(momentoFormatado);
 
 
@@ -241,6 +246,40 @@
                 });
         }
 
+        function convertCanvasToImage(canvas) {
+            const dataURL = canvas.toDataURL('image/png');
+            return dataURL;
+        }
+
+        function salvarImagem(chartId, fileName) {
+            const canvas = document.getElementById(chartId);
+            const chartImageBase64 = convertCanvasToImage(canvas);
+
+            const link = document.createElement('a');
+            link.href = chartImageBase64;
+            link.download = fileName;
+            link.click();
+        }
+
+        function gerarPDF() {
+            const docDefinition = {
+                content: [
+                    { text: 'Gráfico Redes', style: 'header' },
+                    { image: convertCanvasToImage(document.getElementById('myChart')), width: 500 },
+                    { text: 'Gráfico Latência', style: 'header' },
+                    { image: convertCanvasToImage(document.getElementById('myChart2')), width: 500 },
+                ],
+                styles: {
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10]
+                    }
+                }
+            };
+
+            pdfMake.createPdf(docDefinition).download('relatorio.pdf');
+        }
 
         var selectLatencia =
             `SELECT TOP 20
@@ -269,6 +308,7 @@
         ORDER BY
             Data_captura ASC,
             Hora_captura ASC;`
+
         // var selectRede =
         //     `SELECT TOP 20
         //     Dado_Capturado AS Dado,
