@@ -55,7 +55,9 @@
                     <div class="div_individual" id="div_individual">
                         <div class="div-esquerda">
                             <div>
-                                <input type="text" class="" id="inputPesquisa" oninput="listarComputadores()"/>
+                                <input type="text" class="" id="inputPesquisa" oninput="listarProcessos()"/>
+                                <label class="branco" for="filtro">Separar por Andar:</label>
+                                <input type="checkbox" name="filtro" id="chkFiltro"/>
                                 <button onclick="gerarRelatorio()">Gerar relatório</button>
                             </div>
                             <div id="listaComputadores" class="lista-computadores">
