@@ -221,19 +221,31 @@ progress::-webkit-progress-bar {
     border-radius: 8px;
 }
 
-/* progress::-webkit-progress-value {
+
+/* .barra_painel::-webkit-progress-value {
     background: linear-gradient(90deg, #A36BFD 0%, #6B8AEB 103.21%);
     border-radius: 8px;
-} */
+}  */
 
-progress::-webkit-progress-value {
-    background: linear-gradient(90deg, lime 0%, orange 25%, red 75%);
+progress[name="verde"]::-webkit-progress-value {
+    background-color: lime;
     border-radius: 8px;
 }
 
-progress::-moz-progress-bar {
-    background: linear-gradient(90deg, lime 0%, orange 25%, red 75%);
+progress[name="laranja"]::-webkit-progress-value {
+    background-color: orange;
+    border-radius: 8px;
 }
+
+progress[name="vermelho"]::-webkit-progress-value {
+    background-color: red;
+    border-radius: 8px;
+}
+
+
+/* progress::-moz-progress-bar {
+    background: linear-gradient(90deg, lime 0%, orange 25%, red 75%);
+}  */
 .painel h2 {
     margin: 0.5rem;
     /* text-align: left; */
