@@ -1,14 +1,22 @@
+
+import com.github.britooo.looca.api.core.Looca
 import org.apache.commons.dbcp2.BasicDataSource
 import org.springframework.jdbc.core.JdbcTemplate
 
 object Conexao {
 
-    //substitua aqui
-    var bancoUser = "root"
-    var bancoSenha = "38762"
+    private val looca = Looca()
+    private val so = looca.sistema.sistemaOperacional
 
-    var bancoUserServer = "sa"
-    var bancoSenhaServer = "centrix"
+
+    var bancoUser = "root"
+    val bancoSenha = if (so.contains("Win")) {
+        "38762"
+    } else {
+        "urubu100"
+    }
+    private var bancoUserServer = "sa"
+    private var bancoSenhaServer = "centrix"
 
     var jdbcTemplate: JdbcTemplate? = null
 
@@ -31,6 +39,32 @@ object Conexao {
                     """
                   use centrix
               """
+                )
+                jdbcTemplate!!.execute(
+                    """
+                        CREATE TABLE IF NOT EXISTS Monitoramento (
+                        	idMonitoramento INT primary key auto_increment,
+                            Data_captura DATE,
+                            Hora_captura TIME,
+                            Dado_Capturado DECIMAL(10,2),
+                            fkCompMonitorados INT,
+                            fkCompMoniExistentes INT,
+                            fkMaqCompMoni INT,
+                            fkEmpMaqCompMoni INT
+                        )
+                    """.trimIndent()
+                )
+                jdbcTemplate!!.execute(
+                    """
+                        CREATE TABLE IF NOT EXISTS Login (
+                            idLogin INT primary key auto_increment,
+                            Email VARCHAR(45),
+                            Atividade VARCHAR(255),
+                            Id_do_dispositivo CHAR(16),
+                            dataHoraEntrada DATETIME,
+                            dataHoraSaida DATETIME
+                        )
+                    """.trimIndent()
                 )
             }
             return field

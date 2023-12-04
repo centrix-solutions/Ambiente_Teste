@@ -22,6 +22,3 @@ CREATE TABLE IF NOT EXISTS Login (
     dataHoraEntrada DATETIME,
     dataHoraSaida DATETIME
 );
-
-select * from Login;
-select * from monitoramento;

@@ -150,22 +150,11 @@ class Monitoramento {
 
             repositorioUser.registrarLogin(usuarioLogado, idMaquina, maquinaSpecs, horaLogin)
 
-            val componentesExistentes: MutableList<String> = mutableListOf()
-            val fkcomponentesMonitorados: MutableList<Int> = mutableListOf()
-            val componentes: List<Int> = repositorioComponentes.buscarComponetesMaq(idMaquina)
-            val nomeComponentes: List<String> =
-                listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos")
-            componentes.forEach {
-                componentesExistentes.add(nomeComponentes[it - 1])
-                when (it) {
-                    4 -> {
-                        fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
-                    }
 
-                    7 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
-                    8 -> fkcomponentesMonitorados.add(repositorioComponentes.buscarIdComp(idEmpresa, idMaquina, it))
-                }
-            }
+
+            val componentesExistentes: List<String> =
+                listOf("Cpu", "Disco", "Ram", "Usb", "Taxa Download", "Taxa Upload", "Janelas do Sistema", "Processos")
+
 
             /* FIM BUSCA DE DADOS, COMPONENTES E IDS */
 
@@ -227,7 +216,7 @@ class Monitoramento {
                         val data = LocalDate.now()
                         val hora = LocalTime.now(zonaFusoHorario)
                         val dado = dados[i]
-                        val fkcompMoni = fkcomponentesMonitorados[i]
+                        //val fkcompMoni = fkcomponentesMonitorados[i]
                         val fkcompExis = fkcomponentesExistentes[i]
                         repositorioMonitoramento.registrarDados(
                             data,

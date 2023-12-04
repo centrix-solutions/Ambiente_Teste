@@ -1,7 +1,8 @@
+
 import Conexao.bancoSenha
 import Conexao.bancoUser
+import com.github.britooo.looca.api.core.Looca
 import java.io.File
-
 object scriptPadraoPython {
 
     var pythonProcesses: List<Process> = listOf()
@@ -63,7 +64,7 @@ object scriptPadraoPython {
                 "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                 "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_CPU, (data_atual, hora_atual, CPU, 1, $idMaquinaDado, $idEmpresaDado))
 
             # RAM
             add_leitura_RAM = (
@@ -71,7 +72,7 @@ object scriptPadraoPython {
                 "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                 "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 3, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_RAM, (data_atual, hora_atual, RAM, 3, $idMaquinaDado, $idEmpresaDado))
 
             # DISK
             add_leitura_DISK = (
@@ -79,7 +80,7 @@ object scriptPadraoPython {
                 "(Data_captura, Hora_captura, Dado_Capturado, fkCompMoniExistentes, fkMaqCompMoni, fkEmpMaqCompMoni)"
                 "VALUES (%s, %s, %s, %s, %s, %s)"
             )
-            bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 2, $idMaquinaDado, $idMaquinaDado))
+            bdLocal_cursor.execute(add_leitura_DISK, (data_atual, hora_atual, DISK, 2, $idMaquinaDado, $idEmpresaDado))
             bdLocal_cursor.close()
 
             mysql_cnx.commit()
@@ -89,13 +90,13 @@ object scriptPadraoPython {
             # BD Server
             
             # CPU
-            bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_CPU, (str(data_atual), str(hora_atual), CPU, 1, $idMaquinaDado, $idEmpresaDado))
 
             # RAM
-            bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 3, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_RAM, (str(data_atual), str(hora_atual), RAM, 3, $idMaquinaDado, $idEmpresaDado))
 
             # DISK
-            bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 2, $idMaquinaDado, $idMaquinaDado))
+            bdServer_cursor.execute(add_leitura_DISK, (str(data_atual), str(hora_atual), DISK, 2, $idMaquinaDado, $idEmpresaDado))
             
             bdServer_cursor.close()
 
@@ -115,7 +116,7 @@ object scriptPadraoPython {
             cnx = connect(user='$bancoUser', password='${bancoSenha}', host='localhost', database='centrix')
             speed_test = st.Speedtest()
 
-            sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix');
+            sql_server_cnx = pymssql.connect(server='44.197.21.59', database='centrix', user='sa', password='centrix')
 
             while(True):
                 download = speed_test.download()
@@ -176,9 +177,26 @@ object scriptPadraoPython {
 
     }
 
+    private val looca = Looca()
+    private val so = looca.sistema.sistemaOperacional
+    private val executor = if (so.contains("Win")) {
+        "py"
+    } else {
+        "python3"
+    }
     fun executarScript(arquivo1: String, arquivo2: String) {
-            val pythonProcess1 = Runtime.getRuntime().exec("py $arquivo1")
-        val pythonProcess2 = Runtime.getRuntime().exec("py $arquivo2")
+
+        val pythonProcess1: Process
+        val pythonProcess2: Process
+
+        if (so.contains("Win")) {
+            pythonProcess1 = Runtime.getRuntime().exec("$executor $arquivo1")
+            pythonProcess2 = Runtime.getRuntime().exec("$executor $arquivo2")
+        } else {
+            pythonProcess1 = Runtime.getRuntime().exec("python3 centrixMonitoramentoHardware.py")
+            pythonProcess2 = Runtime.getRuntime().exec("python3 centrixMonitoramentoRede.py")
+        }
+
         pythonProcesses = listOf(pythonProcess1, pythonProcess2)
     }
 
