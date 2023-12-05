@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function calcular() {
-        var instrucao = `SELECT TOP 1 * FROM info_sistema ORDER BY data_hora DESC;`;
+        var instrucao = `SELECT TOP 1 * FROM info_sistema ORDER BY data_hora;`;
 
         console.log("Executando a instrução SQL: \n" + instrucao);
         return database.executar(instrucao)
