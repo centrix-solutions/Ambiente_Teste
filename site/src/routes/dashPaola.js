@@ -31,4 +31,9 @@ router.get("/tempoRealDesempenhoMedia/", function (req, res) {
     dashPaolaController.buscarMedidasEmTempoRealDesempenhoMedia(req, res);
 });
 
+// KPI total
+router.get("/tempoRealKpiTotal/", function (req, res) {
+    dashPaolaController.buscarUltimasTotalEmTempoReal(req, res);
+});
+
 module.exports = router;
