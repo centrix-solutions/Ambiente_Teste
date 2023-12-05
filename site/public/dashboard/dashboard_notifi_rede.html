@@ -173,7 +173,7 @@
     async function buscarComputadoresPorAndar() {
         var idAndarVar = (andares.value).split('-')[1];
         if(idAndarVar == 0 || idAndarVar == undefined){
-            idAndarVar = null
+            idAndarVar = null;
         }
         try {
             var resposta = await fetch("/rede/buscarComputadoresPorAndar", {

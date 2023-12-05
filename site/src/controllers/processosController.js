@@ -5,8 +5,9 @@ function listarProcessos(req, res) {
     var idEmpresa = req.body.idEmpresaServer;
     var idAndar = req.body.idAndarServer;
     var filtro = req.body.filtroServer;
+    var pesquisa = req.body.pesquisaServer;
 
-    processosModel.listarProcessos(idEmpresa, idAndar, filtro)
+    processosModel.listarProcessos(idEmpresa, idAndar, filtro, pesquisa)
         .then(
             function (resultado) {
                 res.json(resultado);

@@ -14,15 +14,13 @@
 
     <link rel="stylesheet" href="../css/dash_processos.css">
     <script src="../js/dashboard_processos.js"></script>
+    <script src="../js/andar.js"></script>
 
-    <!-- Adicione isso ao head do seu HTML -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<!-- Adicione isso ao head do seu HTML -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-GLhlTQ8iK16HMI9z0i7WHPsGJ8a9PeHdH2g+iEzPn1qOG2Emv8OrCgqE2KZfEbah" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-GLhlTQ8iK16HMI9z0i7WHPsGJ8a9PeHdH2g+iEzPn1qOG2Emv8OrCgqE2KZfEbah" crossorigin="anonymous">
 </head>
 
-<body onload="listarLateral()">
+<body onload="listarLateral(),buscarAndares()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
@@ -54,50 +52,29 @@
                     </div>
                     <div class="div_individual" id="div_individual">
                         <div class="div-esquerda">
-                            <div>
-                                <input type="text" class="" id="inputPesquisa" oninput="listarProcessos()"/>
-                                <label class="branco" for="filtro">Separar por Andar:</label>
-                                <input type="checkbox" name="filtro" id="chkFiltro"/>
+                            <div class="divPesquisa">
+                                <input type="text" class="" id="inputPesquisa"/>
+                                <div>
+                                    <label class="branco" for="filtro">Separar por Andar:</label>
+                                    <input type="checkbox" name="filtro" id="chkFiltro"/>
+                                </div>
+                                <select name="andares" class="select_andares" id="andares"></select>
+                                <button onclick="listarProcessos()">
+                                    <!-- <span class="rotate-arrow">⭯</span> -->
+                                    <svg class="rotate-arrow" width="15" height="15" viewBox="0 0 212 213" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path id="Vector" stroke="purple" d="M6.62305 93.5C9.7841 69.3843 21.6258 47.2472 39.9315 31.2328C58.2372 15.2183 81.752 6.4244 106.074 6.49712C130.396 6.56985 153.858 15.5043 172.067 31.6279C190.277 47.7515 201.986 69.959 205.003 94.0932C208.019 118.227 202.137 142.634 188.457 162.744C174.776 182.854 154.236 197.288 130.68 203.346C107.124 209.403 82.1685 206.668 60.484 195.652C38.7995 184.637 21.873 166.096 12.873 143.5M6.62305 206V143.5H69.1231" stroke="black" stroke-width="11.495" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                        
+                                </button>
                                 <button onclick="gerarRelatorio()">Gerar relatório</button>
                             </div>
-                            <div id="listaComputadores" class="lista-computadores">
-                                <div class="computador">
-                                    <div class="cabecalho" onclick="toggleInfo()">
-                                        <span>Computador</span>
-                                        <span>Pessoa</span>
-                                        <span id="seta">&#9660;</span>
-                                    </div>
-                                    <div class="conteudo" id="conteudoInfo">
-                                        <input type="checkbox" name="checkComputador" class="" id=""/>
-                                        <label for="checkComputador">Processo</label>
-                                        <div class="div-btn-deletar">
-                                            <button class="btn-deletar" onclick="deletarProcessos()">Deletar Processos</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="listaComputadores" class="lista-computadores"></div>
                         </div>
                         <div class="div-direita">
-                            <div>
+                            <div class="divProcessosDiferentes">
                                 <div>
-                                    <span class="branco ">Processos Diferentes</span>
+                                    <span id="tituloProcessosDiferentes" class="branco ">Processos Diferentes</span>
                                 </div>
-                                <div class="computador">
-                                    <div class="cabecalho" onclick="toggleInfo()">
-                                        <span>Computador</span>
-                                        <span id="seta">&#9660;</span>
-                                    </div>
-                                    <div class="conteudo" id="conteudoInfo">
-                                        <div>
-                                            <span>Pessoa</span>
-                                            <span>Processo</span>
-                                        </div>
-                                        <div>
-                                            <span>Copiar id do computador</span>
-                                            <i class="material-icons">content_copy</i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="listaProcessosDiferentes"></div>
                             </div>
                         </div>
                     </div>

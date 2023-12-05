@@ -1,6 +1,12 @@
 .branco{
     color: white;
 }
+.preto{
+    color: black;
+}
+.cursor{
+    cursor: pointer;
+}
 .div-esquerda{
     width: 70%;
 }
@@ -12,11 +18,14 @@
 }
 .lista-computadores{
     width: 100%;
+    overflow-y: auto;
+    max-height: 600px;
 }
 .computador {
     border: 1px solid #ccc;
-    width: 80%;
+    width: 90%;
     overflow: hidden;
+    margin: auto;
 }
 .cabecalho {
     background-color: #f1f1f1;
@@ -31,6 +40,7 @@
     padding: 10px;
     display: none;
     color: white;
+    flex-direction: column;
 }
 .div_individual{
     color: black;
@@ -42,4 +52,61 @@
 }
 .btn-deletar{
     cursor: pointer;
+}
+.divPesquisa {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+#inputPesquisa {
+    width: 400px;
+}
+.divProcessosDiferentes {
+    width: 100%;
+    padding-top: 10px;
+    text-align: center;
+}
+#tituloProcessosDiferentes {
+    padding-bottom: 10px;
+}
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.rotate-arrow:hover {
+    animation: rotate 2s linear infinite;
+}
+.balao {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+.hidden {
+    display: none;
+}
+#listaProcessosDiferentes{
+    overflow-y: auto;
+    max-height: 600px;
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: #555;
+}
+::-webkit-scrollbar-thumb{
+    background: lightgray;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #888;
 }

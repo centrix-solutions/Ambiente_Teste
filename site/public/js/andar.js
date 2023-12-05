@@ -23,16 +23,13 @@ async function buscarAndares(idFuncionario){
                 var select = document.getElementById(`andares-${idFuncionario}`);
             }
             select.innerHTML = "";
-
             
             var option = document.createElement('option');
             option.innerHTML = "Sem Andar";
             option.value = `andar-0`;
             select.appendChild(option);
-            
 
             for (let i = 0; i < respostaJson.length; i++) {
-                
 
                 // var idAndarDeTrabalho = respostaJson[i].idAndar_de_trabalho;
 
