@@ -63,7 +63,7 @@ else
 fi
 
 echo -e "[Desktop Entry]
-Name=Executar JAR
+Name=CentrixApp
 Comment=Atalho para executar o JAR
 Exec=lxterminal -e 'bash -c \"java -jar ~/Desktop/JarGrupo/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar; read -p Pressione Enter para continuar\"'
 Type=Application
