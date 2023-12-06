@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/andar.js"></script>
+    <script src="../js/nivel_acesso_acrescimo.js"></script>
+    <link rel="stylesheet" href="../css/barra_lateral_mais_visoes.css">
+</head>
+
+<body onload="buscarAndares(), listarLateral()">
+    <div class="container_principal">
+        <div class="barra_lateral" id="lateral_barra"></div>
+        <!-- COMECO AREA DASH -->
+        <div class="area_dash">
+            <!-- COMECO DIV SUPERIOR -->
+            <div class="dash_superior">
+                <div id="containerVisoes" class="escondido">
+                    <div class="menu_visoes">
+                        <div class="botao_visoes" onclick="carregarPaola()">
+                            Dados Gerais
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRafael()">
+                            Rafael
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRuan()">
+                            Ruan
+                        </div>
+                        <div class="botao_visoes" onclick="carregarAle()">
+                            Ale
+                        </div>
+                        <div id="aqui" class="botao_visoes aqui" onclick="carregarEdson()">
+                            EtiquetIA
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_perfil">
+                    <div class="perfil_nome">
+                        <span class="text_perfilNome" id="nomeFuncionario">Nishikigi Chisato</span>
+                        <span class="text_perfilEmail" id="emailFuncionario">nishikigi.chisato@gmail.com</span>
+                    </div>
+                    <div class="perfil_img">
+                        <div class="perfil_imagem"></div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12"
+                                fill="none">
+                                <path d="M1 1.75L9 10.25L17 1.75" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
