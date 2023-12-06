@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/icon/favicon.ico">
+    <title>Dashboard - Alertas e Rede</title>
+    <link rel="stylesheet" href="../css/dash_EtiquetIA.css">
+    <script src="../js/andar.js"></script>
+    <script src="../js/nivel_acesso_acrescimo.js"></script>
+    <script src="../js/wordcloud2.js"></script>
+    <script src="../js/dashboardEdson.js"></script>
+    <script src="EtiquetIA/chat2.js"></script>
+
+</head>
+
+<body onload="buscarAndares(), listarLateral(), buscarWordCloud(), buscarKPIS()">
+    <div class="container_principal">
+        <div class="barra_lateral" id="lateral_barra"></div>
+        <!-- COMECO AREA DASH -->
+        <div class="area_dash">
+            <!-- COMECO DIV SUPERIOR -->
+            <div class="dash_superior">
+                <div id="containerVisoes" class="escondido">
+                    <div class="menu_visoes">
+                        <div class="botao_visoes" onclick="carregarPaola()">
+                            Dados Gerais
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRafael()">
+                            Rafael
+                        </div>
+                        <div class="botao_visoes" onclick="carregarRuan()">
+                            Ruan
+                        </div>
+                        <div class="botao_visoes" onclick="carregarAle()">
+                            Ale
+                        </div>
+                        <div id="aqui" class="botao_visoes aqui" onclick="carregarEdson()">
+                            EtiquetIA
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_perfil">
+                    <div class="perfil_nome">
+                        <span class="text_perfilNome" id="nomeFuncionario">Nishikigi Chisato</span>
+                        <span class="text_perfilEmail" id="emailFuncionario">nishikigi.chisato@gmail.com</span>
+                    </div>
+
+                    <div class="perfil_img">
+                        <div class="perfil_imagem"></div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12"
+                                fill="none">
+                                <path d="M1 1.75L9 10.25L17 1.75" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="titulo">
+                <span class="text_titulo">EtiquetIA - A IA que analisa grosseria e recomenda cortesia</span>
+            </div><br>
+            <!-- FIM DIV SUPERIOR -->
+            <!-- COMECO DASH CENTRAL -->
+            <div class="dash_central">
+                <!-- COMECO DIV KPIS -->
+                <div class="esquerdaCentro">
+                    <div class="div_KPIS">
+                        <div class="kpiBase">
+                            <span class="textKpiBase">Grosserias identificadas neste Mês:</span>
+                            <span id="mesAtual">$39</span>
+                        </div>
+                        <div class="kpiBase">
+                            <span class="textKpiBase">Grosserias identificadas no Mês passado:</span>
+                            <span id="mesPassado" >$50</span>
+                        </div>
+                    </div>
+                    <!-- FIM DIV KPIS -->
+                    <!-- COMECO DIV WORD CLOUD -->
+                    <div class="BaseWordCloud">
+                        <span class="tituloWord">Nuvem de Palavras - Grosserias ditas no Mês</span>
+
+                        <canvas id="wordCloud"></canvas>
+                    </div>
+                    <!-- FIM DIV WORD CLOUD -->
+                </div>
+                <div class="direitaCentro">
+                    <!-- COMECO DIV RECOMENDACAO -->
+                    <div class="baseRecomendacao">
+                        <header class="chatHeader">
+                            <h2>Recomendações da EtiquetIA</h2>
+                        </header>
+                        <div class="chat-messages">
+                            <div class="message amethyst-bg">
+                                <img class="iconIa" src="../assets/icon/EtiquetIAIcon.jpeg" alt="">
+                                <div class="message-sender">EtiquetIA:</div>
+                                <div class="message-text"> <br>Olá <span
+                                        id="botNomeFuncionario">$undefined</span>
+                                    👋, <br>Como posso te ajudar?
+                                </div>
+                                <div class="espaco"></div>
+                            </div>
+                        </div>
+                        
+                        <form class="chat-input-form">
+                            <input type="text" class="chat-input" required placeholder="Escreva aqui..." />
+                            <button type="submit" class="button send-button">Send</button>
+                        </form>
+                    </div>
+                        
+                    </div>
+                    <!-- FIM DIV RECOMENDACAO -->
+                </div>
+            <!-- FIM DASH CENTRAL -->
+            </div>
+            <!-- FIM AREA DASH -->
+</body>
+
+</html>
+<script>
+    nomeFuncionario.innerHTML = sessionStorage.nome;
+    emailFuncionario.innerHTML = sessionStorage.email;
+    botNomeFuncionario.innerHTML = sessionStorage.nome;
+
+    var canvaId = 'wordCloud'
+    var mesAtual = document.getElementById('mesAtual')
+    var mesPassado = document.getElementById('mesPassado')
+
+    function buscarWordCloud(){
+        montarWordCloud(canvaId)
+    }
+
+    function buscarKPIS(){
+        mostrarKPIS()
+        if (sessionStorage.KPImesAtual < sessionStorage.KPImesPassado){
+            mesAtual.classList.add('maior')
+            mesAtual.classList.remove('menor')
+            mesPassado.classList.add('menor')
+            mesPassado.classList.remove('maior')
+        }else {
+            mesAtual.classList.add('menor')
+            mesAtual.classList.remove('maior')
+            mesPassado.classList.add('maior')
+            mesPassado.classList.remove('menor')
+        }
+        mesAtual.innerHTML = sessionStorage.KPImesAtual
+        mesPassado.innerHTML = sessionStorage.KPImesPassado
+    }
+    
+</script>
