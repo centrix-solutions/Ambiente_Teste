@@ -47,13 +47,18 @@
     flex-direction: column;
 }
 .div_individual{
-    color: black;
+    height: fit-content;
+    width: 85vw;
+    background-color: #1E1E1E;
     display: flex;
     flex-direction: column;
     height: fit-content;
     overflow-y: auto;
-    max-height: 600px;
+    border-radius: 1rem;
+    padding: 1vh;
+    margin-top: 2rem;
 }
+
 .div_superior{
     display: flex;
 }
