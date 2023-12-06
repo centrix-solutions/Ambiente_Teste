@@ -251,7 +251,7 @@
                     }
                     tdData.innerHTML = nome;
                     tdStatus.innerHTML = "ATIVO";
-                    if (respostaJson[i].dataHoraEntrada == null || respostaJson[i].dataHoraEntrada != null && respostaJson[i].dataHoraSaida != null) tdStatus.innerHTML = "INATIVO";
+                    // if (respostaJson[i].dataHoraEntrada == null || respostaJson[i].dataHoraEntrada != null && respostaJson[i].dataHoraSaida != null) tdStatus.innerHTML = "INATIVO";
 
                     tr.className = "computadores_individual cursor";
                     tdId.className = "tdComputador";
@@ -265,11 +265,11 @@
 
                     var bola = document.createElement("div");
                     bola.className = "bola_posicao";
-                    if(tdStatus.innerHTML == "ATIVO"){
+                    // if(tdStatus.innerHTML == "ATIVO"){
                         bola.classList.add("verde");
-                    } else {
-                        bola.classList.add("roxa");
-                    }
+                    // } else {
+                    //     bola.classList.add("roxa");
+                    // }
                     div_mapa.appendChild(bola);
                     bola.id = respostaJson[i].idMaquina;
 
