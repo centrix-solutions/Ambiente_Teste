@@ -8,8 +8,7 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
         	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso,
-            Login.email
+            Processo.idProcesso
         FROM
             Maquinas
         LEFT JOIN
@@ -20,10 +19,6 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Empresa
         ON
             Empresa.idEmpresa = Maquinas.fkEmpMaq
-        LEFT JOIN
-            Login
-        ON
-            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
         LEFT JOIN
             Processo
         ON
@@ -40,8 +35,7 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
         	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso,
-            Login.email
+            Processo.idProcesso
         FROM
             Maquinas
         LEFT JOIN
@@ -52,10 +46,6 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Empresa
         ON
             Empresa.idEmpresa = Maquinas.fkEmpMaq
-        LEFT JOIN
-            Login
-        ON
-            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
         LEFT JOIN
             Processo
         ON
@@ -72,8 +62,7 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
         	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso,
-            Login.email
+            Processo.idProcesso
         FROM
             Maquinas
         LEFT JOIN
@@ -84,10 +73,6 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Empresa
         ON
             Empresa.idEmpresa = Maquinas.fkEmpMaq
-        LEFT JOIN
-            Login
-        ON
-            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
         LEFT JOIN
             Processo
         ON
@@ -101,8 +86,7 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
         	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso,
-            Login.email
+            Processo.idProcesso
         FROM
             Maquinas
         LEFT JOIN
@@ -113,10 +97,6 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Empresa
         ON
             Empresa.idEmpresa = Maquinas.fkEmpMaq
-        LEFT JOIN
-            Login
-        ON
-            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
         LEFT JOIN
             Processo
         ON
