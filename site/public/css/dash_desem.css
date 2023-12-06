@@ -11,16 +11,16 @@ body {
 }
 
 .container_principal {
-    height: 100vh;
+    height: 120vh;
     display: flex;
 }
 
 .barra_lateral {
-    height: 103vh;
+    height: 120vh;
 }
 
 .area_dash {
-    height: fit-content;
+    /* height: fit-content; */
     width: 100%;
     color: white;
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
@@ -32,24 +32,24 @@ body {
 .dash_superior {
     height: 8vh;
     margin: 1rem;
+    margin-top: 2rem;
     display: flex;
     align-items: center;
-    padding-top: 10vh;
 }
 
 .bem_vindo {
     display: flex;
     flex-direction: column;
-    margin-left: 80px;
 }
 
 .text_bemVindo1 {
     font-size: 5vh;
     font-weight: bolder;
+    padding: 1rem;
 }
 
 .text_bemVindo2 {
-    font-size: 3vh;
+    font-size: 4vh;
 }
 
 a{
@@ -70,7 +70,6 @@ a{
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 8rem;
 }
 
 .menu_visoes {
@@ -104,4 +103,101 @@ a{
 
 .botao_visoes:active {
     box-shadow: 0 0 1rem #4e3681;
+}
+
+/* Individual Paola */
+.div_individual {
+    height: 95vh;
+    width: 85vw;
+    background-color: #1E1E1E;
+    border-radius: 1rem;
+    padding: 1vh;
+    margin-top: 2rem;
+}
+
+#conteudoPaola{
+    height: 100%;
+    width: 100%;
+}
+
+.kpisPaola {
+    height: 22vh;
+    width: 95%;
+    margin: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.kpiPaola {
+    height: 15vh;
+    width: 12.5vw;
+    background-color: #231F40;
+    box-shadow: 0 0 1.2rem #403d46;
+    border-radius: 1rem;
+    padding: 1vh;
+}
+
+.tituloPaolaKpi {
+    width: 100%;
+    height: 4vh;
+    color: whitesmoke;
+    font-size: 2.5vh;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#desempenhoCpuPaola, #desempenhoRamPaola,
+#totalMaquinaPaola, #maxCpuPaola, #maxRamPaola{
+    color: whitesmoke;
+    width: 100%;
+    height: 8vh;
+    font-size: 4.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inferiorPaola {
+    height: 65vh;
+    width: 95%;
+    margin: 1rem;
+    border-radius: 1rem;
+    padding: 1vh;
+}
+
+.tituloPaola {
+    width: 100%;
+    height: 4vh;
+    color: white;
+    font-size: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.graficosPaola{
+    height: 50vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.graficosPaola h1 {
+    font-size: 3vh;
+    font-weight: 300;
+}
+
+.chartPaola {
+    width: 42vw;
+}
+
+#graficoCpuPaola,
+#graficoRamPaola {
+    background-color: #000000;
+    border-radius: 1rem;
+    margin: 1vh;
+    box-shadow: 0 0 1rem #403d46;
 }

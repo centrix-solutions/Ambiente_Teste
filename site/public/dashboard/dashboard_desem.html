@@ -4,47 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Engenheiro de NOC</title>
+    <title>Dashboard | Desempenho</title>
     <link rel="icon" href="../assets/icon/favicon.ico">
-    <link rel="stylesheet" href="../css/dash_visoes.css">
+    <link rel="stylesheet" href="../css/dash_desem.css">
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <script src="../js/nivelAcesso.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
-<body>
+<body onload="listarLateral(), carregarPaola()">
     <div class="container_principal">
         <div class="barra_lateral" id="lateral_barra"></div>
         <div class="area_dash">
             <div class="dash_superior">
                 <div class="bem_vindo">
                     <span class="text_bemVindo1">
-                        Veja visões diferentes para os dados
-                    </span>
+                        Entenda o desempenho médio da CPU e RAM </span>
                 </div>
             </div>
             <div class="div_central">
                 <div class="div_conteudo">
-                    <div class="menu_visoes">
-                        <div class="botao_visoes" onclick="carregarPaola()">
-                            Dados Gerais
-                        </div>
-                        <div class="botao_visoes" onclick="carregarRafael()">
-                            Rafael
-                        </div>
-                        <div class="botao_visoes" onclick="carregarRuan()">
-                            Ruan
-                        </div>
-                        <div class="botao_visoes" onclick="carregarAle()">
-                            Ale
-                        </div>
-                        <div class="botao_visoes" onclick="carregarEdson()">
-                            Edson
-                        </div>
-                    </div>
                     <div class="div_individual" id="div_individual">
-
                         <div class="conteudoPaola" id="conteudoPaola">
                             <div class="tituloPaola">
                                 Entenda o desempenho médio da CPU e RAM
@@ -126,17 +107,18 @@
     window.onload = async function () {
 
         await listarLateral();
+        await carregarPaola();
 
     };
     function carregarPaola() {
-        
+
         const idEmpresa = sessionStorage.Empresa;
         try {
-            
+
 
             // Gráfico CPU
             obterDadosGraficoCPU(idEmpresa);
-            
+
             // Gráfico RAM
             obterDadosGraficoRAM(idEmpresa);
             atualizarGraficoMediaRAM(idEmpresa);
@@ -147,12 +129,6 @@
         } catch (error) {
             console.error("Erro no carregamento da página: " + error.message);
         }
-
-        conteudoPaola.style.display = 'inline'
-        conteudoRafael.style.display = 'none'
-        conteudoRuan.style.display = 'none'
-        conteudoAle.style.display = 'none'
-        conteudoEdson.style.display = 'none'
 
         // fazendo a a rota do kpi
         var KpiCpuPaola = document.getElementById("desempenhoCpuPaola");
@@ -296,7 +272,7 @@
         function plotarDadosGrafico(resposta, idEmpresa) {
             console.log('Iniciando plotagem do gráfico...');
 
-            
+
             dados = {
                 labels: [],
                 datasets: [{
@@ -343,15 +319,15 @@
                 .then(function (response) {
                     if (response.ok) {
                         response.json().then(function (novoRegistro) {
-                            
+
                             const novaHoraCaptura = new Date(novoRegistro[0].horaCaptura).toISOString().slice(11, 19);
-                            
+
                             if (novaHoraCaptura === dados.labels[dados.labels.length - 1]) {
                                 console.log("Nenhum dado novo para captura, o gráfico não será atualizado.");
                             } else {
                                 dados.labels.shift();
                                 dados.labels.push(novaHoraCaptura);
-                                
+
                                 dados.datasets[0].data.shift();
                                 dados.datasets[0].data.push(novoRegistro[0].mediaCPU);
 
@@ -468,37 +444,5 @@
             }, 2000);
         }
 
-    }
-
-    function carregarRafael() {
-        conteudoRafael.style.display = 'inline'
-        conteudoPaola.style.display = 'none'
-        conteudoRuan.style.display = 'none'
-        conteudoAle.style.display = 'none'
-        conteudoEdson.style.display = 'none'
-    }
-
-    function carregarRuan() {
-        conteudoRuan.style.display = 'inline'
-        conteudoPaola.style.display = 'none'
-        conteudoRafael.style.display = 'none'
-        conteudoAle.style.display = 'none'
-        conteudoEdson.style.display = 'none'
-    }
-
-    function carregarAle() {
-        conteudoAle.style.display = 'inline'
-        conteudoPaola.style.display = 'none'
-        conteudoRafael.style.display = 'none'
-        conteudoRuan.style.display = 'none'
-        conteudoEdson.style.display = 'none'
-    }
-
-    function carregarEdson() {
-        conteudoEdson.style.display = 'inline'
-        conteudoPaola.style.display = 'none'
-        conteudoRafael.style.display = 'none'
-        conteudoRuan.style.display = 'none'
-        conteudoAle.style.display = 'none'
     }
 </script>
