@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/barra_lateral.css">
     <script src="../js/nivelAcesso.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 </head>
 
@@ -28,7 +30,31 @@
                     <div class="div_individual" id="div_individual">
                         <div class="conteudoPaola" id="conteudoPaola">
                             <div class="tituloPaola">
-                                Entenda o desempenho médio da CPU e RAM
+                                Entenda o desempenho médio da CPU e RAM <div class="izinho"><button id="myBtn">
+                                        i</button></div>
+                            </div>
+
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p>
+                                        <span class="aa">CPU</span> ➪ processa as instruções do programa e produz resultados desejados;</p>
+                                    <p>
+                                        <span class="aa">RAM</span> ➪ quantidade de espaço/memória necessária para armazenar o aplicativo
+                                        enquanto ele está sendo executado;
+                                    </p>
+                                    <p>
+                                        Quanto mais RAM, mais aplicativos podem ser executados simultaneamente.
+                                    </p>
+                                    <p>
+                                        Quanto mais CPU, mais cálculos/operações complexos podem ser executados
+                                    </p>
+                                    <img src="../assets/imgs/tabelinha.png" alt="Tabela dos componentes" class="tabela">
+
+                                </div>
+
                             </div>
                             <div class="kpisPaola">
                                 <div class="kpiPaola">
@@ -104,6 +130,33 @@
 </html>
 
 <script>
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
     window.onload = async function () {
 
         await listarLateral();

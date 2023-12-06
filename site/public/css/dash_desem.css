@@ -20,7 +20,6 @@ body {
 }
 
 .area_dash {
-    /* height: fit-content; */
     width: 100%;
     color: white;
     background: linear-gradient(180deg, #4B3753 0%, #4B3753 0%, #4B3753 0.01%, rgba(90, 52, 169, 0.93) 9.09%,
@@ -57,6 +56,61 @@ a{
     text-decoration: none;
     color: white;
 }
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+    border-radius: 1rem;
+    
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: none;
+    width: 60%; 
+    border-radius: 1rem;
+    color: #000000;
+  }
+  
+  .izinho {
+    padding: 2vh;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #000000;
+    float: right;
+    font-size: 5vh;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .tabela {
+    width: 55vw;
+    height: 45vh;
+  }
+
+  .aa {
+    font-weight: bold;
+  }
 
 /*DIV CENTRAL*/
 .div_central {
