@@ -157,6 +157,17 @@ CREATE TABLE IF NOT EXISTS Processo(
     constraint fkEmpProc foreign key (fkEmpProc) references Componentes_Monitorados(fkEmpMaqComp)
 );
 
+create table dadosGrafico(
+	idDadosGrafico int primary key auto_increment,
+    qtdProcessos int,
+    cpu double,
+    ram double,
+    fkMaqDados int,
+	CONSTRAINT fkMaqDados FOREIGN KEY (fkMaqDados) REFERENCES Maquinas (idMaquina),
+    fkEmpDados int,
+    CONSTRAINT fkEmpDados FOREIGN KEY (fkEmpDados) REFERENCES Empresa (idEmpresa)
+);
+
 INSERT INTO Empresa (Nome_fantasia, CNPJ, Responsavel_legal, CEP, numero, complemento)
 VALUES
    ('Empresa A', '12.345.678/9012-34', 'Responsável A', '12345-678', 123, 'Complemento A'),

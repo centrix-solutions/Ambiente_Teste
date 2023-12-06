@@ -23,7 +23,49 @@ function listarProcessos(req, res) {
             }
         );
 }
+function deletarProcessos(req, res) {
+
+    var processosParaDeletar = req.body.processosParaDeletarServer;
+
+    processosModel.deletarProcessos(processosParaDeletar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nSomething is wrong Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+function buscarDadosGrafico(req, res) {
+
+    var vetorCheckbox = req.body.vetorCheckboxServer;
+
+    processosModel.buscarDadosGrafico(vetorCheckbox)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nSomething is wrong Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 module.exports = {
-    listarProcessos
+    listarProcessos,
+    deletarProcessos,
+    buscarDadosGrafico
 }
