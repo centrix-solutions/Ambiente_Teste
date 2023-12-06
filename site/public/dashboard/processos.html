@@ -39,7 +39,7 @@
             <div class="dash_superior">
                 <div class="bem_vindo">
                     <span class="text_bemVindo1">
-                        Processos...
+                        Analisar Processos
                     </span>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                                         </svg>
                                     </button>
                                     <button class="style-fltro cursor" onclick="gerarRelatorio()">Gerar
-                                        relatório</button>
+                                        gráfico</button>
                                 </div>
                                 <div id="listaComputadores" class="lista-computadores"></div>
                             </div>
@@ -215,10 +215,10 @@
 
         chart2.data.labels = idComputador;
         const datasets2 = chart2.data.datasets;
+        datasets2[0].data = qtdProcessos;
         vetorCheckbox.forEach(i => {
             var dado = (sessionStorage.count).split(',')[i]
             if (dado != undefined) {
-                datasets2[0].data = qtdProcessos;
                 datasets2[1].data.push(dado);
             }
         });

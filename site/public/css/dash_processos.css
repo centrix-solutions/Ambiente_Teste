@@ -230,16 +230,16 @@
     align-items: center;
 }
 .barra_lateral{
-    height: 750px;
+    height: 1350px;
 }
 .area_dash{
-    height: 750px;
+    height: 1350px;
 }
 .div_central {
-    height: 550px;
+    height: 950px;
 }
 .container_principal{
-    height: 550px;
+    height: 950px;
 }
 .sla{
     background-color: rgb(60, 0, 255);
