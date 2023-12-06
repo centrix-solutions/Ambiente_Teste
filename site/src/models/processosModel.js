@@ -3,31 +3,31 @@ var database = require("../database/config");
 function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
     if (pesquisa != undefined) {
         var instrucao = `
-        SELECT
-            Processo.titulo,
+        SELECT 
+        	Processo.titulo,
             Maquinas.Id_do_dispositivo,
-            Maquinas.idMaquina,
-            Login.email,
+        	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso
+            Processo.idProcesso,
+            Login.email
         FROM
-            Processo
-        RIGHT JOIN
             Maquinas
-        ON
-            Processo.fkMaqProc = Maquinas.idMaquina
-        JOIN
-            Empresa
-        ON
-            Maquinas.fkEmpMaq = Empresa.idEmpresa
         LEFT JOIN
             andar_de_trabalho
         ON
-            andar_de_trabalho.fkEmpAndar = Empresa.idEmpresa
+            Maquinas.fkAndarDeTrabalho = andar_de_trabalho.idAndar_de_trabalho
+        JOIN
+            Empresa
+        ON
+            Empresa.idEmpresa = Maquinas.fkEmpMaq
         LEFT JOIN
             Login
         ON
-            Login.Id_do_dispositivo = Maquinas.Id_do_dispositivo
+            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
+        LEFT JOIN
+            Processo
+        ON
+            Maquinas.idMaquina = Processo.fkMaqProc
         WHERE
             Empresa.idEmpresa = ${idEmpresa} AND Maquinas.Id_do_dispositivo LIKE '%${pesquisa}%';`;
         console.log("Executando listarProcessos com pesquisa: \n" + instrucao);
@@ -35,31 +35,31 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
     }
     if (!filtro) {
         var instrucao = `
-        SELECT
-            Processo.titulo,
+        SELECT 
+        	Processo.titulo,
             Maquinas.Id_do_dispositivo,
-            Maquinas.idMaquina,
-            Login.email,
+        	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso
+            Processo.idProcesso,
+            Login.email
         FROM
-            Processo
-        RIGHT JOIN
             Maquinas
-        ON
-            Processo.fkMaqProc = Maquinas.idMaquina
-        JOIN
-            Empresa
-        ON
-            Maquinas.fkEmpMaq = Empresa.idEmpresa
         LEFT JOIN
             andar_de_trabalho
         ON
-            andar_de_trabalho.fkEmpAndar = Empresa.idEmpresa
+            Maquinas.fkAndarDeTrabalho = andar_de_trabalho.idAndar_de_trabalho
+        JOIN
+            Empresa
+        ON
+            Empresa.idEmpresa = Maquinas.fkEmpMaq
         LEFT JOIN
             Login
         ON
-            Login.Id_do_dispositivo = Maquinas.Id_do_dispositivo
+            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
+        LEFT JOIN
+            Processo
+        ON
+            Maquinas.idMaquina = Processo.fkMaqProc
         WHERE
             Empresa.idEmpresa = ${idEmpresa};`;
         console.log("Executando listarProcessos sem filtro: \n" + instrucao);
@@ -67,60 +67,60 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
     }
     if (idAndar == null) {
         var instrucao = `
-        SELECT
-            Processo.titulo,
+        SELECT 
+        	Processo.titulo,
             Maquinas.Id_do_dispositivo,
-            Maquinas.idMaquina,
-            Login.email,
+        	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso
+            Processo.idProcesso,
+            Login.email
         FROM
-            Processo
-        RIGHT JOIN
             Maquinas
-        ON
-            Processo.fkMaqProc = Maquinas.idMaquina
-        JOIN
-            Empresa
-        ON
-            Maquinas.fkEmpMaq = Empresa.idEmpresa
         LEFT JOIN
             andar_de_trabalho
         ON
-            andar_de_trabalho.fkEmpAndar = Empresa.idEmpresa
+            Maquinas.fkAndarDeTrabalho = andar_de_trabalho.idAndar_de_trabalho
+        JOIN
+            Empresa
+        ON
+            Empresa.idEmpresa = Maquinas.fkEmpMaq
         LEFT JOIN
             Login
         ON
-            Login.Id_do_dispositivo = Maquinas.Id_do_dispositivo
+            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
+        LEFT JOIN
+            Processo
+        ON
+            Maquinas.idMaquina = Processo.fkMaqProc
         WHERE
             Empresa.idEmpresa = ${idEmpresa} AND Maquinas.fkAndarDeTrabalho IS NULL;`;
     } else {
         var instrucao = `
-        SELECT
-            Processo.titulo,
+        SELECT 
+        	Processo.titulo,
             Maquinas.Id_do_dispositivo,
-            Maquinas.idMaquina,
-            Login.email,
+        	Maquinas.idMaquina,
             Processo.fkMaqProc,
-            Processo.idProcesso
+            Processo.idProcesso,
+            Login.email
         FROM
-            Processo
-        RIGHT JOIN
             Maquinas
-        ON
-            Processo.fkMaqProc = Maquinas.idMaquina
-        JOIN
-            Empresa
-        ON
-            Maquinas.fkEmpMaq = Empresa.idEmpresa
         LEFT JOIN
             andar_de_trabalho
         ON
-            andar_de_trabalho.fkEmpAndar = Empresa.idEmpresa
+            Maquinas.fkAndarDeTrabalho = andar_de_trabalho.idAndar_de_trabalho
+        JOIN
+            Empresa
+        ON
+            Empresa.idEmpresa = Maquinas.fkEmpMaq
         LEFT JOIN
             Login
         ON
-            Login.Id_do_dispositivo = Maquinas.Id_do_dispositivo
+            Maquinas.Id_do_dispositivo = Login.Id_do_dispositivo
+        LEFT JOIN
+            Processo
+        ON
+            Maquinas.idMaquina = Processo.fkMaqProc
         WHERE
             Empresa.idEmpresa = ${idEmpresa} AND Maquinas.fkAndarDeTrabalho = ${idAndar};`;
     }
