@@ -8,7 +8,8 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
             Maquinas.idMaquina,
             Login.email,
-            Processo.fkMaqProc
+            Processo.fkMaqProc,
+            Processo.idProcesso
         FROM
             Processo
         RIGHT JOIN
@@ -39,7 +40,8 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
             Maquinas.idMaquina,
             Login.email,
-            Processo.fkMaqProc
+            Processo.fkMaqProc,
+            Processo.idProcesso
         FROM
             Processo
         RIGHT JOIN
@@ -70,7 +72,8 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
             Maquinas.idMaquina,
             Login.email,
-            Processo.fkMaqProc
+            Processo.fkMaqProc,
+            Processo.idProcesso
         FROM
             Processo
         RIGHT JOIN
@@ -98,7 +101,8 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
             Maquinas.Id_do_dispositivo,
             Maquinas.idMaquina,
             Login.email,
-            Processo.fkMaqProc
+            Processo.fkMaqProc,
+            Processo.idProcesso
         FROM
             Processo
         RIGHT JOIN
@@ -123,7 +127,28 @@ function listarProcessos(idEmpresa, idAndar, filtro, pesquisa) {
     console.log("Executando listarProcessos com filtro: \n" + instrucao);
     return database.executar(instrucao);
 }
+function deletarProcessos(processosParaDeletar) {
+    var instrucao = `UPDATE Processo SET status = 0 WHERE idProcesso IN (${processosParaDeletar});`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function buscarDadosGrafico(vetorCheckbox) {
+    var instrucao = `
+    SELECT dg.*, Maquinas.Id_do_dispositivo
+    FROM dadosGrafico dg
+    JOIN (
+        SELECT fkMaqDados, MAX(idDadosGrafico) AS max_id
+        FROM dadosGrafico
+        WHERE fkMaqDados IN (${vetorCheckbox})
+        GROUP BY fkMaqDados
+    ) max_ids ON dg.fkMaqDados = max_ids.fkMaqDados AND dg.idDadosGrafico = max_ids.max_id
+    JOIN Maquinas ON dg.fkMaqDados = Maquinas.idMaquina;`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
-    listarProcessos
+    listarProcessos,
+    deletarProcessos,
+    buscarDadosGrafico
 }
