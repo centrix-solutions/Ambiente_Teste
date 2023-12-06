@@ -356,15 +356,15 @@
                 function atualizarMetrica() {
                     if (data.cpu_percent >= 99) {
                         document.getElementById('alerta_metrica_cpu').innerHTML = `<img height="20px" src="../assets/icon/error-icon.png">`;
-                    } else if (data.cpu_percent >= 43.40) {
+                    } else if (data.cpu_percent >= 49.62) {
                         document.getElementById('alerta_metrica_cpu').innerHTML = `<img height="20px" src="../assets/icon/warning-icon.png">`;
                     } else {
                         document.getElementById('alerta_metrica_cpu').innerHTML = `<img height="20px" src="../assets/icon/check-icon.png">`
                     }
 
-                    if (data.ram_percent >= 91.60) {
+                    if (data.ram_percent >= 94.30) {
                         document.getElementById('alerta_metrica_ram').innerHTML = `<img height="20px" src="../assets/icon/error-icon.png">`;
-                    } else if (data.ram_percent >= 76.40) {
+                    } else if (data.ram_percent >= 92.50) {
                         document.getElementById('alerta_metrica_ram').innerHTML = `<img height="20px" src="../assets/icon/warning-icon.png">`;
                     } else {
                         document.getElementById('alerta_metrica_ram').innerHTML = `<img height="20px" src="../assets/icon/check-icon.png">`;
