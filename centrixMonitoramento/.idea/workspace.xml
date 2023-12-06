@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/centrixMonitoramento-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Conexao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Conexao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MenuThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MenuThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Monitoramento$inicioMoni$MonitoramentoThread$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Monitoramento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Monitoramento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/scriptPadraoPython.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/scriptPadraoPython.class" afterDir="false" />
-    </list>
+    <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +27,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ToolWindowRun.ShowToolbar": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/rafa_/Desktop/Projeto_Individual_Rafael/kotlin_individual_Rafa"
+    "last_opened_file_path": "C:/Users/alexa/Desktop/last week/Ambiente_Teste/centrixMonitoramento"
   }
 }]]></component>
   <component name="RunManager" selected="Kotlin.AppMainKt">
