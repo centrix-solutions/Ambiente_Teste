@@ -279,10 +279,10 @@ window.onclick = function(event) {
 }
 function SelecionarTodos() {
     var chks = document.getElementsByName('chkRelatorio');
-    for (let i = 1; i <= chks.length; i++) {
-        var checkbox = document.getElementById(`chkRelatorio-${i}`);
+    chks.forEach(i => {
+        var checkbox = document.getElementById(i.id);
         checkbox.checked = true;
-    }
+    });
 }
 setTimeout(() => {
     listarProcessos();

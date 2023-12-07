@@ -114,7 +114,7 @@ function deletarProcessos(processosParaDeletar) {
 }
 function buscarDadosGrafico(vetorCheckbox) {
     var instrucao = `
-    SELECT dg.*, Maquinas.Id_do_dispositivo
+    SELECT dg.*, Maquinas.Id_do_dispositivo, Maquinas.idMaquina
     FROM dadosGrafico dg
     JOIN (
         SELECT fkMaqDados, MAX(idDadosGrafico) AS max_id

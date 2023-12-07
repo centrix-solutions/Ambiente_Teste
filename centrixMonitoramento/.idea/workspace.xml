@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="" />
+    <list default="true" id="2606c994-a642-453b-a7f1-aef50408c38c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../site/public/dashboard/processos.html" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/dashboard/processos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../site/public/js/dashboard_processos.js" beforeDir="false" afterPath="$PROJECT_DIR$/../site/public/js/dashboard_processos.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,15 +24,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/alexa/Desktop/last week/Ambiente_Teste/centrixMonitoramento"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexa/Desktop/last week/Ambiente_Teste/centrixMonitoramento&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Kotlin.AppMainKt">
     <configuration name="AppMainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppMainKt" />

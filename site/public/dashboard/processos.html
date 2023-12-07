@@ -163,15 +163,18 @@
         }
     });
     var idComputador = [];
+    var idMaquina = [];
     var qtdProcessos = [];
     var vetorCpu = [];
     var vetorRam = [];
     async function buscarDadosGrafico() {
         var chks = document.getElementsByName('chkRelatorio');
         var vetorCheckbox = [];
+        var vetorIdComputador = [];
         chks.forEach(i => {
             var idCheckbox = (i.id).split('-')[1];
             var checkbox = document.getElementById(`chkRelatorio-${idCheckbox}`);
+            vetorIdComputador.push(idCheckbox);
             if (checkbox.checked == true) {
                 vetorCheckbox.push(idCheckbox);
             }
@@ -188,6 +191,7 @@
             });
             if (resposta.ok) {
                 idComputador = [];
+                idMaquina = [];
                 qtdProcessos = [];
                 vetorCpu = [];
                 vetorRam = [];
@@ -195,17 +199,18 @@
                 console.log('JSON buscarDadosGrafico: ', respostaJson);
                 respostaJson.forEach(i => {
                     idComputador.push(i.Id_do_dispositivo);
+                    idMaquina.push(i.idMaquina);
                     qtdProcessos.push(i.qtdProcessos);
                     vetorCpu.push(i.cpu);
                     vetorRam.push(i.ram);
                 });
-                atualizarDadosGrafico(vetorCheckbox);
+                atualizarDadosGrafico(vetorCheckbox,vetorIdComputador);
             }
         } catch (erro) {
             console.log("Erro: ", erro);
         }
     }
-    function atualizarDadosGrafico(vetorCheckbox) {
+    function atualizarDadosGrafico(vetorCheckbox,vetorIdComputador) {
         chart1.data.labels = idComputador;
         const datasets = chart1.data.datasets;
         datasets[0].data = qtdProcessos;
@@ -216,12 +221,8 @@
         chart2.data.labels = idComputador;
         const datasets2 = chart2.data.datasets;
         datasets2[0].data = qtdProcessos;
-        vetorCheckbox.forEach(i => {
-            var dado = (sessionStorage.count).split(',')[i]
-            if (dado != undefined) {
-                datasets2[1].data.push(dado);
-            }
-        });
+        // var count = sessionStorage.count.split(',')
+        // datasets2[1].data = vetorTeste;
         chart2.update();
     }
 </script>
