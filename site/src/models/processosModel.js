@@ -126,9 +126,20 @@ function buscarDadosGrafico(vetorCheckbox) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function buscarCountProcesso(vetorCheckbox) {
+    var instrucao = `
+    SELECT Maquinas.idMaquina, COALESCE(COUNT(Processo.PID), 0) AS count
+    FROM Maquinas
+    LEFT JOIN Processo ON Maquinas.idMaquina = Processo.fkMaqProc
+    WHERE Maquinas.idMaquina IN (${vetorCheckbox})
+    GROUP BY Maquinas.idMaquina;`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     listarProcessos,
     deletarProcessos,
-    buscarDadosGrafico
+    buscarDadosGrafico,
+    buscarCountProcesso
 }

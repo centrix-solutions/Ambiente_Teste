@@ -63,9 +63,30 @@ function buscarDadosGrafico(req, res) {
             }
         );
 }
+function buscarCountProcesso(req, res) {
+
+    var vetorCheckbox = req.body.vetorCheckboxServer;
+
+    processosModel.buscarCountProcesso(vetorCheckbox)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nSomething is wrong Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 module.exports = {
     listarProcessos,
     deletarProcessos,
-    buscarDadosGrafico
+    buscarDadosGrafico,
+    buscarCountProcesso
 }

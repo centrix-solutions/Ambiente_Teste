@@ -12,5 +12,8 @@ router.post("/deletarProcessos", function (req, res) {
 router.post("/buscarDadosGrafico", function (req, res) {
     processosController.buscarDadosGrafico(req, res);
 })
+router.post("/buscarCountProcesso", function (req, res) {
+    processosController.buscarCountProcesso(req, res);
+})
 
 module.exports = router;
