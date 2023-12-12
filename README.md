@@ -1,28 +1,65 @@
 <img src="header-centrix-solution.png">
 
-## Funcionalidades Principais
+## Introdução
+Um sistema de dashboard interativo para monitoramento de computadores em diferentes andares, proporcionando uma visão visual do status e localização de cada dispositivo.
 
-<li>Coleta de métricas de hardware e sistemas operacionais.</li>
-<li>Visualização clara de dados por meio de gráficos e indicadores.</li>
-<li>Sistema de alertas personalizáveis para notificar usuários sobre problemas.</li>
-<li>Abertura e acompanhamento de chamados de suporte.</li>
-<li>Geração de logs da aplicação para análise de problemas.</li>
+## Funcionalidades
+- **Monitoramento em Tempo Real:** Acompanhe o status dos computadores em tempo real, com indicadores visuais de ativos, inativos e alertas.
+- **Mapa Interativo:** Visualize a disposição dos computadores em um mapa interativo do andar, facilitando a identificação e seleção.
+- **Cadastro de Andares:** Adicione novos andares e associe-os ao ambiente de trabalho, permitindo uma configuração flexível e personalizada.
+- **Salvamento de Posição:** Mantenha o controle da posição física dos computadores no ambiente e ajuste conforme necessário.
+- **Dashboard Dinâmico:** Controle e visualize dados cruciais em tempo real.
+- **Gerenciamento Detalhado:** Monitore operadores, andares e computadores com facilidade.
+- **Gráficos Estatísticos:** Obtenha insights visuais sobre o desempenho de CPU e RAM.
+- **Notificações Proativas:** Receba alertas em tempo real para uma resposta rápida.
+- **Configuração Flexível:** Personalize andares e máquinas conforme necessário.
+- **Integração de Rede:** Acesse dados de velocidade e latência da rede.
+- **Compatibilidade Universal:** Use em diversos dispositivos para gestão eficiente.
 
+## Tecnologias Utilizadas
 
-## Desenvolvimento feito em
-[![My Skills](https://skills.thijs.gg/icons?i=html,css,js,nodejs,mysql,py,kotlin,figma)](https://skills.thijs.gg)
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+                               
+<img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" /> <img  height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rstudio/rstudio-original.svg" /> <img height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" />
 
+## Instalação
+
+1. Clone o repositório para sua máquina local:
+
+   ```bash
+   git clone https://github.com/Centrix-Solutions-Grupo-07/Ambiente_Teste.git
+   ```
+
+2. Abra o arquivo `index.html` em um navegador web.
 
 ## Como Contribuir
 
-Nós adoramos receber contribuições da comunidade! Se você quiser ajudar a melhorar nossos projetos, siga estas etapas:
+Se deseja contribuir para este projeto, siga as etapas abaixo:
 
-1. Faça um fork deste repositório.
-2. Crie uma nova branch com uma descrição clara do que você está trabalhando.
-3. Faça as alterações desejadas.
-4. Envie um pull request explicando suas alterações e por que elas são importantes.
+1. Faça um fork do repositório.
+2. Crie uma branch para sua contribuição:
 
-Ficaremos felizes em revisar sua contribuição e incorporá-la ao nosso código!
+   ```bash
+   git checkout -b feature/sua-contribuicao
+   ```
+
+3. Realize suas alterações e faça commit:
+
+   ```bash
+   git commit -m "Adiciona funcionalidade/sua-contribuicao"
+   ```
+
+4. Faça push para a branch:
+
+   ```bash
+   git push origin feature/sua-contribuicao
+   ```
+
+5. Abra um pull request na página do repositório.
+
+## Licença
+
+Este projeto é distribuído sob a [Licença MIT](LICENSE).
 
 ## Contato
 
