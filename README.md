@@ -1,7 +1,10 @@
 <img src="header-centrix-solution.png">
 
 ## Introdução
-Um sistema de dashboard interativo para monitoramento de computadores em diferentes andares, proporcionando uma visão visual do status e localização de cada dispositivo.
+Bem-vindo ao nosso projeto colaborativo de criação de um Painel de Monitoramento projetado para facilitar o gerenciamento e monitoramento de computadores em um ambiente específico. Este projeto consiste em dois componentes principais: o documento HTML que define a estrutura do painel e o código JavaScript associado para implementar funcionalidades dinâmicas.
+
+## Visão Geral
+Nosso painel serve como uma ferramenta abrangente para supervisionar o status, posições e alertas relacionados a computadores distribuídos em diferentes andares de uma instalação. Ele fornece uma interface amigável para visualizar dados em tempo real e interagir eficientemente com o sistema.
 
 ## Funcionalidades
 - **Monitoramento em Tempo Real:** Acompanhe o status dos computadores em tempo real, com indicadores visuais de ativos, inativos e alertas.
