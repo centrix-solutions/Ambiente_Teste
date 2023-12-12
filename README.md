@@ -1,7 +1,7 @@
 <img src="header-centrix-solution.png">
 
 ## Introdução
-Bem-vindo ao nosso projeto colaborativo de criação de um Painel de Monitoramento projetado para facilitar o gerenciamento e monitoramento de computadores em um ambiente específico. Este projeto consiste em dois componentes principais: o documento HTML que define a estrutura do painel e o código JavaScript associado para implementar funcionalidades dinâmicas.
+Bem-vindo ao nosso projeto colaborativo de criação de um Painel de Monitoramento projetado para facilitar o gerenciamento e monitoramento de computadores em um ambiente específico.
 
 ## Visão Geral
 Nosso painel serve como uma ferramenta abrangente para supervisionar o status, posições e alertas relacionados a computadores distribuídos em diferentes andares de uma instalação. Ele fornece uma interface amigável para visualizar dados em tempo real e interagir eficientemente com o sistema.
